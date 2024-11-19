@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: a0233f9896b5b4a4da5fb0adbd94c586
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - ww_emitter: {instanceID: 0}
+  - canvas: {instanceID: 0}
+  - button_base: {instanceID: 0}
+  - image: {fileID: 2800000, guid: 71022785710414e309e70a332d27fdf6, type: 3}
+  - image2: {fileID: 2800000, guid: 812e349d0513342a8bf7f9dafb8a2fc7, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 

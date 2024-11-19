@@ -1,0 +1,121 @@
+PODS:
+  - Google-Mobile-Ads-SDK (10.14.0):
+    - GoogleAppMeasurement (< 11.0, >= 7.0)
+    - GoogleUserMessagingPlatform (>= 1.1)
+  - GoogleAppMeasurement (10.29.0):
+    - GoogleAppMeasurement/AdIdSupport (= 10.29.0)
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.11)
+    - GoogleUtilities/MethodSwizzler (~> 7.11)
+    - GoogleUtilities/Network (~> 7.11)
+    - "GoogleUtilities/NSData+zlib (~> 7.11)"
+    - nanopb (< 2.30911.0, >= 2.30908.0)
+  - GoogleAppMeasurement/AdIdSupport (10.29.0):
+    - GoogleAppMeasurement/WithoutAdIdSupport (= 10.29.0)
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.11)
+    - GoogleUtilities/MethodSwizzler (~> 7.11)
+    - GoogleUtilities/Network (~> 7.11)
+    - "GoogleUtilities/NSData+zlib (~> 7.11)"
+    - nanopb (< 2.30911.0, >= 2.30908.0)
+  - GoogleAppMeasurement/WithoutAdIdSupport (10.29.0):
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.11)
+    - GoogleUtilities/MethodSwizzler (~> 7.11)
+    - GoogleUtilities/Network (~> 7.11)
+    - "GoogleUtilities/NSData+zlib (~> 7.11)"
+    - nanopb (< 2.30911.0, >= 2.30908.0)
+  - GoogleUserMessagingPlatform (2.6.0)
+  - GoogleUtilities/AppDelegateSwizzler (7.13.3):
+    - GoogleUtilities/Environment
+    - GoogleUtilities/Logger
+    - GoogleUtilities/Network
+    - GoogleUtilities/Privacy
+  - GoogleUtilities/Environment (7.13.3):
+    - GoogleUtilities/Privacy
+    - PromisesObjC (< 3.0, >= 1.2)
+  - GoogleUtilities/Logger (7.13.3):
+    - GoogleUtilities/Environment
+    - GoogleUtilities/Privacy
+  - GoogleUtilities/MethodSwizzler (7.13.3):
+    - GoogleUtilities/Logger
+    - GoogleUtilities/Privacy
+  - GoogleUtilities/Network (7.13.3):
+    - GoogleUtilities/Logger
+    - "GoogleUtilities/NSData+zlib"
+    - GoogleUtilities/Privacy
+    - GoogleUtilities/Reachability
+  - "GoogleUtilities/NSData+zlib (7.13.3)":
+    - GoogleUtilities/Privacy
+  - GoogleUtilities/Privacy (7.13.3)
+  - GoogleUtilities/Reachability (7.13.3):
+    - GoogleUtilities/Logger
+    - GoogleUtilities/Privacy
+  - IronSourceSDK (8.4.0.0)
+  - IronSourceUnityAdsAdapter (4.3.43.1):
+    - IronSourceSDK (~> 8.4)
+    - UnityAds (= 4.12.3)
+  - nanopb (2.30910.0):
+    - nanopb/decode (= 2.30910.0)
+    - nanopb/encode (= 2.30910.0)
+  - nanopb/decode (2.30910.0)
+  - nanopb/encode (2.30910.0)
+  - PromisesObjC (2.4.0)
+  - Protobuf (3.12.0)
+  - UnityAds (4.12.3)
+  - UnityMediationAdapter (3.0.2):
+    - UnityMediationLogging (~> 1.0)
+  - UnityMediationLogging (1.0.1)
+  - UnityMediationSdk (1.0.1):
+    - Protobuf (~> 3.12.0)
+    - UnityMediationAdapter (~> 3.0)
+    - UnityMediationLogging (~> 1.0)
+  - UnityMediationUnityAdapter (1.0.0):
+    - UnityAds (~> 4.1)
+    - UnityMediationAdapter (~> 3.0)
+    - UnityMediationSdk (>= 0.5)
+
+DEPENDENCIES:
+  - Google-Mobile-Ads-SDK (~> 10.14)
+  - IronSourceSDK (= 8.4.0.0)
+  - IronSourceUnityAdsAdapter (= 4.3.43.1)
+  - Protobuf
+  - UnityMediationSdk (~> 1.0)
+  - UnityMediationUnityAdapter
+
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs:
+    - Google-Mobile-Ads-SDK
+    - GoogleAppMeasurement
+    - GoogleUserMessagingPlatform
+    - GoogleUtilities
+    - IronSourceUnityAdsAdapter
+    - nanopb
+    - PromisesObjC
+    - UnityMediationAdapter
+    - UnityMediationLogging
+  https://github.com/Unity-Technologies/unity-mediation-cocoapods-prod.git:
+    - UnityMediationSdk
+    - UnityMediationUnityAdapter
+  trunk:
+    - GoogleUtilities
+    - IronSourceSDK
+    - Protobuf
+    - UnityAds
+
+SPEC CHECKSUMS:
+  Google-Mobile-Ads-SDK: 8f67a72f88d057335b1ac3f501e2b68ad054116e
+  GoogleAppMeasurement: f9de05ee17401e3355f68e8fc8b5064d429f5918
+  GoogleUserMessagingPlatform: 0c3a08353e53ce8c2feab7addd0b652cde522450
+  GoogleUtilities: ea963c370a38a8069cc5f7ba4ca849a60b6d7d15
+  IronSourceSDK: 557a0edad39c2a48a225af07b491c672ca5acd36
+  IronSourceUnityAdsAdapter: de8c9120a7ac1295b79505fb08686c01ae2a09e2
+  nanopb: 438bc412db1928dac798aa6fd75726007be04262
+  PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
+  Protobuf: 2793fcd0622a00b546c60e7cbbcc493e043e9bb9
+  UnityAds: 32596c2f76856d643b50d3da51c47a552b80d5a4
+  UnityMediationAdapter: 92d76b74095cbd485c03d96115e9201e5b46fbf7
+  UnityMediationLogging: 1a62837a67e0fbef4656c17520abdaea17fc5c0a
+  UnityMediationSdk: 698930bd581fa117faa81e6a637e16104bc18717
+  UnityMediationUnityAdapter: 4b0c00cc3d630507d86b8dd2d33517504ecc5f43
+
+PODFILE CHECKSUM: 99cd8c7209d88be52b6300dc87570eb1ba0649f9
+
+COCOAPODS: 1.14.3

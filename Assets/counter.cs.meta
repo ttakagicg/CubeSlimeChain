@@ -1,0 +1,20 @@
+fileFormatVersion: 2
+guid: 78fe8160f060842378845be5f4d7881b
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - canvas: {instanceID: 0}
+  - panel_base: {instanceID: 0}
+  - image_1: {fileID: 21300000, guid: 4a37df467428849629bc706f04f849f4, type: 3}
+  - image_2: {fileID: 21300000, guid: 5b7c15a088dce406aa5d7048ec89e7db, type: 3}
+  - image_3: {fileID: 21300000, guid: cd7f8a816e96248dbbad15276742a113, type: 3}
+  - image_4: {fileID: 21300000, guid: 7558e22ae0fbc4fc09a4c518c132b9e2, type: 3}
+  - image_5: {fileID: 21300000, guid: c8abc45b36ac0447aba28be2475b6fe4, type: 3}
+  - image_6: {fileID: 21300000, guid: 677a9ee26e18042df96c982b85d7efd5, type: 3}
+  - image_7: {fileID: 21300000, guid: cdb550a7117b04dde9881623b991ed26, type: 3}
+  - image_8: {fileID: 21300000, guid: 4aa549cb6afd14d20a54722726f5e616, type: 3}
+  - image_9: {fileID: 21300000, guid: 107da2113885a45a2aa12b7e7c4837c3, type: 3}
+  - image_0: {fileID: 21300000, guid: 2151d1b009fb5463b993f2d4a81ee347, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 

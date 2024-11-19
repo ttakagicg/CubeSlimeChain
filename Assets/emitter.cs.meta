@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: c6e579bdf0ddb4015a11e9ee4744d902
+timeCreated: 1428215127
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - Cube_Main: {instanceID: 0}
+  - Cube_r: {instanceID: 0}
+  - Cube_b: {instanceID: 0}
+  - Cube_y: {instanceID: 0}
+  - Cube_g: {instanceID: 0}
+  - Cube_w: {instanceID: 0}
+  - Cube_p: {instanceID: 0}
+  - Sphere_m: {fileID: 2100000, guid: f7075bf2167194b6fb9c34b8ec48c6e0, type: 2}
+  - text1: {fileID: 2800000, guid: 4a37df467428849629bc706f04f849f4, type: 3}
+  - sp: {instanceID: 0}
+  - button_base_2: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
