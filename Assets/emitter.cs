@@ -245,7 +245,7 @@ namespace nm_emitter
 				Destroy(under_floor);
 			}
 			under_floor = new GameObject();
-			under_floor = (GameObject)Instantiate(underFloor1, new Vector3(-20.0f, -5.0f, -20.0f), Quaternion.identity);
+			under_floor = (GameObject)Instantiate(underFloor1, new Vector3(-20.0f, 25.0f, -20.0f), Quaternion.identity);
 
 		}
 		// underFloor material set
