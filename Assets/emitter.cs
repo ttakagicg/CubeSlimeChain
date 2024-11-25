@@ -239,14 +239,16 @@ namespace nm_emitter
 		
 		public void make_UnderFloor() {
 			// under floor
-			setUnderfloorMaerial();
-			if (under_floor != null)
+			if (cubersFile.game_Sceen == 0)
 			{
-				Destroy(under_floor);
+				setUnderfloorMaerial();
+				if (under_floor != null)
+				{
+					Destroy(under_floor);
+				}
+				under_floor = new GameObject();
+				under_floor = (GameObject)Instantiate(underFloor1, new Vector3(-20.0f, 25.0f, -20.0f), Quaternion.identity);
 			}
-			under_floor = new GameObject();
-			under_floor = (GameObject)Instantiate(underFloor1, new Vector3(-20.0f, 25.0f, -20.0f), Quaternion.identity);
-
 		}
 		// underFloor material set
 		public void setUnderfloorMaerial()
@@ -518,7 +520,7 @@ namespace nm_emitter
 
 			floor_clear();
 			make_UperFloor();
-             make_UnderFloor();
+            make_UnderFloor();
 			cube_clear();
 			make_cube();
 
@@ -1949,7 +1951,7 @@ namespace nm_emitter
 			if (cubersFile.cubersfile_Loaded && initEmitter)
 			{
 				initEmitter = false;
-				if (cubersFile.setting_BG_Animation == 0)
+				if (cubersFile.setting_BG_Animation == 0 && cubersFile.game_Sceen == 0)
 				{
 					// BGアニメーションオフ
 					under_floor.GetComponent<SpinAnimation>().AnimationSpeed = 0;

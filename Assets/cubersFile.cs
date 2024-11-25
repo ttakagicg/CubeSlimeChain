@@ -60,6 +60,8 @@ namespace nm_cubersFile
         static Thread load_thread;
         static Thread save_thread;
         public static IDictionary response;
+        // ゲームシーン設定
+        public static long game_Sceen = 1;  // 0=アンダーシーンテクスチャ回転　1=ブルーダンジョン
         // ゲームプレイデータ関連
         public static stage_Data[] stage;
         public static level_Data[] stagelevel;
@@ -191,6 +193,7 @@ namespace nm_cubersFile
             //IEnumerator Load_Cubersfile() {
 
             Dictionary<string, object> dic = Load("userData");
+            // TODO:Load_Cubersfileの初期化を行う際は、dic != nullにして保存済みuserDataを更新する
             if (dic == null) {
                 init_gameEncryptionData();  //userDataが無い場合、cube_baseのデバッグデータファイルが読み込まれる
                 dic = Load("userData");
@@ -198,6 +201,7 @@ namespace nm_cubersFile
             response = (IDictionary)dic["response"];
             user_id = (long)response["id"];
             play_date = (string)response["date"];
+            game_Sceen = (long)response["gamesceen"];
             user_stage = (long)response["userstage"];
             user_stagelevel = (long)response["userstagelevel"];
             now_play_stage = (long)response["playstage"];
@@ -305,6 +309,7 @@ namespace nm_cubersFile
             DateTime p_date = DateTime.Now;
 			play_date = p_date.ToString("G");
 			response["date"] = play_date;
+            response["gamesceen"] = game_Sceen;
 			response["playstage"] = now_play_stage;
             response["playstagelevel"] = now_play_stagelevel;
             response["goldcoin"] = goldCoin_Count;
