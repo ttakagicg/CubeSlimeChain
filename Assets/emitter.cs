@@ -177,7 +177,7 @@ namespace nm_emitter
 			reset_flag();
 
 			cube_m = open_cube_m;
-			cube_m_h = open_cube_m_h;
+            cube_m_h = open_cube_m_h;
 			c_cube_m = close_cube_m;
 			c_cube_m_h = close_cube_m_h;
 
@@ -404,7 +404,7 @@ namespace nm_emitter
 			if (offset != 0) offset = 0;
 			else offset = cube_scale/2;
 			int setCubeCount = 0;
-			wBaseColor = new Color(255.0f / 255.0f, 255.0f / 255.0f, 255.0f / 255.0f, 255.0f / 255.0f); // 白
+			wBaseColor = new Color(255.0f / 255.0f, 255.0f / 255.0f, 255.0f / 255.0f, 80.0f / 255.0f); // 白
 			int mod = (int)cubersFile.now_play_stage;
 //			int mod = (int)cubersFile.now_play_stage % emitter.chainExplosion_userLeve;
 			switch (mod) {
@@ -413,7 +413,7 @@ namespace nm_emitter
 //				texture1 = (Texture)Resources.Load ("0 star/juwelly");
 				texture1 = (Texture)Resources.Load ("0 star/star_1");
 
-                wcolor = new Color(28.0f/255.0f, 220.0f / 255.0f, 28.0f/255.0f, 255.0f / 255.0f); // グリーン
+                wcolor = new Color(28.0f/255.0f, 220.0f / 255.0f, 28.0f/255.0f, 80.0f / 255.0f); // グリーン
 				//wcolor = new Color(229.0f/255.0f,156.0f/255.0f,91.0f/255.0f,136.0f/255.0f); //オレンジ
 				//wcolor = new Color(17.0f/255.0f,47.0f/255.0f,151.0f/255.0f,200.0f/255.0f);
 				//wcolor = new Color(0,141.0f/255.0f,123.0f/255.0f);
@@ -422,7 +422,7 @@ namespace nm_emitter
 			case 3:
 			case 4:
 				texture1 = (Texture)Resources.Load ("0 star/Heart_3");
-				wcolor = new Color(220.0f/255.0f,220.0f/255.0f,20.0f/255.0f,255.0f/255.0f); //オレンジ
+				wcolor = new Color(220.0f/255.0f,220.0f/255.0f,20.0f/255.0f, 80.0f / 255.0f); //オレンジ
 //				wcolor = new Color(91.0f/255.0f,129.0f/255.0f,229.0f/255.0f,136.0f/255.0f); // ブルー
 				//wcolor = new Color(156.0f/255.0f,0.0f/255.0f,87.0f/255.0f);
 //				wcolor = new Color(0,0.683f,0);
@@ -430,7 +430,7 @@ namespace nm_emitter
 			case 5:
 			case 6:
 				texture1 = (Texture)Resources.Load ("0 star/dai_1");
-				wcolor = new Color(220.0f/255.0f, 28.0f/255.0f, 28.0f/255.0f,255.0f/255.0f);
+				wcolor = new Color(220.0f/255.0f, 28.0f/255.0f, 28.0f/255.0f, 80.0f / 255.0f);
 //				wcolor = new Color(91.0f/255.0f,229.0f/255.0f,109.0f/255.0f,136.0f/255.0f); // グリーン
 				//wcolor = new Color(121.0f/255.0f,128.0f/255.0f,0.0f/255.0f);
 //				wcolor = new Color(0.683f,0.683f,0);
@@ -438,16 +438,16 @@ namespace nm_emitter
 			}
 
 
-            //cube_m.SetTexture("_MainTex",texture1);
+            //cube_m.SetTexture("_MainTex", texture1);
 
-            cube_m.SetColor("_SpecColor",wcolor);
+            cube_m.SetColor("_SpecColor", wcolor);
             cube_m.SetColor("_Color", wBaseColor);
 
 
-            //			cube_m.SetColor("_Albedo",wcolor);
-            //cube_m.SetColor("_EmissionColor",wcolor);
-            //			cube_m.SetColor("_Color",wcolor);
-            //			cube_m_h.SetColor("_Color",wcolor);
+            //cube_m.SetColor("_Albedo", wcolor);
+            //cube_m.SetColor("_EmissionColor", wcolor);
+            //cube_m.SetColor("_Color", wcolor);
+            //cube_m_h.SetColor("_Color", wcolor);
 
 
 

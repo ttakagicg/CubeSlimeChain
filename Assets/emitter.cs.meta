@@ -1,21 +1,37 @@
 fileFormatVersion: 2
 guid: c6e579bdf0ddb4015a11e9ee4744d902
-timeCreated: 1428215127
-licenseType: Free
 MonoImporter:
+  externalObjects: {}
   serializedVersion: 2
   defaultReferences:
   - Cube_Main: {instanceID: 0}
-  - Cube_r: {instanceID: 0}
-  - Cube_b: {instanceID: 0}
-  - Cube_y: {instanceID: 0}
-  - Cube_g: {instanceID: 0}
-  - Cube_w: {instanceID: 0}
-  - Cube_p: {instanceID: 0}
-  - Sphere_m: {fileID: 2100000, guid: f7075bf2167194b6fb9c34b8ec48c6e0, type: 2}
-  - text1: {fileID: 2800000, guid: 4a37df467428849629bc706f04f849f4, type: 3}
+  - Floor: {instanceID: 0}
+  - underFloor1: {instanceID: 0}
+  - circle_delay: {instanceID: 0}
+  - touchChainExplosionEffect: {instanceID: 0}
+  - shootChainExplosionEffect: {instanceID: 0}
+  - open_cube_m: {instanceID: 0}
+  - open_cube_m_h: {instanceID: 0}
+  - close_cube_m: {instanceID: 0}
+  - close_cube_m_h: {instanceID: 0}
   - sp: {instanceID: 0}
+  - sphere_garavity_sound: {instanceID: 0}
+  - explosion1: {instanceID: 0}
+  - explosion2: {instanceID: 0}
+  - explosion_monster_bomb: {instanceID: 0}
+  - explosion_cube_bomb: {instanceID: 0}
+  - underMT: {instanceID: 0}
+  - underMT1: {instanceID: 0}
+  - underMT2: {instanceID: 0}
+  - underMT3: {instanceID: 0}
+  - underMT4: {instanceID: 0}
+  - underMT5: {instanceID: 0}
+  - underMT6: {instanceID: 0}
+  - underMT7: {instanceID: 0}
+  - mat: {instanceID: 0}
+  - texture1: {instanceID: 0}
   - button_base_2: {instanceID: 0}
+  - canvas: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
