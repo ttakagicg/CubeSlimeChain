@@ -22,7 +22,7 @@ Material:
   stringTagMap:
     RenderType: Transparent
   disabledShaderPasses: []
-  m_LockedProperties: 
+  m_LockedProperties: _BumpMap
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -47,7 +47,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 19555d7d9d114c7f1100f5ab44295342, type: 3}
+        m_Texture: {fileID: 2800000, guid: e734e9cbb775b444d876b9d21af17a3a, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -82,6 +82,6 @@ Material:
     - _ZWrite: 0
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 0.3137255}
-    - _EmissionColor: {r: 0.17041878, g: 0.17041878, b: 0.015492617, a: 0.3137255}
+    - _EmissionColor: {r: 0.021689665, g: 0.17041878, b: 0.021689665, a: 0.3137255}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
