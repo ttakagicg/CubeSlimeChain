@@ -461,9 +461,10 @@ namespace nm_emitter
 				for (int k=0; k<cubeCount; k++) {
 					for (int i=0; i<cubeCount; i++) {
 						
-						if ((j > 0 && j < cubeCount - 1) && (k > 0 && k < cubeCount - 1) && (i > 0 && i < cubeCount - 1)) {
-						}
-						else { 
+                        if ((j > 0 && j < cubeCount - 1) && (k > 0 && k < cubeCount - 1) && (i > 0 && i < cubeCount - 1)) {
+                        }
+                        else
+                        { 
 							if (cubes [j,k,i] != null) {
 								destroyCubeMaterial(cubes [j,k,i]);
 								Destroy(cubes [j,k,i]);
@@ -2004,9 +2005,10 @@ namespace nm_emitter
 					for (int i=0; i<cubeCount; i++) {
 
 						if (cubes[j,k,i] != null) {
-							if ((j > 0 && j < cubeCount - 1) && (k > 0 && k < cubeCount - 1) && (i > 0 && i < cubeCount - 1)) {
-							}
-							else { 
+                            if ((j > 0 && j < cubeCount - 1) && (k > 0 && k < cubeCount - 1) && (i > 0 && i < cubeCount - 1)) {
+                            }
+                            else
+                            { 
 
 								if (cubes[j,k,i].transform.root.tag == "cube_empty") {
 
@@ -2104,20 +2106,22 @@ namespace nm_emitter
 			
 			for (int j=0; j<cubeCount; j++) {
 				for (int k=0; k<cubeCount; k++) {
-					for (int i=0; i<cubeCount; i++) {
-						
-						GameObject child1 = cubes [j,k,i].transform.Find("Cube1").gameObject;
-						child1.GetComponent<Renderer>().material.shader = shd;
-						GameObject child2 = cubes [j,k,i].transform.Find("Cube2").gameObject;
-						child2.GetComponent<Renderer>().material.shader = shd;
-						GameObject child3 = cubes [j,k,i].transform.Find("Cube3").gameObject;
-						child3.GetComponent<Renderer>().material.shader = shd;
-						GameObject child4 = cubes [j,k,i].transform.Find("Cube4").gameObject;
-						child4.GetComponent<Renderer>().material.shader = shd;
-						GameObject child5 = cubes [j,k,i].transform.Find("Cube5").gameObject;
-						child5.GetComponent<Renderer>().material.shader = shd;
-						GameObject child6 = cubes [j,k,i].transform.Find("Cube6").gameObject;
-						child6.GetComponent<Renderer>().material.shader = shd;
+					for (int i = 0; i < cubeCount; i++) {
+
+						if (cubes[j, k, i] != null) { 
+							GameObject child1 = cubes[j, k, i].transform.Find("Cube1").gameObject;
+							child1.GetComponent<Renderer>().material.shader = shd;
+							GameObject child2 = cubes[j, k, i].transform.Find("Cube2").gameObject;
+							child2.GetComponent<Renderer>().material.shader = shd;
+							GameObject child3 = cubes[j, k, i].transform.Find("Cube3").gameObject;
+							child3.GetComponent<Renderer>().material.shader = shd;
+							GameObject child4 = cubes[j, k, i].transform.Find("Cube4").gameObject;
+							child4.GetComponent<Renderer>().material.shader = shd;
+							GameObject child5 = cubes[j, k, i].transform.Find("Cube5").gameObject;
+							child5.GetComponent<Renderer>().material.shader = shd;
+							GameObject child6 = cubes[j, k, i].transform.Find("Cube6").gameObject;
+							child6.GetComponent<Renderer>().material.shader = shd;
+						}
 					}
 				}
 			}
@@ -2216,10 +2220,10 @@ namespace nm_emitter
 				for (int j=0; j<cubeCount; j++) {
 					for (int k=0; k<cubeCount; k++) {
 						for (int i=0; i<cubeCount; i++) {
-							// cube
-							if ((j > 0 && j < cubeCount - 1) && (k > 0 && k < cubeCount - 1) && (i > 0 && i < cubeCount - 1)) {
-							}
-							else if(cubes[j,k,i] != null) {
+                            // cube
+                            if ((j > 0 && j < cubeCount - 1) && (k > 0 && k < cubeCount - 1) && (i > 0 && i < cubeCount - 1)) {
+                            }
+                            else if (cubes[j,k,i] != null) {
 								obj_rotate(cubes[j,k,i],0);
 							}
 							// sphere
@@ -2325,21 +2329,25 @@ namespace nm_emitter
 
 			int t_position = 0;
 
-			for (int j=0; j<cubeCount; j++) {
-				for (int k=0; k<cubeCount; k++) {
-					for (int i=0; i<cubeCount; i++) {
-						
-						Vector3 scale = cubes[j,k,i].transform.localScale;
-						// タッチ位置のCUBEビューポート座標取得 point Cubeがメインカメラのどこに表示されているかを取得
-						Vector3 cubePosition = cubes[j,k,i].transform.position;
-						Vector3 CubeViewportPoint = Camera.main.WorldToViewportPoint(cubePosition);
+			for (int j=0; j < cubeCount; j++) {
+				for (int k=0; k < cubeCount; k++) {
+					for (int i = 0; i < cubeCount; i++)
+					{
+						if (cubes[j, k, i] != null)
+						{
+							Vector3 scale = cubes[j, k, i].transform.localScale;
+							// タッチ位置のCUBEビューポート座標取得 point Cubeがメインカメラのどこに表示されているかを取得
+							Vector3 cubePosition = cubes[j, k, i].transform.position;
+							Vector3 CubeViewportPoint = Camera.main.WorldToViewportPoint(cubePosition);
 
-						RectTransform CanvasRect = canvas.GetComponent<RectTransform>();
-						Vector2 CubeViewPortToCanvasPoint = new Vector2(
-							(CubeViewportPoint.x*CanvasRect.sizeDelta.x),
-							(CubeViewportPoint.y*CanvasRect.sizeDelta.y));
-						if (touchPosition.y >= CubeViewPortToCanvasPoint.y && touchPosition.y <= CubeViewPortToCanvasPoint.y + scale.y) {
-							Debug.Log("HIT!!");
+							RectTransform CanvasRect = canvas.GetComponent<RectTransform>();
+							Vector2 CubeViewPortToCanvasPoint = new Vector2(
+								(CubeViewportPoint.x * CanvasRect.sizeDelta.x),
+								(CubeViewportPoint.y * CanvasRect.sizeDelta.y));
+							if (touchPosition.y >= CubeViewPortToCanvasPoint.y && touchPosition.y <= CubeViewPortToCanvasPoint.y + scale.y)
+							{
+								Debug.Log("HIT!!");
+							}
 						}
 					}
 				}
