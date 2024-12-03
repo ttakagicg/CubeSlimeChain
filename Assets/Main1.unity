@@ -87236,7 +87236,7 @@ MonoBehaviour:
   screen_width: 0
   screen_height: 0
   canvas: {fileID: 997781137}
-  Sphere_Main: {fileID: 1000014069041812, guid: f3e92f0e6c7c8724b98eded63b438981,
+  Sphere_Main: {fileID: 1000014069041812, guid: 581d1c4a7c5024d358bf6f833387812c,
     type: 3}
   Spher_r: {fileID: 0}
   pointText: {fileID: 1116104195854214, guid: 4be8b1fa44ce1461691db401cced24cd, type: 3}
