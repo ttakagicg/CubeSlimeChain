@@ -95,6 +95,7 @@ namespace  nm_sphere {
 		public static bool gravity_ON;
 		public static bool start_game;
 		public static bool timer_Stop = true;
+		public static double monster_floor_position_correction;
 
 		public static object emit_obj;
 
@@ -132,6 +133,16 @@ namespace  nm_sphere {
 			s_num_7 = num_7;
 			s_num_8 = num_8;
 			s_num_9 = num_9;
+
+			// 落下モンスターフロアーY位置補正　モンスター種別毎に調整設定
+			if (cubersFile.game_Sceen == 0)
+			{
+				monster_floor_position_correction = 2;
+			}
+			else if (cubersFile.game_Sceen == 1)
+			{
+				monster_floor_position_correction = 5;
+			}
 
 		}
 		
@@ -792,7 +803,7 @@ namespace  nm_sphere {
 
 						Vector3 pos_1 = get_round_position(child1.transform.position);
 //						pos_1.y= sphere_scale * sphere_Count + 0.4f;
-						Double wy = Math.Round(((sphere_Count + 1) * (sphere_scale * 10) - 2), 1, MidpointRounding.AwayFromZero);
+						Double wy = Math.Round(((sphere_Count + 1) * (sphere_scale * 10) - monster_floor_position_correction), 1, MidpointRounding.AwayFromZero);
 						string str_y = wy.ToString();
 						pos_1.y = float.Parse(str_y)/10;
 						child1.transform.position = pos_1;
@@ -834,7 +845,7 @@ namespace  nm_sphere {
 						int incpos = 0;
 						// フロアーyポジション
 //						float w_y = sphere_scale * sphere_Count + 0.4f;
-						Double wy = Math.Round(((sphere_Count + 1) * (sphere_scale * 10) - 2), 1, MidpointRounding.AwayFromZero);
+						Double wy = Math.Round(((sphere_Count + 1) * (sphere_scale * 10) - monster_floor_position_correction), 1, MidpointRounding.AwayFromZero);
 						string str_y = wy.ToString();
 						float w_y = float.Parse(str_y)/10;
 						for (int i = 0; i < gravitySpheres_count; i++) {
