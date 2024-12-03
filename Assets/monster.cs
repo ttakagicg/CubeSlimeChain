@@ -96,6 +96,15 @@ namespace  nm_monster {
 		public Texture clear_texture;
 		public Texture death_texture;
 		public Texture happy_texture;
+		// マテリアル
+		public Material monster1_yellow;
+		public Material monster1_orange;
+		public Material monster1_blue;
+		public Material monster1_green;
+		public Material monster1_red;
+		public Material monster1_purple;
+		public Material monster1_white;
+		public Material monster1_black;
 
 		const int monster_totalCount_3 = 26;
 		const int monster_totalCount_4 = 56;
@@ -112,6 +121,7 @@ namespace  nm_monster {
 		public static int level_count;
 
 		public static Texture maintexture;
+		public static Material mainmaterial;
 
 
 		void Start () {
@@ -422,7 +432,56 @@ namespace  nm_monster {
 		}
 
 		// モンスターテクスチャ変更
-		public Texture getMonsterTexture(monster_situation situation, monster_color color) {
+		public Material GetMonsterMaterial(monster_situation situation, monster_color color)
+		{
+			switch (situation)
+			{
+				case monster_situation.noraml_monster:
+				case monster_situation.angry_monster:
+				case monster_situation.happy_monster:
+				case monster_situation.death_monster:
+				case monster_situation.sleep_monster:
+				case monster_situation.wakeup_monster:
+				case monster_situation.smile_monster:
+				case monster_situation.fear_monster:
+				case monster_situation.impatient_monster:
+					switch (color)
+					{
+						case monster_color.blue_monster:
+							mainmaterial = monster1_blue;
+							break;
+						case monster_color.green_monster:
+							mainmaterial = monster1_green;
+							break;
+						case monster_color.orange_monster:
+							mainmaterial = monster1_orange;
+							break;
+						case monster_color.red_monster:
+							mainmaterial = monster1_red;
+							break;
+						case monster_color.yellow_monster:
+							mainmaterial = monster1_yellow;
+							break;
+						case monster_color.purple_monster:
+							mainmaterial = monster1_purple;
+							break;
+						case monster_color.white_monster:
+							mainmaterial = monster1_white;
+							break;
+						case monster_color.black_monster:
+							mainmaterial = monster1_black;
+							break;
+					}
+					break;
+				default:
+					mainmaterial = monster1_green;
+					break;
+			}
+			return mainmaterial;
+		}
+
+			// モンスターテクスチャ変更
+			public Texture GetMonsterTexture(monster_situation situation, monster_color color) {
 			switch (situation) {
 			case monster_situation.noraml_monster:
 				switch (color) {

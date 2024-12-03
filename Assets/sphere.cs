@@ -380,13 +380,23 @@ namespace  nm_sphere {
 
 		// モンスターマテリアルカラーチェンジ
 		public static  void change_MonsterMaterial(GameObject child1, monster_situation situation, monster_color color){
-			if (child1.GetComponent<Renderer> () == null) {
+			if (child1.GetComponent<Renderer>() == null)
+			{
+				if (cubersFile.game_Sceen == 1)
+				{
+					GameObject obj = child1.transform.GetChild(0).gameObject;
+					obj.GetComponent<SkinnedMeshRenderer>().material = monster.monster_instance.GetMonsterMaterial(situation, color);
+				}
 			}
-			else {	
-				GameObject obj = child1.transform.Find("dpt_ball").gameObject;
-				GameObject obj2 = obj.transform.Find("sk").gameObject;
-				GameObject obj3 = obj2.transform.Find("body_mdl").gameObject;
-				obj3.GetComponent<Renderer> ().material.mainTexture = monster.monster_instance.getMonsterTexture(situation, color);
+			else
+			{
+				if (cubersFile.game_Sceen == 0)
+				{
+					GameObject obj = child1.transform.Find("dpt_ball").gameObject;
+					GameObject obj2 = obj.transform.Find("sk").gameObject;
+					GameObject obj3 = obj2.transform.Find("body_mdl").gameObject;
+					obj3.GetComponent<Renderer>().material.mainTexture = monster.monster_instance.GetMonsterTexture(situation, color);
+				}
 			}
 		}
 

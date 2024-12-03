@@ -87236,7 +87236,8 @@ MonoBehaviour:
   screen_width: 0
   screen_height: 0
   canvas: {fileID: 997781137}
-  Sphere_Main: {fileID: 187692, guid: 192a279724bb34695bdc57cda395275e, type: 3}
+  Sphere_Main: {fileID: 1000014069041812, guid: f3e92f0e6c7c8724b98eded63b438981,
+    type: 3}
   Spher_r: {fileID: 0}
   pointText: {fileID: 1116104195854214, guid: 4be8b1fa44ce1461691db401cced24cd, type: 3}
   number: {fileID: 127110, guid: 6dc4ac1d834fd417f87db9a1a52155ee, type: 3}
@@ -87463,6 +87464,14 @@ MonoBehaviour:
   clear_texture: {fileID: 2800000, guid: 08701d75026db4225abd566a69c4c2d0, type: 3}
   death_texture: {fileID: 2800000, guid: e7663342729f14133ad496dd80989fe0, type: 3}
   happy_texture: {fileID: 2800000, guid: f18be61ec17ea4711b2c28ef92a421ca, type: 3}
+  monster1_yellow: {fileID: 2100000, guid: d0362bd62d67d214c8cf110d5b7c0db9, type: 2}
+  monster1_orange: {fileID: 2100000, guid: 00fa30a50e335483cb029c6e90d79a3a, type: 2}
+  monster1_blue: {fileID: 2100000, guid: fc9e33a04d407475dbdbca3ce7b4228c, type: 2}
+  monster1_green: {fileID: 2100000, guid: 8b0adcf0796ec644895af4a66334843f, type: 2}
+  monster1_red: {fileID: 2100000, guid: 840e02b46f8e9b84c8acf31307797515, type: 2}
+  monster1_purple: {fileID: 2100000, guid: 3c347453d95784d0f9ea400360788787, type: 2}
+  monster1_white: {fileID: 2100000, guid: db62daf2b44c64f33b5ad0a56c47bfb0, type: 2}
+  monster1_black: {fileID: 2100000, guid: fc9e33a04d407475dbdbca3ce7b4228c, type: 2}
 --- !u!114 &1586480969
 MonoBehaviour:
   m_ObjectHideFlags: 0

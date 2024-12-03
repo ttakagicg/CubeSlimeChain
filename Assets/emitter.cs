@@ -1957,16 +1957,19 @@ namespace nm_emitter
 			// TODO:1-1-11 追加 新規設定画面処理の作成
 			if (cubersFile.cubersfile_Loaded && initEmitter)
 			{
-				initEmitter = false;
-				if (cubersFile.setting_BG_Animation == 0 && cubersFile.game_Sceen == 0)
+				if (cubersFile.game_Sceen == 0)
 				{
-					// BGアニメーションオフ
-					under_floor.GetComponent<SpinAnimation>().AnimationSpeed = 0;
-				}
-				else
-				{
-					// BGアニメーションオン
-					under_floor.GetComponent<SpinAnimation>().AnimationSpeed = 5;
+					initEmitter = false;
+					if (cubersFile.setting_BG_Animation == 0)
+					{
+						// BGアニメーションオフ
+						under_floor.GetComponent<SpinAnimation>().AnimationSpeed = 0;
+					}
+					else
+					{
+						// BGアニメーションオン
+						under_floor.GetComponent<SpinAnimation>().AnimationSpeed = 5;
+					}
 				}
 			}
 		}
