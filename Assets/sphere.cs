@@ -134,16 +134,6 @@ namespace  nm_sphere {
 			s_num_8 = num_8;
 			s_num_9 = num_9;
 
-			// 落下モンスターフロアーY位置補正　モンスター種別毎に調整設定
-			if (cubersFile.game_Sceen == 0)
-			{
-				monster_floor_position_correction = 2;
-			}
-			else if (cubersFile.game_Sceen == 1)
-			{
-				monster_floor_position_correction = 5;
-			}
-
 		}
 		
 		// Update is called once per frame
@@ -268,6 +258,16 @@ namespace  nm_sphere {
 			canvasPanel.setCenterView(off);
 			canvasPanel panel = GetComponentInChildren<canvasPanel>();
 			panel.setCompleteView(2);
+
+			// 落下モンスターフロアーY位置補正　モンスター種別毎に調整設定
+			if (cubersFile.game_Sceen == 0)
+			{
+				monster_floor_position_correction = 2;
+			}
+			else if (cubersFile.game_Sceen == 1)
+			{
+				monster_floor_position_correction = 5;
+			}
 
 			Resources.UnloadUnusedAssets();
 			sphere_clear();

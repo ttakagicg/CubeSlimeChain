@@ -791,7 +791,7 @@ namespace nm_monster
 				case monster_situation.smile_monster:
 					if (gamesceen == 0)
 					{
-						animationName = "pakupaku03";
+						animationName = "paku";
 					}
 					if (gamesceen == 1)
 					{
@@ -801,7 +801,7 @@ namespace nm_monster
 				case monster_situation.death_monster:
 					if (gamesceen == 0)
 					{
-						animationName = "pakupaku03";
+						animationName = "deth01";
 					}
 					if (gamesceen == 1)
 					{
