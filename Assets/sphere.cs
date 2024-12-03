@@ -318,7 +318,9 @@ namespace  nm_sphere {
 							}
 							change_MonsterMaterial(spheres [j,k,i], monster_situation.death_monster, color);								
 							Animator ani = spheres [j,k,i].GetComponent<Animator>();
-							ani.Play("deth01");
+							string str = monster.monster_instance.PlayMonsterAnimation(monster_situation.death_monster, cubersFile.game_Sceen);
+							ani.Play(str);
+							//ani.Play("deth01");
 						}
 					}
 				}
@@ -345,7 +347,9 @@ namespace  nm_sphere {
 							}
 							change_MonsterMaterial(spheres [j,k,i], monster_situation.happy_monster, color);								
 							Animator ani = spheres [j,k,i].GetComponent<Animator>();
-							ani.Play("paku");
+							string str = monster.monster_instance.PlayMonsterAnimation(monster_situation.happy_monster, cubersFile.game_Sceen);
+							ani.Play(str);
+							//ani.Play("paku");
 
 							GameObject obj = spheres [j,k,i].gameObject;
 							obj.GetComponent<Rigidbody>().isKinematic = false;
@@ -579,7 +583,10 @@ namespace  nm_sphere {
                                     else {
 										color = monster.monster_instance.getMonster_color(spheres [j,k,i].tag);
 									}
-									change_MonsterMaterial(spheres [j,k,i], monster_situation.sleep_monster, color);								
+									change_MonsterMaterial(spheres [j,k,i], monster_situation.sleep_monster, color);
+									Animator ani = spheres[j, k, i].GetComponent<Animator>();
+									string str = monster.monster_instance.PlayMonsterAnimation(monster_situation.happy_monster, cubersFile.game_Sceen);
+									ani.Play(str);
 
 									// char_wait_animation
 									char_obj_anim[j,k,i] = new char_obj_animation();
@@ -804,7 +811,7 @@ namespace  nm_sphere {
 						Vector3 pos_1 = get_round_position(child1.transform.position);
 //						pos_1.y= sphere_scale * sphere_Count + 0.4f;
 						Double wy = Math.Round(((sphere_Count + 1) * (sphere_scale * 10) - monster_floor_position_correction), 1, MidpointRounding.AwayFromZero);
-						string str_y = wy.ToString();
+				   		string str_y = wy.ToString();
 						pos_1.y = float.Parse(str_y)/10;
 						child1.transform.position = pos_1;
 
@@ -875,8 +882,10 @@ namespace  nm_sphere {
 					child1.GetComponent<Rigidbody>().isKinematic = false;
 
 					Animator ani = child1.GetComponent<Animator>();
-//					ani.speed = 1.5f;
-                    ani.Play("sleep");
+					//					ani.speed = 1.5f;
+					string str = monster.monster_instance.PlayMonsterAnimation(monster_situation.death_monster, cubersFile.game_Sceen);
+					ani.Play(str);
+					//ani.Play("sleep");
                 }
 
                 //				counter.timer = emitter.gravity_Time + 1;

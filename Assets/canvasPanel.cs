@@ -6066,7 +6066,9 @@ namespace nm_canvasPanel
 					// 落下アニメ設定
 					Animator ani = sphere.useGravitySpheres[i].GetComponent<Animator>();
 					nm_sphere.sphere.change_MonsterMaterial(sphere.useGravitySpheres[i],monster_situation.fear_monster,color);
-					ani.Play("pakupaku03");
+                    string str = monster.monster_instance.PlayMonsterAnimation(monster_situation.fear_monster, cubersFile.game_Sceen);
+                    ani.Play(str);
+                    //ani.Play("pakupaku03");
 				}
 			}
 

@@ -64,7 +64,9 @@ namespace  nm_monsterTrigger {
                     Singleton<SoundPlayer>.instance.playSE("hit008", 2);
 
                     Animator ani = child1.GetComponent<Animator>();
-                    ani.Play("fall01");
+                    string str = monster.monster_instance.PlayMonsterAnimation(monster_situation.noraml_monster, cubersFile.game_Sceen);
+                    ani.Play(str);
+                    //ani.Play("fall01");
                     int mod = (int)cubersFile.now_play_stage % emitter.chainExplosion_userLeve;
                     monster_color color;
                     if (mod != 0)
