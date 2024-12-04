@@ -767,6 +767,7 @@ namespace nm_monster
 			{
 				case monster_situation.noraml_monster:
 				case monster_situation.wakeup_monster:
+				case monster_situation.fear_monster:
 					if (gamesceen == 0)
 					{
 						animationName = "pakupaku03";
@@ -809,7 +810,6 @@ namespace nm_monster
 					}
 					break;
 				case monster_situation.sleep_monster:
-				case monster_situation.fear_monster:
 					if (gamesceen == 0)
 					{
 						animationName = "pakupaku03";

@@ -883,7 +883,7 @@ namespace  nm_sphere {
 
 					Animator ani = child1.GetComponent<Animator>();
 					//					ani.speed = 1.5f;
-					string str = monster.monster_instance.PlayMonsterAnimation(monster_situation.death_monster, cubersFile.game_Sceen);
+					string str = monster.monster_instance.PlayMonsterAnimation(monster_situation.noraml_monster, cubersFile.game_Sceen);
 					ani.Play(str);
 					//ani.Play("sleep");
                 }
