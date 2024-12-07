@@ -268,8 +268,12 @@ namespace  nm_sphere {
 			{
 				monster_floor_position_correction = 5;
 			}
+			else if (cubersFile.game_Sceen == 2)
+			{
+				monster_floor_position_correction = 5;
+			}
 
-			Resources.UnloadUnusedAssets();
+				Resources.UnloadUnusedAssets();
 			sphere_clear();
 			sphere_on();
 			GetComponent<emitter>().reset_Cube();
@@ -401,6 +405,12 @@ namespace  nm_sphere {
 				{
 					GameObject obj = child1.transform.GetChild(0).gameObject;
 					obj.GetComponent<SkinnedMeshRenderer>().material = monster.monster_instance.GetMonsterMaterial(situation, color);
+				} else if (cubersFile.game_Sceen == 2)
+				{
+					// カラーオブジェクト変更処理　Piloto Studio Char. SlimeChar導入時のカラーチェンジ
+					// 頂点カラーの変更の為、SkinnedMeshRenderer内のMESHを変更
+					GameObject obj = child1.transform.GetChild(1).gameObject;
+					obj.GetComponent<SkinnedMeshRenderer>().sharedMesh = monster.monster_instance.GetMonsterColorMesh(situation, color);
 				}
 			}
 			else

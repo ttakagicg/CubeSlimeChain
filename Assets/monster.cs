@@ -110,6 +110,15 @@ namespace nm_monster
 		public Material monster1_purple;
 		public Material monster1_white;
 		public Material monster1_black;
+		// MESHカラーオブジェクト
+		public Mesh monster2_yellowMesh;
+		public Mesh monster2_orangeMesh;
+		public Mesh monster2_blueMesh;
+		public Mesh monster2_greenMesh;
+		public Mesh monster2_redMesh;
+		public Mesh monster2_purpleMesh;
+		public Mesh monster2_whiteMesh;
+		public Mesh monster2_blackMesh;
 
 		const int monster_totalCount_3 = 26;
 		const int monster_totalCount_4 = 56;
@@ -127,6 +136,7 @@ namespace nm_monster
 
 		public static Texture maintexture;
 		public static Material mainmaterial;
+		public static Mesh mainmesh;
 
 
 		void Start()
@@ -483,6 +493,56 @@ namespace nm_monster
 		color_count.Add(monster_color.blue_monster, level_count);
 		color_count.Add(monster_color.orange_monster, level_count);
 #endif
+		}
+
+		// モンスターカラー変更の為、頂点カラーを利用したキャラオブジェクトのMESHオブジェクトを変更する処理の為
+		// fbx内のMESHオブジェクトをカラー指定のあるオブジェクトを返す
+		public Mesh GetMonsterColorMesh(monster_situation situation, monster_color color)
+        {
+			switch (situation)
+			{
+				case monster_situation.noraml_monster:
+				case monster_situation.angry_monster:
+				case monster_situation.happy_monster:
+				case monster_situation.death_monster:
+				case monster_situation.sleep_monster:
+				case monster_situation.wakeup_monster:
+				case monster_situation.smile_monster:
+				case monster_situation.fear_monster:
+				case monster_situation.impatient_monster:
+					switch (color)
+					{
+						case monster_color.blue_monster:
+							mainmesh = monster2_blueMesh;
+							break;
+						case monster_color.green_monster:
+							mainmesh = monster2_greenMesh;
+							break;
+						case monster_color.orange_monster:
+							mainmesh = monster2_orangeMesh;
+							break;
+						case monster_color.red_monster:
+							mainmesh = monster2_redMesh;
+							break;
+						case monster_color.yellow_monster:
+							mainmesh = monster2_yellowMesh;
+							break;
+						case monster_color.purple_monster:
+							mainmesh = monster2_purpleMesh;
+							break;
+						case monster_color.white_monster:
+							mainmesh = monster2_whiteMesh;
+							break;
+						case monster_color.black_monster:
+							mainmesh = monster2_blackMesh;
+							break;
+					}
+					break;
+				default:
+					mainmesh = monster2_greenMesh;
+					break;
+			}
+			return mainmesh;
 		}
 
 		// モンスターテクスチャ変更

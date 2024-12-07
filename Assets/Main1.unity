@@ -87236,7 +87236,7 @@ MonoBehaviour:
   screen_width: 0
   screen_height: 0
   canvas: {fileID: 997781137}
-  Sphere_Main: {fileID: 1000014069041812, guid: 581d1c4a7c5024d358bf6f833387812c,
+  Sphere_Main: {fileID: 1081980521972281161, guid: 5f28451e0ca70469b8dbc14f18f345a6,
     type: 3}
   Spher_r: {fileID: 0}
   pointText: {fileID: 1116104195854214, guid: 4be8b1fa44ce1461691db401cced24cd, type: 3}
@@ -87472,6 +87472,22 @@ MonoBehaviour:
   monster1_purple: {fileID: 2100000, guid: 3c347453d95784d0f9ea400360788787, type: 2}
   monster1_white: {fileID: 2100000, guid: db62daf2b44c64f33b5ad0a56c47bfb0, type: 2}
   monster1_black: {fileID: 2100000, guid: fc9e33a04d407475dbdbca3ce7b4228c, type: 2}
+  monster2_yellowMesh: {fileID: -8334034791520657452, guid: fa50a7b2f1b332a46ae9131d82b5dd68,
+    type: 3}
+  monster2_orangeMesh: {fileID: 2363391359460815210, guid: 024bfe0c3a5d63245be5eb9c53f71a05,
+    type: 3}
+  monster2_blueMesh: {fileID: 4971465172980926250, guid: 812d2b10cfad75d43a0739f71e94ff64,
+    type: 3}
+  monster2_greenMesh: {fileID: 818288664122592095, guid: 26c416683039c9f47bef4d09bd523a43,
+    type: 3}
+  monster2_redMesh: {fileID: 1669883399278563681, guid: 38639d9dd993ee54c84b5b2f6e9d3163,
+    type: 3}
+  monster2_purpleMesh: {fileID: -3681004745212867041, guid: e6c460f26ed218347b3a680ea5820f1f,
+    type: 3}
+  monster2_whiteMesh: {fileID: -3625510999214098745, guid: e49a3c9bd22eeca41b0367601a15ea58,
+    type: 3}
+  monster2_blackMesh: {fileID: -5978648667690749191, guid: 79323a145a03f7e4bb02426a7e5c5911,
+    type: 3}
 --- !u!114 &1586480969
 MonoBehaviour:
   m_ObjectHideFlags: 0
