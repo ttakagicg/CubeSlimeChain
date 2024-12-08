@@ -97,8 +97,13 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: -5694226063379278008, guid: bdc4ba12105bb3d4ab5916de75697c2c,
+      objectReference: {fileID: -8654988905617730303, guid: c79fb1082a2e36c4ebf2f249f4be1431,
         type: 3}
+    - target: {fileID: 6303681687905657100, guid: aee8b04ddb459f3468446912ce0635a2,
+        type: 3}
+      propertyPath: m_RootBone
+      value: 
+      objectReference: {fileID: 2573458731452914433}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -208,3 +213,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d554032558434e4ca78826ae3a9246f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &2573458731452914433 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -6884775364873074407, guid: aee8b04ddb459f3468446912ce0635a2,
+    type: 3}
+  m_PrefabInstance: {fileID: 270953048757604888}
+  m_PrefabAsset: {fileID: 0}

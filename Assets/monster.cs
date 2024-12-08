@@ -836,6 +836,11 @@ namespace nm_monster
 					{
 						animationName = "rabbit_idle";
 					}
+					if (gamesceen == 2)
+					{
+						animationName = "Anim_Slime_WalkingJump";
+						//animationName = "Anim_Slime_Idle";
+					}
 					break;
 				case monster_situation.angry_monster:
 				case monster_situation.impatient_monster:
@@ -846,6 +851,10 @@ namespace nm_monster
 					if (gamesceen == 1)
 					{
 						animationName = "rabbit_attack";
+					}
+					if (gamesceen == 2)
+					{
+						animationName = "Anim_Slime_Attack_03";
 					}
 					break;
 				case monster_situation.happy_monster:
@@ -858,6 +867,10 @@ namespace nm_monster
 					{
 						animationName = "rabbit_move";
 					}
+					if (gamesceen == 2)
+					{
+						animationName = "Anim_Slime_WalkingJump";
+					}
 					break;
 				case monster_situation.death_monster:
 					if (gamesceen == 0)
@@ -868,6 +881,10 @@ namespace nm_monster
 					{
 						animationName = "rabbit_die";
 					}
+					if (gamesceen == 2)
+					{
+						animationName = "Anim_Slime_Dying_03";
+					}
 					break;
 				case monster_situation.sleep_monster:
 					if (gamesceen == 0)
@@ -877,6 +894,10 @@ namespace nm_monster
 					if (gamesceen == 1)
 					{
 						animationName = "rabbit_damage";
+					}
+					if (gamesceen == 2)
+					{
+						animationName = "Anim_Slime_Walking_02";
 					}
 					break;
 				default:
