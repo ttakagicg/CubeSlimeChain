@@ -214,7 +214,7 @@ namespace  nm_counter {
             if (int.Parse(str) <= 0 && sphere.sw_sphere) {
 				// タイマーカウント０
 				if (sphere.gravitySpheres_count != 0) { 
-					// 落下開始
+					//  モンスターキャラ落下開始　重力落下フラグON　落下アニメーションセット　落下サウンドON
 					emitter.sw_floorUpDown = true;
 					for (int jj=0; jj< emitter.cubeCount; jj++) {
 						for (int ii=0; ii<emitter.cubeCount; ii++) {
@@ -238,10 +238,13 @@ namespace  nm_counter {
 							sphere.useGravitySpheres[i].transform.GetComponent<Rigidbody>().mass = cube_mass; // speed high 1 <-> 100 low
 							sphere.useGravitySpheres[i].transform.GetComponent<Rigidbody>().useGravity = true;
 							sphere.useGravitySpheres[i].transform.GetComponent<Rigidbody>().AddForce(Vector3.down * speed, ForceMode.Force);
-							// 落下アニメ設定
+							// 落下マテリアルチェンジ
 							nm_sphere.sphere.change_MonsterMaterial(sphere.useGravitySpheres[i],monster_situation.fear_monster,color);
-
-							sw_animation = 0;
+                            // 落下アニメ設定
+                            Animator ani = sphere.useGravitySpheres[i].GetComponent<Animator>();
+                            string str1 = monster.monster_instance.PlayMonsterAnimation(monster_situation.happy_monster, cubersFile.game_Sceen);
+                            ani.Play(str1);
+                            sw_animation = 0;
 						}
 					}
 					// 落下SE設定

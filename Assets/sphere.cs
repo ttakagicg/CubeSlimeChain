@@ -424,7 +424,7 @@ namespace  nm_sphere {
 				}
 			}
 		}
-
+		// 洗濯ステージに該当するモンスターオブジェクト群を初期化（準備）
 		public void sphere_on() {
 
 			if(!sw_sphere) {
@@ -595,7 +595,7 @@ namespace  nm_sphere {
 									}
 									change_MonsterMaterial(spheres [j,k,i], monster_situation.sleep_monster, color);
 									Animator ani = spheres[j, k, i].GetComponent<Animator>();
-									string str = monster.monster_instance.PlayMonsterAnimation(monster_situation.happy_monster, cubersFile.game_Sceen);
+									string str = monster.monster_instance.PlayMonsterAnimation(monster_situation.noraml_monster, cubersFile.game_Sceen);
 									ani.Play(str);
 
 									// char_wait_animation
@@ -716,22 +716,28 @@ namespace  nm_sphere {
 					for (int i=0; i<before_sphere_Count; ++i) {
 
 						if (spheres [j,k,i] != null) {
-							GameObject obj = spheres [j,k,i].transform.Find("dpt_ball").gameObject;
-							GameObject obj2 = obj.transform.Find("sk").gameObject;
-							GameObject obj3 = obj2.transform.Find("body_mdl").gameObject;
-							Material mat1 = obj3.transform.gameObject.GetComponent<Renderer>().material;
-							DestroyImmediate(mat1);
-							Destroy(spheres [j,k,i]);
-							spheres [j,k,i] = null;
+							if (cubersFile.game_Sceen == 0)
+							{
+								GameObject obj = spheres[j, k, i].transform.Find("dpt_ball").gameObject;
+								GameObject obj2 = obj.transform.Find("sk").gameObject;
+								GameObject obj3 = obj2.transform.Find("body_mdl").gameObject;
+								Material mat1 = obj3.transform.gameObject.GetComponent<Renderer>().material;
+								DestroyImmediate(mat1);
+							}
+							Destroy(spheres[j, k, i]);
+							spheres[j, k, i] = null;
 						}
 					}
 				}
 			}
 			for (int ii = 0; ii < before_sphere_Count; ii++){
 				if (useGravitySpheres[ii] != null) {
-					GameObject wobj1 = useGravitySpheres[ii];
-					Material mat1 = wobj1.transform.gameObject.GetComponent<Renderer>().material;
-					DestroyImmediate(mat1);
+					if (cubersFile.game_Sceen == 0)
+					{
+						GameObject wobj1 = useGravitySpheres[ii];
+						Material mat1 = wobj1.transform.gameObject.GetComponent<Renderer>().material;
+						DestroyImmediate(mat1);
+					}
 					Destroy(useGravitySpheres[ii]);
 					useGravitySpheres[ii] = null;
 				}
@@ -753,7 +759,7 @@ namespace  nm_sphere {
 		public static int gravitySpheres_count = 0;
 		public static int now_gravitySpheres_count = 0;
 
-        // 落下モンスタフロアーセット
+        // 落下モンスタをフロアーへセット
 		public void sphere_dwon() {
 
 			if (sw_sphere) {

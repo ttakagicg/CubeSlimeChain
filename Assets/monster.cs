@@ -111,14 +111,14 @@ namespace nm_monster
 		public Material monster1_white;
 		public Material monster1_black;
 		// MESHカラーオブジェクト
-		public Mesh monster2_yellowMesh;
-		public Mesh monster2_orangeMesh;
-		public Mesh monster2_blueMesh;
 		public Mesh monster2_greenMesh;
+		public Mesh monster2_yellowMesh;
 		public Mesh monster2_redMesh;
 		public Mesh monster2_purpleMesh;
+		public Mesh monster2_blueMesh;
 		public Mesh monster2_whiteMesh;
 		public Mesh monster2_blackMesh;
+		public Mesh monster2_orangeMesh;
 
 		const int monster_totalCount_3 = 26;
 		const int monster_totalCount_4 = 56;
@@ -504,7 +504,6 @@ namespace nm_monster
 				case monster_situation.noraml_monster:
 				case monster_situation.angry_monster:
 				case monster_situation.happy_monster:
-				case monster_situation.death_monster:
 				case monster_situation.sleep_monster:
 				case monster_situation.wakeup_monster:
 				case monster_situation.smile_monster:
@@ -538,6 +537,9 @@ namespace nm_monster
 							break;
 					}
 					break;
+				case monster_situation.death_monster:
+					mainmesh = monster2_blackMesh;
+					break;
 				default:
 					mainmesh = monster2_greenMesh;
 					break;
@@ -545,7 +547,7 @@ namespace nm_monster
 			return mainmesh;
 		}
 
-		// モンスターテクスチャ変更
+		// モンスターマテリアル変更
 		public Material GetMonsterMaterial(monster_situation situation, monster_color color)
 		{
 			switch (situation)
@@ -826,7 +828,6 @@ namespace nm_monster
 			switch (situation)
 			{
 				case monster_situation.noraml_monster:
-				case monster_situation.wakeup_monster:
 				case monster_situation.fear_monster:
 					if (gamesceen == 0)
 					{
@@ -838,8 +839,8 @@ namespace nm_monster
 					}
 					if (gamesceen == 2)
 					{
-						animationName = "Anim_Slime_WalkingJump";
 						//animationName = "Anim_Slime_Idle";
+						animationName = "Anim_Slime_Walking_02";
 					}
 					break;
 				case monster_situation.angry_monster:
@@ -883,7 +884,7 @@ namespace nm_monster
 					}
 					if (gamesceen == 2)
 					{
-						animationName = "Anim_Slime_Dying_03";
+						animationName = "Anim_Slime_Dying_01";
 					}
 					break;
 				case monster_situation.sleep_monster:
@@ -898,6 +899,21 @@ namespace nm_monster
 					if (gamesceen == 2)
 					{
 						animationName = "Anim_Slime_Walking_02";
+					}
+					break;
+				case monster_situation.wakeup_monster:
+					if (gamesceen == 0)
+					{
+						animationName = "pakupaku03";
+					}
+					if (gamesceen == 1)
+					{
+						animationName = "rabbit_damage";
+					}
+					if (gamesceen == 2)
+					{
+						animationName = "Anim_Slime_Walking_02";
+						//animationName = "Anim_Slime_WalkingJump3";
 					}
 					break;
 				default:

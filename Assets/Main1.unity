@@ -87472,21 +87472,21 @@ MonoBehaviour:
   monster1_purple: {fileID: 2100000, guid: 3c347453d95784d0f9ea400360788787, type: 2}
   monster1_white: {fileID: 2100000, guid: db62daf2b44c64f33b5ad0a56c47bfb0, type: 2}
   monster1_black: {fileID: 2100000, guid: fc9e33a04d407475dbdbca3ce7b4228c, type: 2}
-  monster2_yellowMesh: {fileID: -8334034791520657452, guid: fa50a7b2f1b332a46ae9131d82b5dd68,
-    type: 3}
-  monster2_orangeMesh: {fileID: 2363391359460815210, guid: 024bfe0c3a5d63245be5eb9c53f71a05,
-    type: 3}
-  monster2_blueMesh: {fileID: 4971465172980926250, guid: 812d2b10cfad75d43a0739f71e94ff64,
-    type: 3}
   monster2_greenMesh: {fileID: 818288664122592095, guid: 26c416683039c9f47bef4d09bd523a43,
     type: 3}
-  monster2_redMesh: {fileID: 1669883399278563681, guid: 38639d9dd993ee54c84b5b2f6e9d3163,
+  monster2_yellowMesh: {fileID: -198002542796569767, guid: fac60f02576552f4ebd13af51937a678,
     type: 3}
-  monster2_purpleMesh: {fileID: -3681004745212867041, guid: e6c460f26ed218347b3a680ea5820f1f,
+  monster2_redMesh: {fileID: 8534136881705828271, guid: 2eb5f0fd801883a4ab6b27b052d94388,
     type: 3}
-  monster2_whiteMesh: {fileID: -3625510999214098745, guid: e49a3c9bd22eeca41b0367601a15ea58,
+  monster2_purpleMesh: {fileID: 5187519786274643641, guid: c6ca01d0fc866794a83f9c0bb89b1cf9,
     type: 3}
-  monster2_blackMesh: {fileID: -5978648667690749191, guid: 79323a145a03f7e4bb02426a7e5c5911,
+  monster2_blueMesh: {fileID: -2079775674729587944, guid: 797a381db795b7d4f932f07875838e5b,
+    type: 3}
+  monster2_whiteMesh: {fileID: 4280544575570684943, guid: 7d860784f5d995048ad326e5f58cfb84,
+    type: 3}
+  monster2_blackMesh: {fileID: 6794745613212716082, guid: 882848a1b08c39b45ac44504de4e871c,
+    type: 3}
+  monster2_orangeMesh: {fileID: -7809645216774577328, guid: 80f92be86d6db594c9b9ba7a89c35c18,
     type: 3}
 --- !u!114 &1586480969
 MonoBehaviour:
