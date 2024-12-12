@@ -87544,7 +87544,7 @@ MonoBehaviour:
   monster1_black: {fileID: 2100000, guid: fc9e33a04d407475dbdbca3ce7b4228c, type: 2}
   monster2_greenMesh: {fileID: 818288664122592095, guid: 26c416683039c9f47bef4d09bd523a43,
     type: 3}
-  monster2_yellowMesh: {fileID: -198002542796569767, guid: fac60f02576552f4ebd13af51937a678,
+  monster2_yellowMesh: {fileID: 7151590113053782395, guid: 5d9fe75f540fcd9479161ef28e7ffa36,
     type: 3}
   monster2_redMesh: {fileID: 8534136881705828271, guid: 2eb5f0fd801883a4ab6b27b052d94388,
     type: 3}

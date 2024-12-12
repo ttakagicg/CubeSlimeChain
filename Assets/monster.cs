@@ -503,7 +503,6 @@ namespace nm_monster
 			{
 				case monster_situation.noraml_monster:
 				case monster_situation.angry_monster:
-				case monster_situation.happy_monster:
 				case monster_situation.sleep_monster:
 				case monster_situation.wakeup_monster:
 				case monster_situation.smile_monster:
@@ -536,6 +535,9 @@ namespace nm_monster
 							mainmesh = monster2_blackMesh;
 							break;
 					}
+					break;
+				case monster_situation.happy_monster:
+					mainmesh = monster2_whiteMesh;
 					break;
 				case monster_situation.death_monster:
 					mainmesh = monster2_blackMesh;

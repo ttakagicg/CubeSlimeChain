@@ -587,11 +587,25 @@ namespace  nm_sphere {
 #if !DEBUG
                                         color = monster_color.blue_monster;
 #else
-                                        color = monster_color.green_monster;
+										if (cubersFile.game_Sceen == 2)
+										{
+											color = monster_color.white_monster;
+										}
+										else
+										{
+											color = monster_color.green_monster;
+										}
 #endif                                        
                                     }
                                     else {
-										color = monster.monster_instance.getMonster_color(spheres [j,k,i].tag);
+										if (cubersFile.game_Sceen != 2)
+										{
+											color = monster.monster_instance.getMonster_color(spheres[j, k, i].tag);
+										}
+										else
+										{
+											color = monster_color.white_monster;
+										}
 									}
 									change_MonsterMaterial(spheres [j,k,i], monster_situation.sleep_monster, color);
 									Animator ani = spheres[j, k, i].GetComponent<Animator>();
