@@ -545,8 +545,15 @@ namespace nm_emitter
 
 			int mod = (int)cubersFile.now_play_stage % emitter.chainExplosion_userLeve;
 			if (mod == 0) {
-				canvasPanel.s_monsterColorCountView.gameObject.SetActive(true);
-				canvasPanel.monsterColor = true;
+				if (cubersFile.game_Sceen == 0)
+				{
+					canvasPanel.s_monsterColorCountView.gameObject.SetActive(true);
+					canvasPanel.monsterColor = true;
+				} else if (cubersFile.game_Sceen == 2)
+                {
+					canvasPanel.s_monsterSlimeColorCountView.gameObject.SetActive(true);
+					canvasPanel.monsterColor = true;
+				}
 			} else {
 				canvasPanel.s_monsterColorCountView.gameObject.SetActive(false);
 			}
