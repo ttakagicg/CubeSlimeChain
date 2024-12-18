@@ -584,16 +584,6 @@ namespace nm_canvasPanel
         public Text purpleMonsterSlimeCount;
         public Text redMonsterSlimeCount;
         public Text blueMonsterSlimeCount;
-        public Text greenMonsterSlimePoint;
-        public Text yellowMonsterSlimePoint;
-        public Text purpleMonsterSlimePoint;
-        public Text redMonsterSlimePoint;
-        public Text blueMonsterSlimePoint;
-        public Text greenMonsterSlimeLabel;
-        public Text yellowMonsterSlimeLabel;
-        public Text purpleMonsterSlimeLabel;
-        public Text redMonsterSlimeLabel;
-        public Text blueMonsterSlimeLabel;
         public static bool greenMonsterSlimeCountON;
         public static bool yellowMonsterSlimeCountON;
         public static bool orangeMonsterSlimeCountON;
@@ -895,16 +885,16 @@ namespace nm_canvasPanel
             //pos_mc.y = (Screen.height - safeAreaHight) - ((center_header.rectTransform.sizeDelta.y + monsterColorCountView.rectTransform.sizeDelta.y + 45) * scal2.y);
             monsterColorCountView.transform.position = pos_mc;
 
-			// モンスターカウンターイメージstaticセット
-			greenMonsterCountImage_s = greenMonsterCountImage;
+            // モンスターカウンターイメージstaticセット  ゲームシーン０連鎖カウンターパネル２D表示位置での２Dエフェクト表示に利用　※現在未利用
+            greenMonsterCountImage_s = greenMonsterCountImage;
 			greenMonsterStarImage_s = greenMonsterStarImage;
 			yellowMonsterCountImage_s = yellowMonsterCountImage;
 			redMonsterCountImage_s = redMonsterCountImage;
 			purpleMonsterCountImage_s = purpleMonsterCountImage;
 			blueMonsterCountImage_s = blueMonsterCountImage;
 
-			// モンスターカウンター座標セット
-			greenMonsterCounterPosition = greenMonsterCountImage.rectTransform.position;
+            // モンスターカウンター座標セット  ゲームシーン０連鎖カウンターパネル２D表示位置での２Dエフェクト表示に利用　※現在未利用
+            greenMonsterCounterPosition = greenMonsterCountImage.rectTransform.position;
 			yellowMonsterCounterPosition = yellowMonsterCountImage.rectTransform.position;
 			redMonsterCounterPosition = redMonsterCountImage.rectTransform.position;
 			purpleMonsterCounterPosition = purpleMonsterCountImage.rectTransform.position;
@@ -4320,7 +4310,8 @@ namespace nm_canvasPanel
 				monsterColorCount();
 			}
 			if (resetMonsterColor) {
-				setChainExplosionMonsterColorCountView();
+                // 連鎖カウンター２Dパネル表示リセット
+                setChainExplosionMonsterColorCountView();
 				resetChainExplosionMonsterColorCountView();
 				resetMonsterColor = false;
 			}
