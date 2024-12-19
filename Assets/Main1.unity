@@ -52205,7 +52205,7 @@ Transform:
   m_GameObject: {fileID: 940389798}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071069, y: 0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: -15.4, y: -1.86, z: 8.89}
+  m_LocalPosition: {x: -15.44, y: -1.86, z: 9.29}
   m_LocalScale: {x: 1, y: 1, z: 0.9999999}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -54825,16 +54825,6 @@ MonoBehaviour:
   purpleMonsterSlimeCount: {fileID: 631352032}
   redMonsterSlimeCount: {fileID: 521688463}
   blueMonsterSlimeCount: {fileID: 1854889688}
-  greenMonsterSlimePoint: {fileID: 0}
-  yellowMonsterSlimePoint: {fileID: 0}
-  purpleMonsterSlimePoint: {fileID: 0}
-  redMonsterSlimePoint: {fileID: 0}
-  blueMonsterSlimePoint: {fileID: 0}
-  greenMonsterSlimeLabel: {fileID: 0}
-  yellowMonsterSlimeLabel: {fileID: 0}
-  purpleMonsterSlimeLabel: {fileID: 0}
-  redMonsterSlimeLabel: {fileID: 0}
-  blueMonsterSlimeLabel: {fileID: 0}
   greenMonsterLineCount: {fileID: 1736071055}
   yellowMonsterLineCount: {fileID: 313550047}
   purpleMonsterLineCount: {fileID: 110917267}
