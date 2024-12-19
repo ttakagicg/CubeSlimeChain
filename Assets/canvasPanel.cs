@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Video;
 using System;
 using System.Collections;
 using nm_emitter;
@@ -563,20 +564,30 @@ namespace nm_canvasPanel
         public Sprite monsterSlimeCountBaseImage;
         public Sprite monsterSlimeCountHighImage;
         public Image greenMonsterSlimeCountImage;
+        public RawImage greenMonsterSlimeVideoView;
+        public static RawImage greenMonsterSlimeVideoView_s;
         public static Image greenMonsterSlimeCountImage_s;
         public static Vector3 greenMonsterSlimeCounterPosition;
         public Image greenMonsterSlimeStarImage;
         public static Image greenMonsterSlimeStarImage_s;
         public Image yellowMonsterSlimeCountImage;
+        public RawImage yellowMonsterSlimeVideoView;
+        public static RawImage yellowMonsterSlimeVideoView_s;
         public static Image yellowMonsterSlimeCountImage_s;
         public static Vector3 yellowMonsterSlimeCounterPosition;
         public Image purpleMonsterSlimeCountImage;
+        public RawImage purpleMonsterSlimeVideoView;
+        public static RawImage purpleMonsterSlimeVideoView_s;
         public static Image purpleMonsterSlimeCountImage_s;
         public static Vector3 purpleMonsterSlimeCounterPosition;
         public Image redMonsterSlimeCountImage;
+        public RawImage redMonsterSlimeVideoView;
+        public static RawImage redMonsterSlimeVideoView_s;
         public static Image redMonsterSlimeCountImage_s;
         public static Vector3 redMonsterSlimeCounterPosition;
         public Image blueMonsterSlimeCountImage;
+        public RawImage blueMonsterSlimeVideoView;
+        public static RawImage blueMonsterSlimeVideoView_s;
         public static Image blueMonsterSlimeCountImage_s;
         public static Vector3 blueMonsterSlimeCounterPosition;
         public Text greenMonsterSlimeCount;
@@ -906,6 +917,19 @@ namespace nm_canvasPanel
 			redMonsterCountImage.material = chainExplosionCounterM;
 			purpleMonsterCountImage.material = chainExplosionCounterM;
 			blueMonsterCountImage.material = chainExplosionCounterM;
+
+            // スライムモンスター連鎖ビデオビュー
+            greenMonsterSlimeVideoView_s = greenMonsterSlimeVideoView;
+            yellowMonsterSlimeVideoView_s = yellowMonsterSlimeVideoView;
+            redMonsterSlimeVideoView_s = redMonsterSlimeVideoView;
+            purpleMonsterSlimeVideoView_s = purpleMonsterSlimeVideoView;
+            blueMonsterSlimeVideoView_s = blueMonsterSlimeVideoView;
+            // 連鎖時のカウンターパネルビデオ再生ビュー
+            blueMonsterSlimeVideoView_s.gameObject.SetActive(false);
+            greenMonsterSlimeVideoView_s.gameObject.SetActive(false);
+            purpleMonsterSlimeVideoView_s.gameObject.SetActive(false);
+            redMonsterSlimeVideoView_s.gameObject.SetActive(false);
+            yellowMonsterSlimeVideoView_s.gameObject.SetActive(false);
 
             // 連鎖　カラー別取得ポイントテキストクリア
             greenMonsterPoint.text = "";
@@ -1516,55 +1540,115 @@ namespace nm_canvasPanel
 
 
         // set chainExplosionStarEffectPosition
+        [SerializeField]
+        static VideoPlayer videoPlayer;
         public static void setchainExplosionStarEffectPosition(monster_color color) {
+            var seq = DOTween.Sequence();
+            switch (cubersFile.game_Sceen)
+            {
+                case 0:
+                    greenMonsterStarImage_s.gameObject.SetActive(true);
+                    Vector3 monsterCounterPosition = new Vector3(0.0f, 0.0f, 0.0f);
 
-			greenMonsterStarImage_s.gameObject.SetActive(true);
-			Vector3 monsterCounterPosition = new Vector3(0.0f, 0.0f, 0.0f);
+                    switch (color)
+                    {
+                        case monster_color.blue_monster:
+                            monsterCounterPosition = canvasPanel.blueMonsterCounterPosition;
+                            break;
+                        case monster_color.green_monster:
+                            monsterCounterPosition = canvasPanel.greenMonsterCounterPosition;
+                            break;
+                        case monster_color.purple_monster:
+                            monsterCounterPosition = canvasPanel.purpleMonsterCounterPosition;
+                            break;
+                        case monster_color.orange_monster:
+                            //				monsterCounterPosition = canvasPanel.orangeMonsterCounterPosition;
+                            break;
+                        case monster_color.red_monster:
+                            monsterCounterPosition = canvasPanel.redMonsterCounterPosition;
+                            break;
+                        case monster_color.yellow_monster:
+                            monsterCounterPosition = canvasPanel.yellowMonsterCounterPosition;
+                            break;
+                        default:
+                            break;
+                    }
+                    monsterCounterPosition.x += 15;
+                    monsterCounterPosition.y += 40;
+                    greenMonsterStarImage_s.rectTransform.position = monsterCounterPosition;
+                    Vector2 scale = greenMonsterStarImage_s.rectTransform.localScale;
+                    scale.x = 0.1f;
+                    scale.y = 0.1f;
+                    greenMonsterStarImage_s.rectTransform.localScale = scale;
+                    greenMonsterStarImage_s.rectTransform.rotation = Quaternion.Euler(0, 0, 0);
 
-			switch (color) {
-			case monster_color.blue_monster:
-				monsterCounterPosition = canvasPanel.blueMonsterCounterPosition;
-				break;
-			case monster_color.green_monster:
-				monsterCounterPosition = canvasPanel.greenMonsterCounterPosition;
-				break;
-			case monster_color.purple_monster:
-				monsterCounterPosition = canvasPanel.purpleMonsterCounterPosition;
-				break;
-			case monster_color.orange_monster:
-				//				monsterCounterPosition = canvasPanel.orangeMonsterCounterPosition;
-				break;
-			case monster_color.red_monster:
-				monsterCounterPosition = canvasPanel.redMonsterCounterPosition;
-				break;
-			case monster_color.yellow_monster:
-				monsterCounterPosition = canvasPanel.yellowMonsterCounterPosition;
-				break;
-			default:
-				break;
-			}
-			monsterCounterPosition.x += 15;
-			monsterCounterPosition.y += 40;
-			greenMonsterStarImage_s.rectTransform.position = monsterCounterPosition;
-			Vector2 scale = greenMonsterStarImage_s.rectTransform.localScale;
-			scale.x = 0.1f;
-			scale.y = 0.1f;
-			greenMonsterStarImage_s.rectTransform.localScale = scale;
-			greenMonsterStarImage_s.rectTransform.rotation = Quaternion.Euler(0, 0, 0);
-
-			var seq = DOTween.Sequence();
-			seq.Append(greenMonsterStarImage_s.rectTransform.DOScale( new Vector3(2.0f, 2.0f), 1.0f));
-			seq.Join(greenMonsterStarImage_s.rectTransform.DORotate(new Vector3(0f, 0f, 180f),   // 終了時点のRotation
-				2.0f                    // アニメーション時間
-			));
-			seq.OnComplete(() => {
-				// アニメーションが終了時によばれる
-				greenMonsterStarImage_s.gameObject.SetActive(false);
-			});
+                    seq = DOTween.Sequence();
+                    seq.Append(greenMonsterStarImage_s.rectTransform.DOScale(new Vector3(2.0f, 2.0f), 1.0f));
+                    seq.Join(greenMonsterStarImage_s.rectTransform.DORotate(new Vector3(0f, 0f, 180f),   // 終了時点のRotation
+                        2.0f                    // アニメーション時間
+                    ));
+                    seq.OnComplete(() =>
+                    {
+                        // アニメーションが終了時によばれる
+                        greenMonsterStarImage_s.gameObject.SetActive(false);
+                    });
+                    break;
+                case 2:
+                    // スライム連鎖時のカウンターパネルでのダメージビデオ再生処理
+                    switch (color)
+                    {
+                        case monster_color.blue_monster:
+                            blueMonsterSlimeVideoView_s.gameObject.SetActive(true);
+                            videoPlayer = blueMonsterSlimeVideoView_s.gameObject.GetComponent<VideoPlayer>();
+                            videoPlayer.loopPointReached += LoopPointReached;
+                            videoPlayer.Play();
+                            break;
+                        case monster_color.green_monster:
+                            greenMonsterSlimeVideoView_s.gameObject.SetActive(true);
+                            videoPlayer = greenMonsterSlimeVideoView_s.gameObject.GetComponent<VideoPlayer>();
+                            videoPlayer.loopPointReached += LoopPointReached;
+                            videoPlayer.Play();
+                            break;
+                        case monster_color.purple_monster:
+                            purpleMonsterSlimeVideoView_s.gameObject.SetActive(true);
+                            videoPlayer = purpleMonsterSlimeVideoView_s.gameObject.GetComponent<VideoPlayer>();
+                            videoPlayer.loopPointReached += LoopPointReached;
+                            videoPlayer.Play();
+                            break;
+                        case monster_color.orange_monster:
+                            //blueMonsterSlimeVideoView_s.gameObject.SetActive(true);
+                            break;
+                        case monster_color.red_monster:
+                            redMonsterSlimeVideoView_s.gameObject.SetActive(true);
+                            videoPlayer = redMonsterSlimeVideoView_s.gameObject.GetComponent<VideoPlayer>();
+                            videoPlayer.loopPointReached += LoopPointReached;
+                            videoPlayer.Play();
+                            break;
+                        case monster_color.yellow_monster:
+                            yellowMonsterSlimeVideoView_s.gameObject.SetActive(true);
+                            videoPlayer = yellowMonsterSlimeVideoView_s.gameObject.GetComponent<VideoPlayer>();
+                            videoPlayer.loopPointReached += LoopPointReached;
+                            videoPlayer.Play();
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+            }
 				
 		}
-		// Credit CountImage init.
-		public static void creditCountImageInit(int cubecount) {
+        public static void LoopPointReached(VideoPlayer vp)
+        {
+            // 動画再生完了時の処理
+            // アニメーションが終了時によばれる
+            blueMonsterSlimeVideoView_s.gameObject.SetActive(false);
+            greenMonsterSlimeVideoView_s.gameObject.SetActive(false);
+            purpleMonsterSlimeVideoView_s.gameObject.SetActive(false);
+            redMonsterSlimeVideoView_s.gameObject.SetActive(false);
+            yellowMonsterSlimeVideoView_s.gameObject.SetActive(false);
+        }
+        // Credit CountImage init.
+        public static void creditCountImageInit(int cubecount) {
 			switch(cubecount) {
 			case 3:
 				s_life_icon1_BG.gameObject.SetActive(true);
