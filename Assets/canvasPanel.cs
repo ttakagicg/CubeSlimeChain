@@ -256,7 +256,7 @@ namespace nm_canvasPanel
         public Image play_condition2;
         public Image play_condition3;
 
-       　// ゲームライフカウント表示
+       　// ゲームシーン０　ライフカウント表示
         public GameObject life_icon1_BG;
 		public GameObject life_icon2_BG;
 		public GameObject life_icon3_BG;
@@ -272,7 +272,24 @@ namespace nm_canvasPanel
 		public GameObject life_icon3;
 		public GameObject life_icon4;
 		public GameObject life_icon5;
-        
+
+        // ゲームシーン２　ライフカウント表示
+        public GameObject life_hearticon1_BG;
+        public GameObject life_hearticon2_BG;
+        public GameObject life_hearticon3_BG;
+        public GameObject life_hearticon4_BG;
+        public GameObject life_hearticon5_BG;
+        public static GameObject s_life_hearticon1_BG;
+        public static GameObject s_life_hearticon2_BG;
+        public static GameObject s_life_hearticon3_BG;
+        public static GameObject s_life_hearticon4_BG;
+        public static GameObject s_life_hearticon5_BG;
+        public GameObject life_hearticon1;
+        public GameObject life_hearticon2;
+        public GameObject life_hearticon3;
+        public GameObject life_hearticon4;
+        public GameObject life_hearticon5;
+
         // 落下待機経過時間表示
         public Image waitingTimerGauge_BG;
 		public GameObject Level_top;
@@ -723,6 +740,12 @@ namespace nm_canvasPanel
 			s_life_icon3_BG = life_icon3_BG;
 			s_life_icon4_BG = life_icon4_BG;
 			s_life_icon5_BG = life_icon5_BG;
+
+            s_life_hearticon1_BG = life_hearticon1_BG;
+            s_life_hearticon2_BG = life_hearticon2_BG;
+            s_life_hearticon3_BG = life_hearticon3_BG;
+            s_life_hearticon4_BG = life_hearticon4_BG;
+            s_life_hearticon5_BG = life_hearticon5_BG;
 
             // wait time gauge Image
             Vector3 scal_wtg = waitingTimerGauge_BG.transform.localScale;
@@ -1649,36 +1672,76 @@ namespace nm_canvasPanel
         }
         // Credit CountImage init.
         public static void creditCountImageInit(int cubecount) {
-			switch(cubecount) {
-			case 3:
-				s_life_icon1_BG.gameObject.SetActive(true);
-				s_life_icon2_BG.gameObject.SetActive(true);
-				s_life_icon3_BG.gameObject.SetActive(true);
-				s_life_icon4_BG.gameObject.SetActive(false);
-				s_life_icon5_BG.gameObject.SetActive(false);
-				break;
-			case 4:
-				s_life_icon1_BG.gameObject.SetActive(true);
-				s_life_icon2_BG.gameObject.SetActive(true);
-				s_life_icon3_BG.gameObject.SetActive(true);
-				s_life_icon4_BG.gameObject.SetActive(true);
-				s_life_icon5_BG.gameObject.SetActive(false);
-				break;
-			case 5:
-				s_life_icon1_BG.gameObject.SetActive(true);
-				s_life_icon2_BG.gameObject.SetActive(true);
-				s_life_icon3_BG.gameObject.SetActive(true);
-				s_life_icon4_BG.gameObject.SetActive(true);
-				s_life_icon5_BG.gameObject.SetActive(true);
-				break;
-			default:
-				s_life_icon1_BG.gameObject.SetActive(false);
-				s_life_icon2_BG.gameObject.SetActive(false);
-				s_life_icon3_BG.gameObject.SetActive(false);
-				s_life_icon4_BG.gameObject.SetActive(false);
-				s_life_icon5_BG.gameObject.SetActive(false);
-				break;
-			}			
+            switch (cubersFile.game_Sceen)
+            {
+                case 0:
+                    switch (cubecount)
+                    {
+                        case 3:
+                            s_life_icon1_BG.gameObject.SetActive(true);
+                            s_life_icon2_BG.gameObject.SetActive(true);
+                            s_life_icon3_BG.gameObject.SetActive(true);
+                            s_life_icon4_BG.gameObject.SetActive(false);
+                            s_life_icon5_BG.gameObject.SetActive(false);
+                            break;
+                        case 4:
+                            s_life_icon1_BG.gameObject.SetActive(true);
+                            s_life_icon2_BG.gameObject.SetActive(true);
+                            s_life_icon3_BG.gameObject.SetActive(true);
+                            s_life_icon4_BG.gameObject.SetActive(true);
+                            s_life_icon5_BG.gameObject.SetActive(false);
+                            break;
+                        case 5:
+                            s_life_icon1_BG.gameObject.SetActive(true);
+                            s_life_icon2_BG.gameObject.SetActive(true);
+                            s_life_icon3_BG.gameObject.SetActive(true);
+                            s_life_icon4_BG.gameObject.SetActive(true);
+                            s_life_icon5_BG.gameObject.SetActive(true);
+                            break;
+                        default:
+                            s_life_icon1_BG.gameObject.SetActive(false);
+                            s_life_icon2_BG.gameObject.SetActive(false);
+                            s_life_icon3_BG.gameObject.SetActive(false);
+                            s_life_icon4_BG.gameObject.SetActive(false);
+                            s_life_icon5_BG.gameObject.SetActive(false);
+                            break;
+                    }
+                    break;
+
+                case 2:
+                    switch (cubecount)
+                    {
+                        case 3:
+                            s_life_hearticon1_BG.gameObject.SetActive(true);
+                            s_life_hearticon2_BG.gameObject.SetActive(true);
+                            s_life_hearticon3_BG.gameObject.SetActive(true);
+                            s_life_hearticon4_BG.gameObject.SetActive(false);
+                            s_life_hearticon5_BG.gameObject.SetActive(false);
+                            break;
+                        case 4:
+                            s_life_hearticon1_BG.gameObject.SetActive(true);
+                            s_life_hearticon2_BG.gameObject.SetActive(true);
+                            s_life_hearticon3_BG.gameObject.SetActive(true);
+                            s_life_hearticon4_BG.gameObject.SetActive(true);
+                            s_life_hearticon5_BG.gameObject.SetActive(false);
+                            break;
+                        case 5:
+                            s_life_hearticon1_BG.gameObject.SetActive(true);
+                            s_life_hearticon2_BG.gameObject.SetActive(true);
+                            s_life_hearticon3_BG.gameObject.SetActive(true);
+                            s_life_hearticon4_BG.gameObject.SetActive(true);
+                            s_life_hearticon5_BG.gameObject.SetActive(true);
+                            break;
+                        default:
+                            s_life_hearticon1_BG.gameObject.SetActive(false);
+                            s_life_hearticon2_BG.gameObject.SetActive(false);
+                            s_life_hearticon3_BG.gameObject.SetActive(false);
+                            s_life_hearticon4_BG.gameObject.SetActive(false);
+                            s_life_hearticon5_BG.gameObject.SetActive(false);
+                            break;
+                    }
+                    break;
+            }
 				
 			
 		}
@@ -3317,50 +3380,103 @@ namespace nm_canvasPanel
 
 		// ロストicon表示
 		void lostIcon() {
-			switch(sphere.lost_Spheres) {
-			case 1:
-				life_icon1.gameObject.SetActive(true);
-				life_icon2.gameObject.SetActive(false);
-				life_icon3.gameObject.SetActive(false);
-				life_icon4.gameObject.SetActive(false);
-				life_icon5.gameObject.SetActive(false);
-				break;
-			case 2:
-				life_icon1.gameObject.SetActive(true);
-				life_icon2.gameObject.SetActive(true);
-				life_icon3.gameObject.SetActive(false);
-				life_icon4.gameObject.SetActive(false);
-				life_icon5.gameObject.SetActive(false);
-				break;
-			case 3:
-				life_icon1.gameObject.SetActive(true);
-				life_icon2.gameObject.SetActive(true);
-				life_icon3.gameObject.SetActive(true);
-				life_icon4.gameObject.SetActive(false);
-				life_icon5.gameObject.SetActive(false);
-				break;
-			case 4:
-				life_icon1.gameObject.SetActive(true);
-				life_icon2.gameObject.SetActive(true);
-				life_icon3.gameObject.SetActive(true);
-				life_icon4.gameObject.SetActive(true);
-				life_icon5.gameObject.SetActive(false);
-				break;
-			case 5:
-				life_icon1.gameObject.SetActive(true);
-				life_icon2.gameObject.SetActive(true);
-				life_icon3.gameObject.SetActive(true);
-				life_icon4.gameObject.SetActive(true);
-				life_icon5.gameObject.SetActive(true);
-				break;
-			default:
-				life_icon1.gameObject.SetActive(false);
-				life_icon2.gameObject.SetActive(false);
-				life_icon3.gameObject.SetActive(false);
-				life_icon4.gameObject.SetActive(false);
-				life_icon5.gameObject.SetActive(false);
-				break;
-			}			
+            switch (cubersFile.game_Sceen)
+            {
+                case 0:
+                    switch (sphere.lost_Spheres)
+                    {
+                        case 1:
+                            life_icon1.gameObject.SetActive(true);
+                            life_icon2.gameObject.SetActive(false);
+                            life_icon3.gameObject.SetActive(false);
+                            life_icon4.gameObject.SetActive(false);
+                            life_icon5.gameObject.SetActive(false);
+                            break;
+                        case 2:
+                            life_icon1.gameObject.SetActive(true);
+                            life_icon2.gameObject.SetActive(true);
+                            life_icon3.gameObject.SetActive(false);
+                            life_icon4.gameObject.SetActive(false);
+                            life_icon5.gameObject.SetActive(false);
+                            break;
+                        case 3:
+                            life_icon1.gameObject.SetActive(true);
+                            life_icon2.gameObject.SetActive(true);
+                            life_icon3.gameObject.SetActive(true);
+                            life_icon4.gameObject.SetActive(false);
+                            life_icon5.gameObject.SetActive(false);
+                            break;
+                        case 4:
+                            life_icon1.gameObject.SetActive(true);
+                            life_icon2.gameObject.SetActive(true);
+                            life_icon3.gameObject.SetActive(true);
+                            life_icon4.gameObject.SetActive(true);
+                            life_icon5.gameObject.SetActive(false);
+                            break;
+                        case 5:
+                            life_icon1.gameObject.SetActive(true);
+                            life_icon2.gameObject.SetActive(true);
+                            life_icon3.gameObject.SetActive(true);
+                            life_icon4.gameObject.SetActive(true);
+                            life_icon5.gameObject.SetActive(true);
+                            break;
+                        default:
+                            life_icon1.gameObject.SetActive(false);
+                            life_icon2.gameObject.SetActive(false);
+                            life_icon3.gameObject.SetActive(false);
+                            life_icon4.gameObject.SetActive(false);
+                            life_icon5.gameObject.SetActive(false);
+                            break;
+                    }
+                    break;
+                case 2:
+                    switch (sphere.lost_Spheres)
+                    {
+                        case 1:
+                            life_hearticon1.gameObject.SetActive(true);
+                            life_hearticon2.gameObject.SetActive(false);
+                            life_hearticon3.gameObject.SetActive(false);
+                            life_hearticon4.gameObject.SetActive(false);
+                            life_hearticon5.gameObject.SetActive(false);
+                            break;
+                        case 2:
+                            life_hearticon1.gameObject.SetActive(true);
+                            life_hearticon2.gameObject.SetActive(true);
+                            life_hearticon3.gameObject.SetActive(false);
+                            life_hearticon4.gameObject.SetActive(false);
+                            life_hearticon5.gameObject.SetActive(false);
+                            break;
+                        case 3:
+                            life_hearticon1.gameObject.SetActive(true);
+                            life_hearticon2.gameObject.SetActive(true);
+                            life_hearticon3.gameObject.SetActive(true);
+                            life_hearticon4.gameObject.SetActive(false);
+                            life_hearticon5.gameObject.SetActive(false);
+                            break;
+                        case 4:
+                            life_hearticon1.gameObject.SetActive(true);
+                            life_hearticon2.gameObject.SetActive(true);
+                            life_hearticon3.gameObject.SetActive(true);
+                            life_hearticon4.gameObject.SetActive(true);
+                            life_hearticon5.gameObject.SetActive(false);
+                            break;
+                        case 5:
+                            life_hearticon1.gameObject.SetActive(true);
+                            life_hearticon2.gameObject.SetActive(true);
+                            life_hearticon3.gameObject.SetActive(true);
+                            life_hearticon4.gameObject.SetActive(true);
+                            life_hearticon5.gameObject.SetActive(true);
+                            break;
+                        default:
+                            life_hearticon1.gameObject.SetActive(false);
+                            life_hearticon2.gameObject.SetActive(false);
+                            life_hearticon3.gameObject.SetActive(false);
+                            life_hearticon4.gameObject.SetActive(false);
+                            life_hearticon5.gameObject.SetActive(false);
+                            break;
+                    }
+                    break;
+            }
 		}
 
         public static int gametempoCount = 0; //１０秒毎に１加算され緑範囲、黄範囲、赤範囲で各範囲毎にテンポが変化する　サウンド速度が早くなり落下速度もそれに応じて早くなる
