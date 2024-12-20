@@ -5163,11 +5163,12 @@ namespace nm_canvasPanel
 		}
 
 		static public string ConvertTimeSpanToString(TimeSpan ts) {
-			if (ts.Hours > 0 || ts.Days > 0) {
-				return string.Format("{0}:{1:D2}:{2:D2}.{3}", ts.Days * 24 + ts.Hours, ts.Minutes, ts.Seconds, ts.Milliseconds.ToString("000").Substring(0, 2));
-			} else {
-				return string.Format("{0:D2}:{1:D2}.{2}", ts.Minutes, ts.Seconds, ts.Milliseconds.ToString("000").Substring(0, 2));
-			}
+            return string.Format("{0:D2}:{1:D2}:{2:D2}.{3}", ts.Days * 24 + ts.Hours, ts.Minutes, ts.Seconds, ts.Milliseconds.ToString("000").Substring(0, 2));
+   //         if (ts.Hours > 0 || ts.Days > 0) {
+			//	return string.Format("{0}:{1:D2}:{2:D2}.{3}", ts.Days * 24 + ts.Hours, ts.Minutes, ts.Seconds, ts.Milliseconds.ToString("000").Substring(0, 2));
+			//} else {
+			//	return string.Format("{0:D2}:{1:D2}.{2}", ts.Minutes, ts.Seconds, ts.Milliseconds.ToString("000").Substring(0, 2));
+			//}
 		}
 
 		public void changeTimeStats() {

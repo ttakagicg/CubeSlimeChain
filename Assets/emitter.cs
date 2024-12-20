@@ -532,7 +532,7 @@ namespace nm_emitter
 			make_cube();
 
 			canvasPanel.creditCountImageInit(cubeCount);
-			canvasPanel.s_gameTime_text.text = "00:00:00";
+			canvasPanel.s_gameTime_text.text = "00:00:00:00";
 			canvasPanel.gametempoCount = 0;
 			canvasPanel tempochg = GetComponentInChildren<canvasPanel>();
 			tempochg.gameTempoReset();
