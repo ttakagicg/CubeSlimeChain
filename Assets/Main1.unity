@@ -15641,7 +15641,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 93372b6e093e14a0493c9c60f1503c59, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2c58378c466ec484faab70e2d63ec189, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -15813,12 +15813,12 @@ GameObject:
   - component: {fileID: 270282735}
   - component: {fileID: 270282734}
   m_Layer: 5
-  m_Name: purpleSlimeMoveView
+  m_Name: purpleSlimeMovieView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &270282733
 RectTransform:
   m_ObjectHideFlags: 0
@@ -19044,7 +19044,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 93372b6e093e14a0493c9c60f1503c59, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2c58378c466ec484faab70e2d63ec189, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -29109,7 +29109,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &463926488
 RectTransform:
   m_ObjectHideFlags: 0
@@ -29157,7 +29157,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 93372b6e093e14a0493c9c60f1503c59, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c2867bc45c5114292834c2cb4e51b482, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -29603,12 +29603,12 @@ GameObject:
   - component: {fileID: 485747120}
   - component: {fileID: 485747119}
   m_Layer: 5
-  m_Name: blueSlimeMoveView
+  m_Name: blueSlimeMovieView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &485747118
 RectTransform:
   m_ObjectHideFlags: 0
@@ -29773,7 +29773,6 @@ RectTransform:
   - {fileID: 1085349890}
   - {fileID: 1406326265}
   - {fileID: 126108578}
-  - {fileID: 1236786119}
   m_Father: {fileID: 997781141}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -30886,7 +30885,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 93372b6e093e14a0493c9c60f1503c59, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2c58378c466ec484faab70e2d63ec189, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -40058,7 +40057,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &642120527
 RectTransform:
   m_ObjectHideFlags: 0
@@ -40106,7 +40105,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 93372b6e093e14a0493c9c60f1503c59, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c2867bc45c5114292834c2cb4e51b482, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -40281,7 +40280,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 93372b6e093e14a0493c9c60f1503c59, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2c58378c466ec484faab70e2d63ec189, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -46335,12 +46334,12 @@ GameObject:
   - component: {fileID: 787086193}
   - component: {fileID: 787086192}
   m_Layer: 5
-  m_Name: yellowSlimeMoveView
+  m_Name: yellowSlimeMovieView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &787086191
 RectTransform:
   m_ObjectHideFlags: 0
@@ -48473,7 +48472,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &826661793
 RectTransform:
   m_ObjectHideFlags: 0
@@ -48521,7 +48520,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 93372b6e093e14a0493c9c60f1503c59, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c2867bc45c5114292834c2cb4e51b482, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -55249,6 +55248,7 @@ RectTransform:
   - {fileID: 1483220733}
   - {fileID: 1925874056}
   - {fileID: 582490796}
+  - {fileID: 1236786119}
   - {fileID: 488151825}
   - {fileID: 684426204}
   - {fileID: 1207683026}
@@ -55594,20 +55594,21 @@ MonoBehaviour:
   redMonsterLabel: {fileID: 351280194}
   blueMonsterLabel: {fileID: 1318840063}
   monsterColorCountSceen2View: {fileID: 488151823}
-  monsterSlimeCountBaseImage: {fileID: 21300000, guid: c67fb817acc0146c98c5446c0e5bee92,
-    type: 3}
-  monsterSlimeCountHighImage: {fileID: 21300000, guid: 93372b6e093e14a0493c9c60f1503c59,
-    type: 3}
-  greenMonsterSlimeCountImage: {fileID: 826661795}
-  greenMonsterSlimeVideoView: {fileID: 1778161590}
   greenMonsterSlimeStarImage: {fileID: 1406326266}
-  yellowMonsterSlimeCountImage: {fileID: 463926490}
+  greenMonsterSlimeCountImage: {fileID: 342787129}
+  greenMonsterSlimeCountMaskImage: {fileID: 826661795}
+  greenMonsterSlimeVideoView: {fileID: 1778161590}
+  yellowMonsterSlimeCountImage: {fileID: 1417878254}
+  yellowMonsterSlimeCountMaskImage: {fileID: 463926490}
   yellowMonsterSlimeVideoView: {fileID: 787086193}
-  purpleMonsterSlimeCountImage: {fileID: 2010909050}
+  purpleMonsterSlimeCountImage: {fileID: 644376160}
+  purpleMonsterSlimeCountMaskImage: {fileID: 2010909050}
   purpleMonsterSlimeVideoView: {fileID: 270282735}
-  redMonsterSlimeCountImage: {fileID: 2097624687}
+  redMonsterSlimeCountImage: {fileID: 514912910}
+  redMonsterSlimeCountMaskImage: {fileID: 2097624687}
   redMonsterSlimeVideoView: {fileID: 1851748535}
-  blueMonsterSlimeCountImage: {fileID: 642120529}
+  blueMonsterSlimeCountImage: {fileID: 263638444}
+  blueMonsterSlimeCountMaskImage: {fileID: 642120529}
   blueMonsterSlimeVideoView: {fileID: 485747120}
   greenMonsterSlimeCount: {fileID: 40584867}
   yellowMonsterSlimeCount: {fileID: 2129636044}
@@ -65267,7 +65268,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 93372b6e093e14a0493c9c60f1503c59, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2c58378c466ec484faab70e2d63ec189, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -76327,7 +76328,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1236786119
 RectTransform:
   m_ObjectHideFlags: 0
@@ -76341,11 +76342,11 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 730260495}
-  m_Father: {fileID: 488151825}
+  m_Father: {fileID: 997781141}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 8, y: -20}
+  m_AnchoredPosition: {x: 10, y: 1990}
   m_SizeDelta: {x: 160, y: 160}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1236786120
@@ -84397,7 +84398,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 93372b6e093e14a0493c9c60f1503c59, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2c58378c466ec484faab70e2d63ec189, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -102252,12 +102253,12 @@ GameObject:
   - component: {fileID: 1778161590}
   - component: {fileID: 1778161589}
   m_Layer: 5
-  m_Name: greenSlimeMoveView
+  m_Name: greenSlimeMovieView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1778161588
 RectTransform:
   m_ObjectHideFlags: 0
@@ -110247,12 +110248,12 @@ GameObject:
   - component: {fileID: 1851748535}
   - component: {fileID: 1851748534}
   m_Layer: 5
-  m_Name: redSlimeMoveView
+  m_Name: redSlimeMovieView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1851748533
 RectTransform:
   m_ObjectHideFlags: 0
@@ -113671,7 +113672,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 984bef446a11047a9b41a64e6a77dd38, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 0
@@ -116589,7 +116590,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2010909048
 RectTransform:
   m_ObjectHideFlags: 0
@@ -116637,7 +116638,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 93372b6e093e14a0493c9c60f1503c59, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c2867bc45c5114292834c2cb4e51b482, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -124958,7 +124959,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2097624685
 RectTransform:
   m_ObjectHideFlags: 0
@@ -125006,7 +125007,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 93372b6e093e14a0493c9c60f1503c59, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c2867bc45c5114292834c2cb4e51b482, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

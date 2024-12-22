@@ -578,31 +578,39 @@ namespace nm_canvasPanel
         //  スライムモンスターカラー別カウント表示関連
         public Image monsterColorCountSceen2View;
         public static Image s_monsterSlimeColorCountView;
-        public Sprite monsterSlimeCountBaseImage;
-        public Sprite monsterSlimeCountHighImage;
+        public Image greenMonsterSlimeStarImage;
+        public static Image greenMonsterSlimeStarImage_s;
         public Image greenMonsterSlimeCountImage;
+        public Image greenMonsterSlimeCountMaskImage;
+        public static Image greenMonsterSlimeCountMaskImage_s;
         public RawImage greenMonsterSlimeVideoView;
         public static RawImage greenMonsterSlimeVideoView_s;
         public static Image greenMonsterSlimeCountImage_s;
         public static Vector3 greenMonsterSlimeCounterPosition;
-        public Image greenMonsterSlimeStarImage;
-        public static Image greenMonsterSlimeStarImage_s;
         public Image yellowMonsterSlimeCountImage;
+        public Image yellowMonsterSlimeCountMaskImage;
+        public static Image yellowMonsterSlimeCountMaskImage_s;
         public RawImage yellowMonsterSlimeVideoView;
         public static RawImage yellowMonsterSlimeVideoView_s;
         public static Image yellowMonsterSlimeCountImage_s;
         public static Vector3 yellowMonsterSlimeCounterPosition;
         public Image purpleMonsterSlimeCountImage;
+        public Image purpleMonsterSlimeCountMaskImage;
+        public static Image purpleMonsterSlimeCountMaskImage_s;
         public RawImage purpleMonsterSlimeVideoView;
         public static RawImage purpleMonsterSlimeVideoView_s;
         public static Image purpleMonsterSlimeCountImage_s;
         public static Vector3 purpleMonsterSlimeCounterPosition;
         public Image redMonsterSlimeCountImage;
+        public Image redMonsterSlimeCountMaskImage;
+        public static Image redMonsterSlimeCountMaskImage_s;
         public RawImage redMonsterSlimeVideoView;
         public static RawImage redMonsterSlimeVideoView_s;
         public static Image redMonsterSlimeCountImage_s;
         public static Vector3 redMonsterSlimeCounterPosition;
         public Image blueMonsterSlimeCountImage;
+        public Image blueMonsterSlimeCountMaskImage;
+        public static Image blueMonsterSlimeCountMaskImage_s;
         public RawImage blueMonsterSlimeVideoView;
         public static RawImage blueMonsterSlimeVideoView_s;
         public static Image blueMonsterSlimeCountImage_s;
@@ -940,6 +948,19 @@ namespace nm_canvasPanel
 			redMonsterCountImage.material = chainExplosionCounterM;
 			purpleMonsterCountImage.material = chainExplosionCounterM;
 			blueMonsterCountImage.material = chainExplosionCounterM;
+
+            // スライムモンスター連鎖パネルマスク
+            greenMonsterSlimeCountMaskImage_s = greenMonsterSlimeCountMaskImage;
+            yellowMonsterSlimeCountMaskImage_s = yellowMonsterSlimeCountMaskImage;
+            redMonsterSlimeCountMaskImage_s = redMonsterSlimeCountMaskImage;
+            purpleMonsterSlimeCountMaskImage_s = purpleMonsterSlimeCountMaskImage;
+            blueMonsterSlimeCountMaskImage_s = blueMonsterSlimeCountMaskImage;
+            // 連鎖時のカウンターパネルマスクOFF
+            greenMonsterSlimeCountMaskImage_s.gameObject.SetActive(false);
+            yellowMonsterSlimeCountMaskImage.gameObject.SetActive(false);
+            redMonsterSlimeCountMaskImage.gameObject.SetActive(false);
+            purpleMonsterSlimeCountMaskImage.gameObject.SetActive(false);
+            blueMonsterSlimeCountMaskImage.gameObject.SetActive(false);
 
             // スライムモンスター連鎖ビデオビュー
             greenMonsterSlimeVideoView_s = greenMonsterSlimeVideoView;
@@ -2064,11 +2085,11 @@ namespace nm_canvasPanel
                     blueMonsterSlimeCountImage.transform.localScale = scal;
                     if (cnt_b <= 0)
                     {
-                        blueMonsterSlimeCountImage.sprite = monsterSlimeCountBaseImage;
+                        blueMonsterSlimeCountMaskImage_s.gameObject.SetActive(true);
                     }
                     else
                     {
-                        blueMonsterSlimeCountImage.sprite = monsterSlimeCountHighImage;
+                        blueMonsterSlimeCountMaskImage_s.gameObject.SetActive(false);
                     }
 
                     scal = greenMonsterSlimeCountImage.transform.localScale;
@@ -2078,11 +2099,11 @@ namespace nm_canvasPanel
                     greenMonsterSlimeCountImage.transform.localScale = scal;
                     if (cnt_g <= 0)
                     {
-                        greenMonsterSlimeCountImage.sprite = monsterSlimeCountBaseImage;
+                        greenMonsterSlimeCountMaskImage_s.gameObject.SetActive(true);
                     }
                     else
                     {
-                        greenMonsterSlimeCountImage.sprite = monsterSlimeCountHighImage;
+                        greenMonsterSlimeCountMaskImage_s.gameObject.SetActive(false);
                     }
 
                     scal = purpleMonsterSlimeCountImage.transform.localScale;
@@ -2092,11 +2113,11 @@ namespace nm_canvasPanel
                     purpleMonsterSlimeCountImage.transform.localScale = scal;
                     if (cnt_p <= 0)
                     {
-                        purpleMonsterSlimeCountImage.sprite = monsterSlimeCountBaseImage;
+                        purpleMonsterSlimeCountMaskImage_s.gameObject.SetActive(true);
                     }
                     else
                     {
-                        purpleMonsterSlimeCountImage.sprite = monsterSlimeCountHighImage;
+                        purpleMonsterSlimeCountMaskImage_s.gameObject.SetActive(false);
                     }
 
                     scal = redMonsterSlimeCountImage.transform.localScale;
@@ -2106,11 +2127,11 @@ namespace nm_canvasPanel
                     redMonsterSlimeCountImage.transform.localScale = scal;
                     if (cnt_r <= 0)
                     {
-                        redMonsterSlimeCountImage.sprite = monsterSlimeCountBaseImage;
+                        redMonsterSlimeCountMaskImage_s.gameObject.SetActive(true);
                     }
                     else
                     {
-                        redMonsterSlimeCountImage.sprite = monsterSlimeCountHighImage;
+                        redMonsterSlimeCountMaskImage_s.gameObject.SetActive(false);
                     }
 
                     scal = yellowMonsterSlimeCountImage.transform.localScale;
@@ -2120,11 +2141,11 @@ namespace nm_canvasPanel
                     yellowMonsterSlimeCountImage.transform.localScale = scal;
                     if (cnt_y <= 0)
                     {
-                        yellowMonsterSlimeCountImage.sprite = monsterSlimeCountBaseImage;
+                        yellowMonsterSlimeCountMaskImage_s.gameObject.SetActive(true);
                     }
                     else
                     {
-                        yellowMonsterSlimeCountImage.sprite = monsterSlimeCountHighImage;
+                        yellowMonsterSlimeCountMaskImage_s.gameObject.SetActive(false);
                     }
                     break;
 
