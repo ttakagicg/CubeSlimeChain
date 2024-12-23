@@ -816,10 +816,10 @@ namespace nm_canvasPanel
             scal_chaininfo.x = scal_chaininfo.x * screen_width_per;
             scal_chaininfo.y = scal_chaininfo.y * screen_width_per;
             max_chain_count_BG.transform.localScale = scal_chaininfo;
-            Vector3 pos_chaininfo = max_chain_count_BG.transform.position;
-            pos_chaininfo.x = pos_chaininfo.x * scal_chaininfo.x;
-            pos_chaininfo.y = (Screen.height - safeAreaHight) - ((center_header.rectTransform.sizeDelta.y + monsterColorCountView.rectTransform.sizeDelta.y + waitingTimerGauge_BG.rectTransform.sizeDelta.y + max_chain_count_BG.rectTransform.sizeDelta.y + 77) * scal2.y);
-            max_chain_count_BG.transform.position = pos_chaininfo;
+            //Vector3 pos_chaininfo = max_chain_count_BG.transform.position;
+            //pos_chaininfo.x = pos_chaininfo.x * scal_chaininfo.x;
+            //pos_chaininfo.y = (Screen.height - safeAreaHight) - ((center_header.rectTransform.sizeDelta.y + monsterColorCountView.rectTransform.sizeDelta.y + waitingTimerGauge_BG.rectTransform.sizeDelta.y + max_chain_count_BG.rectTransform.sizeDelta.y + 77) * scal2.y);
+            //max_chain_count_BG.transform.position = pos_chaininfo;
             s_max_chain_count_BG = max_chain_count_BG;
             s_max_chain_count_text = max_chain_count_text;
 
