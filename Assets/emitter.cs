@@ -33,7 +33,7 @@ namespace nm_emitter
 		const float button_height = 50;
 		const float button_width = 100;
 		//public const float wangle = 15;
-		const float camera_basePosition = 6.0f;
+		const float camera_basePosition = 7.0f;
 		public const string gameclear_msg = "Game Completed";
 		public const string gameover_msg = "Game Failed";
 		public const int startCountDownTimer = 6;	// 5以下になるとカウントダウン timerにズレが生じカウントダウン終了後も落下タイマーカウントが終了するまでモンスター表示されない
@@ -1215,7 +1215,7 @@ namespace nm_emitter
                                     chain_explosion = true;
 
 									setChainExplosionTouchEffect(sphere.spheres[j,k,i], m_color);
-									setChainExplosionStarEffect(m_color);
+									setChainExplosionCounterPanelEffect(m_color);
 									chainExplosioncolor = m_color;
 								}
 								if (chain_explosion) chain_explosion_timer = 1.8f;
@@ -1483,9 +1483,9 @@ namespace nm_emitter
 		}
 
 		// 連鎖モンスターカウントスターアニメーション
-		static void setChainExplosionStarEffect(monster_color color) {
+		static void setChainExplosionCounterPanelEffect(monster_color color) {
 
-			canvasPanel.setchainExplosionStarEffectPosition(color);
+			canvasPanel.showChainExplosionCounterPanelEffect(color);
 
 		}
 

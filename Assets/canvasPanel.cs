@@ -578,8 +578,6 @@ namespace nm_canvasPanel
         //  スライムモンスターカラー別カウント表示関連
         public Image monsterColorCountSceen2View;
         public static Image s_monsterSlimeColorCountView;
-        public Image greenMonsterSlimeStarImage;
-        public static Image greenMonsterSlimeStarImage_s;
         public Image greenMonsterSlimeCountImage;
         public Image greenMonsterSlimeCountMaskImage;
         public static Image greenMonsterSlimeCountMaskImage_s;
@@ -587,6 +585,10 @@ namespace nm_canvasPanel
         public static RawImage greenMonsterSlimeVideoView_s;
         public static Image greenMonsterSlimeCountImage_s;
         public static Vector3 greenMonsterSlimeCounterPosition;
+        public Image greenMonsterSlimeCountbadgeImage;
+        public static Image greenMonsterSlimeCountbadgeImage_s;
+        public Image greenMonsterSlimeStarImage;
+        public static Image greenMonsterSlimeStarImage_s;
         public Image yellowMonsterSlimeCountImage;
         public Image yellowMonsterSlimeCountMaskImage;
         public static Image yellowMonsterSlimeCountMaskImage_s;
@@ -594,6 +596,10 @@ namespace nm_canvasPanel
         public static RawImage yellowMonsterSlimeVideoView_s;
         public static Image yellowMonsterSlimeCountImage_s;
         public static Vector3 yellowMonsterSlimeCounterPosition;
+        public Image yellowMonsterSlimeCountbadgeImage;
+        public static Image yellowMonsterSlimeCountbadgeImage_s;
+        public Image yellowMonsterSlimeStarImage;
+        public static Image yellowMonsterSlimeStarImage_s;
         public Image purpleMonsterSlimeCountImage;
         public Image purpleMonsterSlimeCountMaskImage;
         public static Image purpleMonsterSlimeCountMaskImage_s;
@@ -601,6 +607,10 @@ namespace nm_canvasPanel
         public static RawImage purpleMonsterSlimeVideoView_s;
         public static Image purpleMonsterSlimeCountImage_s;
         public static Vector3 purpleMonsterSlimeCounterPosition;
+        public Image purpleMonsterSlimeCountbadgeImage;
+        public static Image purpleMonsterSlimeCountbadgeImage_s;
+        public Image purpleMonsterSlimeStarImage;
+        public static Image purpleMonsterSlimeStarImage_s;
         public Image redMonsterSlimeCountImage;
         public Image redMonsterSlimeCountMaskImage;
         public static Image redMonsterSlimeCountMaskImage_s;
@@ -608,6 +618,10 @@ namespace nm_canvasPanel
         public static RawImage redMonsterSlimeVideoView_s;
         public static Image redMonsterSlimeCountImage_s;
         public static Vector3 redMonsterSlimeCounterPosition;
+        public Image redMonsterSlimeCountbadgeImage;
+        public static Image redMonsterSlimeCountbadgeImage_s;
+        public Image redMonsterSlimeStarImage;
+        public static Image redMonsterSlimeStarImage_s;
         public Image blueMonsterSlimeCountImage;
         public Image blueMonsterSlimeCountMaskImage;
         public static Image blueMonsterSlimeCountMaskImage_s;
@@ -615,6 +629,10 @@ namespace nm_canvasPanel
         public static RawImage blueMonsterSlimeVideoView_s;
         public static Image blueMonsterSlimeCountImage_s;
         public static Vector3 blueMonsterSlimeCounterPosition;
+        public Image blueMonsterSlimeCountbadgeImage;
+        public static Image blueMonsterSlimeCountbadgeImage_s;
+        public Image blueMonsterSlimeStarImage;
+        public static Image blueMonsterSlimeStarImage_s;
         public Text greenMonsterSlimeCount;
         public Text yellowMonsterSlimeCount;
         public Text purpleMonsterSlimeCount;
@@ -756,7 +774,7 @@ namespace nm_canvasPanel
             s_life_hearticon5_BG = life_hearticon5_BG;
 
             // wait time gauge Image
-            Vector3 scal_wtg = waitingTimerGauge_BG.transform.localScale;
+/*            Vector3 scal_wtg = waitingTimerGauge_BG.transform.localScale;
             scal_wtg.x = scal_wtg.x * screen_width_per;
             scal_wtg.y = scal_wtg.y * screen_width_per;
             waitingTimerGauge_BG.transform.localScale = scal_wtg;
@@ -767,7 +785,7 @@ namespace nm_canvasPanel
             // モンスター連鎖カウンター上部位置
             //pos_wtg.y = (Screen.height - safeAreaHight) - ((center_header.rectTransform.sizeDelta.y + 45) * scal2.y);
             waitingTimerGauge_BG.transform.position = pos_wtg;
-
+*/
             Level_top_Base_Color = Level_top.gameObject.GetComponent<Image>().color;
             Level1_1_Base_Color = Level1_1.gameObject.GetComponent<Image>().color;
             Level1_2_Base_Color = Level1_2.gameObject.GetComponent<Image>().color;
@@ -949,13 +967,20 @@ namespace nm_canvasPanel
 			purpleMonsterCountImage.material = chainExplosionCounterM;
 			blueMonsterCountImage.material = chainExplosionCounterM;
 
+            // スライムモンスター連鎖パネル
+            greenMonsterSlimeCountImage_s = greenMonsterSlimeCountImage;
+            yellowMonsterSlimeCountImage_s = yellowMonsterSlimeCountImage;
+            redMonsterSlimeCountImage_s = redMonsterSlimeCountImage;
+            purpleMonsterSlimeCountImage_s = purpleMonsterSlimeCountImage;
+            blueMonsterSlimeCountImage_s = blueMonsterSlimeCountImage;
+
             // スライムモンスター連鎖パネルマスク
             greenMonsterSlimeCountMaskImage_s = greenMonsterSlimeCountMaskImage;
             yellowMonsterSlimeCountMaskImage_s = yellowMonsterSlimeCountMaskImage;
             redMonsterSlimeCountMaskImage_s = redMonsterSlimeCountMaskImage;
             purpleMonsterSlimeCountMaskImage_s = purpleMonsterSlimeCountMaskImage;
             blueMonsterSlimeCountMaskImage_s = blueMonsterSlimeCountMaskImage;
-            // 連鎖時のカウンターパネルマスクOFF
+            // スライムモンスター連鎖時のカウンターパネルマスクOFF
             greenMonsterSlimeCountMaskImage_s.gameObject.SetActive(false);
             yellowMonsterSlimeCountMaskImage.gameObject.SetActive(false);
             redMonsterSlimeCountMaskImage.gameObject.SetActive(false);
@@ -974,6 +999,33 @@ namespace nm_canvasPanel
             purpleMonsterSlimeVideoView_s.gameObject.SetActive(false);
             redMonsterSlimeVideoView_s.gameObject.SetActive(false);
             yellowMonsterSlimeVideoView_s.gameObject.SetActive(false);
+
+            // スライムモンスター連鎖カウントバッジハイライト
+            greenMonsterSlimeCountbadgeImage_s = greenMonsterSlimeCountbadgeImage;
+            yellowMonsterSlimeCountbadgeImage_s = yellowMonsterSlimeCountbadgeImage;
+            redMonsterSlimeCountbadgeImage_s = redMonsterSlimeCountbadgeImage;
+            purpleMonsterSlimeCountbadgeImage_s = purpleMonsterSlimeCountbadgeImage;
+            blueMonsterSlimeCountbadgeImage_s = blueMonsterSlimeCountbadgeImage;
+            // スライムモンスター連鎖カウントバッジハイライトOFF
+            greenMonsterSlimeCountbadgeImage_s.gameObject.SetActive(false);
+            yellowMonsterSlimeCountbadgeImage_s.gameObject.SetActive(false);
+            redMonsterSlimeCountbadgeImage_s.gameObject.SetActive(false);
+            purpleMonsterSlimeCountbadgeImage_s.gameObject.SetActive(false);
+            blueMonsterSlimeCountbadgeImage_s.gameObject.SetActive(false);
+
+            // スライムモンスター連鎖カウントバッジスターイメージ
+            greenMonsterSlimeStarImage_s = greenMonsterSlimeStarImage;
+            yellowMonsterSlimeStarImage_s = yellowMonsterSlimeStarImage;
+            redMonsterSlimeStarImage_s = redMonsterSlimeStarImage;
+            purpleMonsterSlimeStarImage_s = purpleMonsterSlimeStarImage;
+            blueMonsterSlimeStarImage_s = blueMonsterSlimeStarImage;
+            // スライムモンスターカウンター座標セット  ゲームシーン０連鎖カウンターパネル２D表示位置での２Dエフェクト表示に利用　※現在未利用
+            greenMonsterSlimeCounterPosition = greenMonsterSlimeStarImage_s.rectTransform.position;
+            yellowMonsterSlimeCounterPosition = yellowMonsterSlimeStarImage_s.rectTransform.position;
+            redMonsterSlimeCounterPosition = redMonsterSlimeStarImage_s.rectTransform.position;
+            purpleMonsterSlimeCounterPosition = purpleMonsterSlimeStarImage_s.rectTransform.position;
+            blueMonsterSlimeCounterPosition = blueMonsterSlimeStarImage_s.rectTransform.position;
+
 
             // 連鎖　カラー別取得ポイントテキストクリア
             greenMonsterPoint.text = "";
@@ -1586,8 +1638,9 @@ namespace nm_canvasPanel
         // set chainExplosionStarEffectPosition
         [SerializeField]
         static VideoPlayer videoPlayer;
-        public static void setchainExplosionStarEffectPosition(monster_color color) {
+        public static void showChainExplosionCounterPanelEffect(monster_color color) {
             var seq = DOTween.Sequence();
+            Vector2 scale;
             switch (cubersFile.game_Sceen)
             {
                 case 0:
@@ -1620,7 +1673,7 @@ namespace nm_canvasPanel
                     monsterCounterPosition.x += 15;
                     monsterCounterPosition.y += 40;
                     greenMonsterStarImage_s.rectTransform.position = monsterCounterPosition;
-                    Vector2 scale = greenMonsterStarImage_s.rectTransform.localScale;
+                    scale = greenMonsterStarImage_s.rectTransform.localScale;
                     scale.x = 0.1f;
                     scale.y = 0.1f;
                     greenMonsterStarImage_s.rectTransform.localScale = scale;
@@ -1641,38 +1694,123 @@ namespace nm_canvasPanel
                     // スライム連鎖時のカウンターパネルでのダメージビデオ再生処理
                     switch (color)
                     {
-                        case monster_color.blue_monster:
-                            blueMonsterSlimeVideoView_s.gameObject.SetActive(true);
-                            videoPlayer = blueMonsterSlimeVideoView_s.gameObject.GetComponent<VideoPlayer>();
-                            videoPlayer.loopPointReached += LoopPointReached;
-                            videoPlayer.Play();
-                            break;
                         case monster_color.green_monster:
                             greenMonsterSlimeVideoView_s.gameObject.SetActive(true);
+                            greenMonsterSlimeCountbadgeImage_s.gameObject.SetActive(true);
                             videoPlayer = greenMonsterSlimeVideoView_s.gameObject.GetComponent<VideoPlayer>();
                             videoPlayer.loopPointReached += LoopPointReached;
                             videoPlayer.Play();
+                            greenMonsterSlimeCountImage_s.canvas.sortingOrder = 2;
+
+                            greenMonsterSlimeCounterPosition.x += 20;
+                            greenMonsterSlimeCounterPosition.y -= 20;
+                            greenMonsterSlimeStarImage_s.rectTransform.position = greenMonsterSlimeCounterPosition;
+                            scale = greenMonsterSlimeStarImage_s.rectTransform.localScale;
+                            scale.x = 0.1f;
+                            scale.y = 0.1f;
+                            greenMonsterSlimeStarImage_s.rectTransform.localScale = scale;
+                            greenMonsterSlimeStarImage_s.rectTransform.rotation = Quaternion.Euler(0, 0, 0);
+                            seq = DOTween.Sequence();
+                            seq.Append(greenMonsterSlimeCountImage_s.rectTransform.DOScale(new Vector3(1.0f, 1.0f), 1.0f));
+                            seq.Append(greenMonsterSlimeStarImage_s.rectTransform.DOScale(new Vector3(2.0f, 2.0f), 1.0f));
+                            seq.Join(greenMonsterSlimeStarImage_s.rectTransform.DORotate(new Vector3(0f, 0f, 180f),   // 終了時点のRotation
+                                1.0f                    // アニメーション時間
+                            ));
                             break;
-                        case monster_color.purple_monster:
-                            purpleMonsterSlimeVideoView_s.gameObject.SetActive(true);
-                            videoPlayer = purpleMonsterSlimeVideoView_s.gameObject.GetComponent<VideoPlayer>();
+                        case monster_color.yellow_monster:
+                            yellowMonsterSlimeVideoView_s.gameObject.SetActive(true);
+                            yellowMonsterSlimeCountbadgeImage_s.gameObject.SetActive(true);
+                            videoPlayer = yellowMonsterSlimeVideoView_s.gameObject.GetComponent<VideoPlayer>();
                             videoPlayer.loopPointReached += LoopPointReached;
                             videoPlayer.Play();
+                            yellowMonsterSlimeCountImage_s.canvas.sortingOrder = 2;
+
+                            yellowMonsterSlimeCounterPosition.x += 20;
+                            yellowMonsterSlimeCounterPosition.y -= 20;
+                            yellowMonsterSlimeStarImage_s.rectTransform.position = yellowMonsterSlimeCounterPosition;
+                            scale = yellowMonsterSlimeStarImage_s.rectTransform.localScale;
+                            scale.x = 0.1f;
+                            scale.y = 0.1f;
+                            yellowMonsterSlimeStarImage_s.rectTransform.localScale = scale;
+                            yellowMonsterSlimeStarImage_s.rectTransform.rotation = Quaternion.Euler(0, 0, 0);
+                            seq = DOTween.Sequence();
+                            seq.Append(yellowMonsterSlimeCountImage_s.rectTransform.DOScale(new Vector3(1.0f, 1.0f), 1.0f));
+                            seq.Append(yellowMonsterSlimeStarImage_s.rectTransform.DOScale(new Vector3(2.0f, 2.0f), 1.0f));
+                            seq.Join(yellowMonsterSlimeStarImage_s.rectTransform.DORotate(new Vector3(0f, 0f, 180f),   // 終了時点のRotation
+                                2.0f                    // アニメーション時間
+                            ));
                             break;
                         case monster_color.orange_monster:
                             //blueMonsterSlimeVideoView_s.gameObject.SetActive(true);
                             break;
                         case monster_color.red_monster:
                             redMonsterSlimeVideoView_s.gameObject.SetActive(true);
+                            redMonsterSlimeCountbadgeImage_s.gameObject.SetActive(true);
                             videoPlayer = redMonsterSlimeVideoView_s.gameObject.GetComponent<VideoPlayer>();
                             videoPlayer.loopPointReached += LoopPointReached;
                             videoPlayer.Play();
+                            redMonsterSlimeCountImage_s.canvas.sortingOrder = 2;
+
+                            redMonsterSlimeCounterPosition.x += 20;
+                            redMonsterSlimeCounterPosition.y -= 20;
+                            redMonsterSlimeStarImage_s.rectTransform.position = redMonsterSlimeCounterPosition;
+                            scale = redMonsterSlimeStarImage_s.rectTransform.localScale;
+                            scale.x = 0.1f;
+                            scale.y = 0.1f;
+                            redMonsterSlimeStarImage_s.rectTransform.localScale = scale;
+                            redMonsterSlimeStarImage_s.rectTransform.rotation = Quaternion.Euler(0, 0, 0);
+                            seq = DOTween.Sequence();
+                            seq.Append(redMonsterSlimeCountImage_s.rectTransform.DOScale(new Vector3(1.0f, 1.0f), 1.0f));
+                            seq.Append(redMonsterSlimeStarImage_s.rectTransform.DOScale(new Vector3(2.0f, 2.0f), 1.0f));
+                            seq.Join(redMonsterSlimeStarImage_s.rectTransform.DORotate(new Vector3(0f, 0f, 180f),   // 終了時点のRotation
+                                2.0f                    // アニメーション時間
+                            ));
                             break;
-                        case monster_color.yellow_monster:
-                            yellowMonsterSlimeVideoView_s.gameObject.SetActive(true);
-                            videoPlayer = yellowMonsterSlimeVideoView_s.gameObject.GetComponent<VideoPlayer>();
+                        case monster_color.purple_monster:
+                            purpleMonsterSlimeVideoView_s.gameObject.SetActive(true);
+                            purpleMonsterSlimeCountbadgeImage_s.gameObject.SetActive(true);
+                            videoPlayer = purpleMonsterSlimeVideoView_s.gameObject.GetComponent<VideoPlayer>();
                             videoPlayer.loopPointReached += LoopPointReached;
                             videoPlayer.Play();
+                            purpleMonsterSlimeCountImage_s.canvas.sortingOrder = 2;
+
+                            purpleMonsterSlimeCounterPosition.x += 20;
+                            purpleMonsterSlimeCounterPosition.y -= 20;
+                            purpleMonsterSlimeStarImage_s.rectTransform.position = purpleMonsterSlimeCounterPosition;
+                            scale = purpleMonsterSlimeStarImage_s.rectTransform.localScale;
+                            scale.x = 0.1f;
+                            scale.y = 0.1f;
+                            purpleMonsterSlimeStarImage_s.rectTransform.localScale = scale;
+                            purpleMonsterSlimeStarImage_s.rectTransform.rotation = Quaternion.Euler(0, 0, 0);
+                            seq = DOTween.Sequence();
+                            seq.Append(purpleMonsterSlimeCountImage_s.rectTransform.DOScale(new Vector3(1.0f, 1.0f), 1.0f));
+                            seq.Append(purpleMonsterSlimeStarImage_s.rectTransform.DOScale(new Vector3(2.0f, 2.0f), 1.0f));
+                            seq.Join(purpleMonsterSlimeStarImage_s.rectTransform.DORotate(new Vector3(0f, 0f, 180f),   // 終了時点のRotation
+                                2.0f                    // アニメーション時間
+                            ));
+                            break;
+                        case monster_color.blue_monster:
+                            blueMonsterSlimeVideoView_s.gameObject.SetActive(true);
+                            blueMonsterSlimeCountbadgeImage_s.gameObject.SetActive(true);
+                            videoPlayer = blueMonsterSlimeVideoView_s.gameObject.GetComponent<VideoPlayer>();
+                            videoPlayer.loopPointReached += LoopPointReached;
+                            videoPlayer.Play();
+                            blueMonsterSlimeCountImage_s.canvas.sortingOrder = 2;
+
+                            blueMonsterSlimeCounterPosition.x += 20;
+                            blueMonsterSlimeCounterPosition.y -= 20;
+                            blueMonsterSlimeStarImage_s.rectTransform.position = blueMonsterSlimeCounterPosition;
+                            scale = blueMonsterSlimeStarImage_s.rectTransform.localScale;
+                            scale.x = 0.1f;
+                            scale.y = 0.1f;
+                            blueMonsterSlimeStarImage_s.rectTransform.localScale = scale;
+                            blueMonsterSlimeStarImage_s.rectTransform.rotation = Quaternion.Euler(0, 0, 0);
+                            seq = DOTween.Sequence();
+                            seq.Append(blueMonsterSlimeCountImage_s.rectTransform.DOScale(new Vector3(1.0f, 1.0f), 1.0f));
+                            seq.Append(blueMonsterSlimeStarImage_s.rectTransform.DOScale(new Vector3(2.0f, 2.0f), 1.0f));
+                            seq.Join(blueMonsterSlimeStarImage_s.rectTransform.DORotate(new Vector3(0f, 0f, 180f),   // 終了時点のRotation
+                                2.0f                    // アニメーション時間
+                            ));
                             break;
                         default:
                             break;
@@ -1681,15 +1819,34 @@ namespace nm_canvasPanel
             }
 				
 		}
+        // 動画再生完了時の処理
+        // アニメーションが終了時によばれる
         public static void LoopPointReached(VideoPlayer vp)
         {
-            // 動画再生完了時の処理
-            // アニメーションが終了時によばれる
             blueMonsterSlimeVideoView_s.gameObject.SetActive(false);
             greenMonsterSlimeVideoView_s.gameObject.SetActive(false);
             purpleMonsterSlimeVideoView_s.gameObject.SetActive(false);
             redMonsterSlimeVideoView_s.gameObject.SetActive(false);
             yellowMonsterSlimeVideoView_s.gameObject.SetActive(false);
+
+            greenMonsterSlimeCountbadgeImage_s.gameObject.SetActive(false);
+            yellowMonsterSlimeCountbadgeImage_s.gameObject.SetActive(false);
+            redMonsterSlimeCountbadgeImage_s.gameObject.SetActive(false);
+            purpleMonsterSlimeCountbadgeImage_s.gameObject.SetActive(false);
+            blueMonsterSlimeCountbadgeImage_s.gameObject.SetActive(false);
+
+            greenMonsterSlimeCountImage_s.canvas.sortingOrder = 1;
+            yellowMonsterSlimeCountImage_s.canvas.sortingOrder =1;
+            redMonsterSlimeCountImage_s.canvas.sortingOrder = 1;
+            purpleMonsterSlimeCountImage_s.canvas.sortingOrder = 1;
+            blueMonsterSlimeCountImage_s.canvas.sortingOrder = 1;
+
+            // スライムモンスター連鎖カウントバッジスターイメージOFF
+            //greenMonsterSlimeStarImage_s.gameObject.SetActive(false);
+            //yellowMonsterSlimeStarImage_s.gameObject.SetActive(false);
+            //redMonsterSlimeStarImage_s.gameObject.SetActive(false);
+            //purpleMonsterSlimeStarImage_s.gameObject.SetActive(false);
+            //blueMonsterSlimeStarImage_s.gameObject.SetActive(false);
         }
         // Credit CountImage init.
         public static void creditCountImageInit(int cubecount) {

@@ -126,6 +126,7 @@ TagManager:
   - onlyTrigger
   - Down_BT
   - 0
+  - FxTemporaire
   layers:
   - Default
   - TransparentFX
