@@ -9,6 +9,7 @@
     "userstage":9,
     "userstagelevel":9,
     "goldcoin":123,
+    "juely":123,
     "golditem":1234,
     "silveritem":123456,
     "itemwait":123,
@@ -112,19 +113,19 @@
     ],
     "itemset":[
       {
-        "itemSetno":1,"itemSetgoldcoin":400,"itemSetprice":290,"itemSetwait":10,"itemSetretry":3
+        "itemSetno":1,"itemSetgoldcoin":400,"itemSetjuely":400,"itemSetprice":290,"itemSetwait":10,"itemSetretry":3
       },
       {
-        "itemSetno":2,"itemSetgoldcoin":1000,"itemSetprice":580,"itemSetwait":25,"itemSetretry":7
+        "itemSetno":2,"itemSetgoldcoin":1000,"itemSetjuely":800,"itemSetprice":580,"itemSetwait":25,"itemSetretry":7
       },
       {
-        "itemSetno":3,"itemSetgoldcoin":2000,"itemSetprice":980,"itemSetwait":50,"itemSetretry":15
+        "itemSetno":3,"itemSetgoldcoin":2000,"itemSetjuely":1200,"itemSetprice":980,"itemSetwait":50,"itemSetretry":15
       },
       {
-        "itemSetno":4,"itemSetgoldcoin":4000,"itemSetprice":1620,"itemSetwait":100,"itemSetretry":30
+        "itemSetno":4,"itemSetgoldcoin":4000,"itemSetjuely":1600,"itemSetprice":1620,"itemSetwait":100,"itemSetretry":30
       },
       {
-        "itemSetno":5,"itemSetgoldcoin":8000,"itemSetprice":2990,"itemSetwait":250,"itemSetretry":100
+        "itemSetno":5,"itemSetgoldcoin":8000,"itemSetjuely":2000,"itemSetprice":2990,"itemSetwait":250,"itemSetretry":100
       }
     ],
     "event": [

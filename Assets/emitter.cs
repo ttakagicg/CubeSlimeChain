@@ -196,7 +196,8 @@ namespace nm_emitter
 			// Initialize the Google Mobile Ads SDK.
 			MobileAds.Initialize(initStatus => { });
 
-			pause_timer = PAUSETIME;
+			pause_timer = 0;
+			//pause_timer = PAUSETIME;
 
 			updown_timer = nextDownWaitTimer;  // 落下後、次のモンスター落下待機表示までの待ち時間
 
@@ -533,9 +534,13 @@ namespace nm_emitter
 
 			canvasPanel.creditCountImageInit(cubeCount);
 			canvasPanel.s_gameTime_text.text = "00:00:00:00";
+			canvasPanel.s_noChainGameTime_text.text = "00:00:00:00";
+			canvasPanel.s_topGameTime_text.text = "TopTime 00:00:00:00";
 			canvasPanel.gametempoCount = 0;
-			canvasPanel tempochg = GetComponentInChildren<canvasPanel>();
-			tempochg.gameTempoReset();
+			canvasPanel canvaspanel = GetComponentInChildren<canvasPanel>();
+			canvaspanel.gameTempoReset();
+			canvaspanel.showItemDSP();
+			
 
 			initGameTempo();
 				
@@ -554,8 +559,32 @@ namespace nm_emitter
 					canvasPanel.s_monsterSlimeColorCountView.gameObject.SetActive(true);
 					canvasPanel.monsterColor = true;
 				}
-			} else {
+				// TODO：テンポゲージトップバー表示OFF＆MAX連鎖カウント表示BGON
+				canvasPanel.s_max_chain_count_BG.gameObject.SetActive(true);
+				canvasPanel.waitingTimerTop_BG_s.gameObject.SetActive(false);
+
+				canvasPanel.s_noChainPlayTimeDSP_Sceen2BGImage.gameObject.SetActive(false);
+				canvasPanel.s_topGameTime_text.gameObject.SetActive(false);
+
+				canvasPanel.s_gameTime_text.gameObject.SetActive(true);
+				canvasPanel.s_noChainGameTime_text.gameObject.SetActive(false);
+
+				canvasPanel.s_gameTime_BG.gameObject.SetActive(true);
+				canvasPanel.s_topGameTime_BG.gameObject.SetActive(false);
+			}
+			else {
 				canvasPanel.s_monsterColorCountView.gameObject.SetActive(false);
+				// TODO：テンポゲージトップバー表示OFF＆MAX連鎖カウント表示BG ON
+				canvasPanel.waitingTimerTop_BG_s.gameObject.SetActive(true);
+
+				canvasPanel.s_noChainPlayTimeDSP_Sceen2BGImage.gameObject.SetActive(true);
+				canvasPanel.s_topGameTime_text.gameObject.SetActive(true);
+
+				canvasPanel.s_gameTime_BG.gameObject.SetActive(false);
+				canvasPanel.s_topGameTime_BG.gameObject.SetActive(true);
+
+				canvasPanel.s_gameTime_text.gameObject.SetActive(false);
+				canvasPanel.s_noChainGameTime_text.gameObject.SetActive(true);
 			}
 
 		}
@@ -1687,7 +1716,7 @@ namespace nm_emitter
 		public static BGM_State BGMstate;
 		private static bool sw = false;
 //		private static bool sw_sphere = false;
-		public static float pause_timer = PAUSETIME;
+		public static float pause_timer = 0;
 		public static float delay_timer = 5.0f;
 		public static float updown_timer = 1.0f;
 		// Update is called once per frame
