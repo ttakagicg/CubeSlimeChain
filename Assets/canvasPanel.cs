@@ -1733,6 +1733,10 @@ namespace nm_canvasPanel
                             greenMonsterSlimeCountbadgeImage_s.gameObject.SetActive(true);
                             greenMonsterSlimeCountImage_s.canvas.sortingOrder = 2;
 
+                            videoPlayer = greenMonsterSlimeVideoView_s.gameObject.GetComponent<VideoPlayer>();
+                            videoPlayer.loopPointReached += LoopPointReached;
+                            videoPlayer.Play();
+
                             //greenMonsterSlimeCounterPosition.x += 20;
                             //greenMonsterSlimeCounterPosition.y -= 20;
                             //greenMonsterSlimeStarImage_s.rectTransform.position = greenMonsterSlimeCounterPosition;
@@ -1745,23 +1749,17 @@ namespace nm_canvasPanel
                             seq.Append(greenMonsterSlimeCountImage_s.rectTransform.DOScale(new Vector3(1.3f, 1.3f), 1.0f));
                             seq.Append(greenMonsterSlimeStarImage_s.rectTransform.DOScale(new Vector3(2.0f, 2.0f), 0.3f));
                             seq.Join(greenMonsterSlimeStarImage_s.rectTransform.DORotate(new Vector3(0f, 0f, 180f),   // 終了時点のRotation
-                                1.0f                    // アニメーション時間
+                                2.0f                    // アニメーション時間
                             ));
-
-                            videoPlayer = greenMonsterSlimeVideoView_s.gameObject.GetComponent<VideoPlayer>();
-                            videoPlayer.loopPointReached += LoopPointReached;
-                            if (videoPlayer.isLooping)
-                            {
-                                videoPlayer.Play();
-                            }
                             break;
                         case monster_color.yellow_monster:
                             yellowMonsterSlimeVideoView_s.gameObject.SetActive(true);
                             yellowMonsterSlimeCountbadgeImage_s.gameObject.SetActive(true);
+                            yellowMonsterSlimeCountImage_s.canvas.sortingOrder = 2;
+
                             videoPlayer = yellowMonsterSlimeVideoView_s.gameObject.GetComponent<VideoPlayer>();
                             videoPlayer.loopPointReached += LoopPointReached;
                             videoPlayer.Play();
-                            yellowMonsterSlimeCountImage_s.canvas.sortingOrder = 2;
 
                             //yellowMonsterSlimeCounterPosition.x += 20;
                             //yellowMonsterSlimeCounterPosition.y -= 20;
@@ -1784,10 +1782,11 @@ namespace nm_canvasPanel
                         case monster_color.red_monster:
                             redMonsterSlimeVideoView_s.gameObject.SetActive(true);
                             redMonsterSlimeCountbadgeImage_s.gameObject.SetActive(true);
+                            redMonsterSlimeCountImage_s.canvas.sortingOrder = 2;
+
                             videoPlayer = redMonsterSlimeVideoView_s.gameObject.GetComponent<VideoPlayer>();
                             videoPlayer.loopPointReached += LoopPointReached;
                             videoPlayer.Play();
-                            redMonsterSlimeCountImage_s.canvas.sortingOrder = 2;
 
                             //redMonsterSlimeCounterPosition.x += 20;
                             //redMonsterSlimeCounterPosition.y -= 20;
@@ -1807,10 +1806,11 @@ namespace nm_canvasPanel
                         case monster_color.purple_monster:
                             purpleMonsterSlimeVideoView_s.gameObject.SetActive(true);
                             purpleMonsterSlimeCountbadgeImage_s.gameObject.SetActive(true);
+                            purpleMonsterSlimeCountImage_s.canvas.sortingOrder = 2;
+
                             videoPlayer = purpleMonsterSlimeVideoView_s.gameObject.GetComponent<VideoPlayer>();
                             videoPlayer.loopPointReached += LoopPointReached;
                             videoPlayer.Play();
-                            purpleMonsterSlimeCountImage_s.canvas.sortingOrder = 2;
 
                             //purpleMonsterSlimeCounterPosition.x += 20;
                             //purpleMonsterSlimeCounterPosition.y -= 20;
@@ -1830,10 +1830,11 @@ namespace nm_canvasPanel
                         case monster_color.blue_monster:
                             blueMonsterSlimeVideoView_s.gameObject.SetActive(true);
                             blueMonsterSlimeCountbadgeImage_s.gameObject.SetActive(true);
+                            blueMonsterSlimeCountImage_s.canvas.sortingOrder = 2;
+
                             videoPlayer = blueMonsterSlimeVideoView_s.gameObject.GetComponent<VideoPlayer>();
                             videoPlayer.loopPointReached += LoopPointReached;
                             videoPlayer.Play();
-                            blueMonsterSlimeCountImage_s.canvas.sortingOrder = 2;
 
                             //blueMonsterSlimeCounterPosition.x += 20;
                             //blueMonsterSlimeCounterPosition.y -= 20;
@@ -6687,6 +6688,7 @@ namespace nm_canvasPanel
 				emitter.BGMstate = emitter.BGM_State.play;
 				emitter.sw_pause = false;
                 emitter.sw_stop = false;
+                emitter.pause_timer = 0;
 			}
                 
             
