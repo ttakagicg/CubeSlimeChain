@@ -46,6 +46,7 @@ namespace nm_cubersFile
     {
         public long itemSet_no;     // アイテムセット販売パターン番号
         public long itemSet_goldcoin;  // ゴールドコイン数
+        public long itemSet_juely;  // ジュエリー数
         public long itemSet_price;     // セット価格
         public long itemSet_wait;      // 落下待機アイテム数
         public long itemSet_retry;     // リトライアイテム数
@@ -72,6 +73,7 @@ namespace nm_cubersFile
         public static long now_play_stagelevel;
         // TODO:1-1-5 獲得アイテム処理 シルバーアイテムカウント＆ゴールドコインカウント
         public static long goldCoin_Count;
+        public static long juely_Count;
         public static long golditem_count;
         public static long silveritem_count;
 
@@ -135,6 +137,7 @@ namespace nm_cubersFile
             cubersfile_Loaded = false;
 
             stage = new stage_Data[game_stage_max];
+            stagelevel = new level_Data[game_stagelevel_max];
             eventData = new event_Data[event_max];
             itemSetData = new itemSet_Data[itemSet_max];
             load_gameEncryptionData();
@@ -194,7 +197,7 @@ namespace nm_cubersFile
 
             Dictionary<string, object> dic = Load("userData");
             // TODO:Load_Cubersfileの初期化を行う際は、dic != nullにして保存済みuserDataを更新する
-            if (dic == null) {
+            if (dic != null) {
                 init_gameEncryptionData();  //userDataが無い場合、cube_baseのデバッグデータファイルが読み込まれる
                 dic = Load("userData");
             }
@@ -207,6 +210,7 @@ namespace nm_cubersFile
             now_play_stage = (long)response["playstage"];
             now_play_stagelevel = (long)response["playstagelevel"];
             goldCoin_Count = (long)response["goldcoin"];
+            juely_Count = (long)response["juely"];
             golditem_count = (long)response["golditem"];
             silveritem_count = (long)response["silveritem"];
             game_count = (long)response["gamecount"];
@@ -263,6 +267,7 @@ namespace nm_cubersFile
                 itemSetData[n] = new itemSet_Data();
                 itemSetData[n].itemSet_no = (long)itemset_d["itemSetno"];
                 itemSetData[n].itemSet_goldcoin = (long)itemset_d["itemSetgoldcoin"];
+                itemSetData[n].itemSet_juely = (long)itemset_d["itemSetjuely"];
                 itemSetData[n].itemSet_price = (long)itemset_d["itemSetprice"];
                 itemSetData[n].itemSet_wait = (long)itemset_d["itemSetwait"];
                 itemSetData[n].itemSet_retry = (long)itemset_d["itemSetretry"];
@@ -313,6 +318,7 @@ namespace nm_cubersFile
 			response["playstage"] = now_play_stage;
             response["playstagelevel"] = now_play_stagelevel;
             response["goldcoin"] = goldCoin_Count;
+            response["juely"] = juely_Count;
             response["silveritem"] = silveritem_count;
             response["itemwait"] = item_wait;
             response["itemretry"] = item_retry;
@@ -350,6 +356,7 @@ namespace nm_cubersFile
                 IDictionary itemset_d = (IDictionary)itemSetlist[n];
                 itemset_d["itemSetno"] = itemSetData[n].itemSet_no;
                 itemset_d["itemSetgoldcoin"] = itemSetData[n].itemSet_goldcoin;
+                itemset_d["itemSetjuely"] = itemSetData[n].itemSet_juely;
                 itemset_d["itemSetprice"] = itemSetData[n].itemSet_price;
                 itemset_d["itemSetwait"] = itemSetData[n].itemSet_wait;
                 itemset_d["itemSetretry"] = itemSetData[n].itemSet_retry;

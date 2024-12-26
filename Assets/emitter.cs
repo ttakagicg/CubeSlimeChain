@@ -33,7 +33,7 @@ namespace nm_emitter
 		const float button_height = 50;
 		const float button_width = 100;
 		//public const float wangle = 15;
-		const float camera_basePosition = 6.0f;
+		const float camera_basePosition = 7.0f;
 		public const string gameclear_msg = "Game Completed";
 		public const string gameover_msg = "Game Failed";
 		public const int startCountDownTimer = 6;	// 5以下になるとカウントダウン timerにズレが生じカウントダウン終了後も落下タイマーカウントが終了するまでモンスター表示されない
@@ -196,7 +196,8 @@ namespace nm_emitter
 			// Initialize the Google Mobile Ads SDK.
 			MobileAds.Initialize(initStatus => { });
 
-			pause_timer = PAUSETIME;
+			pause_timer = 0;
+			//pause_timer = PAUSETIME;
 
 			updown_timer = nextDownWaitTimer;  // 落下後、次のモンスター落下待機表示までの待ち時間
 
@@ -532,10 +533,14 @@ namespace nm_emitter
 			make_cube();
 
 			canvasPanel.creditCountImageInit(cubeCount);
-			canvasPanel.s_gameTime_text.text = "00:00:00";
+			canvasPanel.s_gameTime_text.text = "00:00:00:00";
+			canvasPanel.s_noChainGameTime_text.text = "00:00:00:00";
+			canvasPanel.s_topGameTime_text.text = "TopTime 00:00:00:00";
 			canvasPanel.gametempoCount = 0;
-			canvasPanel tempochg = GetComponentInChildren<canvasPanel>();
-			tempochg.gameTempoReset();
+			canvasPanel canvaspanel = GetComponentInChildren<canvasPanel>();
+			canvaspanel.gameTempoReset();
+			canvaspanel.showItemDSP();
+			
 
 			initGameTempo();
 				
@@ -545,10 +550,41 @@ namespace nm_emitter
 
 			int mod = (int)cubersFile.now_play_stage % emitter.chainExplosion_userLeve;
 			if (mod == 0) {
-				canvasPanel.s_monsterColorCountView.gameObject.SetActive(true);
-				canvasPanel.monsterColor = true;
-			} else {
+				if (cubersFile.game_Sceen == 0)
+				{
+					canvasPanel.s_monsterColorCountView.gameObject.SetActive(true);
+					canvasPanel.monsterColor = true;
+				} else if (cubersFile.game_Sceen == 2)
+                {
+					canvasPanel.s_monsterSlimeColorCountView.gameObject.SetActive(true);
+					canvasPanel.monsterColor = true;
+				}
+				// TODO：テンポゲージトップバー表示OFF＆MAX連鎖カウント表示BGON
+				canvasPanel.s_max_chain_count_BG.gameObject.SetActive(true);
+				canvasPanel.waitingTimerTop_BG_s.gameObject.SetActive(false);
+
+				canvasPanel.s_noChainPlayTimeDSP_Sceen2BGImage.gameObject.SetActive(false);
+				canvasPanel.s_topGameTime_text.gameObject.SetActive(false);
+
+				canvasPanel.s_gameTime_text.gameObject.SetActive(true);
+				canvasPanel.s_noChainGameTime_text.gameObject.SetActive(false);
+
+				canvasPanel.s_gameTime_BG.gameObject.SetActive(true);
+				canvasPanel.s_topGameTime_BG.gameObject.SetActive(false);
+			}
+			else {
 				canvasPanel.s_monsterColorCountView.gameObject.SetActive(false);
+				// TODO：テンポゲージトップバー表示OFF＆MAX連鎖カウント表示BG ON
+				canvasPanel.waitingTimerTop_BG_s.gameObject.SetActive(true);
+
+				canvasPanel.s_noChainPlayTimeDSP_Sceen2BGImage.gameObject.SetActive(true);
+				canvasPanel.s_topGameTime_text.gameObject.SetActive(true);
+
+				canvasPanel.s_gameTime_BG.gameObject.SetActive(false);
+				canvasPanel.s_topGameTime_BG.gameObject.SetActive(true);
+
+				canvasPanel.s_gameTime_text.gameObject.SetActive(false);
+				canvasPanel.s_noChainGameTime_text.gameObject.SetActive(true);
 			}
 
 		}
@@ -1208,7 +1244,7 @@ namespace nm_emitter
                                     chain_explosion = true;
 
 									setChainExplosionTouchEffect(sphere.spheres[j,k,i], m_color);
-									setChainExplosionStarEffect(m_color);
+									setChainExplosionCounterPanelEffect(m_color);
 									chainExplosioncolor = m_color;
 								}
 								if (chain_explosion) chain_explosion_timer = 1.8f;
@@ -1476,9 +1512,9 @@ namespace nm_emitter
 		}
 
 		// 連鎖モンスターカウントスターアニメーション
-		static void setChainExplosionStarEffect(monster_color color) {
+		static void setChainExplosionCounterPanelEffect(monster_color color) {
 
-			canvasPanel.setchainExplosionStarEffectPosition(color);
+			canvasPanel.showChainExplosionCounterPanelEffect(color);
 
 		}
 
@@ -1680,7 +1716,7 @@ namespace nm_emitter
 		public static BGM_State BGMstate;
 		private static bool sw = false;
 //		private static bool sw_sphere = false;
-		public static float pause_timer = PAUSETIME;
+		public static float pause_timer = 0;
 		public static float delay_timer = 5.0f;
 		public static float updown_timer = 1.0f;
 		// Update is called once per frame

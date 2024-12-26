@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Video;
 using System;
 using System.Collections;
 using nm_emitter;
@@ -236,6 +237,9 @@ namespace nm_canvasPanel
         public Text silver_item_get_text;
         public static Text s_silver_item_get_text;
 
+        // 連鎖無しの場合のプレイタイム表示ビュー　※連鎖カウントパネル表示領域
+        public Image noChainPlayTimeDSP_Sceen2BGImage;
+        public static Image s_noChainPlayTimeDSP_Sceen2BGImage;
 
         // TODO: アイテムボーナス 現在未使用
         public Image item_bonus;
@@ -255,7 +259,7 @@ namespace nm_canvasPanel
         public Image play_condition2;
         public Image play_condition3;
 
-       　// ゲームライフカウント表示
+       　// ゲームシーン０　ライフカウント表示
         public GameObject life_icon1_BG;
 		public GameObject life_icon2_BG;
 		public GameObject life_icon3_BG;
@@ -271,10 +275,34 @@ namespace nm_canvasPanel
 		public GameObject life_icon3;
 		public GameObject life_icon4;
 		public GameObject life_icon5;
-        
+
+        // ゲームシーン２　ライフカウント表示
+        public GameObject life_hearticon1_BG;
+        public GameObject life_hearticon2_BG;
+        public GameObject life_hearticon3_BG;
+        public GameObject life_hearticon4_BG;
+        public GameObject life_hearticon5_BG;
+        public static GameObject s_life_hearticon1_BG;
+        public static GameObject s_life_hearticon2_BG;
+        public static GameObject s_life_hearticon3_BG;
+        public static GameObject s_life_hearticon4_BG;
+        public static GameObject s_life_hearticon5_BG;
+        public GameObject life_hearticon1;
+        public GameObject life_hearticon2;
+        public GameObject life_hearticon3;
+        public GameObject life_hearticon4;
+        public GameObject life_hearticon5;
+        public static GameObject s_life_hearticon1;
+        public static GameObject s_life_hearticon2;
+        public static GameObject s_life_hearticon3;
+        public static GameObject s_life_hearticon4;
+        public static GameObject s_life_hearticon5;
+
         // 落下待機経過時間表示
         public Image waitingTimerGauge_BG;
-		public GameObject Level_top;
+        public Image waitingTimerTop_BG;
+        public static Image waitingTimerTop_BG_s;
+        public GameObject Level_top;
         public GameObject Level1_1;
         public GameObject Level1_2;
 		public GameObject Level1_3;
@@ -317,9 +345,17 @@ namespace nm_canvasPanel
 		public static Text s_gameStatus_text;
 		public Text gameTimeEnd_text;
 		public static Text s_gameTimeEnd_text;
-		public Text gameTime_text;
+        public Image gameTime_BG;
+        public static Image s_gameTime_BG;
+        public Text gameTime_text;
 		public static Text s_gameTime_text;
-		public TimeSpan currentTs;
+        public Image topGameTime_BG;
+        public static Image s_topGameTime_BG;
+        public Text topGameTime_text;
+        public static Text s_topGameTime_text;
+        public TextMeshProUGUI noChainGameTime_text;
+        public static TextMeshProUGUI s_noChainGameTime_text;
+        public TimeSpan currentTs;
 		public static TimeSpan playEndTimeSpan;
 		public Text startCountDown_text;
         public Text gamePoint;
@@ -327,6 +363,7 @@ namespace nm_canvasPanel
 
         // 取得アイテム表示
         public Text coin_text;
+        public Text juely_text;
 
         public Image goldItem_BG;
         public Image goldItem_1;
@@ -512,8 +549,9 @@ namespace nm_canvasPanel
 		public static bool monsterColor = false;
 		public static bool resetMonsterColor = false;
 		public Image monsterColorCountView;
+
 		public Material chainExplosionCounterM;
-		public Material chainExplosionCounterHighLightM;
+		//public Material chainExplosionCounterHighLightM;
 		public static Image s_monsterColorCountView;
 		public Sprite monsterCountBaseImage;
 		public Sprite monsterCountHighImage;
@@ -556,7 +594,77 @@ namespace nm_canvasPanel
 		public static bool redMonsterCountON;
 		public static bool blueMonsterCountON;
 
-		public GameObject greenMonsterLineCount;
+        //  スライムモンスターカラー別カウント表示関連
+        public Image monsterColorCountSceen2View;
+        public static Image s_monsterSlimeColorCountView;
+        public Image greenMonsterSlimeCountImage;
+        public Image greenMonsterSlimeCountMaskImage;
+        public static Image greenMonsterSlimeCountMaskImage_s;
+        public RawImage greenMonsterSlimeVideoView;
+        public static RawImage greenMonsterSlimeVideoView_s;
+        public static Image greenMonsterSlimeCountImage_s;
+        //public static Vector3 greenMonsterSlimeCounterPosition;
+        public Image greenMonsterSlimeCountbadgeImage;
+        public static Image greenMonsterSlimeCountbadgeImage_s;
+        public Image greenMonsterSlimeStarImage;
+        public static Image greenMonsterSlimeStarImage_s;
+        public Image yellowMonsterSlimeCountImage;
+        public Image yellowMonsterSlimeCountMaskImage;
+        public static Image yellowMonsterSlimeCountMaskImage_s;
+        public RawImage yellowMonsterSlimeVideoView;
+        public static RawImage yellowMonsterSlimeVideoView_s;
+        public static Image yellowMonsterSlimeCountImage_s;
+        public static Vector3 yellowMonsterSlimeCounterPosition;
+        public Image yellowMonsterSlimeCountbadgeImage;
+        public static Image yellowMonsterSlimeCountbadgeImage_s;
+        public Image yellowMonsterSlimeStarImage;
+        public static Image yellowMonsterSlimeStarImage_s;
+        public Image purpleMonsterSlimeCountImage;
+        public Image purpleMonsterSlimeCountMaskImage;
+        public static Image purpleMonsterSlimeCountMaskImage_s;
+        public RawImage purpleMonsterSlimeVideoView;
+        public static RawImage purpleMonsterSlimeVideoView_s;
+        public static Image purpleMonsterSlimeCountImage_s;
+        public static Vector3 purpleMonsterSlimeCounterPosition;
+        public Image purpleMonsterSlimeCountbadgeImage;
+        public static Image purpleMonsterSlimeCountbadgeImage_s;
+        public Image purpleMonsterSlimeStarImage;
+        public static Image purpleMonsterSlimeStarImage_s;
+        public Image redMonsterSlimeCountImage;
+        public Image redMonsterSlimeCountMaskImage;
+        public static Image redMonsterSlimeCountMaskImage_s;
+        public RawImage redMonsterSlimeVideoView;
+        public static RawImage redMonsterSlimeVideoView_s;
+        public static Image redMonsterSlimeCountImage_s;
+        public static Vector3 redMonsterSlimeCounterPosition;
+        public Image redMonsterSlimeCountbadgeImage;
+        public static Image redMonsterSlimeCountbadgeImage_s;
+        public Image redMonsterSlimeStarImage;
+        public static Image redMonsterSlimeStarImage_s;
+        public Image blueMonsterSlimeCountImage;
+        public Image blueMonsterSlimeCountMaskImage;
+        public static Image blueMonsterSlimeCountMaskImage_s;
+        public RawImage blueMonsterSlimeVideoView;
+        public static RawImage blueMonsterSlimeVideoView_s;
+        public static Image blueMonsterSlimeCountImage_s;
+        public static Vector3 blueMonsterSlimeCounterPosition;
+        public Image blueMonsterSlimeCountbadgeImage;
+        public static Image blueMonsterSlimeCountbadgeImage_s;
+        public Image blueMonsterSlimeStarImage;
+        public static Image blueMonsterSlimeStarImage_s;
+        public Text greenMonsterSlimeCount;
+        public Text yellowMonsterSlimeCount;
+        public Text purpleMonsterSlimeCount;
+        public Text redMonsterSlimeCount;
+        public Text blueMonsterSlimeCount;
+        public static bool greenMonsterSlimeCountON;
+        public static bool yellowMonsterSlimeCountON;
+        public static bool orangeMonsterSlimeCountON;
+        public static bool purpleMonsterSlimeCountON;
+        public static bool redMonsterSlimeCountON;
+        public static bool blueMonsterSlimeCountON;
+
+        public GameObject greenMonsterLineCount;
 		public GameObject yellowMonsterLineCount;
 		public GameObject purpleMonsterLineCount;
 		public GameObject redMonsterLineCount;
@@ -587,8 +695,12 @@ namespace nm_canvasPanel
 
             s_LifeLostCount_text = LifeLostCount_text;
             s_LifeLostCount_text.GetComponent<Text>().text = "";
-			s_gameTime_text = gameTime_text;
+            s_gameTime_BG = gameTime_BG;
+            s_gameTime_text = gameTime_text;
 			gameTime_text.text = "";
+            s_noChainGameTime_text = noChainGameTime_text;
+            s_topGameTime_BG = topGameTime_BG;
+            s_topGameTime_text = topGameTime_text;
 			countDownTime = emitter.startCountDownTimer;
 
             emitter.playState = emitter.gamePlayState.Pause;
@@ -678,19 +790,31 @@ namespace nm_canvasPanel
 			s_life_icon4_BG = life_icon4_BG;
 			s_life_icon5_BG = life_icon5_BG;
 
-            // wait time gauge Image
-            Vector3 scal_wtg = waitingTimerGauge_BG.transform.localScale;
-            scal_wtg.x = scal_wtg.x * screen_width_per;
-            scal_wtg.y = scal_wtg.y * screen_width_per;
-            waitingTimerGauge_BG.transform.localScale = scal_wtg;
-            Vector3 pos_wtg = waitingTimerGauge_BG.transform.position;
-            pos_wtg.x = pos_wtg.x * scal_wtg.x;
-            // モンスター連鎖カウンター下部位置
-            pos_wtg.y = (Screen.height - safeAreaHight) - ((center_header.rectTransform.sizeDelta.y + monsterColorCountView.rectTransform.sizeDelta.y + waitingTimerGauge_BG.rectTransform.sizeDelta.y + 55) * scal2.y);
-            // モンスター連鎖カウンター上部位置
-            //pos_wtg.y = (Screen.height - safeAreaHight) - ((center_header.rectTransform.sizeDelta.y + 45) * scal2.y);
-            waitingTimerGauge_BG.transform.position = pos_wtg;
+            s_life_hearticon1_BG = life_hearticon1_BG;
+            s_life_hearticon2_BG = life_hearticon2_BG;
+            s_life_hearticon3_BG = life_hearticon3_BG;
+            s_life_hearticon4_BG = life_hearticon4_BG;
+            s_life_hearticon5_BG = life_hearticon5_BG;
 
+            s_life_hearticon1 = life_hearticon1;
+            s_life_hearticon2 = life_hearticon2;
+            s_life_hearticon3 = life_hearticon3;
+            s_life_hearticon4 = life_hearticon4;
+            s_life_hearticon5 = life_hearticon5;
+
+            // wait time gauge Image
+            /*            Vector3 scal_wtg = waitingTimerGauge_BG.transform.localScale;
+                        scal_wtg.x = scal_wtg.x * screen_width_per;
+                        scal_wtg.y = scal_wtg.y * screen_width_per;
+                        waitingTimerGauge_BG.transform.localScale = scal_wtg;
+                        Vector3 pos_wtg = waitingTimerGauge_BG.transform.position;
+                        pos_wtg.x = pos_wtg.x * scal_wtg.x;
+                        // モンスター連鎖カウンター下部位置
+                        pos_wtg.y = (Screen.height - safeAreaHight) - ((center_header.rectTransform.sizeDelta.y + monsterColorCountView.rectTransform.sizeDelta.y + waitingTimerGauge_BG.rectTransform.sizeDelta.y + 55) * scal2.y);
+                        // モンスター連鎖カウンター上部位置
+                        //pos_wtg.y = (Screen.height - safeAreaHight) - ((center_header.rectTransform.sizeDelta.y + 45) * scal2.y);
+                        waitingTimerGauge_BG.transform.position = pos_wtg;
+            */
             Level_top_Base_Color = Level_top.gameObject.GetComponent<Image>().color;
             Level1_1_Base_Color = Level1_1.gameObject.GetComponent<Image>().color;
             Level1_2_Base_Color = Level1_2.gameObject.GetComponent<Image>().color;
@@ -704,6 +828,7 @@ namespace nm_canvasPanel
             Level3_4_Base_Color = Level3_4.gameObject.GetComponent<Image>().color;
 
             waitingTimerGauge_BG.gameObject.SetActive(false);
+            waitingTimerTop_BG_s = waitingTimerTop_BG;
             Level_top.gameObject.SetActive(false);
             Level1_1.gameObject.SetActive(false);
 			Level1_2.gameObject.SetActive(false);
@@ -721,12 +846,16 @@ namespace nm_canvasPanel
             scal_chaininfo.x = scal_chaininfo.x * screen_width_per;
             scal_chaininfo.y = scal_chaininfo.y * screen_width_per;
             max_chain_count_BG.transform.localScale = scal_chaininfo;
-            Vector3 pos_chaininfo = max_chain_count_BG.transform.position;
-            pos_chaininfo.x = pos_chaininfo.x * scal_chaininfo.x;
-            pos_chaininfo.y = (Screen.height - safeAreaHight) - ((center_header.rectTransform.sizeDelta.y + monsterColorCountView.rectTransform.sizeDelta.y + waitingTimerGauge_BG.rectTransform.sizeDelta.y + max_chain_count_BG.rectTransform.sizeDelta.y + 77) * scal2.y);
-            max_chain_count_BG.transform.position = pos_chaininfo;
+            //Vector3 pos_chaininfo = max_chain_count_BG.transform.position;
+            //pos_chaininfo.x = pos_chaininfo.x * scal_chaininfo.x;
+            //pos_chaininfo.y = (Screen.height - safeAreaHight) - ((center_header.rectTransform.sizeDelta.y + monsterColorCountView.rectTransform.sizeDelta.y + waitingTimerGauge_BG.rectTransform.sizeDelta.y + max_chain_count_BG.rectTransform.sizeDelta.y + 77) * scal2.y);
+            //max_chain_count_BG.transform.position = pos_chaininfo;
             s_max_chain_count_BG = max_chain_count_BG;
             s_max_chain_count_text = max_chain_count_text;
+
+            // 連鎖無しの場合のプレイタイム表示ビュー　※連鎖カウントパネル表示領域
+            s_noChainPlayTimeDSP_Sceen2BGImage = noChainPlayTimeDSP_Sceen2BGImage;
+            s_noChainPlayTimeDSP_Sceen2BGImage.gameObject.SetActive(false);
 
             Vector3 scal_getIteminfo = silver_item_GET_BG.transform.localScale;
             scal_getIteminfo.x = scal_getIteminfo.x * screen_width_per;
@@ -738,8 +867,9 @@ namespace nm_canvasPanel
             silver_item_GET_BG.transform.position = pos_getIteminfo;
             s_silver_item_GET_BG = silver_item_GET_BG;
             s_silver_item_get_text = silver_item_get_text;
+
             s_max_chain_count_BG.gameObject.SetActive(false);
-            s_silver_item_GET_BG.gameObject.SetActive(false);
+            //s_silver_item_GET_BG.gameObject.SetActive(false);
 
             // TODO:1-1-１０修正 新規アイテム変換購入画面処理の作成
             Vector3 scal_tdlb = playItemView_button_BG.transform.localScale;
@@ -850,16 +980,16 @@ namespace nm_canvasPanel
             //pos_mc.y = (Screen.height - safeAreaHight) - ((center_header.rectTransform.sizeDelta.y + monsterColorCountView.rectTransform.sizeDelta.y + 45) * scal2.y);
             monsterColorCountView.transform.position = pos_mc;
 
-			// モンスターカウンターイメージstaticセット
-			greenMonsterCountImage_s = greenMonsterCountImage;
+            // モンスターカウンターイメージstaticセット  ゲームシーン０連鎖カウンターパネル２D表示位置での２Dエフェクト表示に利用　※現在未利用
+            greenMonsterCountImage_s = greenMonsterCountImage;
 			greenMonsterStarImage_s = greenMonsterStarImage;
 			yellowMonsterCountImage_s = yellowMonsterCountImage;
 			redMonsterCountImage_s = redMonsterCountImage;
 			purpleMonsterCountImage_s = purpleMonsterCountImage;
 			blueMonsterCountImage_s = blueMonsterCountImage;
 
-			// モンスターカウンター座標セット
-			greenMonsterCounterPosition = greenMonsterCountImage.rectTransform.position;
+            // モンスターカウンター座標セット  ゲームシーン０連鎖カウンターパネル２D表示位置での２Dエフェクト表示に利用　※現在未利用
+            greenMonsterCounterPosition = greenMonsterCountImage.rectTransform.position;
 			yellowMonsterCounterPosition = yellowMonsterCountImage.rectTransform.position;
 			redMonsterCounterPosition = redMonsterCountImage.rectTransform.position;
 			purpleMonsterCounterPosition = purpleMonsterCountImage.rectTransform.position;
@@ -871,6 +1001,66 @@ namespace nm_canvasPanel
 			redMonsterCountImage.material = chainExplosionCounterM;
 			purpleMonsterCountImage.material = chainExplosionCounterM;
 			blueMonsterCountImage.material = chainExplosionCounterM;
+
+            // スライムモンスター連鎖パネル
+            greenMonsterSlimeCountImage_s = greenMonsterSlimeCountImage;
+            yellowMonsterSlimeCountImage_s = yellowMonsterSlimeCountImage;
+            redMonsterSlimeCountImage_s = redMonsterSlimeCountImage;
+            purpleMonsterSlimeCountImage_s = purpleMonsterSlimeCountImage;
+            blueMonsterSlimeCountImage_s = blueMonsterSlimeCountImage;
+
+            // スライムモンスター連鎖パネルマスク
+            greenMonsterSlimeCountMaskImage_s = greenMonsterSlimeCountMaskImage;
+            yellowMonsterSlimeCountMaskImage_s = yellowMonsterSlimeCountMaskImage;
+            redMonsterSlimeCountMaskImage_s = redMonsterSlimeCountMaskImage;
+            purpleMonsterSlimeCountMaskImage_s = purpleMonsterSlimeCountMaskImage;
+            blueMonsterSlimeCountMaskImage_s = blueMonsterSlimeCountMaskImage;
+            // スライムモンスター連鎖時のカウンターパネルマスクOFF
+            greenMonsterSlimeCountMaskImage_s.gameObject.SetActive(false);
+            yellowMonsterSlimeCountMaskImage.gameObject.SetActive(false);
+            redMonsterSlimeCountMaskImage.gameObject.SetActive(false);
+            purpleMonsterSlimeCountMaskImage.gameObject.SetActive(false);
+            blueMonsterSlimeCountMaskImage.gameObject.SetActive(false);
+
+            // スライムモンスター連鎖ビデオビュー
+            greenMonsterSlimeVideoView_s = greenMonsterSlimeVideoView;
+            yellowMonsterSlimeVideoView_s = yellowMonsterSlimeVideoView;
+            redMonsterSlimeVideoView_s = redMonsterSlimeVideoView;
+            purpleMonsterSlimeVideoView_s = purpleMonsterSlimeVideoView;
+            blueMonsterSlimeVideoView_s = blueMonsterSlimeVideoView;
+            // 連鎖時のカウンターパネルビデオ再生ビュー
+            blueMonsterSlimeVideoView_s.gameObject.SetActive(false);
+            greenMonsterSlimeVideoView_s.gameObject.SetActive(false);
+            purpleMonsterSlimeVideoView_s.gameObject.SetActive(false);
+            redMonsterSlimeVideoView_s.gameObject.SetActive(false);
+            yellowMonsterSlimeVideoView_s.gameObject.SetActive(false);
+
+            // スライムモンスター連鎖カウントバッジハイライト
+            greenMonsterSlimeCountbadgeImage_s = greenMonsterSlimeCountbadgeImage;
+            yellowMonsterSlimeCountbadgeImage_s = yellowMonsterSlimeCountbadgeImage;
+            redMonsterSlimeCountbadgeImage_s = redMonsterSlimeCountbadgeImage;
+            purpleMonsterSlimeCountbadgeImage_s = purpleMonsterSlimeCountbadgeImage;
+            blueMonsterSlimeCountbadgeImage_s = blueMonsterSlimeCountbadgeImage;
+            // スライムモンスター連鎖カウントバッジハイライトOFF
+            greenMonsterSlimeCountbadgeImage_s.gameObject.SetActive(false);
+            yellowMonsterSlimeCountbadgeImage_s.gameObject.SetActive(false);
+            redMonsterSlimeCountbadgeImage_s.gameObject.SetActive(false);
+            purpleMonsterSlimeCountbadgeImage_s.gameObject.SetActive(false);
+            blueMonsterSlimeCountbadgeImage_s.gameObject.SetActive(false);
+
+            // スライムモンスター連鎖カウントバッジスターイメージ
+            greenMonsterSlimeStarImage_s = greenMonsterSlimeStarImage;
+            yellowMonsterSlimeStarImage_s = yellowMonsterSlimeStarImage;
+            redMonsterSlimeStarImage_s = redMonsterSlimeStarImage;
+            purpleMonsterSlimeStarImage_s = purpleMonsterSlimeStarImage;
+            blueMonsterSlimeStarImage_s = blueMonsterSlimeStarImage;
+            // スライムモンスターカウンター座標セット  ゲームシーン０連鎖カウンターパネル２D表示位置での２Dエフェクト表示に利用　※現在未利用
+            //greenMonsterSlimeCounterPosition = greenMonsterSlimeStarImage_s.rectTransform.position;
+            yellowMonsterSlimeCounterPosition = yellowMonsterSlimeStarImage_s.rectTransform.position;
+            redMonsterSlimeCounterPosition = redMonsterSlimeStarImage_s.rectTransform.position;
+            purpleMonsterSlimeCounterPosition = purpleMonsterSlimeStarImage_s.rectTransform.position;
+            blueMonsterSlimeCounterPosition = blueMonsterSlimeStarImage_s.rectTransform.position;
+
 
             // 連鎖　カラー別取得ポイントテキストクリア
             greenMonsterPoint.text = "";
@@ -884,7 +1074,6 @@ namespace nm_canvasPanel
 
             // 連鎖取得アイテムオブジェクト配列セット
             setChainGetitemArray();
-            showItemDSP();
 
             // オープニングメニュー　背景 sunshine1-2
             s_sunshine1 = sunshine1;
@@ -1056,14 +1245,16 @@ namespace nm_canvasPanel
             pos_st.y = (Screen.height - safeAreaHight) - (center_header.rectTransform.sizeDelta.y + monsterColorCountView.rectTransform.sizeDelta.y + waitingTimerGauge_BG.rectTransform.sizeDelta.y + startCountDown_text.rectTransform.sizeDelta.y + 100) * scal2.y;
             //pos_st.y = monsterColorCountView.transform.position.y - (startCountDown_text.rectTransform.sizeDelta.y * screen_width_per);
             startCountDown_text.transform.position = pos_st;
-			s_monsterColorCountView = monsterColorCountView;
-			s_monsterColorCountView.gameObject.SetActive(false);
+            s_monsterColorCountView = monsterColorCountView;
+            s_monsterColorCountView.gameObject.SetActive(false);
+            s_monsterSlimeColorCountView = monsterColorCountSceen2View;
+            s_monsterSlimeColorCountView.gameObject.SetActive(false);
 
-			// center view waku
-//			s_center_waku = center_waku;
+            // center view waku
+            //			s_center_waku = center_waku;
 
-			// play time end dsp
-			s_gameTimeEnd_text = gameTimeEnd_text;
+            // play time end dsp
+            s_gameTimeEnd_text = gameTimeEnd_text;
 			gameTimeEnd_text.text = "";
 
 			// game status
@@ -1479,85 +1670,285 @@ namespace nm_canvasPanel
 
 
         // set chainExplosionStarEffectPosition
-        public static void setchainExplosionStarEffectPosition(monster_color color) {
+        [SerializeField]
+        static VideoPlayer videoPlayer;
+        public static void showChainExplosionCounterPanelEffect(monster_color color) {
+            var seq = DOTween.Sequence();
+            Vector2 scale;
+            switch (cubersFile.game_Sceen)
+            {
+                case 0:
+                    greenMonsterStarImage_s.gameObject.SetActive(true);
+                    Vector3 monsterCounterPosition = new Vector3(0.0f, 0.0f, 0.0f);
 
-			greenMonsterStarImage_s.gameObject.SetActive(true);
-			Vector3 monsterCounterPosition = new Vector3(0.0f, 0.0f, 0.0f);
+                    switch (color)
+                    {
+                        case monster_color.blue_monster:
+                            monsterCounterPosition = canvasPanel.blueMonsterCounterPosition;
+                            break;
+                        case monster_color.green_monster:
+                            monsterCounterPosition = canvasPanel.greenMonsterCounterPosition;
+                            break;
+                        case monster_color.purple_monster:
+                            monsterCounterPosition = canvasPanel.purpleMonsterCounterPosition;
+                            break;
+                        case monster_color.orange_monster:
+                            //				monsterCounterPosition = canvasPanel.orangeMonsterCounterPosition;
+                            break;
+                        case monster_color.red_monster:
+                            monsterCounterPosition = canvasPanel.redMonsterCounterPosition;
+                            break;
+                        case monster_color.yellow_monster:
+                            monsterCounterPosition = canvasPanel.yellowMonsterCounterPosition;
+                            break;
+                        default:
+                            break;
+                    }
+                    monsterCounterPosition.x += 15;
+                    monsterCounterPosition.y += 40;
+                    greenMonsterStarImage_s.rectTransform.position = monsterCounterPosition;
+                    scale = greenMonsterStarImage_s.rectTransform.localScale;
+                    scale.x = 0.1f;
+                    scale.y = 0.1f;
+                    greenMonsterStarImage_s.rectTransform.localScale = scale;
+                    greenMonsterStarImage_s.rectTransform.rotation = Quaternion.Euler(0, 0, 0);
 
-			switch (color) {
-			case monster_color.blue_monster:
-				monsterCounterPosition = canvasPanel.blueMonsterCounterPosition;
-				break;
-			case monster_color.green_monster:
-				monsterCounterPosition = canvasPanel.greenMonsterCounterPosition;
-				break;
-			case monster_color.purple_monster:
-				monsterCounterPosition = canvasPanel.purpleMonsterCounterPosition;
-				break;
-			case monster_color.orange_monster:
-				//				monsterCounterPosition = canvasPanel.orangeMonsterCounterPosition;
-				break;
-			case monster_color.red_monster:
-				monsterCounterPosition = canvasPanel.redMonsterCounterPosition;
-				break;
-			case monster_color.yellow_monster:
-				monsterCounterPosition = canvasPanel.yellowMonsterCounterPosition;
-				break;
-			default:
-				break;
-			}
-			monsterCounterPosition.x += 15;
-			monsterCounterPosition.y += 40;
-			greenMonsterStarImage_s.rectTransform.position = monsterCounterPosition;
-			Vector2 scale = greenMonsterStarImage_s.rectTransform.localScale;
-			scale.x = 0.1f;
-			scale.y = 0.1f;
-			greenMonsterStarImage_s.rectTransform.localScale = scale;
-			greenMonsterStarImage_s.rectTransform.rotation = Quaternion.Euler(0, 0, 0);
+                    seq = DOTween.Sequence();
+                    seq.Append(greenMonsterStarImage_s.rectTransform.DOScale(new Vector3(2.0f, 2.0f), 1.0f));
+                    seq.Join(greenMonsterStarImage_s.rectTransform.DORotate(new Vector3(0f, 0f, 180f),   // 終了時点のRotation
+                        2.0f                    // アニメーション時間
+                    ));
+                    seq.OnComplete(() =>
+                    {
+                        // アニメーションが終了時によばれる
+                        greenMonsterStarImage_s.gameObject.SetActive(false);
+                    });
+                    break;
+                case 2:
+                    // スライム連鎖時のカウンターパネルでのダメージビデオ再生処理
+                    switch (color)
+                    {
+                        case monster_color.green_monster:
+                            greenMonsterSlimeVideoView_s.gameObject.SetActive(true);
+                            greenMonsterSlimeCountbadgeImage_s.gameObject.SetActive(true);
+                            greenMonsterSlimeCountImage_s.canvas.sortingOrder = 2;
 
-			var seq = DOTween.Sequence();
-			seq.Append(greenMonsterStarImage_s.rectTransform.DOScale( new Vector3(2.0f, 2.0f), 1.0f));
-			seq.Join(greenMonsterStarImage_s.rectTransform.DORotate(new Vector3(0f, 0f, 180f),   // 終了時点のRotation
-				2.0f                    // アニメーション時間
-			));
-			seq.OnComplete(() => {
-				// アニメーションが終了時によばれる
-				greenMonsterStarImage_s.gameObject.SetActive(false);
-			});
+                            videoPlayer = greenMonsterSlimeVideoView_s.gameObject.GetComponent<VideoPlayer>();
+                            videoPlayer.loopPointReached += LoopPointReached;
+                            videoPlayer.Play();
+
+                            //greenMonsterSlimeCounterPosition.x += 20;
+                            //greenMonsterSlimeCounterPosition.y -= 20;
+                            //greenMonsterSlimeStarImage_s.rectTransform.position = greenMonsterSlimeCounterPosition;
+                            scale = greenMonsterSlimeStarImage_s.rectTransform.localScale;
+                            scale.x = 0.1f;
+                            scale.y = 0.1f;
+                            greenMonsterSlimeStarImage_s.rectTransform.localScale = scale;
+                            greenMonsterSlimeStarImage_s.rectTransform.rotation = Quaternion.Euler(0, 0, 0);
+                            seq = DOTween.Sequence();
+                            seq.Append(greenMonsterSlimeCountImage_s.rectTransform.DOScale(new Vector3(1.3f, 1.3f), 1.0f));
+                            seq.Append(greenMonsterSlimeStarImage_s.rectTransform.DOScale(new Vector3(2.0f, 2.0f), 0.3f));
+                            seq.Join(greenMonsterSlimeStarImage_s.rectTransform.DORotate(new Vector3(0f, 0f, 180f),   // 終了時点のRotation
+                                2.0f                    // アニメーション時間
+                            ));
+                            break;
+                        case monster_color.yellow_monster:
+                            yellowMonsterSlimeVideoView_s.gameObject.SetActive(true);
+                            yellowMonsterSlimeCountbadgeImage_s.gameObject.SetActive(true);
+                            yellowMonsterSlimeCountImage_s.canvas.sortingOrder = 2;
+
+                            videoPlayer = yellowMonsterSlimeVideoView_s.gameObject.GetComponent<VideoPlayer>();
+                            videoPlayer.loopPointReached += LoopPointReached;
+                            videoPlayer.Play();
+
+                            //yellowMonsterSlimeCounterPosition.x += 20;
+                            //yellowMonsterSlimeCounterPosition.y -= 20;
+                            //yellowMonsterSlimeStarImage_s.rectTransform.position = yellowMonsterSlimeCounterPosition;
+                            scale = yellowMonsterSlimeStarImage_s.rectTransform.localScale;
+                            scale.x = 0.1f;
+                            scale.y = 0.1f;
+                            yellowMonsterSlimeStarImage_s.rectTransform.localScale = scale;
+                            yellowMonsterSlimeStarImage_s.rectTransform.rotation = Quaternion.Euler(0, 0, 0);
+                            seq = DOTween.Sequence();
+                            seq.Append(yellowMonsterSlimeCountImage_s.rectTransform.DOScale(new Vector3(1.3f, 1.3f), 1.0f));
+                            seq.Append(yellowMonsterSlimeStarImage_s.rectTransform.DOScale(new Vector3(2.0f, 2.0f), 1.0f));
+                            seq.Join(yellowMonsterSlimeStarImage_s.rectTransform.DORotate(new Vector3(0f, 0f, 180f),   // 終了時点のRotation
+                                2.0f                    // アニメーション時間
+                            ));
+                            break;
+                        case monster_color.orange_monster:
+                            //blueMonsterSlimeVideoView_s.gameObject.SetActive(true);
+                            break;
+                        case monster_color.red_monster:
+                            redMonsterSlimeVideoView_s.gameObject.SetActive(true);
+                            redMonsterSlimeCountbadgeImage_s.gameObject.SetActive(true);
+                            redMonsterSlimeCountImage_s.canvas.sortingOrder = 2;
+
+                            videoPlayer = redMonsterSlimeVideoView_s.gameObject.GetComponent<VideoPlayer>();
+                            videoPlayer.loopPointReached += LoopPointReached;
+                            videoPlayer.Play();
+
+                            //redMonsterSlimeCounterPosition.x += 20;
+                            //redMonsterSlimeCounterPosition.y -= 20;
+                            //redMonsterSlimeStarImage_s.rectTransform.position = redMonsterSlimeCounterPosition;
+                            scale = redMonsterSlimeStarImage_s.rectTransform.localScale;
+                            scale.x = 0.1f;
+                            scale.y = 0.1f;
+                            redMonsterSlimeStarImage_s.rectTransform.localScale = scale;
+                            redMonsterSlimeStarImage_s.rectTransform.rotation = Quaternion.Euler(0, 0, 0);
+                            seq = DOTween.Sequence();
+                            seq.Append(redMonsterSlimeCountImage_s.rectTransform.DOScale(new Vector3(1.3f, 1.3f), 1.0f));
+                            seq.Append(redMonsterSlimeStarImage_s.rectTransform.DOScale(new Vector3(2.0f, 2.0f), 1.0f));
+                            seq.Join(redMonsterSlimeStarImage_s.rectTransform.DORotate(new Vector3(0f, 0f, 180f),   // 終了時点のRotation
+                                2.0f                    // アニメーション時間
+                            ));
+                            break;
+                        case monster_color.purple_monster:
+                            purpleMonsterSlimeVideoView_s.gameObject.SetActive(true);
+                            purpleMonsterSlimeCountbadgeImage_s.gameObject.SetActive(true);
+                            purpleMonsterSlimeCountImage_s.canvas.sortingOrder = 2;
+
+                            videoPlayer = purpleMonsterSlimeVideoView_s.gameObject.GetComponent<VideoPlayer>();
+                            videoPlayer.loopPointReached += LoopPointReached;
+                            videoPlayer.Play();
+
+                            //purpleMonsterSlimeCounterPosition.x += 20;
+                            //purpleMonsterSlimeCounterPosition.y -= 20;
+                            //purpleMonsterSlimeStarImage_s.rectTransform.position = purpleMonsterSlimeCounterPosition;
+                            scale = purpleMonsterSlimeStarImage_s.rectTransform.localScale;
+                            scale.x = 0.1f;
+                            scale.y = 0.1f;
+                            purpleMonsterSlimeStarImage_s.rectTransform.localScale = scale;
+                            purpleMonsterSlimeStarImage_s.rectTransform.rotation = Quaternion.Euler(0, 0, 0);
+                            seq = DOTween.Sequence();
+                            seq.Append(purpleMonsterSlimeCountImage_s.rectTransform.DOScale(new Vector3(1.3f, 1.3f), 1.0f));
+                            seq.Append(purpleMonsterSlimeStarImage_s.rectTransform.DOScale(new Vector3(2.0f, 2.0f), 1.0f));
+                            seq.Join(purpleMonsterSlimeStarImage_s.rectTransform.DORotate(new Vector3(0f, 0f, 180f),   // 終了時点のRotation
+                                2.0f                    // アニメーション時間
+                            ));
+                            break;
+                        case monster_color.blue_monster:
+                            blueMonsterSlimeVideoView_s.gameObject.SetActive(true);
+                            blueMonsterSlimeCountbadgeImage_s.gameObject.SetActive(true);
+                            blueMonsterSlimeCountImage_s.canvas.sortingOrder = 2;
+
+                            videoPlayer = blueMonsterSlimeVideoView_s.gameObject.GetComponent<VideoPlayer>();
+                            videoPlayer.loopPointReached += LoopPointReached;
+                            videoPlayer.Play();
+
+                            //blueMonsterSlimeCounterPosition.x += 20;
+                            //blueMonsterSlimeCounterPosition.y -= 20;
+                            //blueMonsterSlimeStarImage_s.rectTransform.position = blueMonsterSlimeCounterPosition;
+                            scale = blueMonsterSlimeStarImage_s.rectTransform.localScale;
+                            scale.x = 0.1f;
+                            scale.y = 0.1f;
+                            blueMonsterSlimeStarImage_s.rectTransform.localScale = scale;
+                            blueMonsterSlimeStarImage_s.rectTransform.rotation = Quaternion.Euler(0, 0, 0);
+                            seq = DOTween.Sequence();
+                            seq.Append(blueMonsterSlimeCountImage_s.rectTransform.DOScale(new Vector3(1.3f, 1.3f), 1.0f));
+                            seq.Append(blueMonsterSlimeStarImage_s.rectTransform.DOScale(new Vector3(2.0f, 2.0f), 1.0f));
+                            seq.Join(blueMonsterSlimeStarImage_s.rectTransform.DORotate(new Vector3(0f, 0f, 180f),   // 終了時点のRotation
+                                2.0f                    // アニメーション時間
+                            ));
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+            }
 				
 		}
-		// Credit CountImage init.
-		public static void creditCountImageInit(int cubecount) {
-			switch(cubecount) {
-			case 3:
-				s_life_icon1_BG.gameObject.SetActive(true);
-				s_life_icon2_BG.gameObject.SetActive(true);
-				s_life_icon3_BG.gameObject.SetActive(true);
-				s_life_icon4_BG.gameObject.SetActive(false);
-				s_life_icon5_BG.gameObject.SetActive(false);
-				break;
-			case 4:
-				s_life_icon1_BG.gameObject.SetActive(true);
-				s_life_icon2_BG.gameObject.SetActive(true);
-				s_life_icon3_BG.gameObject.SetActive(true);
-				s_life_icon4_BG.gameObject.SetActive(true);
-				s_life_icon5_BG.gameObject.SetActive(false);
-				break;
-			case 5:
-				s_life_icon1_BG.gameObject.SetActive(true);
-				s_life_icon2_BG.gameObject.SetActive(true);
-				s_life_icon3_BG.gameObject.SetActive(true);
-				s_life_icon4_BG.gameObject.SetActive(true);
-				s_life_icon5_BG.gameObject.SetActive(true);
-				break;
-			default:
-				s_life_icon1_BG.gameObject.SetActive(false);
-				s_life_icon2_BG.gameObject.SetActive(false);
-				s_life_icon3_BG.gameObject.SetActive(false);
-				s_life_icon4_BG.gameObject.SetActive(false);
-				s_life_icon5_BG.gameObject.SetActive(false);
-				break;
-			}			
+        // 動画再生完了時の処理
+        // アニメーションが終了時によばれる Todo: 呼ばれたり呼ばれられなかったりとするので
+        // resetChainExplosionMonsterColorCountView()に処理をうつした！
+        public static void LoopPointReached(VideoPlayer vp)
+        {
+
+            //greenMonsterSlimeCountbadgeImage_s.gameObject.SetActive(false);
+            //yellowMonsterSlimeCountbadgeImage_s.gameObject.SetActive(false);
+            //redMonsterSlimeCountbadgeImage_s.gameObject.SetActive(false);
+            //purpleMonsterSlimeCountbadgeImage_s.gameObject.SetActive(false);
+            //blueMonsterSlimeCountbadgeImage_s.gameObject.SetActive(false);
+
+            //greenMonsterSlimeCountImage_s.canvas.sortingOrder = 1;
+            //yellowMonsterSlimeCountImage_s.canvas.sortingOrder = 1;
+            //redMonsterSlimeCountImage_s.canvas.sortingOrder = 1;
+            //purpleMonsterSlimeCountImage_s.canvas.sortingOrder = 1;
+            //blueMonsterSlimeCountImage_s.canvas.sortingOrder = 1;
+
+        }
+        // Credit CountImage init.
+        public static void creditCountImageInit(int cubecount) {
+            switch (cubersFile.game_Sceen)
+            {
+                case 0:
+                    switch (cubecount)
+                    {
+                        case 3:
+                            s_life_icon1_BG.gameObject.SetActive(true);
+                            s_life_icon2_BG.gameObject.SetActive(true);
+                            s_life_icon3_BG.gameObject.SetActive(true);
+                            s_life_icon4_BG.gameObject.SetActive(false);
+                            s_life_icon5_BG.gameObject.SetActive(false);
+                            break;
+                        case 4:
+                            s_life_icon1_BG.gameObject.SetActive(true);
+                            s_life_icon2_BG.gameObject.SetActive(true);
+                            s_life_icon3_BG.gameObject.SetActive(true);
+                            s_life_icon4_BG.gameObject.SetActive(true);
+                            s_life_icon5_BG.gameObject.SetActive(false);
+                            break;
+                        case 5:
+                            s_life_icon1_BG.gameObject.SetActive(true);
+                            s_life_icon2_BG.gameObject.SetActive(true);
+                            s_life_icon3_BG.gameObject.SetActive(true);
+                            s_life_icon4_BG.gameObject.SetActive(true);
+                            s_life_icon5_BG.gameObject.SetActive(true);
+                            break;
+                        default:
+                            s_life_icon1_BG.gameObject.SetActive(false);
+                            s_life_icon2_BG.gameObject.SetActive(false);
+                            s_life_icon3_BG.gameObject.SetActive(false);
+                            s_life_icon4_BG.gameObject.SetActive(false);
+                            s_life_icon5_BG.gameObject.SetActive(false);
+                            break;
+                    }
+                    break;
+
+                case 2:
+                    switch (cubecount)
+                    {
+                        case 3:
+                            s_life_hearticon1.gameObject.SetActive(true);
+                            s_life_hearticon2.gameObject.SetActive(true);
+                            s_life_hearticon3.gameObject.SetActive(true);
+                            s_life_hearticon4.gameObject.SetActive(false);
+                            s_life_hearticon5.gameObject.SetActive(false);
+                            break;
+                        case 4:
+                            s_life_hearticon1.gameObject.SetActive(true);
+                            s_life_hearticon2.gameObject.SetActive(true);
+                            s_life_hearticon3.gameObject.SetActive(true);
+                            s_life_hearticon4.gameObject.SetActive(true);
+                            s_life_hearticon5.gameObject.SetActive(false);
+                            break;
+                        case 5:
+                            s_life_hearticon1.gameObject.SetActive(true);
+                            s_life_hearticon2.gameObject.SetActive(true);
+                            s_life_hearticon3.gameObject.SetActive(true);
+                            s_life_hearticon4.gameObject.SetActive(true);
+                            s_life_hearticon5.gameObject.SetActive(true);
+                            break;
+                        default:
+                            s_life_hearticon1.gameObject.SetActive(false);
+                            s_life_hearticon2.gameObject.SetActive(false);
+                            s_life_hearticon3.gameObject.SetActive(false);
+                            s_life_hearticon4.gameObject.SetActive(false);
+                            s_life_hearticon5.gameObject.SetActive(false);
+                            break;
+                    }
+                    break;
+            }
 				
 			
 		}
@@ -1634,8 +2025,8 @@ namespace nm_canvasPanel
         // TODO:連鎖　MAX chain count情報及び取得予定アイテム数表示の拡大表示処理
         public void chainInfoEffectDSP()
         {
-            s_max_chain_count_BG.gameObject.SetActive(true);
-            s_silver_item_GET_BG.gameObject.SetActive(true);
+            //s_max_chain_count_BG.gameObject.SetActive(true);
+            //s_silver_item_GET_BG.gameObject.SetActive(true);
             /*
             Vector3 scal = s_silver_item_GET_BG.transform.localScale;
             scal.x = m_hit_zoom;
@@ -1786,88 +2177,211 @@ namespace nm_canvasPanel
 			purpleMonsterPoint.text = "";
 			blueMonsterPoint.text = "";
 
-			Vector3 scal = blueMonsterCountImage.transform.localScale;
-			scal.x = m_hit_reset;
-			scal.y = m_hit_reset;
-			scal.z = m_hit_reset;
-			blueMonsterCountImage.transform.localScale = scal;
-			int cnt_b = monster.monster_instance.get_monsterColorCount(monster_color.blue_monster);
-			if (cnt_b <= 0) {
-//				blueMonsterCountImage.material = chainExplosionCounterHighLightM;
-				blueMonsterCountImage.sprite = monsterCountHighImage;
-			}
-			else { 
-				blueMonsterCountImage.material = chainExplosionCounterM;
-				blueMonsterCountImage.sprite = monsterCountBaseImage;
-			}
-//			if (cnt_b <= 0) blueMonsterCountImage.material = chainExplosionCounterHighLightM;
-//			else blueMonsterCountImage.material = chainExplosionCounterM;
+            int cnt_b = monster.monster_instance.get_monsterColorCount(monster_color.blue_monster);
+            int cnt_g = monster.monster_instance.get_monsterColorCount(monster_color.green_monster);
+            int cnt_y = monster.monster_instance.get_monsterColorCount(monster_color.yellow_monster);
+            int cnt_r = monster.monster_instance.get_monsterColorCount(monster_color.red_monster);
+            int cnt_p = monster.monster_instance.get_monsterColorCount(monster_color.purple_monster);
+            Vector3 scal;
+            switch (cubersFile.game_Sceen)
+            {
+                case 0:
+                    scal = blueMonsterCountImage.transform.localScale;
+                    scal.x = m_hit_reset;
+                    scal.y = m_hit_reset;
+                    scal.z = m_hit_reset;
+                    blueMonsterCountImage.transform.localScale = scal;
+                    if (cnt_b <= 0)
+                    {
+                        blueMonsterCountImage.sprite = monsterCountHighImage;
+                    }
+                    else
+                    {
+                        blueMonsterCountImage.material = chainExplosionCounterM;
+                        blueMonsterCountImage.sprite = monsterCountBaseImage;
+                    }
 
-			scal = greenMonsterCountImage.transform.localScale;
-			scal.x = m_hit_reset;
-			scal.y = m_hit_reset;
-			scal.z = m_hit_reset;
-			greenMonsterCountImage.transform.localScale = scal;
-			int cnt_g = monster.monster_instance.get_monsterColorCount(monster_color.green_monster);
-			if (cnt_g <= 0) {
-//				greenMonsterCountImage.material = chainExplosionCounterHighLightM;
-				greenMonsterCountImage.sprite = monsterCountHighImage;
-			}
-			else { 
-				greenMonsterCountImage.material = chainExplosionCounterM;
-				greenMonsterCountImage.sprite = monsterCountBaseImage;
-			}
+                    scal = greenMonsterCountImage.transform.localScale;
+                    scal.x = m_hit_reset;
+                    scal.y = m_hit_reset;
+                    scal.z = m_hit_reset;
+                    greenMonsterCountImage.transform.localScale = scal;
+                    if (cnt_g <= 0)
+                    {
+                        greenMonsterCountImage.sprite = monsterCountHighImage;
+                    }
+                    else
+                    {
+                        greenMonsterCountImage.material = chainExplosionCounterM;
+                        greenMonsterCountImage.sprite = monsterCountBaseImage;
+                    }
 
-			scal = purpleMonsterCountImage.transform.localScale;
-			scal.x = m_hit_reset;
-			scal.y = m_hit_reset;
-			scal.z = m_hit_reset;
-			purpleMonsterCountImage.transform.localScale = scal;
-			int cnt_p = monster.monster_instance.get_monsterColorCount(monster_color.purple_monster);
-			if (cnt_p <= 0) {
-//				purpleMonsterCountImage.material = chainExplosionCounterHighLightM;
-				purpleMonsterCountImage.sprite = monsterCountHighImage;
-			}
-			else { 
-				purpleMonsterCountImage.material = chainExplosionCounterM;
-				purpleMonsterCountImage.sprite = monsterCountBaseImage;
-			}
-//			if (cnt_p <= 0) purpleMonsterCountImage.material = chainExplosionCounterHighLightM;
-//			else purpleMonsterCountImage.material = chainExplosionCounterM;
+                    scal = purpleMonsterCountImage.transform.localScale;
+                    scal.x = m_hit_reset;
+                    scal.y = m_hit_reset;
+                    scal.z = m_hit_reset;
+                    purpleMonsterCountImage.transform.localScale = scal;
+                    if (cnt_p <= 0)
+                    {
+                        purpleMonsterCountImage.sprite = monsterCountHighImage;
+                    }
+                    else
+                    {
+                        purpleMonsterCountImage.material = chainExplosionCounterM;
+                        purpleMonsterCountImage.sprite = monsterCountBaseImage;
+                    }
 
-			scal = redMonsterCountImage.transform.localScale;
-			scal.x = m_hit_reset;
-			scal.y = m_hit_reset;
-			scal.z = m_hit_reset;
-			redMonsterCountImage.transform.localScale = scal;
-			int cnt_r = monster.monster_instance.get_monsterColorCount(monster_color.red_monster);
-			if (cnt_r <= 0) {
-//				redMonsterCountImage.material = chainExplosionCounterHighLightM;
-				redMonsterCountImage.sprite = monsterCountHighImage;
-			}
-			else { 
-				redMonsterCountImage.material = chainExplosionCounterM;
-				redMonsterCountImage.sprite = monsterCountBaseImage;
-			}
-//			if (cnt_r <= 0) redMonsterCountImage.material = chainExplosionCounterHighLightM;
-//			else redMonsterCountImage.material = chainExplosionCounterM;
+                    scal = redMonsterCountImage.transform.localScale;
+                    scal.x = m_hit_reset;
+                    scal.y = m_hit_reset;
+                    scal.z = m_hit_reset;
+                    redMonsterCountImage.transform.localScale = scal;
+                    if (cnt_r <= 0)
+                    {
+                        redMonsterCountImage.sprite = monsterCountHighImage;
+                    }
+                    else
+                    {
+                        redMonsterCountImage.material = chainExplosionCounterM;
+                        redMonsterCountImage.sprite = monsterCountBaseImage;
+                    }
 
-			scal = yellowMonsterCountImage.transform.localScale;
-			scal.x = m_hit_reset;
-			scal.y = m_hit_reset;
-			scal.z = m_hit_reset;
-			yellowMonsterCountImage.transform.localScale = scal;
-			int cnt_y = monster.monster_instance.get_monsterColorCount(monster_color.yellow_monster);
-			if (cnt_y <= 0) {
-				yellowMonsterCountImage.sprite = monsterCountHighImage;
-//				yellowMonsterCountImage.material = chainExplosionCounterHighLightM;
-			}
-			else { 
-				yellowMonsterCountImage.material = chainExplosionCounterM;
-				yellowMonsterCountImage.sprite = monsterCountBaseImage;
-			}
-//			if (cnt_y <= 0) yellowMonsterCountImage.material = chainExplosionCounterHighLightM;
-//			else yellowMonsterCountImage.material = chainExplosionCounterM;
+                    scal = yellowMonsterCountImage.transform.localScale;
+                    scal.x = m_hit_reset;
+                    scal.y = m_hit_reset;
+                    scal.z = m_hit_reset;
+                    yellowMonsterCountImage.transform.localScale = scal;
+                    if (cnt_y <= 0)
+                    {
+                        yellowMonsterCountImage.sprite = monsterCountHighImage;
+                    }
+                    else
+                    {
+                        yellowMonsterCountImage.material = chainExplosionCounterM;
+                        yellowMonsterCountImage.sprite = monsterCountBaseImage;
+                    }
+                    break;
+
+                case 2:
+                    //  game_sceen 2
+                    scal = blueMonsterSlimeCountImage.transform.localScale;
+                    scal.x = m_hit_reset;
+                    scal.y = m_hit_reset;
+                    scal.z = m_hit_reset;
+                    blueMonsterSlimeCountImage.transform.localScale = scal;
+                    scal = blueMonsterSlimeStarImage.transform.localScale;
+                    scal.x = m_hit_reset;
+                    scal.y = m_hit_reset;
+                    scal.z = m_hit_reset;
+                    blueMonsterSlimeStarImage.transform.localScale = scal;
+                    if (cnt_b <= 0)
+                    {
+                        blueMonsterSlimeCountMaskImage_s.gameObject.SetActive(true);
+                    }
+                    else
+                    {
+                        blueMonsterSlimeCountMaskImage_s.gameObject.SetActive(false);
+                    }
+
+                    scal = greenMonsterSlimeCountImage.transform.localScale;
+                    scal.x = m_hit_reset;
+                    scal.y = m_hit_reset;
+                    scal.z = m_hit_reset;
+                    greenMonsterSlimeCountImage.transform.localScale = scal;
+                    scal = greenMonsterSlimeStarImage.transform.localScale;
+                    scal.x = m_hit_reset;
+                    scal.y = m_hit_reset;
+                    scal.z = m_hit_reset;
+                    greenMonsterSlimeStarImage.transform.localScale = scal;
+                    if (cnt_g <= 0)
+                    {
+                        greenMonsterSlimeCountMaskImage_s.gameObject.SetActive(true);
+                    }
+                    else
+                    {
+                        greenMonsterSlimeCountMaskImage_s.gameObject.SetActive(false);
+                    }
+
+                    scal = purpleMonsterSlimeCountImage.transform.localScale;
+                    scal.x = m_hit_reset;
+                    scal.y = m_hit_reset;
+                    scal.z = m_hit_reset;
+                    purpleMonsterSlimeCountImage.transform.localScale = scal;
+                    scal = purpleMonsterSlimeStarImage.transform.localScale;
+                    scal.x = m_hit_reset;
+                    scal.y = m_hit_reset;
+                    scal.z = m_hit_reset;
+                    purpleMonsterSlimeStarImage.transform.localScale = scal;
+                    if (cnt_p <= 0)
+                    {
+                        purpleMonsterSlimeCountMaskImage_s.gameObject.SetActive(true);
+                    }
+                    else
+                    {
+                        purpleMonsterSlimeCountMaskImage_s.gameObject.SetActive(false);
+                    }
+
+                    scal = redMonsterSlimeCountImage.transform.localScale;
+                    scal.x = m_hit_reset;
+                    scal.y = m_hit_reset;
+                    scal.z = m_hit_reset;
+                    redMonsterSlimeCountImage.transform.localScale = scal;
+                    scal = redMonsterSlimeStarImage.transform.localScale;
+                    scal.x = m_hit_reset;
+                    scal.y = m_hit_reset;
+                    scal.z = m_hit_reset;
+                    redMonsterSlimeStarImage.transform.localScale = scal;
+                    if (cnt_r <= 0)
+                    {
+                        redMonsterSlimeCountMaskImage_s.gameObject.SetActive(true);
+                    }
+                    else
+                    {
+                        redMonsterSlimeCountMaskImage_s.gameObject.SetActive(false);
+                    }
+
+                    scal = yellowMonsterSlimeCountImage.transform.localScale;
+                    scal.x = m_hit_reset;
+                    scal.y = m_hit_reset;
+                    scal.z = m_hit_reset;
+                    yellowMonsterSlimeCountImage.transform.localScale = scal;
+                    scal = yellowMonsterSlimeStarImage.transform.localScale;
+                    scal.x = m_hit_reset;
+                    scal.y = m_hit_reset;
+                    scal.z = m_hit_reset;
+                    yellowMonsterSlimeStarImage.transform.localScale = scal;
+                    if (cnt_y <= 0)
+                    {
+                        yellowMonsterSlimeCountMaskImage_s.gameObject.SetActive(true);
+                    }
+                    else
+                    {
+                        yellowMonsterSlimeCountMaskImage_s.gameObject.SetActive(false);
+                    }
+
+                    // TODO:動画再生終了の検知が上手くできていないので、ここでバッジ及びスターエフェクトビューのOFFを行う
+                    greenMonsterSlimeCountbadgeImage_s.gameObject.SetActive(false);
+                    yellowMonsterSlimeCountbadgeImage_s.gameObject.SetActive(false);
+                    redMonsterSlimeCountbadgeImage_s.gameObject.SetActive(false);
+                    purpleMonsterSlimeCountbadgeImage_s.gameObject.SetActive(false);
+                    blueMonsterSlimeCountbadgeImage_s.gameObject.SetActive(false);
+
+                    // 連鎖時動画ビューOFF　ここでパネルリサイズ後にOFFする事でイメージ画像との繋ぎの不自然を少し解消させる
+                    greenMonsterSlimeVideoView_s.gameObject.SetActive(false);
+                    purpleMonsterSlimeVideoView_s.gameObject.SetActive(false);
+                    redMonsterSlimeVideoView_s.gameObject.SetActive(false);
+                    yellowMonsterSlimeVideoView_s.gameObject.SetActive(false);
+                    blueMonsterSlimeVideoView_s.gameObject.SetActive(false);
+
+                    greenMonsterSlimeCountImage_s.canvas.sortingOrder = 1;
+                    yellowMonsterSlimeCountImage_s.canvas.sortingOrder = 1;
+                    redMonsterSlimeCountImage_s.canvas.sortingOrder = 1;
+                    purpleMonsterSlimeCountImage_s.canvas.sortingOrder = 1;
+                    blueMonsterSlimeCountImage_s.canvas.sortingOrder = 1;
+
+                    break;
+
+            }
 
 			chainExplosionZanCount();
 		}
@@ -1875,91 +2389,150 @@ namespace nm_canvasPanel
 
         // 連鎖残り数表示
         public void chainExplosionZanCount() {
-			int green = monster.monster_instance.getChainExplosionLineCount(monster_color.green_monster);
-			if (green > 0) {
-				greenMonsterCount.text = green.ToString();
-				greenMonsterLabel.text = "Line";
+            int green = monster.monster_instance.getChainExplosionLineCount(monster_color.green_monster);
+            int yellow = monster.monster_instance.getChainExplosionLineCount(monster_color.yellow_monster);
+            int purple = monster.monster_instance.getChainExplosionLineCount(monster_color.purple_monster);
+            int red = monster.monster_instance.getChainExplosionLineCount(monster_color.red_monster);
+            int blue = monster.monster_instance.getChainExplosionLineCount(monster_color.blue_monster);
 
-				greenMonsterLineSliderCount.SetActive(true);
-				greenMonsterLineCount.GetComponent<Text>().text = green.ToString() +"/" + monster.level_Line_count;
-				greenMonsterLineSliderCount.GetComponent<Slider>().value = (float)green / (float)monster.level_Line_count;
+            switch (cubersFile.game_Sceen)
+            {
+                case 0:
+                    if (green > 0)
+                    {
+                        greenMonsterCount.text = green.ToString();
+                        greenMonsterLabel.text = "Line";
 
-//				greenMonsterCountImage.sprite = monsterCountBaseImage;
-			}
-			else {
-				greenMonsterCount.text = "";
-				greenMonsterLabel.text = "";
-				greenMonsterLineCount.GetComponent<Text>().text = "";
-				greenMonsterLineSliderCount.GetComponent<Slider>().value = 0;
-				greenMonsterLineSliderCount.SetActive(false);
-//				greenMonsterCountImage.sprite = monsterCountHighImage;
-			}
-			int yellow = monster.monster_instance.getChainExplosionLineCount(monster_color.yellow_monster);
-			if (yellow > 0) {
-				yellowMonsterCount.text = yellow.ToString();
-				yellowMonsterLabel.text = "Line";
+                        greenMonsterLineSliderCount.SetActive(true);
+                        greenMonsterLineCount.GetComponent<Text>().text = green.ToString() + "/" + monster.level_Line_count;
+                        greenMonsterLineSliderCount.GetComponent<Slider>().value = (float)green / (float)monster.level_Line_count;
 
-				yellowMonsterLineSliderCount.SetActive(true);
-				yellowMonsterLineCount.GetComponent<Text>().text = yellow.ToString() +"/" + monster.level_Line_count;
-				yellowMonsterLineSliderCount.GetComponent<Slider>().value = (float)yellow / (float)monster.level_Line_count;
-//				yellowMonsterCountImage.sprite = monsterCountBaseImage;
-			}
-			else {
-				yellowMonsterCount.text = "";
-				yellowMonsterLabel.text = "";
-				yellowMonsterLineCount.GetComponent<Text>().text = "";
-				yellowMonsterLineSliderCount.GetComponent<Slider>().value = 0;
-				yellowMonsterLineSliderCount.SetActive(false);
-//				yellowMonsterCountImage.sprite = monsterCountHighImage;
-			}
-			int purple = monster.monster_instance.getChainExplosionLineCount(monster_color.purple_monster);
-			if (purple > 0) {
-				purpleMonsterCount.text = purple.ToString();
-				purpleMonsterLabel.text = "Line";
+                        //				greenMonsterCountImage.sprite = monsterCountBaseImage;
+                    }
+                    else
+                    {
+                        greenMonsterCount.text = "";
+                        greenMonsterLabel.text = "";
+                        greenMonsterLineCount.GetComponent<Text>().text = "";
+                        greenMonsterLineSliderCount.GetComponent<Slider>().value = 0;
+                        greenMonsterLineSliderCount.SetActive(false);
+                        //				greenMonsterCountImage.sprite = monsterCountHighImage;
+                    }
+                    if (yellow > 0)
+                    {
+                        yellowMonsterCount.text = yellow.ToString();
+                        yellowMonsterLabel.text = "Line";
 
-				purpleMonsterLineSliderCount.SetActive(true);
-				purpleMonsterLineCount.GetComponent<Text>().text = purple.ToString() +"/" + monster.level_Line_count;
-				purpleMonsterLineSliderCount.GetComponent<Slider>().value = (float)purple / (float)monster.level_Line_count;
-			}
-			else {
-				purpleMonsterCount.text = "";
-				purpleMonsterLabel.text = "";
-				purpleMonsterLineCount.GetComponent<Text>().text = "";
-				purpleMonsterLineSliderCount.GetComponent<Slider>().value = 0;
-				purpleMonsterLineSliderCount.SetActive(false);
-			}
-			int red = monster.monster_instance.getChainExplosionLineCount(monster_color.red_monster);
-			if (red > 0) {
-				redMonsterCount.text = red.ToString();
-				redMonsterLabel.text = "Line";
+                        yellowMonsterLineSliderCount.SetActive(true);
+                        yellowMonsterLineCount.GetComponent<Text>().text = yellow.ToString() + "/" + monster.level_Line_count;
+                        yellowMonsterLineSliderCount.GetComponent<Slider>().value = (float)yellow / (float)monster.level_Line_count;
+                        //				yellowMonsterCountImage.sprite = monsterCountBaseImage;
+                    }
+                    else
+                    {
+                        yellowMonsterCount.text = "";
+                        yellowMonsterLabel.text = "";
+                        yellowMonsterLineCount.GetComponent<Text>().text = "";
+                        yellowMonsterLineSliderCount.GetComponent<Slider>().value = 0;
+                        yellowMonsterLineSliderCount.SetActive(false);
+                        //				yellowMonsterCountImage.sprite = monsterCountHighImage;
+                    }
+                    if (purple > 0)
+                    {
+                        purpleMonsterCount.text = purple.ToString();
+                        purpleMonsterLabel.text = "Line";
 
-				redMonsterLineSliderCount.SetActive(true);
-				redMonsterLineCount.GetComponent<Text>().text = red.ToString() +"/" + monster.level_Line_count;
-				redMonsterLineSliderCount.GetComponent<Slider>().value = (float)red / (float)monster.level_Line_count;
-			}
-			else {
-				redMonsterCount.text = "";
-				redMonsterLabel.text = "";
-				redMonsterLineCount.GetComponent<Text>().text = "";
-				redMonsterLineSliderCount.GetComponent<Slider>().value = 0;
-				redMonsterLineSliderCount.SetActive(false);
-			}
-			int blue = monster.monster_instance.getChainExplosionLineCount(monster_color.blue_monster);
-			if (blue > 0) {
-				blueMonsterCount.text = blue.ToString();
-				blueMonsterLabel.text = "Line";
+                        purpleMonsterLineSliderCount.SetActive(true);
+                        purpleMonsterLineCount.GetComponent<Text>().text = purple.ToString() + "/" + monster.level_Line_count;
+                        purpleMonsterLineSliderCount.GetComponent<Slider>().value = (float)purple / (float)monster.level_Line_count;
+                    }
+                    else
+                    {
+                        purpleMonsterCount.text = "";
+                        purpleMonsterLabel.text = "";
+                        purpleMonsterLineCount.GetComponent<Text>().text = "";
+                        purpleMonsterLineSliderCount.GetComponent<Slider>().value = 0;
+                        purpleMonsterLineSliderCount.SetActive(false);
+                    }
+                    if (red > 0)
+                    {
+                        redMonsterCount.text = red.ToString();
+                        redMonsterLabel.text = "Line";
 
-				blueMonsterLineSliderCount.SetActive(true);
-				blueMonsterLineCount.GetComponent<Text>().text = blue.ToString() +"/" + monster.level_Line_count;
-				blueMonsterLineSliderCount.GetComponent<Slider>().value = (float)blue / (float)monster.level_Line_count;
-			}
-			else {
-				blueMonsterCount.text = "";
-				blueMonsterLabel.text = "";
-				blueMonsterLineCount.GetComponent<Text>().text = "";
-				blueMonsterLineSliderCount.GetComponent<Slider>().value = 0;
-				blueMonsterLineSliderCount.SetActive(false);
-			}
+                        redMonsterLineSliderCount.SetActive(true);
+                        redMonsterLineCount.GetComponent<Text>().text = red.ToString() + "/" + monster.level_Line_count;
+                        redMonsterLineSliderCount.GetComponent<Slider>().value = (float)red / (float)monster.level_Line_count;
+                    }
+                    else
+                    {
+                        redMonsterCount.text = "";
+                        redMonsterLabel.text = "";
+                        redMonsterLineCount.GetComponent<Text>().text = "";
+                        redMonsterLineSliderCount.GetComponent<Slider>().value = 0;
+                        redMonsterLineSliderCount.SetActive(false);
+                    }
+                    if (blue > 0)
+                    {
+                        blueMonsterCount.text = blue.ToString();
+                        blueMonsterLabel.text = "Line";
+
+                        blueMonsterLineSliderCount.SetActive(true);
+                        blueMonsterLineCount.GetComponent<Text>().text = blue.ToString() + "/" + monster.level_Line_count;
+                        blueMonsterLineSliderCount.GetComponent<Slider>().value = (float)blue / (float)monster.level_Line_count;
+                    }
+                    else
+                    {
+                        blueMonsterCount.text = "";
+                        blueMonsterLabel.text = "";
+                        blueMonsterLineCount.GetComponent<Text>().text = "";
+                        blueMonsterLineSliderCount.GetComponent<Slider>().value = 0;
+                        blueMonsterLineSliderCount.SetActive(false);
+                    }
+                    break;
+
+                case 2:
+                    if (green > 0)
+                    {
+                        greenMonsterSlimeCount.text = green.ToString();
+                    }
+                    else
+                    {
+                        greenMonsterSlimeCount.text = "";
+                    }
+                    if (yellow > 0)
+                    {
+                        yellowMonsterSlimeCount.text = yellow.ToString();
+                    }
+                    else
+                    {
+                        yellowMonsterSlimeCount.text = "";
+                    }
+                    if (purple > 0)
+                    {
+                        purpleMonsterSlimeCount.text = purple.ToString();
+                    }
+                    else
+                    {
+                        purpleMonsterSlimeCount.text = "";
+                    }
+                    if (red > 0)
+                    {
+                        redMonsterSlimeCount.text = red.ToString();
+                    }
+                    else
+                    {
+                        redMonsterSlimeCount.text = "";
+                    }
+                    if (blue > 0)
+                    {
+                        blueMonsterSlimeCount.text = blue.ToString();
+                    }
+                    else
+                    {
+                        blueMonsterSlimeCount.text = "";
+                    }
+                    break;
+            }
 		}
 		// モンスター残り数表示
 		public void monsterZanCount() {
@@ -3060,50 +3633,103 @@ namespace nm_canvasPanel
 
 		// ロストicon表示
 		void lostIcon() {
-			switch(sphere.lost_Spheres) {
-			case 1:
-				life_icon1.gameObject.SetActive(true);
-				life_icon2.gameObject.SetActive(false);
-				life_icon3.gameObject.SetActive(false);
-				life_icon4.gameObject.SetActive(false);
-				life_icon5.gameObject.SetActive(false);
-				break;
-			case 2:
-				life_icon1.gameObject.SetActive(true);
-				life_icon2.gameObject.SetActive(true);
-				life_icon3.gameObject.SetActive(false);
-				life_icon4.gameObject.SetActive(false);
-				life_icon5.gameObject.SetActive(false);
-				break;
-			case 3:
-				life_icon1.gameObject.SetActive(true);
-				life_icon2.gameObject.SetActive(true);
-				life_icon3.gameObject.SetActive(true);
-				life_icon4.gameObject.SetActive(false);
-				life_icon5.gameObject.SetActive(false);
-				break;
-			case 4:
-				life_icon1.gameObject.SetActive(true);
-				life_icon2.gameObject.SetActive(true);
-				life_icon3.gameObject.SetActive(true);
-				life_icon4.gameObject.SetActive(true);
-				life_icon5.gameObject.SetActive(false);
-				break;
-			case 5:
-				life_icon1.gameObject.SetActive(true);
-				life_icon2.gameObject.SetActive(true);
-				life_icon3.gameObject.SetActive(true);
-				life_icon4.gameObject.SetActive(true);
-				life_icon5.gameObject.SetActive(true);
-				break;
-			default:
-				life_icon1.gameObject.SetActive(false);
-				life_icon2.gameObject.SetActive(false);
-				life_icon3.gameObject.SetActive(false);
-				life_icon4.gameObject.SetActive(false);
-				life_icon5.gameObject.SetActive(false);
-				break;
-			}			
+            switch (cubersFile.game_Sceen)
+            {
+                case 0:
+                    switch (sphere.lost_Spheres)
+                    {
+                        case 1:
+                            life_icon1.gameObject.SetActive(true);
+                            life_icon2.gameObject.SetActive(false);
+                            life_icon3.gameObject.SetActive(false);
+                            life_icon4.gameObject.SetActive(false);
+                            life_icon5.gameObject.SetActive(false);
+                            break;
+                        case 2:
+                            life_icon1.gameObject.SetActive(true);
+                            life_icon2.gameObject.SetActive(true);
+                            life_icon3.gameObject.SetActive(false);
+                            life_icon4.gameObject.SetActive(false);
+                            life_icon5.gameObject.SetActive(false);
+                            break;
+                        case 3:
+                            life_icon1.gameObject.SetActive(true);
+                            life_icon2.gameObject.SetActive(true);
+                            life_icon3.gameObject.SetActive(true);
+                            life_icon4.gameObject.SetActive(false);
+                            life_icon5.gameObject.SetActive(false);
+                            break;
+                        case 4:
+                            life_icon1.gameObject.SetActive(true);
+                            life_icon2.gameObject.SetActive(true);
+                            life_icon3.gameObject.SetActive(true);
+                            life_icon4.gameObject.SetActive(true);
+                            life_icon5.gameObject.SetActive(false);
+                            break;
+                        case 5:
+                            life_icon1.gameObject.SetActive(true);
+                            life_icon2.gameObject.SetActive(true);
+                            life_icon3.gameObject.SetActive(true);
+                            life_icon4.gameObject.SetActive(true);
+                            life_icon5.gameObject.SetActive(true);
+                            break;
+                        default:
+                            life_icon1.gameObject.SetActive(false);
+                            life_icon2.gameObject.SetActive(false);
+                            life_icon3.gameObject.SetActive(false);
+                            life_icon4.gameObject.SetActive(false);
+                            life_icon5.gameObject.SetActive(false);
+                            break;
+                    }
+                    break;
+                case 2:
+                    switch (sphere.lost_Spheres)
+                    {
+                        case 1:
+                            life_hearticon1.gameObject.SetActive(true);
+                            life_hearticon2.gameObject.SetActive(false);
+                            life_hearticon3.gameObject.SetActive(false);
+                            life_hearticon4.gameObject.SetActive(false);
+                            life_hearticon5.gameObject.SetActive(false);
+                            break;
+                        case 2:
+                            life_hearticon1.gameObject.SetActive(true);
+                            life_hearticon2.gameObject.SetActive(true);
+                            life_hearticon3.gameObject.SetActive(false);
+                            life_hearticon4.gameObject.SetActive(false);
+                            life_hearticon5.gameObject.SetActive(false);
+                            break;
+                        case 3:
+                            life_hearticon1.gameObject.SetActive(true);
+                            life_hearticon2.gameObject.SetActive(true);
+                            life_hearticon3.gameObject.SetActive(true);
+                            life_hearticon4.gameObject.SetActive(false);
+                            life_hearticon5.gameObject.SetActive(false);
+                            break;
+                        case 4:
+                            life_hearticon1.gameObject.SetActive(true);
+                            life_hearticon2.gameObject.SetActive(true);
+                            life_hearticon3.gameObject.SetActive(true);
+                            life_hearticon4.gameObject.SetActive(true);
+                            life_hearticon5.gameObject.SetActive(false);
+                            break;
+                        case 5:
+                            life_hearticon1.gameObject.SetActive(true);
+                            life_hearticon2.gameObject.SetActive(true);
+                            life_hearticon3.gameObject.SetActive(true);
+                            life_hearticon4.gameObject.SetActive(true);
+                            life_hearticon5.gameObject.SetActive(true);
+                            break;
+                        default:
+                            life_hearticon1.gameObject.SetActive(false);
+                            life_hearticon2.gameObject.SetActive(false);
+                            life_hearticon3.gameObject.SetActive(false);
+                            life_hearticon4.gameObject.SetActive(false);
+                            life_hearticon5.gameObject.SetActive(false);
+                            break;
+                    }
+                    break;
+            }
 		}
 
         public static int gametempoCount = 0; //１０秒毎に１加算され緑範囲、黄範囲、赤範囲で各範囲毎にテンポが変化する　サウンド速度が早くなり落下速度もそれに応じて早くなる
@@ -3879,7 +4505,9 @@ namespace nm_canvasPanel
         static long showSilverItem = 0;
         static long showGoldItem = 0;
         static long showCoin = 0;
+        static long showJuely = 0;
         static int coinAdd = 10;
+        static int juelyAdd = 10;
         static float bouns = 1.0f;
         // アイテム表示非表示処理　SW：１シルバーアイテム　２：ゴールドアイテム
         void showItemAllClear(int sw)
@@ -3897,7 +4525,7 @@ namespace nm_canvasPanel
                 }
             }
         }
-        void showItemDSP()
+        public void showItemDSP()
         {
             // シルバーアイテムの表示個数を計算
             showSilverItem = cubersFile.silveritem_count % 10;
@@ -3905,6 +4533,8 @@ namespace nm_canvasPanel
             showGoldItem = cubersFile.golditem_count % 10;
             // 表示コイン数セット
             showCoin = cubersFile.goldCoin_Count;
+            // 表示コイン数セット
+            showJuely = cubersFile.juely_Count;
 
             // プレイ画面ゴールド、シルバーアイテム表示セット
             for (int i = 0; i < 10; i++)
@@ -3941,7 +4571,9 @@ namespace nm_canvasPanel
                 }
             }
             //　コイン数表示
-            coin_text.text = " × " + cubersFile.goldCoin_Count.ToString();
+            coin_text.text = cubersFile.goldCoin_Count.ToString();
+            //　juely数表示
+            juely_text.text = cubersFile.juely_Count.ToString();
 
         }
         // TODO:追加　1-1-5 獲得アイテム表示処理　メソッド
@@ -4018,7 +4650,9 @@ namespace nm_canvasPanel
                     // ゴールドアイテムMAX１０ー＞コイン加算ボーナス
                     // コイン加算処理は、setItemData()で処理済み
                     showCoin =+ (long)(coinAdd * bouns);
-                    coin_text.text = " × " + showCoin.ToString();
+                    coin_text.text = showCoin.ToString();
+                    showJuely = +(long)(juelyAdd * bouns);
+                    juely_text.text = showJuely.ToString();
                 }
             }
             else
@@ -4137,7 +4771,8 @@ namespace nm_canvasPanel
 				monsterColorCount();
 			}
 			if (resetMonsterColor) {
-				setChainExplosionMonsterColorCountView();
+                // 連鎖カウンター２Dパネル表示リセット
+                setChainExplosionMonsterColorCountView();
 				resetChainExplosionMonsterColorCountView();
 				resetMonsterColor = false;
 			}
@@ -4781,19 +5416,34 @@ namespace nm_canvasPanel
 			} else {
 				currentTs = lastStopTimeSpan;
 			}
-			if (gameTime_text != null) {
-				gameTime_text.text = ConvertTimeSpanToString(currentTs);
-				gameTimeEnd_text.text = gameTime_text.text;
-				playEndTimeSpan = currentTs;
-			}
-		}
+            int mod = (int)cubersFile.now_play_stage % emitter.chainExplosion_userLeve;
+            if (mod == 0) {
+                // 連鎖時のプレイタイム表示
+                if (gameTime_text != null)
+                {
+                    gameTime_text.text = ConvertTimeSpanToString(currentTs);
+                    gameTimeEnd_text.text = gameTime_text.text;
+                    playEndTimeSpan = currentTs;
+                }
+            }
+            else {
+                // 連鎖無し時のプレイタイム表示
+                if (noChainGameTime_text != null)
+                {
+                    noChainGameTime_text.text = ConvertTimeSpanToString(currentTs);
+                    gameTimeEnd_text.text = noChainGameTime_text.text;
+                    playEndTimeSpan = currentTs;
+                }
+            }
+        }
 
 		static public string ConvertTimeSpanToString(TimeSpan ts) {
-			if (ts.Hours > 0 || ts.Days > 0) {
-				return string.Format("{0}:{1:D2}:{2:D2}.{3}", ts.Days * 24 + ts.Hours, ts.Minutes, ts.Seconds, ts.Milliseconds.ToString("000").Substring(0, 2));
-			} else {
-				return string.Format("{0:D2}:{1:D2}.{2}", ts.Minutes, ts.Seconds, ts.Milliseconds.ToString("000").Substring(0, 2));
-			}
+            return string.Format("{0:D2}:{1:D2}:{2:D2}.{3}", ts.Days * 24 + ts.Hours, ts.Minutes, ts.Seconds, ts.Milliseconds.ToString("000").Substring(0, 2));
+   //         if (ts.Hours > 0 || ts.Days > 0) {
+			//	return string.Format("{0}:{1:D2}:{2:D2}.{3}", ts.Days * 24 + ts.Hours, ts.Minutes, ts.Seconds, ts.Milliseconds.ToString("000").Substring(0, 2));
+			//} else {
+			//	return string.Format("{0:D2}:{1:D2}.{2}", ts.Minutes, ts.Seconds, ts.Milliseconds.ToString("000").Substring(0, 2));
+			//}
 		}
 
 		public void changeTimeStats() {
@@ -6038,6 +6688,7 @@ namespace nm_canvasPanel
 				emitter.BGMstate = emitter.BGM_State.play;
 				emitter.sw_pause = false;
                 emitter.sw_stop = false;
+                emitter.pause_timer = 0;
 			}
                 
             
@@ -6087,7 +6738,7 @@ namespace nm_canvasPanel
 			if (cubersFile.pause_count <= 0) return;
 			if (sphere.gravitySpheres_count == 0) return;
 
-			if (emitter.sw_Gravity) {
+			//if (emitter.sw_Gravity) {
 
                 cubersFile.pause_count--;
 				emitter.playState = emitter.gamePlayState.Pause;
@@ -6096,7 +6747,7 @@ namespace nm_canvasPanel
 				emitter.BGMstate = emitter.BGM_State.Stop;
 				emitter.sw_pause = true;
 
-				emitter.pause_timer = emitter.PAUSETIME;
+				emitter.pause_timer += emitter.PAUSETIME;
 				counter.timer = 0; // pause_timer値を0になったらtimer=0として待機時間０でモンスターを落下させる
 
 				//pause_text.gameObject.SetActive(true);
@@ -6106,7 +6757,7 @@ namespace nm_canvasPanel
                 // AdMob init.
                 // TODO:AD バナー広告の初期化
                 //this.RequestBanner();
-            }
+            //}
         }
 
         // シェアボタンクリック処理
