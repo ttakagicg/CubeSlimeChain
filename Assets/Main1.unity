@@ -92237,7 +92237,7 @@ MonoBehaviour:
     type: 3}
   explosion1: {fileID: 184156, guid: bce27d7f08ec54438ab280e990f935c6, type: 3}
   explosion2: {fileID: 132248, guid: 21c8e047af8d14ad598af39de9a4a397, type: 3}
-  explosion_monster_bomb: {fileID: 1000012996356918, guid: f6e4ead252a83439bba32a57714b0c19,
+  explosion_monster_bomb: {fileID: 3273069592101808156, guid: a857b64226e0f4a38ae24baa1c7bc00a,
     type: 3}
   explosion_cube_bomb: {fileID: 8584875187903508867, guid: 7dfd7f5dda2fc4ad299c98fd5811108d,
     type: 3}
