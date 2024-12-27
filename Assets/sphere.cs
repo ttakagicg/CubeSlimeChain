@@ -213,8 +213,25 @@ namespace  nm_sphere {
 								if( char_obj_anim[j,k,i].now_angle >= char_obj_anim[j,k,i].set_angle/char_obj_anim[j,k,i].one_angle) {
 									// animation wait time set
 									char_obj_anim[j,k,i].wait_time = UnityEngine.Random.Range(1,3);
-
-
+ 
+/*									// スライムモンスター待機アニメーション切り替え処理
+									if (cubersFile.game_Sceen == 2)
+									{
+										Animator ani = spheres[j, k, i].GetComponent<Animator>();
+										AnimatorClipInfo[] clipInfo = ani.GetCurrentAnimatorClipInfo(0);
+										string clipName = clipInfo[0].clip.name;
+										// TODO: 待機中アニメーション複数設定
+										if (ani.GetCurrentAnimatorStateInfo(0).IsName("Anim_Slime_Walking_04"))
+										{
+											string str1 = monster.monster_instance.PlayMonsterAnimation(monster_situation.noraml_monster, cubersFile.game_Sceen);
+											ani.Play(str1);
+										}
+										else
+										{
+											string str1 = monster.monster_instance.PlayMonsterAnimation(monster_situation.wakeup_monster, cubersFile.game_Sceen);
+											ani.Play(str1);
+										}
+									} */
 								}
 							}
 
@@ -608,9 +625,9 @@ namespace  nm_sphere {
 										}
 									}
 									change_MonsterMaterial(spheres [j,k,i], monster_situation.sleep_monster, color);
-									Animator ani = spheres[j, k, i].GetComponent<Animator>();
-									string str = monster.monster_instance.PlayMonsterAnimation(monster_situation.noraml_monster, cubersFile.game_Sceen);
-									ani.Play(str);
+									//Animator ani = spheres[j, k, i].GetComponent<Animator>();
+									//string str = monster.monster_instance.PlayMonsterAnimation(monster_situation.noraml_monster, cubersFile.game_Sceen);
+									//ani.Play(str);
 
 									// char_wait_animation
 									char_obj_anim[j,k,i] = new char_obj_animation();
@@ -912,14 +929,14 @@ namespace  nm_sphere {
 					child1.GetComponent<Rigidbody>().isKinematic = false;
 
 					Animator ani = child1.GetComponent<Animator>();
-					//					ani.speed = 1.5f;
-					string str = monster.monster_instance.PlayMonsterAnimation(monster_situation.noraml_monster, cubersFile.game_Sceen);
-					ani.Play(str);
+                    //					ani.speed = 1.5f;
+                    string str = monster.monster_instance.PlayMonsterAnimation(monster_situation.noraml_monster, cubersFile.game_Sceen);
+                    ani.Play(str);
 					//ani.Play("sleep");
-                }
+				}
 
-                //				counter.timer = emitter.gravity_Time + 1;
-                now_gravitySpheres_count = gravitySpheres_count;
+				//				counter.timer = emitter.gravity_Time + 1;
+				now_gravitySpheres_count = gravitySpheres_count;
 
 			}
 		}

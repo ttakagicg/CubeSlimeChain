@@ -900,7 +900,7 @@ namespace nm_monster
 					}
 					if (gamesceen == 2)
 					{
-						animationName = "Anim_Slime_Walking_02";
+						animationName = "Anim_Slime_idle";
 					}
 					break;
 				case monster_situation.wakeup_monster:
@@ -914,7 +914,7 @@ namespace nm_monster
 					}
 					if (gamesceen == 2)
 					{
-						animationName = "Anim_Slime_Walking_02";
+						animationName = "Anim_Slime_Walking_04";
 						//animationName = "Anim_Slime_WalkingJump3";
 					}
 					break;
