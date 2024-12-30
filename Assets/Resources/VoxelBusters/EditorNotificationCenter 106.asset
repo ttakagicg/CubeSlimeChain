@@ -1,16 +1,3 @@
-%YAML 1.1
-%TAG !u! tag:unity3d.com,2011:
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: EditorNotificationCenter 106
-  m_EditorClassIdentifier: Assembly-CSharp-firstpass:VoxelBusters.NativePlugins.Internal:EditorNotificationCenter
-  m_supportedNotificationTypes: 0
-  m_isRegisteredForRemoteNotifications: 0
+version https://git-lfs.github.com/spec/v1
+oid sha256:32e8add21e3e67e863b3ba3beefeb6fb7d825facb7ac8582262c226a4ebe21dd
+size 523

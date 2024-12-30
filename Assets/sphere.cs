@@ -3,6 +3,7 @@
 using UnityEditor;
 #endif
 using System;
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
@@ -53,6 +54,7 @@ namespace  nm_sphere {
 		public GameObject pointText;
 		public static GameObject s_pointText;
 		public static GameObject[] obj_pointText;
+		public static GameObject pointText_w;
 
 		public GameObject number;
 		public static GameObject s_number;
@@ -1311,7 +1313,7 @@ namespace  nm_sphere {
 			var text_pos = Camera.main.WorldToScreenPoint(pos);
 			// 表示テキストセット
 			String str = "";
-			str = emitter.chainExplosionLineCount.ToString() + "Chain";
+			str = emitter.chainExplosionLineCount.ToString() + " Chain Line";
 
 			// TODO:キューブ上でのヒットポイント表示処理
 			setChainExplosionInfoAnimation(setHitPointPosition(text_pos), str);
@@ -1426,69 +1428,89 @@ namespace  nm_sphere {
 		// pos テキスト座標 
 		// text 文字列
 		// anim アニメーション種別
-		// TODO:連鎖でのキューブ上での文字表示処理
-		public static void setHitPointAnimation(Vector3 pos,string text, int line_count,int anim) {
+		/*		// TODO:連鎖でのキューブ上での文字表示処理
+				public static void setHitPointAnimation(Vector3 pos,string text, int line_count,int anim) {
 
-            screen_width_per = Screen.width / 1125.0f;
-            //screen_width_per = Screen.width / 320.0f;
+					screen_width_per = Screen.width / 1125.0f;
+					//screen_width_per = Screen.width / 320.0f;
 
-            var textcount = text.ToString().Length;
-			float window_size = Screen.height;
-			int font_size = 14;
+					var textcount = text.ToString().Length;
+					float window_size = Screen.height;
+					int font_size = 14;
 
-			for (int i = 0; i < textcount; i++) {
-				if (anim_pointText[line_count,i] != null) {
-					Destroy(anim_pointText[line_count,i]);
+					for (int i = 0; i < textcount; i++) {
+						if (anim_pointText[line_count,i] != null) {
+							Destroy(anim_pointText[line_count,i]);
+						}
+						anim_pointText[line_count,i] = (GameObject)Instantiate(s_pointText, new Vector3(s_pointText.transform.position.x, s_pointText.transform.position.y, s_pointText.transform.position.z), Quaternion.identity);
+						anim_pointText[line_count,i].transform.SetParent(s_canvas.transform);
+						anim_pointText[line_count,i].transform.position = pos + new Vector3((font_size + 3) * screen_width_per * i, 0.0f, 0.0f);
+
+						anim_pointText[line_count,i].gameObject.GetComponent<Text>().text = text.Substring(i, 1);
+						anim_pointText[line_count,i].gameObject.GetComponent<Text>().fontSize = font_size;
+						anim_pointText[line_count,i].gameObject.GetComponent<TextEffect>().delay = 0.1f * i;
+						anim_pointText[line_count,i].gameObject.GetComponent<TextEffect>().SetVerticesDirty();
+
+						Vector3 scal = anim_pointText[line_count,i].gameObject.GetComponent<Text>().transform.localScale;
+						scal.x = scal.x * screen_width_per;
+						scal.y = scal.y * screen_width_per;
+						anim_pointText[line_count,i].gameObject.GetComponent<Text>().transform.localScale = scal;
+					}
 				}
-				anim_pointText[line_count,i] = (GameObject)Instantiate(s_pointText, new Vector3(s_pointText.transform.position.x, s_pointText.transform.position.y, s_pointText.transform.position.z), Quaternion.identity);
-				anim_pointText[line_count,i].transform.SetParent(s_canvas.transform);
-				anim_pointText[line_count,i].transform.position = pos + new Vector3((font_size + 3) * screen_width_per * i, 0.0f, 0.0f);
-
-				anim_pointText[line_count,i].gameObject.GetComponent<Text>().text = text.Substring(i, 1);
-				anim_pointText[line_count,i].gameObject.GetComponent<Text>().fontSize = font_size;
-				anim_pointText[line_count,i].gameObject.GetComponent<TextEffect>().delay = 0.1f * i;
-				anim_pointText[line_count,i].gameObject.GetComponent<TextEffect>().SetVerticesDirty();
-
-				Vector3 scal = anim_pointText[line_count,i].gameObject.GetComponent<Text>().transform.localScale;
-				scal.x = scal.x * screen_width_per;
-				scal.y = scal.y * screen_width_per;
-				anim_pointText[line_count,i].gameObject.GetComponent<Text>().transform.localScale = scal;
-			}
-		}
-
+		*/
 		// TODO:連鎖でのキューブ上での文字表示処理
 		// 連鎖数及び取得連鎖アイテム数表示処理
 		public static void setChainExplosionInfoAnimation(Vector3 pos, string text)
 		{
 
-			
+			// 表示オフはemmiterの// chain Explosion reset cheack　→　if (chain_explosion)で親子関係を解除する
 			screen_width_per = Screen.width / 1125.0f;
-            //screen_width_per = Screen.width / 320.0f;
-
-            var textcount = text.ToString().Length;
+			var textcount = text.ToString().Length;
 			float window_size = Screen.height;
 			int font_size = 48;
 
-			for (int i = 0; i < textcount; i++)
+			pointText_w = (GameObject)Instantiate(s_pointText, new Vector3(s_pointText.transform.position.x, s_pointText.transform.position.y, s_pointText.transform.position.z), Quaternion.identity);
+			pointText_w.transform.SetParent(s_canvas.transform);
+			pointText_w.transform.position = pos;
+			pointText_w.gameObject.GetComponent<TMPro.TextMeshProUGUI>().text = text;
+
+            Vector3 scal = pointText_w.gameObject.transform.localScale;
+			scal.x = 0.1f;
+            scal.y = 0.1f;
+			pointText_w.gameObject.transform.localScale = scal;
+
+			var seq = DOTween.Sequence();
+			seq.Append(pointText_w.transform.DOScale(new Vector3(1.0f, 1.0f), 1.0f));
+			seq.Append(pointText_w.transform.DOScale(new Vector3(1.0f, 1.0f), 1.0f));
+			seq.OnComplete(() =>
 			{
-				if (anim_pointText[0, i] != null)
-				{
-					Destroy(anim_pointText[0, i]);
-				}
-				anim_pointText[0, i] = (GameObject)Instantiate(s_pointText, new Vector3(s_pointText.transform.position.x, s_pointText.transform.position.y, s_pointText.transform.position.z), Quaternion.identity);
-				anim_pointText[0, i].transform.SetParent(s_canvas.transform);
-				anim_pointText[0, i].transform.position = pos + new Vector3((font_size + 3) * screen_width_per * i, 0.0f, 0.0f);
+				// アニメーションが終了時によばれる
+				pointText_w.gameObject.transform.parent = null;
+            });
 
-				anim_pointText[0, i].gameObject.GetComponent<Text>().text = text.Substring(i, 1);
-				anim_pointText[0, i].gameObject.GetComponent<Text>().fontSize = font_size;
-				anim_pointText[0, i].gameObject.GetComponent<TextEffect>().delay = 0.1f * i;
-				anim_pointText[0, i].gameObject.GetComponent<TextEffect>().SetVerticesDirty();
+			/*
+                        for (int i = 0; i < textcount; i++)
+                                    {
+                                        if (anim_pointText[0, i] != null)
+                                        {
+                                            Destroy(anim_pointText[0, i]);
+                                        }
+                                        anim_pointText[0, i] = (GameObject)Instantiate(s_pointText, new Vector3(s_pointText.transform.position.x, s_pointText.transform.position.y, s_pointText.transform.position.z), Quaternion.identity);
+                                        anim_pointText[0, i].transform.SetParent(s_canvas.transform);
+                                        anim_pointText[0, i].transform.position = pos + new Vector3((font_size + 3) * screen_width_per * i, 0.0f, 0.0f);
 
-				Vector3 scal = anim_pointText[0, i].gameObject.GetComponent<Text>().transform.localScale;
-				scal.x = scal.x * screen_width_per;
-				scal.y = scal.y * screen_width_per;
-				anim_pointText[0, i].gameObject.GetComponent<Text>().transform.localScale = scal;
-			}
+                                        anim_pointText[0, i].gameObject.GetComponent<TMPro.TextMeshProUGUI>().text = text.Substring(i, 1);
+                                        //anim_pointText[0, i].gameObject.GetComponent<Text>().text = text.Substring(i, 1);
+                                        //anim_pointText[0, i].gameObject.GetComponent<TMPro.TextMeshProUGUI>().fontSize = font_size;
+                                        //anim_pointText[0, i].gameObject.GetComponent<TextEffect>().delay = 0.1f * i;
+                                        //anim_pointText[0, i].gameObject.GetComponent<TextEffect>().SetVerticesDirty();
+
+                                        Vector3 scal = anim_pointText[0, i].gameObject.transform.localScale;
+                                        scal.x = scal.x * screen_width_per;
+                                        scal.y = scal.y * screen_width_per;
+                                        anim_pointText[0, i].gameObject.transform.localScale = scal;
+                                    }
+                        */
 		}
 
 

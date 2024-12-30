@@ -357,7 +357,12 @@ namespace nm_canvasPanel
         public static TextMeshProUGUI s_noChainGameTime_text;
         public TimeSpan currentTs;
 		public static TimeSpan playEndTimeSpan;
-		public Text startCountDown_text;
+        public Text startCountDown_text;
+        public TextMeshProUGUI startCountDown_text1;
+        public TextMeshProUGUI startCountDown_text2;
+        public TextMeshProUGUI startCountDown_text3;
+        public TextMeshProUGUI startCountDown_text4;
+        public TextMeshProUGUI startCountDown_text5;
         public Text gamePoint;
         public Text gamePointLabel;
 
@@ -532,7 +537,7 @@ namespace nm_canvasPanel
 		public static bool startCountDown = false;
 		public static float countDownTime;
 
-		public static int sunshinerotate = 0;
+        public static int sunshinerotate = 0;
 		public static float sunshinerotateTime;
 		public static float statusTime;
 		public static bool pauseON = false;
@@ -1242,9 +1247,10 @@ namespace nm_canvasPanel
 			pos_st.x = pos_st.x * screen_width_per;
             //pos_st.y = pos_st.y * screen_width_per;
             // monsterColorCountView 下
-            pos_st.y = (Screen.height - safeAreaHight) - (center_header.rectTransform.sizeDelta.y + monsterColorCountView.rectTransform.sizeDelta.y + waitingTimerGauge_BG.rectTransform.sizeDelta.y + startCountDown_text.rectTransform.sizeDelta.y + 100) * scal2.y;
+            pos_st.y = (Screen.height - safeAreaHight) - (center_header.rectTransform.sizeDelta.y + monsterColorCountView.rectTransform.sizeDelta.y + waitingTimerGauge_BG.rectTransform.sizeDelta.y + startCountDown_text.rectTransform.sizeDelta.y + 120) * scal2.y;
             //pos_st.y = monsterColorCountView.transform.position.y - (startCountDown_text.rectTransform.sizeDelta.y * screen_width_per);
             startCountDown_text.transform.position = pos_st;
+
             s_monsterColorCountView = monsterColorCountView;
             s_monsterColorCountView.gameObject.SetActive(false);
             s_monsterSlimeColorCountView = monsterColorCountSceen2View;
@@ -4799,19 +4805,20 @@ namespace nm_canvasPanel
 
                 // カウントダウン表示制御　連鎖開始時もカウントダウン有りに
                 startCountDown_text.gameObject.SetActive(true);
-    //            switch (cubersFile.now_play_stage) {
-				//	case 1:
-				//	case 3:
-				//	case 5:
-				//		// スタートカウントダウンとりあえず非表示に コメントを外すとカウンターが表示される
-				//		startCountDown_text.gameObject.SetActive(true);
-				//		break;
-				//	default:			
-				//		startCountDown_text.gameObject.SetActive(false);
-				//		break;
-				//}
-
-				countDownTime -= Time.deltaTime;
+                // テキストメッシュアニメーションカウントダウン５表示
+                startCountDown_text5.gameObject.SetActive(true);
+                //            switch (cubersFile.now_play_stage) {
+                //	case 1:
+                //	case 3:
+                //	case 5:
+                //		// スタートカウントダウンとりあえず非表示に コメントを外すとカウンターが表示される
+                //		startCountDown_text.gameObject.SetActive(true);
+                //		break;
+                //	default:			
+                //		startCountDown_text.gameObject.SetActive(false);
+                //		break;
+                //}
+                countDownTime -= Time.deltaTime;
 
 				int kk = 1;
 				string st = @"D" + kk.ToString();
@@ -4820,7 +4827,10 @@ namespace nm_canvasPanel
 				
 				if (int.Parse(str) <= 0) {
 					startCountDown_text.gameObject.SetActive(false);
-					startCountDown = false;
+                    // テキストメッシュアニメーションカウントダウン1非表示
+                    startCountDown_text1.gameObject.SetActive(false);
+
+                    startCountDown = false;
 					countDownTime = emitter.startCountDownTimer;
                     int wait_timer = gravity_time_array[cubersFile.now_play_stage - 1, cubersFile.now_play_stagelevel - 1];
                     if (wait_timer == 0)
@@ -4854,14 +4864,51 @@ namespace nm_canvasPanel
                         }
                     }
                     counter.timer = 0;
-//					counter.timer = emitter.gravity_Time;
 					timeChange = true; //true時、タイマースタート以外にモンスターの動きにも関係するプレーステータスの設定も行われる
 				}
 				else {
-
-					startCountDown_text.text = str;
-				}
-			}
+                    //startCountDown_text.text = str;
+                    // テキストメッシュアニメーションカウントダウン非表示ON/OFF
+                    switch (int.Parse(str))
+                    {
+                        case 1:
+                            startCountDown_text1.gameObject.SetActive(true);
+                            startCountDown_text2.gameObject.SetActive(false);
+                            startCountDown_text3.gameObject.SetActive(false);
+                            startCountDown_text4.gameObject.SetActive(false);
+                            startCountDown_text5.gameObject.SetActive(false);
+                            break;
+                        case 2:
+                            startCountDown_text1.gameObject.SetActive(false);
+                            startCountDown_text2.gameObject.SetActive(true);
+                            startCountDown_text3.gameObject.SetActive(false);
+                            startCountDown_text4.gameObject.SetActive(false);
+                            startCountDown_text5.gameObject.SetActive(false);
+                            break;
+                        case 3:
+                            startCountDown_text1.gameObject.SetActive(false);
+                            startCountDown_text2.gameObject.SetActive(false);
+                            startCountDown_text3.gameObject.SetActive(true);
+                            startCountDown_text4.gameObject.SetActive(false);
+                            startCountDown_text5.gameObject.SetActive(false);
+                            break;
+                        case 4:
+                            startCountDown_text1.gameObject.SetActive(false);
+                            startCountDown_text2.gameObject.SetActive(false);
+                            startCountDown_text3.gameObject.SetActive(false);
+                            startCountDown_text4.gameObject.SetActive(true);
+                            startCountDown_text5.gameObject.SetActive(false);
+                            break;
+                        case 5:
+                            startCountDown_text1.gameObject.SetActive(false);
+                            startCountDown_text2.gameObject.SetActive(false);
+                            startCountDown_text3.gameObject.SetActive(false);
+                            startCountDown_text4.gameObject.SetActive(false);
+                            startCountDown_text5.gameObject.SetActive(true);
+                            break;
+                    }
+                }
+            }
 
 
 			// game time プレー中の時間表示

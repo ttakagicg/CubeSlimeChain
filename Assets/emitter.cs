@@ -1903,7 +1903,6 @@ namespace nm_emitter
 					chain_explosion_timer = 1.8f;
 					sphere.hitpointcount = 0;
 					chainExplosionPoint = 0;
-
 				}
 				else {
 //					// モンスターカラーカウント&強調表示表示ON
@@ -1932,7 +1931,7 @@ namespace nm_emitter
 						}
 					}
 					else {
-						if (chain_explosion_timer <= -0.5f) {
+						if (chain_explosion_timer <= -0.1f) {
 							//						if (int.Parse(str) < 0) {
 
 							// TODO:連鎖 追加
