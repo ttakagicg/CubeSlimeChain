@@ -32,6 +32,7 @@ namespace nm_emitter
 
 		const float button_height = 50;
 		const float button_width = 100;
+		const float chainExplosionTime = 1.8f;
 		//public const float wangle = 15;
 		const float camera_basePosition = 7.0f;
 		public const string gameclear_msg = "Game Completed";
@@ -553,9 +554,11 @@ namespace nm_emitter
 				if (cubersFile.game_Sceen == 0)
 				{
 					canvasPanel.s_monsterColorCountView.gameObject.SetActive(true);
+					canvasPanel.s_monsterSlimeColorCountView.gameObject.SetActive(false);
 					canvasPanel.monsterColor = true;
 				} else if (cubersFile.game_Sceen == 2)
                 {
+					canvasPanel.s_monsterColorCountView.gameObject.SetActive(false);
 					canvasPanel.s_monsterSlimeColorCountView.gameObject.SetActive(true);
 					canvasPanel.monsterColor = true;
 				}
@@ -575,6 +578,7 @@ namespace nm_emitter
 			else {
 				canvasPanel.s_monsterColorCountView.gameObject.SetActive(false);
 				// TODO：テンポゲージトップバー表示OFF＆MAX連鎖カウント表示BG ON
+				canvasPanel.s_max_chain_count_BG.gameObject.SetActive(false);
 				canvasPanel.waitingTimerTop_BG_s.gameObject.SetActive(true);
 
 				canvasPanel.s_noChainPlayTimeDSP_Sceen2BGImage.gameObject.SetActive(true);
@@ -852,7 +856,7 @@ namespace nm_emitter
 		static int chain_count = 0;
 
 		static bool chain_explosion = false;
-		static float chain_explosion_timer = 1.8f;
+		static float chain_explosion_timer = chainExplosionTime;
 //		static bool shoot_bomb = false;
 
         static Vector3 setObjectLocation(GameObject obj)
@@ -1247,7 +1251,7 @@ namespace nm_emitter
 									setChainExplosionCounterPanelEffect(m_color);
 									chainExplosioncolor = m_color;
 								}
-								if (chain_explosion) chain_explosion_timer = 1.8f;
+								if (chain_explosion) chain_explosion_timer = chainExplosionTime;
                                 
                                 YX_lineobjCount = 0;
                                 YZ_lineobjCount = 0;
@@ -1875,7 +1879,7 @@ namespace nm_emitter
 					effect_explosion = false;
 				}
 			}
-			// chain Explosion reset cheack
+			// chain Explosion reset check
 			if (chain_explosion) {
 
 				if (chain_explosion_timer == -1) {
@@ -1900,7 +1904,7 @@ namespace nm_emitter
 
 					effect_obj_count = 0;
 					chain_explosion = false;
-					chain_explosion_timer = 1.8f;
+					chain_explosion_timer = chainExplosionTime;
 					sphere.hitpointcount = 0;
 					chainExplosionPoint = 0;
 				}

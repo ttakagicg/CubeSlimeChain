@@ -872,7 +872,7 @@ namespace nm_monster
 					}
 					if (gamesceen == 2)
 					{
-						animationName = "Anim_Slime_WalkingJump";
+                        animationName = "Anim_Slime_WalkingJump";
 					}
 					break;
 				case monster_situation.death_monster:
