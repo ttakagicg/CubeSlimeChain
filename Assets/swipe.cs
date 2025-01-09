@@ -105,8 +105,8 @@ public class swipe : MonoBehaviour {
                     setRotateMove();
 
                 }
-                    // スワイプ移動方向チェックフラグオフ
-                    emitter.turn_move = false;
+                // スワイプ移動方向チェックフラグオフ
+                emitter.turn_move = false;
                 emitter.turn_end = false;
                 touchCube_X_Position = 0;
 				touchCube_Y_Position = 0;
@@ -121,6 +121,10 @@ public class swipe : MonoBehaviour {
                         //Debug.Log("hit!!!!!!!!!!");
 
                         GameObject obj = hit.collider.gameObject;
+                        if (obj.transform.root.CompareTag("Untagged"))
+                        {
+                            break;
+                        }
                         //					Debug.Log("gameObject:" + obj + " " + obj.transform.position.y);
                         // タッチがキューブか判定
                         if (obj.transform.root.tag == "cube_empty" || obj.transform.root.tag == "cube_close")

@@ -1416,7 +1416,7 @@ namespace nm_emitter
 		static void setChainExplosionEffect(GameObject obj) {
 
 			Vector3 effect_position = obj.transform.position;
-			effect_position.y += 0.5f;
+			effect_position.y += 0.2f;
 			// 設定済みエフェクトチェック
 			for (int i = 0; i < effect_obj_count; i++) {
 				Vector3 ef_position = effect_obj[i].transform.position;
