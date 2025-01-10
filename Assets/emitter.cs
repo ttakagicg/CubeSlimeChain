@@ -163,6 +163,13 @@ namespace nm_emitter
 		public const int midlleTempoTime = 7;
 		public const int highTempoTime = 4;
 
+		public GameObject sceen_light1;
+		public GameObject sceen_light2;
+		public GameObject sceen_light3;
+		public GameObject sceen_blue;
+		public GameObject sceen_green;
+		public GameObject sceen_red;
+
 		void Awake() {
 
 			screen_width = Screen.width;
@@ -202,11 +209,52 @@ namespace nm_emitter
 
 			updown_timer = nextDownWaitTimer;  // 落下後、次のモンスター落下待機表示までの待ち時間
 
+			setSceenDsp(1);
             make_UnderFloor();
             MainMenuDsp();
 
 		}
+		public void setSceenDsp(int stageNumber)
+        {
+			switch (cubersFile.now_play_stage)
+			{
+				case 1:
+				case 2:
+					// 背景ベース設定
+					sceen_blue.gameObject.SetActive(true);
 
+					sceen_green.gameObject.SetActive(false);
+					sceen_red.gameObject.SetActive(false);
+					// ライティング設定
+					sceen_light1.gameObject.SetActive(false);
+					sceen_light2.gameObject.SetActive(false);
+					sceen_light3.gameObject.SetActive(false);
+					break;
+				case 3:
+				case 4:
+					sceen_green.gameObject.SetActive(true);
+
+					sceen_blue.gameObject.SetActive(false);
+					sceen_red.gameObject.SetActive(false);
+					// ライティング設定
+					sceen_light1.gameObject.SetActive(false);
+					sceen_light2.gameObject.SetActive(false);
+					sceen_light3.gameObject.SetActive(false);
+					break;
+				case 5:
+				case 6:
+					sceen_red.gameObject.SetActive(true);
+
+					sceen_blue.gameObject.SetActive(false);
+					sceen_green.gameObject.SetActive(false);
+					// ライティング設定
+					sceen_light1.gameObject.SetActive(false);
+					sceen_light2.gameObject.SetActive(false);
+					sceen_light3.gameObject.SetActive(true);
+					break;
+			}
+
+		}
 		private void MainMenuDsp() {
 
 			//canvasPanel.s_mainMenu_field.gameObject.SetActive(true);
@@ -406,7 +454,7 @@ namespace nm_emitter
 			if (offset != 0) offset = 0;
 			else offset = cube_scale/2;
 			int setCubeCount = 0;
-            var intensity = -4;
+            var intensity = -3;
             var factor = Mathf.Pow(1.5f, intensity);
             //wBaseColor = new Color((255.0f / 255.0f) * factor, (255.0f / 255.0f) * factor, (255.0f / 255.0f) * factor, 80.0f / 255.0f); // 白
             wBaseColor = new Color(255.0f / 255.0f, 255.0f / 255.0f, 255.0f / 255.0f, 80.0f / 255.0f); // 白

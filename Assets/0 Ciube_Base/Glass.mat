@@ -15,7 +15,7 @@ Material:
   - _ALPHAPREMULTIPLY_ON
   - _EMISSION
   m_InvalidKeywords: []
-  m_LightmapFlags: 2
+  m_LightmapFlags: 1
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: 3000
@@ -82,6 +82,6 @@ Material:
     - _ZWrite: 0
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 0.3137255}
-    - _EmissionColor: {r: 0.17041878, g: 0.17041878, b: 0.015492617, a: 0.3137255}
+    - _EmissionColor: {r: 0.032534495, g: 0.25562817, b: 0.032534495, a: 0.3137255}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

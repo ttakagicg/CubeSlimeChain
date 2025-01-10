@@ -5690,6 +5690,10 @@ namespace nm_canvasPanel
 
             sunshinerotate = 0;
 
+            // 背景設定
+            GameObject sceenBG = this.transform.root.gameObject;
+            sceenBG.GetComponent<emitter>().setSceenDsp((int)cubersFile.now_play_stage);
+
             safeareaout_header_BG.gameObject.SetActive(true);
             safeareaout_footer_BG.gameObject.SetActive(true);
             header_BG.gameObject.SetActive(true);

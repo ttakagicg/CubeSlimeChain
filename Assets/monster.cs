@@ -841,7 +841,6 @@ namespace nm_monster
 					}
 					if (gamesceen == 2)
 					{
-						//animationName = "Anim_Slime_Idle";
 						animationName = "Anim_Slime_Walking_02";
 					}
 					break;
@@ -915,7 +914,6 @@ namespace nm_monster
 					if (gamesceen == 2)
 					{
 						animationName = "Anim_Slime_Walking_04";
-						//animationName = "Anim_Slime_WalkingJump3";
 					}
 					break;
 				default:
