@@ -239,7 +239,7 @@ namespace nm_emitter
 					// ライティング設定
 					sceen_light1.gameObject.SetActive(false);
 					sceen_light2.gameObject.SetActive(false);
-					sceen_light3.gameObject.SetActive(false);
+					sceen_light3.gameObject.SetActive(true);
 					break;
 				case 5:
 				case 6:
@@ -466,17 +466,15 @@ namespace nm_emitter
 //				texture1 = (Texture)Resources.Load ("0 star/juwelly");
 				texture1 = (Texture)Resources.Load ("0 star/star_1");
 
-                //wcolor = new Color(28.0f/255.0f, 220.0f / 255.0f, 28.0f / 255.0f, 80.0f / 255.0f); // グリーン
-                wcolor = new Color((28.0f/255.0f) * factor, (220.0f / 255.0f) * factor, (28.0f /255.0f) * factor, 80.0f / 255.0f); // グリーン
+                //wcolor = new Color((28.0f/255.0f) * factor, (220.0f / 255.0f) * factor, (28.0f /255.0f) * factor, 80.0f / 255.0f); // green
 				//wcolor = new Color(229.0f/255.0f,156.0f/255.0f,91.0f/255.0f,136.0f/255.0f); //オレンジ
-				//wcolor = new Color(17.0f/255.0f,47.0f/255.0f,151.0f/255.0f,200.0f/255.0f);
-				//wcolor = new Color(0,141.0f/255.0f,123.0f/255.0f);
-//				wcolor = new Color(0.683f,0,0);
+				wcolor = new Color((17.0f/255.0f) * factor, (47.0f/255.0f) * factor, (151.0f/255.0f) * factor, 80.0f/255.0f); // blue
 				break;
 			case 3:
 			case 4:
 				texture1 = (Texture)Resources.Load ("0 star/Heart_3");
-				wcolor = new Color((220.0f/255.0f) * factor,(220.0f /255.0f) * factor, (20.0f/255.0f) * factor, 80.0f / 255.0f); //オレンジ
+				wcolor = new Color((28.0f / 255.0f) * factor, (220.0f / 255.0f) * factor, (28.0f / 255.0f) * factor, 80.0f / 255.0f); // green
+				//wcolor = new Color((220.0f/255.0f) * factor,(220.0f /255.0f) * factor, (20.0f/255.0f) * factor, 80.0f / 255.0f); //yellow
 				//wcolor = new Color(220.0f/255.0f,220.0f/255.0f,20.0f/255.0f, 80.0f / 255.0f); //オレンジ
 				//wcolor = new Color(156.0f/255.0f,0.0f/255.0f,87.0f/255.0f);
 //				wcolor = new Color(0,0.683f,0);

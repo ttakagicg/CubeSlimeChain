@@ -2,7 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-
+using nm_cubersFile;
 
 namespace nm_monster
 {
@@ -111,14 +111,30 @@ namespace nm_monster
 		public Material monster1_white;
 		public Material monster1_black;
 		// MESHカラーオブジェクト
-		public Mesh monster2_greenMesh;
-		public Mesh monster2_yellowMesh;
-		public Mesh monster2_redMesh;
-		public Mesh monster2_purpleMesh;
-		public Mesh monster2_blueMesh;
-		public Mesh monster2_whiteMesh;
-		public Mesh monster2_blackMesh;
-		public Mesh monster2_orangeMesh;
+		public Mesh monster2_greenMesh1;
+		public Mesh monster2_yellowMesh1;
+		public Mesh monster2_redMesh1;
+		public Mesh monster2_purpleMesh1;
+		public Mesh monster2_blueMesh1;
+		public Mesh monster2_whiteMesh1;
+		public Mesh monster2_blackMesh1;
+		public Mesh monster2_orangeMesh1;
+		public Mesh monster2_greenMesh2;
+		public Mesh monster2_yellowMesh2;
+		public Mesh monster2_redMesh2;
+		public Mesh monster2_purpleMesh2;
+		public Mesh monster2_blueMesh2;
+		public Mesh monster2_whiteMesh2;
+		public Mesh monster2_blackMesh2;
+		public Mesh monster2_orangeMesh2;
+		public Mesh monster2_greenMesh3;
+		public Mesh monster2_yellowMesh3;
+		public Mesh monster2_redMesh3;
+		public Mesh monster2_purpleMesh3;
+		public Mesh monster2_blueMesh3;
+		public Mesh monster2_whiteMesh3;
+		public Mesh monster2_blackMesh3;
+		public Mesh monster2_orangeMesh3;
 
 		const int monster_totalCount_3 = 26;
 		const int monster_totalCount_4 = 56;
@@ -499,6 +515,7 @@ namespace nm_monster
 		// fbx内のMESHオブジェクトをカラー指定のあるオブジェクトを返す
 		public Mesh GetMonsterColorMesh(monster_situation situation, monster_color color)
         {
+			int stage = (int)cubersFile.now_play_stage;
 			switch (situation)
 			{
 				case monster_situation.noraml_monster:
@@ -511,39 +528,201 @@ namespace nm_monster
 					switch (color)
 					{
 						case monster_color.blue_monster:
-							mainmesh = monster2_blueMesh;
+							if (stage == 2)
+							{
+								mainmesh = monster2_blueMesh1;
+							} else if (stage == 4)
+                            {
+								mainmesh = monster2_blueMesh2;
+							} else if (stage == 6)
+                            {
+								mainmesh = monster2_blueMesh3;
+							} else
+                            {
+								mainmesh = monster2_blueMesh1;
+							}
 							break;
 						case monster_color.green_monster:
-							mainmesh = monster2_greenMesh;
+							if (stage == 2)
+							{
+								mainmesh = monster2_greenMesh1;
+							}
+							else if (stage == 4)
+							{
+								mainmesh = monster2_greenMesh2;
+							}
+							else if (stage == 6)
+							{
+								mainmesh = monster2_greenMesh3;
+							}
+							else
+							{
+								mainmesh = monster2_greenMesh1;
+							}
 							break;
 						case monster_color.orange_monster:
-							mainmesh = monster2_orangeMesh;
+							if (stage == 2)
+							{
+								mainmesh = monster2_orangeMesh1;
+							}
+							else if (stage == 4)
+							{
+								mainmesh = monster2_orangeMesh2;
+							}
+							else if (stage == 6)
+							{
+								mainmesh = monster2_orangeMesh3;
+							}
+							else
+							{
+								mainmesh = monster2_orangeMesh1;
+							}
 							break;
 						case monster_color.red_monster:
-							mainmesh = monster2_redMesh;
+							if (stage == 2)
+							{
+								mainmesh = monster2_redMesh1;
+							}
+							else if (stage == 4)
+							{
+								mainmesh = monster2_redMesh2;
+							}
+							else if (stage == 6)
+							{
+								mainmesh = monster2_redMesh3;
+							}
+							else
+							{
+								mainmesh = monster2_redMesh1;
+							}
 							break;
 						case monster_color.yellow_monster:
-							mainmesh = monster2_yellowMesh;
+							if (stage == 2)
+							{
+								mainmesh = monster2_yellowMesh1;
+							}
+							else if (stage == 4)
+							{
+								mainmesh = monster2_yellowMesh2;
+							}
+							else if (stage == 6)
+							{
+								mainmesh = monster2_yellowMesh3;
+							}
+							else
+							{
+								mainmesh = monster2_yellowMesh1;
+							}
 							break;
 						case monster_color.purple_monster:
-							mainmesh = monster2_purpleMesh;
+							if (stage == 2)
+							{
+								mainmesh = monster2_purpleMesh1;
+							}
+							else if (stage == 4)
+							{
+								mainmesh = monster2_purpleMesh2;
+							}
+							else if (stage == 6)
+							{
+								mainmesh = monster2_purpleMesh3;
+							}
+							else
+							{
+								mainmesh = monster2_purpleMesh1;
+							}
 							break;
 						case monster_color.white_monster:
-							mainmesh = monster2_whiteMesh;
+							if (stage == 1 || stage == 2)
+							{
+								mainmesh = monster2_whiteMesh1;
+							}
+							else if (stage == 3 || stage == 4)
+							{
+								mainmesh = monster2_whiteMesh2;
+							}
+							else if (stage == 5 || stage == 6)
+							{
+								mainmesh = monster2_whiteMesh3;
+							}
+							else
+							{
+								mainmesh = monster2_whiteMesh1;
+							}
 							break;
 						case monster_color.black_monster:
-							mainmesh = monster2_blackMesh;
+							if (stage == 1 || stage == 2)
+							{
+								mainmesh = monster2_blackMesh1;
+							}
+							else if (stage == 3 || stage == 4)
+							{
+								mainmesh = monster2_blackMesh2;
+							}
+							else if (stage == 5 || stage == 6)
+							{
+								mainmesh = monster2_blackMesh3;
+							}
+							else
+							{
+								mainmesh = monster2_blackMesh1;
+							}
 							break;
 					}
 					break;
 				case monster_situation.happy_monster:
-					mainmesh = monster2_whiteMesh;
+					if (stage == 1 || stage == 2)
+					{
+						mainmesh = monster2_whiteMesh1;
+					}
+					else if (stage == 3 || stage == 4)
+					{
+						mainmesh = monster2_whiteMesh2;
+					}
+					else if (stage == 5 || stage == 6)
+					{
+						mainmesh = monster2_whiteMesh3;
+					}
+					else
+					{
+						mainmesh = monster2_whiteMesh1;
+					}
 					break;
 				case monster_situation.death_monster:
-					mainmesh = monster2_blackMesh;
+					if (stage == 1 || stage == 2)
+					{
+						mainmesh = monster2_blackMesh1;
+					}
+					else if (stage == 3 || stage == 4)
+					{
+						mainmesh = monster2_blackMesh2;
+					}
+					else if (stage == 5 || stage == 6)
+					{
+						mainmesh = monster2_blackMesh3;
+					}
+					else
+					{
+						mainmesh = monster2_blackMesh1;
+					}
 					break;
 				default:
-					mainmesh = monster2_greenMesh;
+					if (stage == 1 || stage == 2)
+					{
+						mainmesh = monster2_greenMesh1;
+					}
+					else if (stage == 3 || stage == 4)
+					{
+						mainmesh = monster2_greenMesh2;
+					}
+					else if (stage == 5 || stage == 6)
+					{
+						mainmesh = monster2_greenMesh3;
+					}
+					else
+					{
+						mainmesh = monster2_greenMesh1;
+					}
 					break;
 			}
 			return mainmesh;
