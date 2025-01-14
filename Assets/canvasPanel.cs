@@ -875,45 +875,6 @@ namespace nm_canvasPanel
             s_life_hearticon4 = life_hearticon4;
             s_life_hearticon5 = life_hearticon5;
 
-            // wait time gauge Image
-            /*            Vector3 scal_wtg = waitingTimerGauge_BG.transform.localScale;
-                        scal_wtg.x = scal_wtg.x * screen_width_per;
-                        scal_wtg.y = scal_wtg.y * screen_width_per;
-                        waitingTimerGauge_BG.transform.localScale = scal_wtg;
-                        Vector3 pos_wtg = waitingTimerGauge_BG.transform.position;
-                        pos_wtg.x = pos_wtg.x * scal_wtg.x;
-                        // モンスター連鎖カウンター下部位置
-                        pos_wtg.y = (Screen.height - safeAreaHight) - ((center_header.rectTransform.sizeDelta.y + monsterColorCountView.rectTransform.sizeDelta.y + waitingTimerGauge_BG.rectTransform.sizeDelta.y + 55) * scal2.y);
-                        // モンスター連鎖カウンター上部位置
-                        //pos_wtg.y = (Screen.height - safeAreaHight) - ((center_header.rectTransform.sizeDelta.y + 45) * scal2.y);
-                        waitingTimerGauge_BG.transform.position = pos_wtg;
-            */
-            Level_top_Base_Color = Level_top.gameObject.GetComponent<Image>().color;
-            Level1_1_Base_Color = Level1_1.gameObject.GetComponent<Image>().color;
-            Level1_2_Base_Color = Level1_2.gameObject.GetComponent<Image>().color;
-			Level1_3_Base_Color = Level1_3.gameObject.GetComponent<Image>().color;
-			Level2_1_Base_Color = Level2_1.gameObject.GetComponent<Image>().color;
-			Level2_2_Base_Color = Level2_2.gameObject.GetComponent<Image>().color;
-			Level2_3_Base_Color = Level2_3.gameObject.GetComponent<Image>().color;
-			Level3_1_Base_Color = Level3_1.gameObject.GetComponent<Image>().color;
-			Level3_2_Base_Color = Level3_2.gameObject.GetComponent<Image>().color;
-			Level3_3_Base_Color = Level3_3.gameObject.GetComponent<Image>().color;
-            Level3_4_Base_Color = Level3_4.gameObject.GetComponent<Image>().color;
-
-            waitingTimerGauge_BG.gameObject.SetActive(false);
-            waitingTimerTop_BG_s = waitingTimerTop_BG;
-            Level_top.gameObject.SetActive(false);
-            Level1_1.gameObject.SetActive(false);
-			Level1_2.gameObject.SetActive(false);
-			Level1_3.gameObject.SetActive(false);
-			Level2_1.gameObject.SetActive(false);
-			Level2_2.gameObject.SetActive(false);
-			Level2_3.gameObject.SetActive(false);
-			Level3_1.gameObject.SetActive(false);
-			Level3_2.gameObject.SetActive(false);
-			Level3_3.gameObject.SetActive(false);
-            Level3_4.gameObject.SetActive(false);
-
             // 連鎖MAX数及び連鎖取得予定アイテム数表示
             Vector3 scal_chaininfo = max_chain_count_BG.transform.localScale;
             scal_chaininfo.x = scal_chaininfo.x * screen_width_per;
@@ -930,13 +891,25 @@ namespace nm_canvasPanel
             s_noChainPlayTimeDSP_Sceen2BGImage = noChainPlayTimeDSP_Sceen2BGImage;
             s_noChainPlayTimeDSP_Sceen2BGImage.gameObject.SetActive(false);
 
+            Vector3 scal_nt = noChainPlayTimeDSP_Sceen2BGImage.transform.localScale;
+            scal_nt.x = scal_nt.x * screen_width_per;
+            scal_nt.y = scal_nt.y * screen_width_per;
+            noChainPlayTimeDSP_Sceen2BGImage.transform.localScale = scal_nt;
+            Vector3 pos_nt = noChainPlayTimeDSP_Sceen2BGImage.transform.position;
+            pos_nt.x = pos_nt.x * scal_nt.x;
+            // 落下待機ゲージ上部位置
+            pos_nt.y = (Screen.height - safeAreaHight) - ((left_header.rectTransform.sizeDelta.y + noChainPlayTimeDSP_Sceen2BGImage.rectTransform.sizeDelta.y) * scal2.y);
+            // 落下待機ゲージ下部位置
+            //pos_mc.y = (Screen.height - safeAreaHight) - ((center_header.rectTransform.sizeDelta.y + monsterColorCountView.rectTransform.sizeDelta.y + 45) * scal2.y);
+            monsterColorCountView.transform.position = pos_nt;
+
             Vector3 scal_getIteminfo = silver_item_GET_BG.transform.localScale;
             scal_getIteminfo.x = scal_getIteminfo.x * screen_width_per;
             scal_getIteminfo.y = scal_getIteminfo.y * screen_width_per;
             silver_item_GET_BG.transform.localScale = scal_getIteminfo;
             Vector3 pos_getIteminfo = silver_item_GET_BG.transform.position;
             pos_getIteminfo.x = pos_getIteminfo.x * scal_getIteminfo.x;
-            pos_getIteminfo.y = (Screen.height - safeAreaHight) - ((center_header.rectTransform.sizeDelta.y + monsterColorCountView.rectTransform.sizeDelta.y + waitingTimerGauge_BG.rectTransform.sizeDelta.y + silver_item_GET_BG.rectTransform.sizeDelta.y + 77) * scal2.y);
+            pos_getIteminfo.y = (Screen.height - safeAreaHight) - ((left_header.rectTransform.sizeDelta.y + monsterColorCountView.rectTransform.sizeDelta.y + waitingTimerGauge_BG.rectTransform.sizeDelta.y + silver_item_GET_BG.rectTransform.sizeDelta.y + 77) * scal2.y);
             silver_item_GET_BG.transform.position = pos_getIteminfo;
             s_silver_item_GET_BG = silver_item_GET_BG;
             s_silver_item_get_text = silver_item_get_text;
@@ -964,7 +937,6 @@ namespace nm_canvasPanel
             // 設定画面表示ボタン
             Button psb_obj = playSettingView_button.transform.GetComponent<Button>();
             psb_obj.onClick.AddListener(() => ButtonSettingPlayClick());
-
 
             // 落下待機ゲージ上部位置
             pos_tdlb.y = (Screen.height - safeAreaHight) - ((center_header.rectTransform.sizeDelta.y + playItemView_button_BG.GetComponent<Image>().rectTransform.sizeDelta.y) * scal2.y);
@@ -1048,7 +1020,7 @@ namespace nm_canvasPanel
 			Vector3 pos_mc = monsterColorCountView.transform.position;
 			pos_mc.x = pos_mc.x * scal_mc.x;
             // 落下待機ゲージ上部位置
-            pos_mc.y = (Screen.height - safeAreaHight) - ((center_header.rectTransform.sizeDelta.y + monsterColorCountView.rectTransform.sizeDelta.y) * scal2.y);
+            pos_mc.y = (Screen.height - safeAreaHight) - ((left_header.rectTransform.sizeDelta.y + monsterColorCountView.rectTransform.sizeDelta.y) * scal2.y);
             // 落下待機ゲージ下部位置
             //pos_mc.y = (Screen.height - safeAreaHight) - ((center_header.rectTransform.sizeDelta.y + monsterColorCountView.rectTransform.sizeDelta.y + 45) * scal2.y);
             monsterColorCountView.transform.position = pos_mc;
@@ -1076,6 +1048,17 @@ namespace nm_canvasPanel
 			blueMonsterCountImage.material = chainExplosionCounterM;
 
             // スライムモンスター連鎖パネル
+            Vector3 scal_mc2 =  monsterColorCountSceen2View.transform.localScale;
+            scal_mc2.x = scal_mc2.x * screen_width_per;
+            scal_mc2.y = scal_mc2.y * screen_width_per;
+            monsterColorCountSceen2View.transform.localScale = scal_mc2;
+            Vector3 pos_mc2 = monsterColorCountSceen2View.transform.position;
+            pos_mc2.x = pos_mc2.x * scal_mc2.x;
+            // 落下待機ゲージ上部位置
+            pos_mc2.y = (Screen.height - safeAreaHight) - ((left_header.rectTransform.sizeDelta.y + monsterColorCountSceen2View.rectTransform.sizeDelta.y + 50) * scal2.y);
+            // 落下待機ゲージ下部位置
+            monsterColorCountSceen2View.transform.position = pos_mc2;
+
             greenMonsterSlimeCountView_s = greenMonsterSlimeCountView;
             yellowMonsterSlimeCountView_s = yellowMonsterSlimeCountView;
             redMonsterSlimeCountView_s = redMonsterSlimeCountView;
@@ -1161,8 +1144,57 @@ namespace nm_canvasPanel
 			purpleMonsterPoint.text = "";
 			blueMonsterPoint.text = "";
 
-			// 連鎖ボーナスポイントテキストクリア
-			item_bonusCount.text = "";
+            // 落下待機時間経過ゲージビュー
+            // wait time gauge Image
+            Vector3 scal_wtg = waitingTimerGauge_BG.transform.localScale;
+            scal_wtg.x = scal_wtg.x * screen_width_per;
+            scal_wtg.y = scal_wtg.y * screen_width_per;
+            waitingTimerGauge_BG.transform.localScale = scal_wtg;
+            Vector3 pos_wtg = waitingTimerGauge_BG.transform.position;
+            pos_wtg.x = pos_wtg.x * scal_wtg.x;
+            // モンスター連鎖カウンター下部位置
+            if (cubersFile.game_Sceen == 0)
+            {
+                pos_wtg.y = (Screen.height - safeAreaHight) - ((left_header.rectTransform.sizeDelta.y + monsterColorCountView.rectTransform.sizeDelta.y + waitingTimerGauge_BG.rectTransform.sizeDelta.y) * scal2.y);
+            }
+            else
+            {
+                pos_wtg.y = (Screen.height - safeAreaHight) - ((left_header.rectTransform.sizeDelta.y + monsterColorCountSceen2View.rectTransform.sizeDelta.y + waitingTimerGauge_BG.rectTransform.sizeDelta.y + 50) * scal2.y);
+            }
+            // モンスター連鎖カウンター上部位置
+            //pos_wtg.y = (Screen.height - safeAreaHight) - ((center_header.rectTransform.sizeDelta.y + 45) * scal2.y);
+            waitingTimerGauge_BG.transform.position = pos_wtg;
+            waitingTimerGauge_BG.gameObject.SetActive(false);
+
+            waitingTimerTop_BG_s = waitingTimerTop_BG;
+
+            Level_top_Base_Color = Level_top.gameObject.GetComponent<Image>().color;
+            Level1_1_Base_Color = Level1_1.gameObject.GetComponent<Image>().color;
+            Level1_2_Base_Color = Level1_2.gameObject.GetComponent<Image>().color;
+            Level1_3_Base_Color = Level1_3.gameObject.GetComponent<Image>().color;
+            Level2_1_Base_Color = Level2_1.gameObject.GetComponent<Image>().color;
+            Level2_2_Base_Color = Level2_2.gameObject.GetComponent<Image>().color;
+            Level2_3_Base_Color = Level2_3.gameObject.GetComponent<Image>().color;
+            Level3_1_Base_Color = Level3_1.gameObject.GetComponent<Image>().color;
+            Level3_2_Base_Color = Level3_2.gameObject.GetComponent<Image>().color;
+            Level3_3_Base_Color = Level3_3.gameObject.GetComponent<Image>().color;
+            Level3_4_Base_Color = Level3_4.gameObject.GetComponent<Image>().color;
+
+            Level_top.gameObject.SetActive(false);
+            Level1_1.gameObject.SetActive(false);
+            Level1_2.gameObject.SetActive(false);
+            Level1_3.gameObject.SetActive(false);
+            Level2_1.gameObject.SetActive(false);
+            Level2_2.gameObject.SetActive(false);
+            Level2_3.gameObject.SetActive(false);
+            Level3_1.gameObject.SetActive(false);
+            Level3_2.gameObject.SetActive(false);
+            Level3_3.gameObject.SetActive(false);
+            Level3_4.gameObject.SetActive(false);
+
+
+            // 連鎖ボーナスポイントテキストクリア
+            item_bonusCount.text = "";
 
             // 連鎖取得アイテムオブジェクト配列セット
             setChainGetitemArray();
@@ -5436,8 +5468,9 @@ namespace nm_canvasPanel
                         // 連鎖無しステージ選択時、ここで連鎖パネルビューを強制的にオフにする
                         s_monsterSlimeColorCountView.gameObject.SetActive(false);
                     }
+
                     var seq = DOTween.Sequence();
-                    seq.Append(game_select_view.rectTransform.DOMove(new Vector3(0, -game_select_view.rectTransform.sizeDelta.y - 100, 0), 1));
+                    seq.Append(game_select_view.rectTransform.DOMove(new Vector3(0, -Screen.height, 0), 1));
                     seq.OnComplete(() =>
                     {
                         // アニメーションが終了時によばれる
