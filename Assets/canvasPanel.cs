@@ -898,10 +898,10 @@ namespace nm_canvasPanel
             Vector3 pos_nt = noChainPlayTimeDSP_Sceen2BGImage.transform.position;
             pos_nt.x = pos_nt.x * scal_nt.x;
             // 落下待機ゲージ上部位置
-            pos_nt.y = (Screen.height - safeAreaHight) - ((left_header.rectTransform.sizeDelta.y + noChainPlayTimeDSP_Sceen2BGImage.rectTransform.sizeDelta.y) * scal2.y);
+            pos_nt.y = (Screen.height - safeAreaHight) - ((left_header.rectTransform.sizeDelta.y + noChainPlayTimeDSP_Sceen2BGImage.rectTransform.sizeDelta.y + 50) * scal2.y);
             // 落下待機ゲージ下部位置
             //pos_mc.y = (Screen.height - safeAreaHight) - ((center_header.rectTransform.sizeDelta.y + monsterColorCountView.rectTransform.sizeDelta.y + 45) * scal2.y);
-            monsterColorCountView.transform.position = pos_nt;
+            noChainPlayTimeDSP_Sceen2BGImage.transform.position = pos_nt;
 
             Vector3 scal_getIteminfo = silver_item_GET_BG.transform.localScale;
             scal_getIteminfo.x = scal_getIteminfo.x * screen_width_per;

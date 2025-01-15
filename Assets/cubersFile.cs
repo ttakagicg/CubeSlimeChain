@@ -197,7 +197,7 @@ namespace nm_cubersFile
 
             Dictionary<string, object> dic = Load("userData");
             // TODO:Load_Cubersfileの初期化を行う際は、dic != nullにして保存済みuserDataを更新する
-            if (dic != null) {
+            if (dic == null) {
                 init_gameEncryptionData();  //userDataが無い場合、cube_baseのデバッグデータファイルが読み込まれる
                 dic = Load("userData");
             }
