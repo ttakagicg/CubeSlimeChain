@@ -12,3 +12,10 @@ MonoImporter:
   icon: {instanceID: 0}
   userData: 
   assetBundleName: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 25634
+  packageName: 100 Best Effects Pack
+  packageVersion: 5.5.0.1
+  assetPath: Assets/Standard Assets/Effects/ImageEffects/Scripts/DepthOfFieldDeprecated.cs
+  uploadId: 245886

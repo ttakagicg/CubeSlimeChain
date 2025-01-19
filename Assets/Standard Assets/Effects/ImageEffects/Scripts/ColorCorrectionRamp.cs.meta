@@ -8,3 +8,10 @@ MonoImporter:
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 25634
+  packageName: 100 Best Effects Pack
+  packageVersion: 5.5.0.1
+  assetPath: Assets/Standard Assets/Effects/ImageEffects/Scripts/ColorCorrectionRamp.cs
+  uploadId: 245886
