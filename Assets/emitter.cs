@@ -228,7 +228,7 @@ namespace nm_emitter
 					// ライティング設定
 					sceen_light1.gameObject.SetActive(false);
 					sceen_light2.gameObject.SetActive(false);
-					sceen_light3.gameObject.SetActive(false);
+					sceen_light3.gameObject.SetActive(true);
 					break;
 				case 3:
 				case 4:
