@@ -5925,8 +5925,8 @@ namespace nm_canvasPanel
 
             safeareaout_header_BG.gameObject.SetActive(true);
             safeareaout_footer_BG.gameObject.SetActive(true);
-            header_BG.gameObject.SetActive(true);
-            footer_BG.gameObject.SetActive(true);
+            //header_BG.gameObject.SetActive(true);
+            //footer_BG.gameObject.SetActive(true);
             playItemView_button_BG.gameObject.SetActive(true);
             playSettingView_button_BG.gameObject.SetActive(true);
             down_button_L_BG.gameObject.SetActive(true);
@@ -5946,7 +5946,7 @@ namespace nm_canvasPanel
             var level = (int)cubersFile.now_play_stagelevel;
             // リソースステージバッジイメージデータのセット
             getResourceLevelImageData(stage, level, img);
-            rank_bg.gameObject.SetActive(true);
+            //rank_bg.gameObject.SetActive(true);
 
             // TODO: 削除　1-1-1 2:レベル選択で行われていたデータ設定処理をステージ選択で行なうように変更　画面デザイン変更に伴い削除(コメントアウト)
             // ポイント、タイム表示
@@ -6326,8 +6326,8 @@ namespace nm_canvasPanel
                 playSettingView_button_BG.gameObject.SetActive(true);
                 down_button_L_BG.gameObject.SetActive(true);
                 down_button_R_BG.gameObject.SetActive(true);
-                header_BG.gameObject.SetActive(true);
-                footer_BG.gameObject.SetActive(true);
+                //header_BG.gameObject.SetActive(true);
+                //footer_BG.gameObject.SetActive(true);
                 right_header.gameObject.SetActive(true);
 				b_Pause.gameObject.SetActive(true);
             }
@@ -6420,8 +6420,8 @@ namespace nm_canvasPanel
             playSettingView_button_BG.gameObject.SetActive(true);
             down_button_L_BG.gameObject.SetActive(true);
             down_button_R_BG.gameObject.SetActive(true);
-            header_BG.gameObject.SetActive(true);
-            footer_BG.gameObject.SetActive(true);
+            //header_BG.gameObject.SetActive(true);
+            //footer_BG.gameObject.SetActive(true);
             right_header.gameObject.SetActive(true);
 			left_header.gameObject.SetActive(true);
             center_header.gameObject.SetActive(true);
