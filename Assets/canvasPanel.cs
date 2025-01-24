@@ -12,6 +12,9 @@ using DG.Tweening;
 using TMPro;
 //using GoogleMobileAds.Api;
 using FSP_Samples;
+
+using nm_RankCanvas;
+
 namespace nm_canvasPanel
 {
 
@@ -5860,6 +5863,9 @@ namespace nm_canvasPanel
 
             // TODO:連鎖ありカウントパネルイメージ設定
             setChainBombPanelImage((int)cubersFile.now_play_stage);
+
+            // TODO:Rank Badge setting
+            RankCanvas.setRankBadge((int)cubersFile.now_play_stage, (int)cubersFile.now_play_stagelevel);
 
             // TODO:削除　1-1-1 1:現在のレベルメニューを削除しステージ選択からの遷移を取り止め　不要となったソース部分の削除
             //Create_GameStageSelectView();
