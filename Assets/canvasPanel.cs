@@ -889,6 +889,7 @@ namespace nm_canvasPanel
             //max_chain_count_BG.transform.position = pos_chaininfo;
             s_max_chain_count_BG = max_chain_count_BG;
             s_max_chain_count_text = max_chain_count_text;
+            s_max_chain_count_text.text = "0";
 
             // 連鎖無しの場合のプレイタイム表示ビュー　※連鎖カウントパネル表示領域
             s_noChainPlayTimeDSP_Sceen2BGImage = noChainPlayTimeDSP_Sceen2BGImage;

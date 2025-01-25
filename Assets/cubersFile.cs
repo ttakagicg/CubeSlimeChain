@@ -85,7 +85,7 @@ namespace nm_cubersFile
         public static IList stagelist;
         public static int game_stage_max = 6;
         // TODO:修正　stageLevel MAX 変更　7 -> 5
-        public static int game_stagelevel_max = 5;
+        public static int game_stagelevel_max = 3;
         // TODO:追加　1-1-1 ３：セーブサービス利用データの作成
         //// 月額利用サービス関連データ
         public static long monthlyService;      // 月額利用サービスフラグON:利用中　OFF:未利用
