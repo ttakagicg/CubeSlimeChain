@@ -5866,7 +5866,7 @@ namespace nm_canvasPanel
             setChainBombPanelImage((int)cubersFile.now_play_stage);
 
             // TODO:Rank Badge setting
-            RankCanvas.setRankBadge((int)cubersFile.now_play_stage, (int)cubersFile.now_play_stagelevel);
+            //RankCanvas.setRankBadge((int)cubersFile.now_play_stage, (int)cubersFile.now_play_stagelevel);
 
             // TODO:削除　1-1-1 1:現在のレベルメニューを削除しステージ選択からの遷移を取り止め　不要となったソース部分の削除
             //Create_GameStageSelectView();

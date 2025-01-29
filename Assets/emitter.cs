@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-//using UnityEditor;
+using UnityEngine.SceneManagement;
 using System;
 using System.Collections;
 using System.Linq;
@@ -177,10 +177,16 @@ namespace nm_emitter
 
 		}
 
-		// Use this for initialization
-		void Start () {
+        // Use this for initialization
+        [Obsolete]
+        void Start () {
 			//  フレームレート設定　固定　※Project Setting→Auality→Level(Beautiful＆Vsync Count[Don`t Sync]設定が必要)
 			Application.targetFrameRate = 60;
+
+			if (SceneManager.sceneCount == 1)
+			{
+                //Application.LoadLevelAdditive("Badge");
+            }
 
 			reset_flag();
 
@@ -1296,6 +1302,9 @@ namespace nm_emitter
 									setChainExplosionTouchEffect(sphere.spheres[j,k,i], m_color);
 									setChainExplosionCounterPanelEffect(m_color);
 									chainExplosioncolor = m_color;
+
+									Singleton<SoundPlayer>.instance.playSE_2("bomb004", 0);
+
 								}
 								if (chain_explosion) chain_explosion_timer = chainExplosionTime;
                                 
@@ -1308,9 +1317,9 @@ namespace nm_emitter
                                 // 連鎖関連データセット
                                 setChainExplosionDataItem();
 
-                                // TODO: 連鎖 テスト　連鎖カウント
-                                //Debug.Log("chainExplosionLineCount = " + chainExplosionLineCount);
-                                return;
+								// TODO: 連鎖 テスト　連鎖カウント
+								//Debug.Log("chainExplosionLineCount = " + chainExplosionLineCount);
+								return;
 							}
 						}
 					}
@@ -1533,7 +1542,7 @@ namespace nm_emitter
 			main5.startColor = chainExplosion_color;
 			main5.startDelay = delayTime;
 
-			Singleton<SoundPlayer>.instance.playSE_2( "bomb004" ,0);
+			//Singleton<SoundPlayer>.instance.playSE_2( "bomb004" ,0);
 
 			effect_obj_count++;
 
