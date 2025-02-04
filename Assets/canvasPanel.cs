@@ -13,7 +13,7 @@ using TMPro;
 //using GoogleMobileAds.Api;
 using FSP_Samples;
 
-using nm_RankCanvas;
+using nm_RankBadge;
 
 namespace nm_canvasPanel
 {
@@ -5845,6 +5845,7 @@ namespace nm_canvasPanel
                     break;
             }
         }
+        public RankBadge rankbadge;
         //   ステージ選択ボタン押下処理
         public void buttonSelectCell(Button level)
         {
@@ -5865,8 +5866,8 @@ namespace nm_canvasPanel
             // TODO:連鎖ありカウントパネルイメージ設定
             setChainBombPanelImage((int)cubersFile.now_play_stage);
 
-            // TODO:Rank Badge setting
-            //RankCanvas.setRankBadge((int)cubersFile.now_play_stage, (int)cubersFile.now_play_stagelevel);
+            //// TODO:Rank Badge setting
+            //rankbadge.setRankBadge((int)cubersFile.now_play_stage, (int)cubersFile.now_play_stagelevel);
 
             // TODO:削除　1-1-1 1:現在のレベルメニューを削除しステージ選択からの遷移を取り止め　不要となったソース部分の削除
             //Create_GameStageSelectView();
@@ -5948,11 +5949,13 @@ namespace nm_canvasPanel
             emitter.playState = emitter.gamePlayState.Play;
 
             // ステージバッジ表示
+            // TODO:バッジ変更に伴う修正
             img = rank_bg.GetComponent<Image>();
             var stage = (int)cubersFile.now_play_stage;
             var level = (int)cubersFile.now_play_stagelevel;
+            rankbadge.setRankBadge(stage,level);
             // リソースステージバッジイメージデータのセット
-            getResourceLevelImageData(stage, level, img);
+            //getResourceLevelImageData(stage, level, img);
             //rank_bg.gameObject.SetActive(true);
 
             // TODO: 削除　1-1-1 2:レベル選択で行われていたデータ設定処理をステージ選択で行なうように変更　画面デザイン変更に伴い削除(コメントアウト)
