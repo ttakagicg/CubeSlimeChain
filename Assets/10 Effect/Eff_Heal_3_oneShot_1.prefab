@@ -29369,9 +29369,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: MagicEffect6
       objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: 71b814182aa66a64f9549419a7f6b124, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: 71b814182aa66a64f9549419a7f6b124, type: 3}
+      propertyPath: m_Name
+      value: Magic-Smoke1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: 71b814182aa66a64f9549419a7f6b124, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 100010, guid: 71b814182aa66a64f9549419a7f6b124, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 190340, guid: 71b814182aa66a64f9549419a7f6b124, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 71b814182aa66a64f9549419a7f6b124, type: 3}
       propertyPath: m_LocalScale.x
@@ -29491,6 +29507,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 19994942, guid: 71b814182aa66a64f9549419a7f6b124, type: 3}
       propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1821627654069314, guid: 71b814182aa66a64f9549419a7f6b124, type: 3}
+      propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 198209691646321864, guid: 71b814182aa66a64f9549419a7f6b124,

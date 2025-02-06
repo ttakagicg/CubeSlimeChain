@@ -1541,6 +1541,57 @@ namespace nm_emitter
 			var main5 = obj6.GetComponent<ParticleSystem>().main;
 			main5.startColor = chainExplosion_color;
 			main5.startDelay = delayTime;
+			// 追加エフェクト
+/*			GameObject obj7 = obj1.transform.Find("MagicEffect6").gameObject;
+			GameObject objsub1 = obj7.transform.Find("Magic-Ring").gameObject;
+			var mainsub1 = objsub1.GetComponent<ParticleSystem>().main;
+			Color cl1 = mainsub1.startColor.colorMax;
+			cl1.r = chainExplosion_color.r;
+			cl1.g = chainExplosion_color.g;
+			cl1.b = chainExplosion_color.b;
+			mainsub1.startColor = cl1;
+			mainsub1.startDelay = delayTime;
+			GameObject objsub2 = obj7.transform.Find("Magic-Ring_2").gameObject;
+			var mainsub2 = objsub2.GetComponent<ParticleSystem>().main;
+			Color cl2 = mainsub2.startColor.colorMax;
+			cl2.r = chainExplosion_color.r;
+			cl2.g = chainExplosion_color.g;
+			cl2.b = chainExplosion_color.b;
+			mainsub2.startColor = cl2;
+			mainsub2.startDelay = delayTime;
+            GameObject objsub3 = obj7.transform.Find("Magic-Smoke").gameObject;
+            var mainsub3 = objsub3.GetComponent<ParticleSystem>().main;
+            Color cl3 = mainsub3.startColor.colorMax;
+            cl3.r = chainExplosion_color.r;
+            cl3.g = chainExplosion_color.g;
+            cl3.b = chainExplosion_color.b;
+            mainsub3.startColor = cl3;
+            mainsub3.startDelay = delayTime;
+            GameObject objsub31 = obj7.transform.Find("Magic-Smoke1").gameObject;
+            var mainsub31 = objsub31.GetComponent<ParticleSystem>().main;
+            Color cl31 = mainsub31.startColor.colorMax;
+            cl31.r = chainExplosion_color.r;
+            cl31.g = chainExplosion_color.g;
+            cl31.b = chainExplosion_color.b;
+            mainsub31.startColor = cl31;
+            mainsub31.startDelay = delayTime;
+            GameObject objsub4 = obj7.transform.Find("Magic-Flash").gameObject;
+			var mainsub4 = objsub4.GetComponent<ParticleSystem>().main;
+			Color cl4 = mainsub4.startColor.colorMax;
+			cl4.r = chainExplosion_color.r;
+			cl4.g = chainExplosion_color.g;
+			cl4.b = chainExplosion_color.b;
+			mainsub4.startColor = cl4;
+			mainsub4.startDelay = delayTime;
+			GameObject objsub5 = obj7.transform.Find("Magic-Spark").gameObject;
+			var mainsub5 = objsub5.GetComponent<ParticleSystem>().main;
+			Color cl5 = mainsub5.startColor.colorMax;
+			cl5.r = chainExplosion_color.r;
+			cl5.g = chainExplosion_color.g;
+			cl5.b = chainExplosion_color.b;
+			mainsub5.startColor = cl5;
+			mainsub5.startDelay = delayTime;
+*/
 
 			//Singleton<SoundPlayer>.instance.playSE_2( "bomb004" ,0);
 

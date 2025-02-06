@@ -7080,7 +7080,7 @@ namespace nm_canvasPanel
 				emitter.playState = emitter.gamePlayState.Pause;
 				timeChange = true;
 				emitter.sw_Gravity = false;
-				emitter.BGMstate = emitter.BGM_State.Stop;
+				//emitter.BGMstate = emitter.BGM_State.Stop;
 				emitter.sw_pause = true;
 
 				emitter.pause_timer += emitter.PAUSETIME;
