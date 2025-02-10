@@ -1463,7 +1463,7 @@ namespace  nm_sphere {
 		public static void setChainExplosionInfoAnimation(Vector3 pos, string text)
 		{
 
-			// 表示オフはemmiterの// chain Explosion reset cheack　→　if (chain_explosion)で親子関係を解除する
+			// 表示オフはemmiterの// Update() → if (chain_explosion)で親子関係を解除する // chain Explosion reset cheack コメント
 			screen_width_per = Screen.width / 1125.0f;
 			var textcount = text.ToString().Length;
 			float window_size = Screen.height;
@@ -1481,36 +1481,12 @@ namespace  nm_sphere {
 
 			var seq = DOTween.Sequence();
 			seq.Append(pointText_w.transform.DOScale(new Vector3(1.0f, 1.0f), 1.0f));
-			seq.Append(pointText_w.transform.DOScale(new Vector3(1.0f, 1.0f), 1.0f));
-			seq.OnComplete(() =>
+			seq.Append(pointText_w.transform.DOScale(new Vector3(1.0f, 1.0f), 1.0f));　// 表示時間の為２度設定 1.0f→2.0fよりスムーズ
+            seq.OnComplete(() =>
 			{
 				// アニメーションが終了時によばれる
 				pointText_w.gameObject.transform.parent = null;
             });
-
-			/*
-                        for (int i = 0; i < textcount; i++)
-                                    {
-                                        if (anim_pointText[0, i] != null)
-                                        {
-                                            Destroy(anim_pointText[0, i]);
-                                        }
-                                        anim_pointText[0, i] = (GameObject)Instantiate(s_pointText, new Vector3(s_pointText.transform.position.x, s_pointText.transform.position.y, s_pointText.transform.position.z), Quaternion.identity);
-                                        anim_pointText[0, i].transform.SetParent(s_canvas.transform);
-                                        anim_pointText[0, i].transform.position = pos + new Vector3((font_size + 3) * screen_width_per * i, 0.0f, 0.0f);
-
-                                        anim_pointText[0, i].gameObject.GetComponent<TMPro.TextMeshProUGUI>().text = text.Substring(i, 1);
-                                        //anim_pointText[0, i].gameObject.GetComponent<Text>().text = text.Substring(i, 1);
-                                        //anim_pointText[0, i].gameObject.GetComponent<TMPro.TextMeshProUGUI>().fontSize = font_size;
-                                        //anim_pointText[0, i].gameObject.GetComponent<TextEffect>().delay = 0.1f * i;
-                                        //anim_pointText[0, i].gameObject.GetComponent<TextEffect>().SetVerticesDirty();
-
-                                        Vector3 scal = anim_pointText[0, i].gameObject.transform.localScale;
-                                        scal.x = scal.x * screen_width_per;
-                                        scal.y = scal.y * screen_width_per;
-                                        anim_pointText[0, i].gameObject.transform.localScale = scal;
-                                    }
-                        */
 		}
 
 

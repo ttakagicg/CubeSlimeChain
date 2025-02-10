@@ -72,13 +72,60 @@ namespace nm_canvasPanel
         public Button userNameConfirmCancel_BT;
 
         // ゲーム選択画面セル ランク
+        // TODO:newステージセレクト関連
         public Button selectViewClose_BT;
+        public Image selectCellView1_1_BG;
+        public Image selectCellView1_2_BG;
+        public Image selectCellView2_1_BG;
+        public Image selectCellView2_2_BG;
+        public Image selectCellView3_1_BG;
+        public Image selectCellView3_2_BG;
+        public Button stage1_1_bt;
+        public Button stage1_2_bt;
+        public Button stage1_3_bt;
+        public Button stage2_1_bt;
+        public Button stage2_2_bt;
+        public Button stage2_3_bt;
+        public Button stage3_1_bt;
+        public Button stage3_2_bt;
+        public Button stage3_3_bt;
+        public Button stage4_1_bt;
+        public Button stage4_2_bt;
+        public Button stage4_3_bt;
+        public Button stage5_1_bt;
+        public Button stage5_2_bt;
+        public Button stage5_3_bt;
+        public Button stage6_1_bt;
+        public Button stage6_2_bt;
+        public Button stage6_3_bt;
+        public Image stage1_1_Mask;
+        public Image stage1_2_Mask;
+        public Image stage1_3_Mask;
+        public Image stage2_1_Mask;
+        public Image stage2_2_Mask;
+        public Image stage2_3_Mask;
+        public Image stage3_1_Mask;
+        public Image stage3_2_Mask;
+        public Image stage3_3_Mask;
+        public Image stage4_1_Mask;
+        public Image stage4_2_Mask;
+        public Image stage4_3_Mask;
+        public Image stage5_1_Mask;
+        public Image stage5_2_Mask;
+        public Image stage5_3_Mask;
+        public Image stage6_1_Mask;
+        public Image stage6_2_Mask;
+        public Image stage6_3_Mask;
+
+
+        // TODO:旧ステージセレクト関連
+        //public Button selectViewClose_BT;
         public Image saveLevel1_1Image;
-		public Image saveLevel1_2Image;
-		public Image saveLevel2_1Image;
-		public Image saveLevel2_2Image;
-		public Image saveLevel3_1Image;
-		public Image saveLevel3_2Image;
+        public Image saveLevel1_2Image;
+        public Image saveLevel2_1Image;
+        public Image saveLevel2_2Image;
+        public Image saveLevel3_1Image;
+        public Image saveLevel3_2Image;
         public Image selectView1_1_BG;
         public Image selectView1_2_BG;
         public Image selectView2_1_BG;
@@ -86,11 +133,11 @@ namespace nm_canvasPanel
         public Image selectView3_1_BG;
         public Image selectView3_2_BG;
         public Button selectView1_1;
-		public Button selectView1_2;
-		public Button selectView2_1;
-		public Button selectView2_2;
-		public Button selectView3_1;
-		public Button selectView3_2;
+        public Button selectView1_2;
+        public Button selectView2_1;
+        public Button selectView2_2;
+        public Button selectView3_1;
+        public Button selectView3_2;
         // TODO:追加 1-1-6 ゲームステージ選択メニュー画面修正
         // セーブデータ有り時の確認画面
         public Image startSaveLevelConfirm_View;
@@ -1429,12 +1476,12 @@ namespace nm_canvasPanel
 
             // new game select view
             Vector3 gselect_scal = game_select_view.transform.localScale;
-			gselect_scal.x = gselect_scal.x * screen_width_per;
-			gselect_scal.y = gselect_scal.y * screen_width_per;
-			game_select_view.transform.localScale = gselect_scal;
-			Vector3 gf_pos = game_select_view.transform.position;
-			gf_pos.y = -(Screen.height - safeAreaHight);
-			game_select_view.transform.position = gf_pos;
+            gselect_scal.x = gselect_scal.x * screen_width_per;
+            gselect_scal.y = gselect_scal.y * screen_width_per;
+            game_select_view.transform.localScale = gselect_scal;
+            Vector3 gf_pos = game_select_view.transform.position;
+            gf_pos.y = -(Screen.height - safeAreaHight);
+            game_select_view.transform.position = gf_pos;
 
             // new game stage select view
             Vector3 gsselect_scal = game_stage_select_view.transform.localScale;
@@ -2913,11 +2960,120 @@ namespace nm_canvasPanel
         // ステージメニューの作成　gameselectView
         private void Create_GameSelectView() {
 
-
             selectViewClose_BT.transform.tag = "99";
             selectViewClose_BT.GetComponent<Button>().onClick.RemoveAllListeners();
             selectViewClose_BT.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell(selectViewClose_BT));
+            // TODO:newステージセレクト関連
+            stage1_1_bt.transform.tag = "1";
+            stage1_1_bt.GetComponent<Button>().onClick.RemoveAllListeners();
+            stage1_1_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell(stage1_1_bt));
+            setGameBadge(stage1_1_bt, 1);
+            //setStageLevelSelectBTTotalClearInfo(1,1);
 
+            stage1_2_bt.transform.tag = "2";
+            stage1_2_bt.GetComponent<Button>().onClick.RemoveAllListeners();
+            stage1_2_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell(stage1_2_bt));
+            setGameBadge(stage1_2_bt, 1);
+            //setStageLevelSelectBTTotalClearInfo(1, 2);
+
+            stage1_3_bt.transform.tag = "3";
+            stage1_3_bt.GetComponent<Button>().onClick.RemoveAllListeners();
+            stage1_3_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell(stage1_3_bt));
+            setGameBadge(stage1_3_bt, 1);
+            //setStageLevelSelectBTTotalClearInfo(1, 3);
+
+            stage2_1_bt.transform.tag = "4";
+            stage2_1_bt.GetComponent<Button>().onClick.RemoveAllListeners();
+            stage2_1_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell(stage2_1_bt));
+            setGameBadge(stage2_1_bt, 1);
+            //setStageLevelSelectBTTotalClearInfo(2, 1);
+
+            stage2_2_bt.transform.tag = "5";
+            stage2_2_bt.GetComponent<Button>().onClick.RemoveAllListeners();
+            stage2_2_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell(stage2_2_bt));
+            setGameBadge(stage2_2_bt, 1);
+            //setStageLevelSelectBTTotalClearInfo(2, 2);
+
+            stage2_3_bt.transform.tag = "6";
+            stage2_3_bt.GetComponent<Button>().onClick.RemoveAllListeners();
+            stage2_3_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell(stage2_3_bt));
+            setGameBadge(stage2_3_bt, 1);
+            //setStageLevelSelectBTTotalClearInfo(2, 3);
+
+            stage3_1_bt.transform.tag = "7";
+            stage3_1_bt.GetComponent<Button>().onClick.RemoveAllListeners();
+            stage3_1_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell(stage3_1_bt));
+            setGameBadge(stage3_1_bt, 1);
+            //setStageLevelSelectBTTotalClearInfo(3, 1);
+
+            stage3_2_bt.transform.tag = "8";
+            stage3_2_bt.GetComponent<Button>().onClick.RemoveAllListeners();
+            stage3_2_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell(stage3_2_bt));
+            setGameBadge(stage3_2_bt, 1);
+            //setStageLevelSelectBTTotalClearInfo(3, 2);
+
+            stage3_3_bt.transform.tag = "9";
+            stage3_3_bt.GetComponent<Button>().onClick.RemoveAllListeners();
+            stage3_3_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell(stage3_3_bt));
+            setGameBadge(stage3_3_bt, 1);
+            //setStageLevelSelectBTTotalClearInfo(3, 3);
+
+            stage4_1_bt.transform.tag = "10";
+            stage4_1_bt.GetComponent<Button>().onClick.RemoveAllListeners();
+            stage4_1_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell(stage4_1_bt));
+            setGameBadge(stage4_1_bt, 1);
+            //setStageLevelSelectBTTotalClearInfo(4, 1);
+
+            stage4_2_bt.transform.tag = "11";
+            stage4_2_bt.GetComponent<Button>().onClick.RemoveAllListeners();
+            stage4_2_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell(stage4_2_bt));
+            setGameBadge(stage4_2_bt, 1);
+            //setStageLevelSelectBTTotalClearInfo(4, 2);
+
+            stage4_3_bt.transform.tag = "12";
+            stage4_3_bt.GetComponent<Button>().onClick.RemoveAllListeners();
+            stage4_3_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell(stage4_3_bt));
+            setGameBadge(stage4_3_bt, 1);
+            //setStageLevelSelectBTTotalClearInfo(4, 3);
+
+            stage5_1_bt.transform.tag = "13";
+            stage5_1_bt.GetComponent<Button>().onClick.RemoveAllListeners();
+            stage5_1_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell(stage5_1_bt));
+            setGameBadge(stage5_1_bt, 1);
+            //setStageLevelSelectBTTotalClearInfo(5, 1);
+
+            stage5_2_bt.transform.tag = "14";
+            stage5_2_bt.GetComponent<Button>().onClick.RemoveAllListeners();
+            stage5_2_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell(stage5_2_bt));
+            setGameBadge(stage5_2_bt, 1);
+            //setStageLevelSelectBTTotalClearInfo(5, 2);
+
+            stage5_3_bt.transform.tag = "15";
+            stage5_3_bt.GetComponent<Button>().onClick.RemoveAllListeners();
+            stage5_3_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell(stage5_3_bt));
+            setGameBadge(stage5_3_bt, 1);
+            //setStageLevelSelectBTTotalClearInfo(5, 3);
+
+            stage6_1_bt.transform.tag = "16";
+            stage6_1_bt.GetComponent<Button>().onClick.RemoveAllListeners();
+            stage6_1_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell(stage6_1_bt));
+            setGameBadge(stage6_1_bt, 1);
+            //setStageLevelSelectBTTotalClearInfo(6, 1);
+
+            stage6_2_bt.transform.tag = "17";
+            stage6_2_bt.GetComponent<Button>().onClick.RemoveAllListeners();
+            stage6_2_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell(stage6_2_bt));
+            setGameBadge(stage6_2_bt, 1);
+            //setStageLevelSelectBTTotalClearInfo(6, 2);
+
+            stage6_3_bt.transform.tag = "18";
+            stage6_3_bt.GetComponent<Button>().onClick.RemoveAllListeners();
+            stage6_3_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell(stage6_3_bt));
+            setGameBadge(stage6_3_bt, 1);
+            //setStageLevelSelectBTTotalClearInfo(6, 3);
+
+
+            // TODO:旧ステージセレクト関連
             selectView1_1.transform.tag = "1";
 			selectView1_1.GetComponent<Button>().onClick.RemoveAllListeners();
 			selectView1_1.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell(selectView1_1));
@@ -2961,6 +3117,49 @@ namespace nm_canvasPanel
             setStageSelectBTTotalClearInfo(6);
 
         }
+        // TODO:new ゲームステージ選択メニュー画面修正
+/*        void setStageLevelSelectBTTotalClearInfo(int stageno, int level)
+        {
+            // トータルプレイ時間
+            long totalPlayTime = 0;
+            long totalLostCount = 0;
+
+            IDictionary dt = (IDictionary)cubersFile.stage[stageno - 1].leveldata[level - 1];
+            // プレイ時間（秒）
+            totalPlayTime += (long)dt["playtime"];
+            // トータルロストカウント
+            totalLostCount += (long)dt["lostcount"];
+            var span = new TimeSpan(0, 0, (int)totalPlayTime);
+            var hhmmss = span.ToString(@"hh\:mm\:ss");
+            switch (stageno)
+            {
+                case 1:
+                    cleartime1_1.gameObject.GetComponent<Text>().text = hhmmss;
+                    totallost1_1_count.gameObject.GetComponent<Text>().text = totalLostCount.ToString();
+                    break;
+                case 2:
+                    cleartime1_2.gameObject.GetComponent<Text>().text = hhmmss;
+                    totallost1_2_count.gameObject.GetComponent<Text>().text = totalLostCount.ToString();
+                    break;
+                case 3:
+                    cleartime2_1.gameObject.GetComponent<Text>().text = hhmmss;
+                    totallost2_1_count.gameObject.GetComponent<Text>().text = totalLostCount.ToString();
+                    break;
+                case 4:
+                    cleartime2_2.gameObject.GetComponent<Text>().text = hhmmss;
+                    totallost2_2_count.gameObject.GetComponent<Text>().text = totalLostCount.ToString();
+                    break;
+                case 5:
+                    cleartime3_1.gameObject.GetComponent<Text>().text = hhmmss;
+                    totallost3_1_count.gameObject.GetComponent<Text>().text = totalLostCount.ToString();
+                    break;
+                case 6:
+                    cleartime3_2.gameObject.GetComponent<Text>().text = hhmmss;
+                    totallost3_2_count.gameObject.GetComponent<Text>().text = totalLostCount.ToString();
+                    break;
+            }
+        }
+*/
         // TODO:1-1-6 ゲームステージ選択メニュー画面修正
         void setStageSelectBTTotalClearInfo(int stageno)
         {
@@ -3070,6 +3269,47 @@ namespace nm_canvasPanel
 
                 }
         */
+        // ステージ選択ボタンマスクチェック＆バッジセット
+        void setGameBadge(Button bt, int i)
+        {
+            stage1_1_bt.gameObject.SetActive(true);
+            stage1_2_bt.gameObject.SetActive(false);
+            stage1_3_bt.gameObject.SetActive(false);
+            stage2_1_bt.gameObject.SetActive(false);
+            stage2_2_bt.gameObject.SetActive(false);
+            stage2_3_bt.gameObject.SetActive(false);
+            stage3_1_bt.gameObject.SetActive(false);
+            stage3_2_bt.gameObject.SetActive(false);
+            stage3_3_bt.gameObject.SetActive(false);
+            stage4_1_bt.gameObject.SetActive(false);
+            stage4_2_bt.gameObject.SetActive(false);
+            stage4_3_bt.gameObject.SetActive(false);
+            stage5_1_bt.gameObject.SetActive(false);
+            stage5_2_bt.gameObject.SetActive(false);
+            stage5_3_bt.gameObject.SetActive(false);
+            stage6_1_bt.gameObject.SetActive(false);
+            stage6_2_bt.gameObject.SetActive(false);
+            stage6_3_bt.gameObject.SetActive(false);
+            stage1_1_Mask.gameObject.SetActive(false);
+            stage1_2_Mask.gameObject.SetActive(true);
+            stage1_3_Mask.gameObject.SetActive(true);
+            stage2_1_Mask.gameObject.SetActive(true);
+            stage2_2_Mask.gameObject.SetActive(true);
+            stage2_3_Mask.gameObject.SetActive(true);
+            stage3_1_Mask.gameObject.SetActive(true);
+            stage3_2_Mask.gameObject.SetActive(true);
+            stage3_3_Mask.gameObject.SetActive(true);
+            stage4_1_Mask.gameObject.SetActive(true);
+            stage4_2_Mask.gameObject.SetActive(true);
+            stage4_3_Mask.gameObject.SetActive(true);
+            stage5_1_Mask.gameObject.SetActive(true);
+            stage5_2_Mask.gameObject.SetActive(true);
+            stage5_3_Mask.gameObject.SetActive(true);
+            stage6_1_Mask.gameObject.SetActive(true);
+            stage6_2_Mask.gameObject.SetActive(true);
+            stage6_3_Mask.gameObject.SetActive(true);
+
+        }
         private Sprite spt;
         private Image img;
         // ステージ選択ボタンマスクチェック＆バッジセット

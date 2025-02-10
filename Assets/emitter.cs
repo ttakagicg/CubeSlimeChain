@@ -64,6 +64,8 @@ namespace nm_emitter
 		// TODO:追加　ステージレベルMAX判定に使用
 		public const int stageLevel_max = 5;
 		public const int chainExplosion_userLeve = 2; // 3
+		// TODO:new stage select 
+		public const int level_max = 3;
 
 		public const int monsterPositionCenterGroup = 1;
 		public const int monsterPositionCenterSideCenterGroup5 = 12;
