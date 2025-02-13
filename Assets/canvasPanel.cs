@@ -413,12 +413,19 @@ namespace nm_canvasPanel
         public TextMeshProUGUI startCountDown_text3;
         public TextMeshProUGUI startCountDown_text4;
         public TextMeshProUGUI startCountDown_text5;
+        // itemGet Message disp.
+        public Image itemGetView;
+        public TextMeshProUGUI itemGetTitle;
+        public TextMeshProUGUI itemGetCount;
+        public TextMeshProUGUI itemGetMessage;
         public Text gamePoint;
         public Text gamePointLabel;
 
         // 取得アイテム表示
         public Text coin_text;
-        public Text juely_text;
+        public Text jewelry_text;
+        public Image jewelryCountIcon;
+        public Image jewelryCountStarIcon;
 
         public Image goldItem_BG;
         public Image goldItem_1;
@@ -1421,6 +1428,19 @@ namespace nm_canvasPanel
             //pos_st.y = monsterColorCountView.transform.position.y - (startCountDown_text.rectTransform.sizeDelta.y * screen_width_per);
             startCountDown_text.transform.position = pos_st;
 
+            // アイテムゲットテキスト表示
+            Vector3 scal_igt = itemGetView.transform.localScale;
+            scal_igt.x = scal_igt.x * screen_width_per;
+            scal_igt.y = scal_igt.y * screen_width_per;
+            itemGetView.transform.localScale = scal_igt;
+            Vector3 pos_igt = itemGetView.transform.position;
+            pos_igt.x = pos_igt.x * screen_width_per;
+            pos_st.y = (Screen.height - safeAreaHight) - (center_header.rectTransform.sizeDelta.y + monsterColorCountView.rectTransform.sizeDelta.y + waitingTimerGauge_BG.rectTransform.sizeDelta.y + itemGetView.rectTransform.sizeDelta.y + 20) * scal2.y;
+            itemGetView.transform.position = pos_igt;
+            itemGetView.gameObject.SetActive(false);
+
+            jewelryCountStarIcon.gameObject.SetActive(false);
+
             s_monsterColorCountView = monsterColorCountView;
             s_monsterColorCountView.gameObject.SetActive(false);
             s_monsterSlimeColorCountView = monsterColorCountSceen2View;
@@ -2315,30 +2335,74 @@ namespace nm_canvasPanel
         // TODO:連鎖　MAX chain count情報及び取得予定アイテム数表示の拡大表示処理
         public void chainInfoEffectDSP()
         {
-            //s_max_chain_count_BG.gameObject.SetActive(true);
-            //s_silver_item_GET_BG.gameObject.SetActive(true);
-            /*
-            Vector3 scal = s_silver_item_GET_BG.transform.localScale;
-            scal.x = m_hit_zoom;
-            scal.y = m_hit_zoom;
-            scal.z = m_hit_zoom;
-            s_silver_item_GET_BG.transform.localScale = scal;
-            */
-            s_silver_item_get_text.text = "✖︎　" + emitter.chainExplosionLinePlayCount.ToString();
+            // ジュエリーカウントアップエフェクト表示
+            var seq = DOTween.Sequence();
+            seq.Append(jewelryCountIcon.transform.DOScale(new Vector3(1.5f, 1.5f), 0.5f));
+            seq.Append(jewelryCountIcon.transform.DOScale(new Vector3(1.5f, 1.5f), 2.0f));
+            seq.OnComplete(() =>
+            {
+                // アニメーションが終了時によばれる
+                Vector3 scal = jewelryCountIcon.gameObject.transform.localScale;
+                scal.x = 1.0f;
+                scal.y = 1.0f;
+                jewelryCountIcon.gameObject.transform.localScale = scal;
+            });
+            //  star disp.
+            Vector2 scale1 = jewelryCountStarIcon.rectTransform.localScale;
+            scale1.x = 0.1f;
+            scale1.y = 0.1f;
+            jewelryCountStarIcon.rectTransform.localScale = scale1;
+            jewelryCountStarIcon.rectTransform.rotation = Quaternion.Euler(0, 0, 0);
+            jewelryCountStarIcon.gameObject.SetActive(true);
 
-            if (s_max_chain_count_text.text == "") {
-                s_max_chain_count_text.text = "0";
-            }
-            if (int.Parse(s_max_chain_count_text.text) < emitter.chainExplosionLinePlayMAX) { 
-                /*
-                Vector3 scal_max = s_max_chain_count_BG.transform.localScale;
-                scal_max.x = m_hit_zoom;
-                scal_max.y = m_hit_zoom;
-                scal_max.z = m_hit_zoom;
-                s_max_chain_count_BG.transform.localScale = scal_max;
-                */
-                s_max_chain_count_text.text = emitter.chainExplosionLinePlayMAX.ToString();
-            }
+            var seq1 = DOTween.Sequence();
+            seq1.Append(jewelryCountStarIcon.rectTransform.DOScale(new Vector3(2.0f, 2.0f), 1.0f));
+            seq1.Join(jewelryCountStarIcon.rectTransform.DORotate(new Vector3(0f, 0f, 180f),   // 終了時点のRotation
+                2.0f                    // アニメーション時間
+            ));
+            seq1.OnComplete(() => {
+                // アニメーションが終了時によばれる
+                jewelryCountStarIcon.gameObject.SetActive(false);
+            });
+
+            // ジュエリーアイテムゲットメッセージ表示
+            itemGetView.gameObject.SetActive(true);
+
+            var seq2 = DOTween.Sequence();
+            seq2.Append(itemGetView.transform.DOScale(new Vector3(1.0f, 1.0f), 1.0f));
+            seq2.Append(itemGetView.transform.DOScale(new Vector3(1.0f, 1.0f), 1.0f));　// 表示時間の為２度設定 1.0f→2.0fよりスムーズ
+            seq2.OnComplete(() =>
+            {
+                // アニメーションが終了時によばれる
+                itemGetView.gameObject.SetActive(false);
+            });
+
+
+            ////s_max_chain_count_BG.gameObject.SetActive(true);
+            ////s_silver_item_GET_BG.gameObject.SetActive(true);
+            ///*
+            //Vector3 scal = s_silver_item_GET_BG.transform.localScale;
+            //scal.x = m_hit_zoom;
+            //scal.y = m_hit_zoom;
+            //scal.z = m_hit_zoom;
+            //s_silver_item_GET_BG.transform.localScale = scal;
+            //*/
+            //s_silver_item_get_text.text = "✖︎　" + emitter.chainExplosionLinePlayCount.ToString();
+
+            //if (s_max_chain_count_text.text == "") {
+            //    s_max_chain_count_text.text = "0";
+            //}
+            //if (int.Parse(s_max_chain_count_text.text) < emitter.chainExplosionLinePlayMAX) { 
+            //    /*
+            //    Vector3 scal_max = s_max_chain_count_BG.transform.localScale;
+            //    scal_max.x = m_hit_zoom;
+            //    scal_max.y = m_hit_zoom;
+            //    scal_max.z = m_hit_zoom;
+            //    s_max_chain_count_BG.transform.localScale = scal_max;
+            //    */
+            //    s_max_chain_count_text.text = emitter.chainExplosionLinePlayMAX.ToString();
+            //}
+
         }
 
 
@@ -4988,9 +5052,9 @@ namespace nm_canvasPanel
         static long showSilverItem = 0;
         static long showGoldItem = 0;
         static long showCoin = 0;
-        static long showJuely = 0;
+        static long showjewelry = 0;
         static int coinAdd = 10;
-        static int juelyAdd = 10;
+        static int jewelryAdd = 10;
         static float bouns = 1.0f;
         // アイテム表示非表示処理　SW：１シルバーアイテム　２：ゴールドアイテム
         void showItemAllClear(int sw)
@@ -5017,7 +5081,7 @@ namespace nm_canvasPanel
             // 表示コイン数セット
             showCoin = cubersFile.goldCoin_Count;
             // 表示コイン数セット
-            showJuely = cubersFile.juely_Count;
+            showjewelry = cubersFile.jewelry_Count;
 
             // プレイ画面ゴールド、シルバーアイテム表示セット
             for (int i = 0; i < 10; i++)
@@ -5056,7 +5120,7 @@ namespace nm_canvasPanel
             //　コイン数表示
             coin_text.text = cubersFile.goldCoin_Count.ToString();
             //　juely数表示
-            juely_text.text = cubersFile.juely_Count.ToString();
+            jewelry_text.text = cubersFile.jewelry_Count.ToString();
 
         }
         // TODO:追加　1-1-5 獲得アイテム表示処理　メソッド
@@ -5134,8 +5198,8 @@ namespace nm_canvasPanel
                     // コイン加算処理は、setItemData()で処理済み
                     showCoin =+ (long)(coinAdd * bouns);
                     coin_text.text = showCoin.ToString();
-                    showJuely = +(long)(juelyAdd * bouns);
-                    juely_text.text = showJuely.ToString();
+                    showjewelry = +(long)(jewelryAdd * bouns);
+                    jewelry_text.text = showjewelry.ToString();
                 }
             }
             else

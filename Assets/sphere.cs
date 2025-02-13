@@ -24,7 +24,7 @@ namespace  nm_sphere {
 		public float now_angle; // one_angle count
 		public float wait_time; //animation wait time
 	}
-	
+
 	public class sphere : MonoBehaviour {
 
 		public float screen_width;
@@ -51,8 +51,16 @@ namespace  nm_sphere {
 		public static char_obj_animation[,,] char_obj_anim;
 		public Material Spher_r;
 
-		public GameObject pointText;
-		public static GameObject s_pointText;
+		public GameObject chaineCountGreenText;
+		public GameObject chaineCountYellowText;
+		public GameObject chaineCountRedText;
+		public GameObject chaineCountPurpleText;
+		public GameObject chaineCountBlueText;
+		public static GameObject s_chaineCountGreenText;
+		public static GameObject s_chaineCountYellowText;
+		public static GameObject s_chaineCountRedText;
+		public static GameObject s_chaineCountPurpleText;
+		public static GameObject s_chaineCountBlueText;
 		public static GameObject[] obj_pointText;
 		public static GameObject pointText_w;
 
@@ -102,8 +110,8 @@ namespace  nm_sphere {
 		public static object emit_obj;
 
 		// Use this for initialization
-		void Start () {
-		
+		void Start() {
+
 			start_game = false;
 			sw_sphere = false;
 			gameover = false;
@@ -121,7 +129,11 @@ namespace  nm_sphere {
 
 			gameStatus_text = "";
 
-			s_pointText = pointText;
+			s_chaineCountGreenText = chaineCountGreenText;
+			s_chaineCountYellowText = chaineCountYellowText;
+			s_chaineCountRedText = chaineCountRedText;
+			s_chaineCountPurpleText = chaineCountPurpleText;
+			s_chaineCountBlueText = chaineCountBlueText;
 			s_canvas = canvas;
 
 			s_number = number;
@@ -137,14 +149,14 @@ namespace  nm_sphere {
 			s_num_9 = num_9;
 
 		}
-		
+
 		// Update is called once per frame
 		public static float timer = 10;
 		const int time_keta = 2;
-		void Update () {
-		
+		void Update() {
+
 			if (gameover) {
-//				point_count = 0;
+				//				point_count = 0;
 				GetComponent<emitter>().stop_BGM();
 			}
 			else if (complete) {
@@ -159,15 +171,15 @@ namespace  nm_sphere {
 				// モンスタープロパティ初期化
 				GetComponent<monster>().init_monster_property();
 
-                game_start();
+				game_start();
 				start_game = false;
 				timer_Stop = false;
 			}
 			else if (hitpointcount > 0) {
 
 				for (int i = 0; i < hitpointcount; i++) {
-//					obj_3dtext[i].transform.position = new Vector3(obj_3dtext[i].transform.position.x, Mathf.PingPong(Time.time,0.5f) + 1.5f,obj_3dtext[i].transform.position.z);
-//					obj_3dtext[i].transform.position = new Vector3(obj_3dtext[i].transform.position.x, Mathf.PingPong(Time.time,0.2f) + 1.5f,obj_3dtext[i].transform.position.z);
+					//					obj_3dtext[i].transform.position = new Vector3(obj_3dtext[i].transform.position.x, Mathf.PingPong(Time.time,0.5f) + 1.5f,obj_3dtext[i].transform.position.z);
+					//					obj_3dtext[i].transform.position = new Vector3(obj_3dtext[i].transform.position.x, Mathf.PingPong(Time.time,0.2f) + 1.5f,obj_3dtext[i].transform.position.z);
 				}
 			}
 			else {
@@ -179,69 +191,69 @@ namespace  nm_sphere {
 		}
 		// char obj wait animation
 		void char_roteto_animation() {
-		
-			for (int j=0; j<emitter.cubeCount; j++) {
-				for (int k=0; k<emitter.cubeCount; k++) {
-					for (int i=0; i<emitter.cubeCount; i++) {
+
+			for (int j = 0; j < emitter.cubeCount; j++) {
+				for (int k = 0; k < emitter.cubeCount; k++) {
+					for (int i = 0; i < emitter.cubeCount; i++) {
 						// char obj
-						if(char_obj_anim[j,k,i] != null && spheres[j,k,i] != null) {
+						if (char_obj_anim[j, k, i] != null && spheres[j, k, i] != null) {
 
-							if (char_obj_anim[j,k,i].wait_time != 0) {
+							if (char_obj_anim[j, k, i].wait_time != 0) {
 
-								char_obj_anim[j,k,i].wait_time -= Time.deltaTime;
+								char_obj_anim[j, k, i].wait_time -= Time.deltaTime;
 								int ke = time_keta;
 								string st = @"D" + ke.ToString();
-								int val = (int)char_obj_anim[j,k,i].wait_time;
+								int val = (int)char_obj_anim[j, k, i].wait_time;
 								string str = val.ToString(st);
-								
+
 								if (int.Parse(str) <= 0) {
 									//  roteto angle set
-									char_obj_anim[j,k,i].set_angle = UnityEngine.Random.Range(0,180);
+									char_obj_anim[j, k, i].set_angle = UnityEngine.Random.Range(0, 180);
 									// 1frame roteto angle
-									char_obj_anim[j,k,i].one_angle = UnityEngine.Random.Range(1,20);
+									char_obj_anim[j, k, i].one_angle = UnityEngine.Random.Range(1, 20);
 									// roteto cunt reset
-									char_obj_anim[j,k,i].now_angle = 0;
+									char_obj_anim[j, k, i].now_angle = 0;
 
-									char_obj_anim[j,k,i].wait_time = 0;
+									char_obj_anim[j, k, i].wait_time = 0;
 
 								}
 							}
 							else {
 
-								char_obj_anim[j,k,i].now_angle++;
+								char_obj_anim[j, k, i].now_angle++;
 
-								spheres[j,k,i].transform.Rotate(Vector3.up * char_obj_anim[j,k,i].one_angle);
+								spheres[j, k, i].transform.Rotate(Vector3.up * char_obj_anim[j, k, i].one_angle);
 
-								if( char_obj_anim[j,k,i].now_angle >= char_obj_anim[j,k,i].set_angle/char_obj_anim[j,k,i].one_angle) {
+								if (char_obj_anim[j, k, i].now_angle >= char_obj_anim[j, k, i].set_angle / char_obj_anim[j, k, i].one_angle) {
 									// animation wait time set
-									char_obj_anim[j,k,i].wait_time = UnityEngine.Random.Range(1,3);
- 
-/*									// スライムモンスター待機アニメーション切り替え処理
-									if (cubersFile.game_Sceen == 2)
-									{
-										Animator ani = spheres[j, k, i].GetComponent<Animator>();
-										AnimatorClipInfo[] clipInfo = ani.GetCurrentAnimatorClipInfo(0);
-										string clipName = clipInfo[0].clip.name;
-										// TODO: 待機中アニメーション複数設定
-										if (ani.GetCurrentAnimatorStateInfo(0).IsName("Anim_Slime_Walking_04"))
-										{
-											string str1 = monster.monster_instance.PlayMonsterAnimation(monster_situation.noraml_monster, cubersFile.game_Sceen);
-											ani.Play(str1);
-										}
-										else
-										{
-											string str1 = monster.monster_instance.PlayMonsterAnimation(monster_situation.wakeup_monster, cubersFile.game_Sceen);
-											ani.Play(str1);
-										}
-									} */
+									char_obj_anim[j, k, i].wait_time = UnityEngine.Random.Range(1, 3);
+
+									/*									// スライムモンスター待機アニメーション切り替え処理
+																		if (cubersFile.game_Sceen == 2)
+																		{
+																			Animator ani = spheres[j, k, i].GetComponent<Animator>();
+																			AnimatorClipInfo[] clipInfo = ani.GetCurrentAnimatorClipInfo(0);
+																			string clipName = clipInfo[0].clip.name;
+																			// TODO: 待機中アニメーション複数設定
+																			if (ani.GetCurrentAnimatorStateInfo(0).IsName("Anim_Slime_Walking_04"))
+																			{
+																				string str1 = monster.monster_instance.PlayMonsterAnimation(monster_situation.noraml_monster, cubersFile.game_Sceen);
+																				ani.Play(str1);
+																			}
+																			else
+																			{
+																				string str1 = monster.monster_instance.PlayMonsterAnimation(monster_situation.wakeup_monster, cubersFile.game_Sceen);
+																				ani.Play(str1);
+																			}
+																		} */
 								}
 							}
 
 							// y position check
-							if (spheres[j,k,i].transform.position.y < -sphere_scale * sphere_Count) {
+							if (spheres[j, k, i].transform.position.y < -sphere_scale * sphere_Count) {
 								// IOStatus true == IN
-								monster.monster_instance.setMonster_IOstatus(spheres[j,k,i].tag, false);
-								monster_reset(spheres[j,k,i].gameObject);
+								monster.monster_instance.setMonster_IOstatus(spheres[j, k, i].tag, false);
+								monster_reset(spheres[j, k, i].gameObject);
 								now_sphere_count--;
 							}
 
@@ -259,7 +271,7 @@ namespace  nm_sphere {
 			string st = @"D" + k.ToString();
 			int val = (int)timer;
 			string str = val.ToString(st);
-			
+
 			if (int.Parse(str) < 0) {
 
 				gameover = false;
@@ -292,7 +304,7 @@ namespace  nm_sphere {
 				monster_floor_position_correction = 5;
 			}
 
-				Resources.UnloadUnusedAssets();
+			Resources.UnloadUnusedAssets();
 			sphere_clear();
 			sphere_on();
 			GetComponent<emitter>().reset_Cube();
@@ -306,19 +318,19 @@ namespace  nm_sphere {
 			if (canvasPanel.startCountDown) {
 				canvasPanel.timeChange = false;
 				counter.timer = startTimer;
-//				counter.timer = emitter.startCountDownTimer;
-//				counter.timer = emitter.gravity_Time;
-//				counter.timer = 1;
+				//				counter.timer = emitter.startCountDownTimer;
+				//				counter.timer = emitter.gravity_Time;
+				//				counter.timer = 1;
 			}
 			else {
 				counter.timer = startTimer;
-//				counter.timer = emitter.gravity_Time;
-//				counter.timer = 1;
+				//				counter.timer = emitter.gravity_Time;
+				//				counter.timer = 1;
 			}
 			// カウントダウンを含めた開始までのタイマー　タイマー0で落下オブジェクトが出現する
-//			counter.timer = emitter.startCountDownTimer - 2;
-//			emitter.sw_floorUpDown = true;
-//			emitter.updown_timer = -1;
+			//			counter.timer = emitter.startCountDownTimer - 2;
+			//			emitter.sw_floorUpDown = true;
+			//			emitter.updown_timer = -1;
 		}
 
 		public static void game_over_proc() {
@@ -329,18 +341,18 @@ namespace  nm_sphere {
 			int mod = (int)cubersFile.now_play_stage % emitter.chainExplosion_userLeve;
 			monster_color color;
 
-			for (int j=0; j<sphere_Count; j++) {
-				for (int k=0; k<sphere_Count; k++) {
-					for (int i=0; i<sphere_Count; i++) {
+			for (int j = 0; j < sphere_Count; j++) {
+				for (int k = 0; k < sphere_Count; k++) {
+					for (int i = 0; i < sphere_Count; i++) {
 
-						if (spheres [j,k,i] != null) {
+						if (spheres[j, k, i] != null) {
 							if (mod == 0) {
 								color = monster_color.green_monster;
 							} else {
-								color = monster.monster_instance.getMonster_color(spheres [j,k,i].tag);
+								color = monster.monster_instance.getMonster_color(spheres[j, k, i].tag);
 							}
-							change_MonsterMaterial(spheres [j,k,i], monster_situation.death_monster, color);								
-							Animator ani = spheres [j,k,i].GetComponent<Animator>();
+							change_MonsterMaterial(spheres[j, k, i], monster_situation.death_monster, color);
+							Animator ani = spheres[j, k, i].GetComponent<Animator>();
 							string str = monster.monster_instance.PlayMonsterAnimation(monster_situation.death_monster, cubersFile.game_Sceen);
 							ani.Play(str);
 							//ani.Play("deth01");
@@ -358,55 +370,55 @@ namespace  nm_sphere {
 			monster_color color;
 
 			float speed = 3;
-			for (int j=0; j<sphere_Count; j++) {
-				for (int k=0; k<sphere_Count; k++) {
-					for (int i=0; i<sphere_Count; i++) {
-						
-						if (spheres [j,k,i] != null) {
+			for (int j = 0; j < sphere_Count; j++) {
+				for (int k = 0; k < sphere_Count; k++) {
+					for (int i = 0; i < sphere_Count; i++) {
+
+						if (spheres[j, k, i] != null) {
 							if (mod == 0) {
 								color = monster_color.green_monster;
 							} else {
-								color = monster.monster_instance.getMonster_color(spheres [j,k,i].tag);
+								color = monster.monster_instance.getMonster_color(spheres[j, k, i].tag);
 							}
-							change_MonsterMaterial(spheres [j,k,i], monster_situation.happy_monster, color);								
-							Animator ani = spheres [j,k,i].GetComponent<Animator>();
+							change_MonsterMaterial(spheres[j, k, i], monster_situation.happy_monster, color);
+							Animator ani = spheres[j, k, i].GetComponent<Animator>();
 							string str = monster.monster_instance.PlayMonsterAnimation(monster_situation.happy_monster, cubersFile.game_Sceen);
 							ani.Play(str);
 							//ani.Play("paku");
 
-							GameObject obj = spheres [j,k,i].gameObject;
+							GameObject obj = spheres[j, k, i].gameObject;
 							obj.GetComponent<Rigidbody>().isKinematic = false;
 
-							int direction = UnityEngine.Random.Range(1,7);
-							switch(direction) {
-							case 1:
-								obj.GetComponent<Rigidbody>().AddForce(Vector3.up * speed,ForceMode.Acceleration);
-								obj.GetComponent<Rigidbody>().AddForce(Vector3.up * speed,ForceMode.VelocityChange);
-								break;
-							case 2:
-								obj.GetComponent<Rigidbody>().AddForce(Vector3.down * speed,ForceMode.Acceleration);
-								obj.GetComponent<Rigidbody>().AddForce(Vector3.down * speed,ForceMode.VelocityChange);
-								break;
-							case 3:
-								obj.GetComponent<Rigidbody>().AddForce(Vector3.left * speed,ForceMode.Acceleration);
-								obj.GetComponent<Rigidbody>().AddForce(Vector3.left * speed,ForceMode.VelocityChange);
-								break;
-							case 4:
-								obj.GetComponent<Rigidbody>().AddForce(Vector3.right * speed,ForceMode.Acceleration);
-								obj.GetComponent<Rigidbody>().AddForce(Vector3.right * speed,ForceMode.VelocityChange);
-								break;
-							case 5:
-								obj.GetComponent<Rigidbody>().AddForce(Vector3.forward * speed,ForceMode.Acceleration);
-								obj.GetComponent<Rigidbody>().AddForce(Vector3.forward * speed,ForceMode.VelocityChange);
-								break;
-							case 6:
-								obj.GetComponent<Rigidbody>().AddForce(Vector3.back * speed,ForceMode.Acceleration);
-								obj.GetComponent<Rigidbody>().AddForce(Vector3.back * speed,ForceMode.VelocityChange);
-								break;
-							default :
-								obj.GetComponent<Rigidbody>().AddForce(Vector3.up * speed,ForceMode.Acceleration);
-								obj.GetComponent<Rigidbody>().AddForce(Vector3.up * speed,ForceMode.VelocityChange);
-								break;
+							int direction = UnityEngine.Random.Range(1, 7);
+							switch (direction) {
+								case 1:
+									obj.GetComponent<Rigidbody>().AddForce(Vector3.up * speed, ForceMode.Acceleration);
+									obj.GetComponent<Rigidbody>().AddForce(Vector3.up * speed, ForceMode.VelocityChange);
+									break;
+								case 2:
+									obj.GetComponent<Rigidbody>().AddForce(Vector3.down * speed, ForceMode.Acceleration);
+									obj.GetComponent<Rigidbody>().AddForce(Vector3.down * speed, ForceMode.VelocityChange);
+									break;
+								case 3:
+									obj.GetComponent<Rigidbody>().AddForce(Vector3.left * speed, ForceMode.Acceleration);
+									obj.GetComponent<Rigidbody>().AddForce(Vector3.left * speed, ForceMode.VelocityChange);
+									break;
+								case 4:
+									obj.GetComponent<Rigidbody>().AddForce(Vector3.right * speed, ForceMode.Acceleration);
+									obj.GetComponent<Rigidbody>().AddForce(Vector3.right * speed, ForceMode.VelocityChange);
+									break;
+								case 5:
+									obj.GetComponent<Rigidbody>().AddForce(Vector3.forward * speed, ForceMode.Acceleration);
+									obj.GetComponent<Rigidbody>().AddForce(Vector3.forward * speed, ForceMode.VelocityChange);
+									break;
+								case 6:
+									obj.GetComponent<Rigidbody>().AddForce(Vector3.back * speed, ForceMode.Acceleration);
+									obj.GetComponent<Rigidbody>().AddForce(Vector3.back * speed, ForceMode.VelocityChange);
+									break;
+								default:
+									obj.GetComponent<Rigidbody>().AddForce(Vector3.up * speed, ForceMode.Acceleration);
+									obj.GetComponent<Rigidbody>().AddForce(Vector3.up * speed, ForceMode.VelocityChange);
+									break;
 							}
 
 						}
@@ -417,7 +429,7 @@ namespace  nm_sphere {
 		}
 
 		// モンスターマテリアルカラーチェンジ
-		public static  void change_MonsterMaterial(GameObject child1, monster_situation situation, monster_color color){
+		public static void change_MonsterMaterial(GameObject child1, monster_situation situation, monster_color color) {
 			if (child1.GetComponent<Renderer>() == null)
 			{
 				if (cubersFile.game_Sceen == 1)
@@ -446,36 +458,36 @@ namespace  nm_sphere {
 		// 洗濯ステージに該当するモンスターオブジェクト群を初期化（準備）
 		public void sphere_on() {
 
-			if(!sw_sphere) {
+			if (!sw_sphere) {
 
 				sw_sphere = true;
 
-				if (sphere_Count == 3)  sphere_totalCount = sphere_totalCount_3;
-				if (sphere_Count == 4)  sphere_totalCount = sphere_totalCount_4;
-				if (sphere_Count == 5)  sphere_totalCount = sphere_totalCount_5;
+				if (sphere_Count == 3) sphere_totalCount = sphere_totalCount_3;
+				if (sphere_Count == 4) sphere_totalCount = sphere_totalCount_4;
+				if (sphere_Count == 5) sphere_totalCount = sphere_totalCount_5;
 
 				int monsterCubePositionGroup = 0;
-					
+
 				screen_width = Screen.width;
 				screen_height = Screen.height;
-				float scale = emitter.cube_scale*10;
+				float scale = emitter.cube_scale * 10;
 
-				int half_sphereount = sphere_Count/2;
-				float offset = sphere_Count%2;
+				int half_sphereount = sphere_Count / 2;
+				float offset = sphere_Count % 2;
 				if (offset != 0) offset = 0;
-				else offset = scale/2;
+				else offset = scale / 2;
 
-//				int half_sphereount = sphere_Count/2;
-//				float offset = sphere_Count%2;
-//				if (offset != 0) offset = 0;
-//				else offset = scale/2;
+				//				int half_sphereount = sphere_Count/2;
+				//				float offset = sphere_Count%2;
+				//				if (offset != 0) offset = 0;
+				//				else offset = scale/2;
 
-				char_obj_anim = new char_obj_animation[sphere_Count,sphere_Count,sphere_Count];
+				char_obj_anim = new char_obj_animation[sphere_Count, sphere_Count, sphere_Count];
 
-				useGravitySpheres = new GameObject[sphere_Count*2];
+				useGravitySpheres = new GameObject[sphere_Count * 2];
 				if (spheres == null) {
 					int tagNameCount = 0;
-					spheres = new GameObject[sphere_Count,sphere_Count,sphere_Count];
+					spheres = new GameObject[sphere_Count, sphere_Count, sphere_Count];
 					Sphere_Main.GetComponent<Rigidbody>().useGravity = false;
 					Sphere_Main.GetComponent<SphereCollider>().enabled = false;
 
@@ -489,107 +501,107 @@ namespace  nm_sphere {
 					Double wx1;
 					Double wy1;
 					Double wz1;
-					for (int j=0; j<sphere_Count; j++) {
-						for (int k=0; k<sphere_Count; k++) {
-							for (int i=0; i<sphere_Count; i++) {
+					for (int j = 0; j < sphere_Count; j++) {
+						for (int k = 0; k < sphere_Count; k++) {
+							for (int i = 0; i < sphere_Count; i++) {
 
 								// cube position group set
-								monsterCubePositionGroup = setMosterPositionGroup(j,k,i);
+								monsterCubePositionGroup = setMosterPositionGroup(j, k, i);
 
 								if (sphere_Count == 3) {
 									// 3 × 3 × 3
 									if (k == 1 && i == 1 && j == 1) {
-										
+
 									}
 									else if (k == 1 && (i == 0 || i == 2) && j != 1) {
 										wx1 = Math.Round((-half_sphereount + i) * scale, 1, MidpointRounding.AwayFromZero);
 										str_x1 = wx1.ToString();
-										pos1.x = float.Parse(str_x1)/10;
+										pos1.x = float.Parse(str_x1) / 10;
 										wy1 = Math.Round((-half_sphereount + k) * scale + 200.0f, 1, MidpointRounding.AwayFromZero);
 										str_y1 = wy1.ToString();
-										pos1.y = float.Parse(str_y1)/10;
-										spheres [j,k,i] = (GameObject)Instantiate (Sphere_Main, new Vector3 (pos1.x, pos1.y, 0.0f), Quaternion.identity);
-//										spheres [j,k,i] = (GameObject)Instantiate (Sphere_Main, new Vector3 ((-half_sphereount + i) * scale, (-half_sphereount + k) * scale + 20.0f, 0.0f), Quaternion.identity);
+										pos1.y = float.Parse(str_y1) / 10;
+										spheres[j, k, i] = (GameObject)Instantiate(Sphere_Main, new Vector3(pos1.x, pos1.y, 0.0f), Quaternion.identity);
+										//										spheres [j,k,i] = (GameObject)Instantiate (Sphere_Main, new Vector3 ((-half_sphereount + i) * scale, (-half_sphereount + k) * scale + 20.0f, 0.0f), Quaternion.identity);
 									}
 									else if (k == 1 && (i == 0 || i == 2) && j == 1) {
 										wy1 = Math.Round((-half_sphereount + k) * scale + 200.0f, 1, MidpointRounding.AwayFromZero);
 										str_y1 = wy1.ToString();
-										pos1.y = float.Parse(str_y1)/10;
-										spheres [j,k,i] = (GameObject)Instantiate (Sphere_Main, new Vector3 (0.0f, pos1.y, 0.0f), Quaternion.identity);
-//										spheres [j,k,i] = (GameObject)Instantiate (Sphere_Main, new Vector3 (0.0f, (-half_sphereount + k) * scale + 20.0f, 0.0f), Quaternion.identity);
+										pos1.y = float.Parse(str_y1) / 10;
+										spheres[j, k, i] = (GameObject)Instantiate(Sphere_Main, new Vector3(0.0f, pos1.y, 0.0f), Quaternion.identity);
+										//										spheres [j,k,i] = (GameObject)Instantiate (Sphere_Main, new Vector3 (0.0f, (-half_sphereount + k) * scale + 20.0f, 0.0f), Quaternion.identity);
 									}
 									else if (k == 1 && i == 1 && (j == 0 || j == 2)) {
 										wy1 = Math.Round((-half_sphereount + k) * scale + 200.0f, 1, MidpointRounding.AwayFromZero);
 										str_y1 = wy1.ToString();
-										pos1.y = float.Parse(str_y1)/10;
-										spheres [j,k,i] = (GameObject)Instantiate (Sphere_Main, new Vector3 (0.0f, pos1.y, 0.0f), Quaternion.identity);
-//										spheres [j,k,i] = (GameObject)Instantiate (Sphere_Main, new Vector3 (0.0f, (-half_sphereount + k) * scale + 20.0f, 0.0f), Quaternion.identity);
+										pos1.y = float.Parse(str_y1) / 10;
+										spheres[j, k, i] = (GameObject)Instantiate(Sphere_Main, new Vector3(0.0f, pos1.y, 0.0f), Quaternion.identity);
+										//										spheres [j,k,i] = (GameObject)Instantiate (Sphere_Main, new Vector3 (0.0f, (-half_sphereount + k) * scale + 20.0f, 0.0f), Quaternion.identity);
 									}
 									else {
 										wx1 = Math.Round((-half_sphereount + i) * scale, 1, MidpointRounding.AwayFromZero);
 										str_x1 = wx1.ToString();
-										pos1.x = float.Parse(str_x1)/10;
+										pos1.x = float.Parse(str_x1) / 10;
 										wy1 = Math.Round((-half_sphereount + k) * scale + 200.0f, 1, MidpointRounding.AwayFromZero);
 										str_y1 = wy1.ToString();
-										pos1.y = float.Parse(str_y1)/10;
+										pos1.y = float.Parse(str_y1) / 10;
 										wz1 = Math.Round((-half_sphereount + j) * scale, 1, MidpointRounding.AwayFromZero);
 										str_z1 = wz1.ToString();
-										pos1.z = float.Parse(str_z1)/10;
-										spheres [j,k,i] = (GameObject)Instantiate (Sphere_Main, new Vector3 (pos1.x, pos1.y, pos1.z), Quaternion.identity);
-//										spheres [j,k,i] = (GameObject)Instantiate (Sphere_Main, new Vector3 ((-half_sphereount + i) * scale, (-half_sphereount + k) * scale + 20.0f, (-half_sphereount + j) * scale), Quaternion.identity);
+										pos1.z = float.Parse(str_z1) / 10;
+										spheres[j, k, i] = (GameObject)Instantiate(Sphere_Main, new Vector3(pos1.x, pos1.y, pos1.z), Quaternion.identity);
+										//										spheres [j,k,i] = (GameObject)Instantiate (Sphere_Main, new Vector3 ((-half_sphereount + i) * scale, (-half_sphereount + k) * scale + 20.0f, (-half_sphereount + j) * scale), Quaternion.identity);
 									}
 								}
 								else if (sphere_Count == 4) {
 									// 4 × 4 × 4
-									if ((k == 1 || k == 2 ) && (i == 1 || i == 2) && (j == 1 || j == 2)) {
-										
+									if ((k == 1 || k == 2) && (i == 1 || i == 2) && (j == 1 || j == 2)) {
+
 									}
-									else if ((k == 1 || k == 2 ) && (i == 0 || i == 3) && (j == 0 || j == 3)) {
-										spheres [j,k,i] = (GameObject)Instantiate (Sphere_Main, new Vector3 (((-half_sphereount + k) * scale + offset)/10, ((-half_sphereount + i) * scale + 200.0f)/10, ((-half_sphereount + j) * scale + offset)/10), Quaternion.identity);
-//										spheres [j,k,i] = (GameObject)Instantiate (Sphere_Main, new Vector3 ((-half_sphereount + k) * scale + offset, (-half_sphereount + i) * scale + 20.0f, (-half_sphereount + j) * scale + offset), Quaternion.identity);
+									else if ((k == 1 || k == 2) && (i == 0 || i == 3) && (j == 0 || j == 3)) {
+										spheres[j, k, i] = (GameObject)Instantiate(Sphere_Main, new Vector3(((-half_sphereount + k) * scale + offset) / 10, ((-half_sphereount + i) * scale + 200.0f) / 10, ((-half_sphereount + j) * scale + offset) / 10), Quaternion.identity);
+										//										spheres [j,k,i] = (GameObject)Instantiate (Sphere_Main, new Vector3 ((-half_sphereount + k) * scale + offset, (-half_sphereount + i) * scale + 20.0f, (-half_sphereount + j) * scale + offset), Quaternion.identity);
 									}
-									else if ((k == 1 || k == 2 ) && (i == 0 || i == 3) && (j == 1 || j == 2)) {
-										spheres [j,k,i] = (GameObject)Instantiate (Sphere_Main, new Vector3 (((-half_sphereount + k) * scale + offset)/10, ((-half_sphereount + i) * scale + 200.0f)/10, ((-half_sphereount + j) * scale + offset)/10), Quaternion.identity);
-//										spheres [j,k,i] = (GameObject)Instantiate (Sphere_Main, new Vector3 ((-half_sphereount + k) * scale + offset, (-half_sphereount + i) * scale + 20.0f, (-half_sphereount + j) * scale + offset), Quaternion.identity);
+									else if ((k == 1 || k == 2) && (i == 0 || i == 3) && (j == 1 || j == 2)) {
+										spheres[j, k, i] = (GameObject)Instantiate(Sphere_Main, new Vector3(((-half_sphereount + k) * scale + offset) / 10, ((-half_sphereount + i) * scale + 200.0f) / 10, ((-half_sphereount + j) * scale + offset) / 10), Quaternion.identity);
+										//										spheres [j,k,i] = (GameObject)Instantiate (Sphere_Main, new Vector3 ((-half_sphereount + k) * scale + offset, (-half_sphereount + i) * scale + 20.0f, (-half_sphereount + j) * scale + offset), Quaternion.identity);
 									}
-									else if ((k == 1 || k == 2 ) && (i == 1 || i == 2) && (j == 0 || j == 3)) {
-										spheres [j,k,i] = (GameObject)Instantiate (Sphere_Main, new Vector3 (((-half_sphereount + i) * scale + offset)/10, ((-half_sphereount + k) * scale + 200.0f)/10, ((-half_sphereount + k) * scale + offset)/10), Quaternion.identity);
-//										spheres [j,k,i] = (GameObject)Instantiate (Sphere_Main, new Vector3 ((-half_sphereount + i) * scale + offset, (-half_sphereount + k) * scale + 20.0f, (-half_sphereount + k*10) * scale + offset), Quaternion.identity);
+									else if ((k == 1 || k == 2) && (i == 1 || i == 2) && (j == 0 || j == 3)) {
+										spheres[j, k, i] = (GameObject)Instantiate(Sphere_Main, new Vector3(((-half_sphereount + i) * scale + offset) / 10, ((-half_sphereount + k) * scale + 200.0f) / 10, ((-half_sphereount + k) * scale + offset) / 10), Quaternion.identity);
+										//										spheres [j,k,i] = (GameObject)Instantiate (Sphere_Main, new Vector3 ((-half_sphereount + i) * scale + offset, (-half_sphereount + k) * scale + 20.0f, (-half_sphereount + k*10) * scale + offset), Quaternion.identity);
 									}
 									else {
-										spheres [j,k,i] = (GameObject)Instantiate (Sphere_Main, new Vector3 (((-half_sphereount + i) * scale + offset)/10, ((-half_sphereount + k) * scale + 200.0f)/10, ((-half_sphereount + j) * scale + offset)/10), Quaternion.identity);
-//?										spheres [j,k,i] = (GameObject)Instantiate (Sphere_Main, new Vector3 ((-half_sphereount + i) * scale + offset, (-half_sphereount + k) * scale + 20.0f, (-half_sphereount + j) * scale + offset), Quaternion.identity);
+										spheres[j, k, i] = (GameObject)Instantiate(Sphere_Main, new Vector3(((-half_sphereount + i) * scale + offset) / 10, ((-half_sphereount + k) * scale + 200.0f) / 10, ((-half_sphereount + j) * scale + offset) / 10), Quaternion.identity);
+										//?										spheres [j,k,i] = (GameObject)Instantiate (Sphere_Main, new Vector3 ((-half_sphereount + i) * scale + offset, (-half_sphereount + k) * scale + 20.0f, (-half_sphereount + j) * scale + offset), Quaternion.identity);
 									}
 								}
 								else if (sphere_Count == 5) {
 									// 5 × 5 × 5
-									if ((k == 1 || k == 2 || k == 3) && (i == 1 || i == 2|| i == 3) && (j == 1 || j == 2|| j == 3)) {
-										
-									} 
+									if ((k == 1 || k == 2 || k == 3) && (i == 1 || i == 2 || i == 3) && (j == 1 || j == 2 || j == 3)) {
+
+									}
 									else if ((k == 1 || k == 2 || k == 3) && (i == 0 || i == 4) && (j == 0 || j == 4)) {
-										spheres [j,k,i] = (GameObject)Instantiate (Sphere_Main, new Vector3 (((-half_sphereount + i) * scale + offset)/10, ((-half_sphereount + k) * scale + 200.0f)/10, ((-half_sphereount + k) * scale + offset)/10), Quaternion.identity);
-//										spheres [j,k,i] = (GameObject)Instantiate (Sphere_Main, new Vector3 ((-half_sphereount + i) * scale + offset, (-half_sphereount + k) * scale + 20.0f, (-half_sphereount + k) * scale + offset), Quaternion.identity);
+										spheres[j, k, i] = (GameObject)Instantiate(Sphere_Main, new Vector3(((-half_sphereount + i) * scale + offset) / 10, ((-half_sphereount + k) * scale + 200.0f) / 10, ((-half_sphereount + k) * scale + offset) / 10), Quaternion.identity);
+										//										spheres [j,k,i] = (GameObject)Instantiate (Sphere_Main, new Vector3 ((-half_sphereount + i) * scale + offset, (-half_sphereount + k) * scale + 20.0f, (-half_sphereount + k) * scale + offset), Quaternion.identity);
 									}
 									else if ((k == 1 || k == 2 || k == 3) && (i == 0 || i == 4) && (j == 1 || j == 2 || j == 3)) {
-										spheres [j,k,i] = (GameObject)Instantiate (Sphere_Main, new Vector3 (((-half_sphereount + k) * scale + offset)/10, ((-half_sphereount + k) * scale + 200.0f)/10, ((-half_sphereount + j) * scale + offset)/10), Quaternion.identity);
-//										spheres [j,k,i] = (GameObject)Instantiate (Sphere_Main, new Vector3 ((-half_sphereount + k) * scale + offset, (-half_sphereount + k) * scale + 20.0f, (-half_sphereount + j) * scale + offset), Quaternion.identity);
+										spheres[j, k, i] = (GameObject)Instantiate(Sphere_Main, new Vector3(((-half_sphereount + k) * scale + offset) / 10, ((-half_sphereount + k) * scale + 200.0f) / 10, ((-half_sphereount + j) * scale + offset) / 10), Quaternion.identity);
+										//										spheres [j,k,i] = (GameObject)Instantiate (Sphere_Main, new Vector3 ((-half_sphereount + k) * scale + offset, (-half_sphereount + k) * scale + 20.0f, (-half_sphereount + j) * scale + offset), Quaternion.identity);
 									}
 									else if ((k == 1 || k == 2 || k == 3) && (i == 1 || i == 2 || i == 3) && (j == 0 || j == 4)) {
-										spheres [j,k,i] = (GameObject)Instantiate (Sphere_Main, new Vector3 (((-half_sphereount + i) * scale + offset)/10, ((-half_sphereount + k) * scale + 200.0f)/10, ((-half_sphereount + k) * scale + offset)/10), Quaternion.identity);
+										spheres[j, k, i] = (GameObject)Instantiate(Sphere_Main, new Vector3(((-half_sphereount + i) * scale + offset) / 10, ((-half_sphereount + k) * scale + 200.0f) / 10, ((-half_sphereount + k) * scale + offset) / 10), Quaternion.identity);
 									}
 									else {
-										spheres [j,k,i] = (GameObject)Instantiate (Sphere_Main, new Vector3 (((-half_sphereount + i) * scale + offset)/10, ((-half_sphereount + k) * scale + 200.0f)/10, ((-half_sphereount + j) * scale + offset)/10), Quaternion.identity);
-//										spheres [j,k,i] = (GameObject)Instantiate (Sphere_Main, new Vector3 ((-half_sphereount + i) * scale + offset, (-half_sphereount + k) * scale + 20.0f, (-half_sphereount + j) * scale + offset), Quaternion.identity);
+										spheres[j, k, i] = (GameObject)Instantiate(Sphere_Main, new Vector3(((-half_sphereount + i) * scale + offset) / 10, ((-half_sphereount + k) * scale + 200.0f) / 10, ((-half_sphereount + j) * scale + offset) / 10), Quaternion.identity);
+										//										spheres [j,k,i] = (GameObject)Instantiate (Sphere_Main, new Vector3 ((-half_sphereount + i) * scale + offset, (-half_sphereount + k) * scale + 20.0f, (-half_sphereount + j) * scale + offset), Quaternion.identity);
 									}
 
 								}
-								if (spheres [j,k,i] != null) { 
-									
-									Vector3 pos = spheres[j,k,i].transform.position;
+								if (spheres[j, k, i] != null) {
+
+									Vector3 pos = spheres[j, k, i].transform.position;
 
 									tagNameCount++;
 									make_Tag(tagNameCount.ToString());
-									spheres[j,k,i].tag = tagNameCount.ToString();
+									spheres[j, k, i].tag = tagNameCount.ToString();
 									monster_property m_property = new monster_property();
 
 									m_property.tagID = tagNameCount.ToString();
@@ -598,10 +610,10 @@ namespace  nm_sphere {
 #if !DEBUG
 									m_property.monster_color = monster_color.blue_monster;
 #else
-                                    m_property.monster_color = monster_color.green_monster;
+									m_property.monster_color = monster_color.green_monster;
 #endif
-                                    m_property.start_position = pos;
-									GetComponent<monster>().addMonster_property(tagNameCount.ToString(),m_property);
+									m_property.start_position = pos;
+									GetComponent<monster>().addMonster_property(tagNameCount.ToString(), m_property);
 									if (mod == 0) {
 #if !DEBUG
                                         color = monster_color.blue_monster;
@@ -614,9 +626,9 @@ namespace  nm_sphere {
 										{
 											color = monster_color.green_monster;
 										}
-#endif                                        
-                                    }
-                                    else {
+#endif
+									}
+									else {
 										if (cubersFile.game_Sceen != 2)
 										{
 											color = monster.monster_instance.getMonster_color(spheres[j, k, i].tag);
@@ -626,17 +638,17 @@ namespace  nm_sphere {
 											color = monster_color.white_monster;
 										}
 									}
-									change_MonsterMaterial(spheres [j,k,i], monster_situation.sleep_monster, color);
+									change_MonsterMaterial(spheres[j, k, i], monster_situation.sleep_monster, color);
 									//Animator ani = spheres[j, k, i].GetComponent<Animator>();
 									//string str = monster.monster_instance.PlayMonsterAnimation(monster_situation.noraml_monster, cubersFile.game_Sceen);
 									//ani.Play(str);
 
 									// char_wait_animation
-									char_obj_anim[j,k,i] = new char_obj_animation();
-									char_obj_anim[j,k,i].wait_time = UnityEngine.Random.Range(1,3);
-									char_obj_anim[j,k,i].now_angle = 0.0f;
-									char_obj_anim[j,k,i].set_angle = 0.0f;
-									char_obj_anim[j,k,i].one_angle = 0.0f;
+									char_obj_anim[j, k, i] = new char_obj_animation();
+									char_obj_anim[j, k, i].wait_time = UnityEngine.Random.Range(1, 3);
+									char_obj_anim[j, k, i].now_angle = 0.0f;
+									char_obj_anim[j, k, i].set_angle = 0.0f;
+									char_obj_anim[j, k, i].one_angle = 0.0f;
 								}
 							}
 						}
@@ -657,8 +669,8 @@ namespace  nm_sphere {
 					// 0: center
 					return 1;
 				}
-				else if ( ((k == 0 || k == 2) && (j == 1 || i == 1)) 
-					|| ((k == 1) && (j == 0 || j == 2)) 
+				else if (((k == 0 || k == 2) && (j == 1 || i == 1))
+					|| ((k == 1) && (j == 0 || j == 2))
 					|| ((k == 1) || (i == 0 || i == 2))) {
 					// 1:side center
 					return 2;
@@ -672,8 +684,8 @@ namespace  nm_sphere {
 				if ((k == 1 || k == 2) && (j == 1 || j == 2) && (i == 1 || i == 2)) {
 					return 0;
 				}
-				else if (((k == 1 || k == 2) && (j == 1 || j == 2)) 
-					|| ((k == 1 || k == 2) && (i == 1 || i == 2)) 
+				else if (((k == 1 || k == 2) && (j == 1 || j == 2))
+					|| ((k == 1 || k == 2) && (i == 1 || i == 2))
 					|| ((j == 1 || j == 2) && (i == 1 || i == 2))) {
 					// ４＊４の場合、centerは２＊２だが識別は１一つで問題ない
 					// 0: center
@@ -693,13 +705,13 @@ namespace  nm_sphere {
 				if ((k == 1 || k == 2 || k == 3) && (j == 1 || j == 2 || j == 3) && (i == 1 || i == 2 || i == 3)) {
 					return 0;
 				}
-				else if (((k == 1 || k == 2 || k == 3) && (j == 1 || j == 2 || j == 3)) 
-					|| ((k == 1 || k == 2 || k == 3) && (i == 1 || i == 2 || i == 3)) 
+				else if (((k == 1 || k == 2 || k == 3) && (j == 1 || j == 2 || j == 3))
+					|| ((k == 1 || k == 2 || k == 3) && (i == 1 || i == 2 || i == 3))
 					|| ((j == 1 || j == 2 || k == 3) && (i == 1 || i == 2 || i == 3))) {
 					// 0: center
 					// ５＊５の場合、centerも３＊３の情報を付加する必要がある
 					if (j == 2 && k == 2 && i == 2) return 1; // center center
-					if ((j == 2 && (i == 1 || i == 3)) || (k == 2 && (j == 1|| j == 3)) || (i == 2 && (j == 1 || j == 3))) return 12; // center side center
+					if ((j == 2 && (i == 1 || i == 3)) || (k == 2 && (j == 1 || j == 3)) || (i == 2 && (j == 1 || j == 3))) return 12; // center side center
 					if ((j == 1 || j == 3) && (k == 1 || k == 3) && (i == 1 || i == 3)) return 13; // center corner
 					return 1;
 				}
@@ -717,25 +729,25 @@ namespace  nm_sphere {
 		}
 
 		void make_Tag(string tagName) {
-			#if UNITY_EDITOR
+#if UNITY_EDITOR
 			UnityEngine.Object[] asset = AssetDatabase.LoadAllAssetsAtPath("ProjectSettings/TagManager.asset");
 			if ((asset != null) && (asset.Length > 0)) {
 				SerializedObject so = new SerializedObject(asset[0]);
 				SerializedProperty tags = so.FindProperty("tags");
-				
+
 				for (int i = 0; i < tags.arraySize; ++i) {
 					if (tags.GetArrayElementAtIndex(i).stringValue == tagName) {
 						return;
 					}
 				}
-				
+
 				int index = tags.arraySize;
 				tags.InsertArrayElementAtIndex(index);
 				tags.GetArrayElementAtIndex(index).stringValue = tagName;
 				so.ApplyModifiedProperties();
 				so.Update();
 			}
-			#endif
+#endif
 		}
 		public void sphere_clear() {
 
@@ -744,11 +756,11 @@ namespace  nm_sphere {
 			sw_sphere = false;
 			screen_width = Screen.width;
 			screen_height = Screen.height;
-			for (int j=0; j<before_sphere_Count; j++) {
-				for (int k=0; k<before_sphere_Count; k++) {
-					for (int i=0; i<before_sphere_Count; ++i) {
+			for (int j = 0; j < before_sphere_Count; j++) {
+				for (int k = 0; k < before_sphere_Count; k++) {
+					for (int i = 0; i < before_sphere_Count; ++i) {
 
-						if (spheres [j,k,i] != null) {
+						if (spheres[j, k, i] != null) {
 							if (cubersFile.game_Sceen == 0)
 							{
 								GameObject obj = spheres[j, k, i].transform.Find("dpt_ball").gameObject;
@@ -763,7 +775,7 @@ namespace  nm_sphere {
 					}
 				}
 			}
-			for (int ii = 0; ii < before_sphere_Count; ii++){
+			for (int ii = 0; ii < before_sphere_Count; ii++) {
 				if (useGravitySpheres[ii] != null) {
 					if (cubersFile.game_Sceen == 0)
 					{
@@ -778,7 +790,7 @@ namespace  nm_sphere {
 			spheres = null;
 			now_sphere_count = 0;
 
-//			reset_Guid_Floor();
+			//			reset_Guid_Floor();
 		}
 
 		const int cube_corner_count = 8;
@@ -792,7 +804,7 @@ namespace  nm_sphere {
 		public static int gravitySpheres_count = 0;
 		public static int now_gravitySpheres_count = 0;
 
-        // 落下モンスタをフロアーへセット
+		// 落下モンスタをフロアーへセット
 		public void sphere_dwon() {
 
 			if (sw_sphere) {
@@ -816,11 +828,11 @@ namespace  nm_sphere {
 				screen_width = Screen.width;
 				screen_height = Screen.height;
 
-                //落下オブジェ数　選択ステージの範囲を設定
-                int min_count = canvasPanel.gravity_number_min_array[cubersFile.now_play_stage - 1, cubersFile.now_play_stagelevel - 1];
-                int max_count = canvasPanel.gravity_number_max_array[cubersFile.now_play_stage - 1, cubersFile.now_play_stagelevel - 1];
+				//落下オブジェ数　選択ステージの範囲を設定
+				int min_count = canvasPanel.gravity_number_min_array[cubersFile.now_play_stage - 1, cubersFile.now_play_stagelevel - 1];
+				int max_count = canvasPanel.gravity_number_max_array[cubersFile.now_play_stage - 1, cubersFile.now_play_stagelevel - 1];
 
-                int c_sphere = UnityEngine.Random.Range(min_count, max_count + 1);  // int型UnityEngine.Random.Rangeは MAX値は最大値を含まない為、１加算
+				int c_sphere = UnityEngine.Random.Range(min_count, max_count + 1);  // int型UnityEngine.Random.Rangeは MAX値は最大値を含まない為、１加算
 				/*
                                 if (sphere_Count == 3)
                                     c_sphere = UnityEngine.Random.Range(1,sphere_Count + 2);
@@ -831,7 +843,7 @@ namespace  nm_sphere {
                 //				int c_sphere = UnityEngine.Random.Range(1,sphere_Count + 1);
                 */
 				int ww = sphere_totalCount - now_sphere_count;
-				if ( ww >= c_sphere ) {
+				if (ww >= c_sphere) {
 					gravitySpheres_count = c_sphere;
 				}
 				else {
@@ -848,7 +860,7 @@ namespace  nm_sphere {
 
 					if (w_useGravitySpheres[i] != null) {
 
-						GameObject child1 = w_useGravitySpheres [i];
+						GameObject child1 = w_useGravitySpheres[i];
 						// マテリアルチェンジ
 						if (mod != 0) {
 							color = monster_color.noColor_monster;
@@ -858,10 +870,10 @@ namespace  nm_sphere {
 						change_MonsterMaterial(child1, monster_situation.sleep_monster, color);
 
 						Vector3 pos_1 = get_round_position(child1.transform.position);
-//						pos_1.y= sphere_scale * sphere_Count + 0.4f;
+						//						pos_1.y= sphere_scale * sphere_Count + 0.4f;
 						Double wy = Math.Round(((sphere_Count + 1) * (sphere_scale * 10) - monster_floor_position_correction), 1, MidpointRounding.AwayFromZero);
-				   		string str_y = wy.ToString();
-						pos_1.y = float.Parse(str_y)/10;
+						string str_y = wy.ToString();
+						pos_1.y = float.Parse(str_y) / 10;
 						child1.transform.position = pos_1;
 
 						now_sphere_count++;
@@ -880,17 +892,17 @@ namespace  nm_sphere {
 				for (int i = 0; i < gravitySpheres_count; i++) ww_useGravitySpheres = w_useGravitySpheres;
 				// ここからww_useGravitySpheresを使用
 				if (gravitySpheres_count > 1) {
-					
+
 					int dec_monster_count = 0;
 
 					for (int i = 0; i < gravitySpheres_count - 1; i++) {
-						for (int ii = i + 1; ii < gravitySpheres_count;ii++) {
+						for (int ii = i + 1; ii < gravitySpheres_count; ii++) {
 
-							int pos_1 = get_SelectedMonster_PositionNumber (w_useGravitySpheres[i].transform.position);
-							int pos_2 = get_SelectedMonster_PositionNumber (w_useGravitySpheres[ii].transform.position);
+							int pos_1 = get_SelectedMonster_PositionNumber(w_useGravitySpheres[i].transform.position);
+							int pos_2 = get_SelectedMonster_PositionNumber(w_useGravitySpheres[ii].transform.position);
 							if (pos_1 == pos_2) {
 								// 重複あり yポジションリセット
-								ww_useGravitySpheres [i].transform.position = get_round_position(monster.monster_instance.getMonster_position(ww_useGravitySpheres [i].tag));
+								ww_useGravitySpheres[i].transform.position = get_round_position(monster.monster_instance.getMonster_position(ww_useGravitySpheres[i].tag));
 								// 落下モンスター数減算
 								dec_monster_count++;
 								break;
@@ -900,12 +912,12 @@ namespace  nm_sphere {
 					if (dec_monster_count != 0) {
 						int incpos = 0;
 						// フロアーyポジション
-//						float w_y = sphere_scale * sphere_Count + 0.4f;
+						//						float w_y = sphere_scale * sphere_Count + 0.4f;
 						Double wy = Math.Round(((sphere_Count + 1) * (sphere_scale * 10) - monster_floor_position_correction), 1, MidpointRounding.AwayFromZero);
 						string str_y = wy.ToString();
-						float w_y = float.Parse(str_y)/10;
+						float w_y = float.Parse(str_y) / 10;
 						for (int i = 0; i < gravitySpheres_count; i++) {
-							
+
 							Vector3 pos_1 = get_round_position(ww_useGravitySpheres[i].transform.position);
 							// 重複　フロアーyポジションリセット有りオブジェクトかチェック
 							if (pos_1.y == w_y) {
@@ -925,15 +937,15 @@ namespace  nm_sphere {
 				for (int i = 0; i < gravitySpheres_count; i++) {
 
 					useGravitySpheres[i] = w_useGravitySpheres[i];
-					GameObject child1 = useGravitySpheres [i];
+					GameObject child1 = useGravitySpheres[i];
 					child1.GetComponent<Collider>().isTrigger = true;
 					child1.GetComponent<SphereCollider>().enabled = true;
 					child1.GetComponent<Rigidbody>().isKinematic = false;
 
 					Animator ani = child1.GetComponent<Animator>();
-                    //					ani.speed = 1.5f;
-                    string str = monster.monster_instance.PlayMonsterAnimation(monster_situation.noraml_monster, cubersFile.game_Sceen);
-                    ani.Play(str);
+					//					ani.speed = 1.5f;
+					string str = monster.monster_instance.PlayMonsterAnimation(monster_situation.noraml_monster, cubersFile.game_Sceen);
+					ani.Play(str);
 					//ani.Play("sleep");
 				}
 
@@ -947,28 +959,28 @@ namespace  nm_sphere {
 		// x:1 〜　sphere_Count ＋　z:10 〜　sphere_Count
 		// 11 〜　(sphere_Count+sphere_Count)
 		public int get_SelectedMonster_PositionNumber(Vector3 pos) {
-			
+
 			int positionNumber;
 			float scale = emitter.cube_scale;
-			int half_cubeCount = sphere_Count/2;
-			float offset = sphere_Count%2;
+			int half_cubeCount = sphere_Count / 2;
+			float offset = sphere_Count % 2;
 			if (offset != 0) offset = 0;
-			else offset = scale/2;
+			else offset = scale / 2;
 
 			Double wx = Math.Round(pos.x * 10, 1, MidpointRounding.AwayFromZero);
 			string str_x = wx.ToString();
-			float obj_X_Position = float.Parse(str_x)/10;
+			float obj_X_Position = float.Parse(str_x) / 10;
 			Double wz = Math.Round(pos.z * 10, 1, MidpointRounding.AwayFromZero);
 			string str_z = wz.ToString();
-			float obj_Z_Position = float.Parse(str_z)/10;
+			float obj_Z_Position = float.Parse(str_z) / 10;
 
 			// x
-			for (int jj=0; jj<sphere_Count; jj++) {
-				for (int ii=0; ii<sphere_Count; ii++) {
+			for (int jj = 0; jj < sphere_Count; jj++) {
+				for (int ii = 0; ii < sphere_Count; ii++) {
 					float base_x_position = (-half_cubeCount + jj) * scale + offset;
 					float base_z_position = (-half_cubeCount + ii) * scale + offset;
 					if (obj_X_Position == base_x_position && obj_Z_Position == base_z_position) {
-						positionNumber = jj + (ii*10);
+						positionNumber = jj + (ii * 10);
 						return positionNumber;
 					}
 				}
@@ -981,13 +993,13 @@ namespace  nm_sphere {
 			Vector3 round_pos;
 			Double wy = Math.Round(pos.y * 10, 1, MidpointRounding.AwayFromZero);
 			string str_y = wy.ToString();
-			round_pos.y = float.Parse(str_y)/10;
+			round_pos.y = float.Parse(str_y) / 10;
 			Double wx = Math.Round(pos.x * 10, 1, MidpointRounding.AwayFromZero);
 			string str_x = wx.ToString();
-			round_pos.x = float.Parse(str_x)/10;
+			round_pos.x = float.Parse(str_x) / 10;
 			Double wz = Math.Round(pos.z * 10, 1, MidpointRounding.AwayFromZero);
 			string str_z = wz.ToString();
-			round_pos.z = float.Parse(str_z)/10;
+			round_pos.z = float.Parse(str_z) / 10;
 
 			return round_pos;
 		}
@@ -996,13 +1008,13 @@ namespace  nm_sphere {
 			Vector3 round_pos;
 			Double wy = Math.Round(pos.y * 10, 1, MidpointRounding.AwayFromZero);
 			string str_y = wy.ToString();
-			round_pos.y = float.Parse(str_y)/10;
+			round_pos.y = float.Parse(str_y) / 10;
 			Double wx = Math.Round(pos.x * 10, 1, MidpointRounding.AwayFromZero);
 			string str_x = wx.ToString();
-			round_pos.x = float.Parse(str_x)/10;
+			round_pos.x = float.Parse(str_x) / 10;
 			Double wz = Math.Round(pos.z * 10, 1, MidpointRounding.AwayFromZero);
 			string str_z = wz.ToString();
-			round_pos.z = float.Parse(str_z)/10;
+			round_pos.z = float.Parse(str_z) / 10;
 
 			return round_pos;
 		}
@@ -1011,15 +1023,15 @@ namespace  nm_sphere {
 		public Vector3 set_sphere_position() {
 
 			int ww = sphere_totalCount - now_sphere_count;
-			int p = UnityEngine.Random.Range(0,ww);
+			int p = UnityEngine.Random.Range(0, ww);
 			Vector3 pos = emitter.empty_cube_position[p];
 
 			for (int i = p; i < ww - 1; i++) {
-				emitter.empty_cube_position[i] = emitter.empty_cube_position[i+1];;
+				emitter.empty_cube_position[i] = emitter.empty_cube_position[i + 1]; ;
 			}
 			return pos;
 		}
-		
+
 		//落下するオブジェ選択
 		int now_cube_corner_count;
 		int now_cube_center_count;
@@ -1034,19 +1046,19 @@ namespace  nm_sphere {
 			extract_obj = new GameObject[ww];
 			int extract_obj_count = 0;
 
-			for (int j=0; j<sphere_Count; j++) {
-				for (int k=0; k<sphere_Count; k++) {
-					for (int i=0; i<sphere_Count; i++) {
+			for (int j = 0; j < sphere_Count; j++) {
+				for (int k = 0; k < sphere_Count; k++) {
+					for (int i = 0; i < sphere_Count; i++) {
 						//キューブ中心は除外
-						if (spheres[j,k,i] == null) {
+						if (spheres[j, k, i] == null) {
 						}
 						else {
-							Double wy = Math.Round(spheres[j,k,i].transform.position.y * 10, 1, MidpointRounding.AwayFromZero);
+							Double wy = Math.Round(spheres[j, k, i].transform.position.y * 10, 1, MidpointRounding.AwayFromZero);
 							string str_y = wy.ToString();
-							float p_y = float.Parse(str_y)/10;
+							float p_y = float.Parse(str_y) / 10;
 							//待機オブジェクト
-							if(p_y > sphere_scale * 10) {
-								extract_obj[extract_obj_count] = spheres[j,k,i];
+							if (p_y > sphere_scale * 10) {
+								extract_obj[extract_obj_count] = spheres[j, k, i];
 								if (extract_obj_count >= ww) {
 									break;
 								}
@@ -1057,160 +1069,160 @@ namespace  nm_sphere {
 				}
 			}
 
-			int jj = UnityEngine.Random.Range(0,extract_obj_count);
+			int jj = UnityEngine.Random.Range(0, extract_obj_count);
 			if (extract_obj[jj] == null) {
 				Debug.Log("extract_obj:" + extract_obj_count);
 			}
 			return extract_obj[jj];
 		}
-/*
-		//OnTriggerEnter(Collider col)
-		//物体同士衝突した時に一度だけ呼ばれるメソッド
-		//colliderは当たったオブジェクト
-		//OnTriggerEnterのイベントを発行するためにはColliderのIsTriggerフラグをON
-		//IsTriggerフラグをONにすると、イベントの判定を行うが、物理エンジンの影響を受けなくなる
-		//OnTriggerEnter発生時、IsTriggerフラグをfalseに設定すると物理エンジンが有効となり障害物と衝突する
-		//	this.GetComponent<Collider>().isTrigger = true or false;
+		/*
+				//OnTriggerEnter(Collider col)
+				//物体同士衝突した時に一度だけ呼ばれるメソッド
+				//colliderは当たったオブジェクト
+				//OnTriggerEnterのイベントを発行するためにはColliderのIsTriggerフラグをON
+				//IsTriggerフラグをONにすると、イベントの判定を行うが、物理エンジンの影響を受けなくなる
+				//OnTriggerEnter発生時、IsTriggerフラグをfalseに設定すると物理エンジンが有効となり障害物と衝突する
+				//	this.GetComponent<Collider>().isTrigger = true or false;
 
-		void OnTriggerEnter(Collider col){
+				void OnTriggerEnter(Collider col){
 
-			if(col.gameObject.transform.root.tag == "cube_empty") {
-				
-				GameObject child1 = this.gameObject;
-				if (!monster.monster_instance.getMonster_IOstatus(child1.tag)) {
+					if(col.gameObject.transform.root.tag == "cube_empty") {
 
-					now_gravitySpheres_count--;
+						GameObject child1 = this.gameObject;
+						if (!monster.monster_instance.getMonster_IOstatus(child1.tag)) {
 
-					monster.monster_instance.setMonster_IOstatus(child1.tag, true);
-					child1.GetComponent<Collider>().isTrigger = false;
+							now_gravitySpheres_count--;
 
-					child1.GetComponent<Rigidbody>().isKinematic = true;
+							monster.monster_instance.setMonster_IOstatus(child1.tag, true);
+							child1.GetComponent<Collider>().isTrigger = false;
 
-					//接触後、所定ポジション移動
-					child1.GetComponent<Rigidbody>().useGravity = false;
-					child1.transform.position = col.gameObject.transform.root.position;
-					
-					GameObject child = col.gameObject;
-	//				child.GetComponent<Collider>().isTrigger = true;
-	//				s_cube = col.gameObject;
+							child1.GetComponent<Rigidbody>().isKinematic = true;
 
-//					child.GetComponent<FixedJoint>().connectedBody = child1.GetComponent<Rigidbody>();
-//					child.GetComponent<FixedJoint>().connectedAnchor = child1.transform.position;
-//					child.GetComponent<FixedJoint>().breakForce = 1.0f;
-					child.transform.root.tag = "cube_close";
-					material_change(col.transform.root.gameObject);
+							//接触後、所定ポジション移動
+							child1.GetComponent<Rigidbody>().useGravity = false;
+							child1.transform.position = col.gameObject.transform.root.position;
 
-					Singleton<SoundPlayer>.instance.playSE( "hit008" ,2);
-					
-					Animator ani = child1.GetComponent<Animator>();
-					ani.Play("fall01");
-					int mod = (int)cubersFile.now_play_stage % emitter.chainExplosion_userLeve;
-					monster_color color;
-					if (mod != 0) {
-						color = monster_color.noColor_monster;
-					} else {
-						color = monster.monster_instance.getMonster_color(child1.tag);
+							GameObject child = col.gameObject;
+			//				child.GetComponent<Collider>().isTrigger = true;
+			//				s_cube = col.gameObject;
+
+		//					child.GetComponent<FixedJoint>().connectedBody = child1.GetComponent<Rigidbody>();
+		//					child.GetComponent<FixedJoint>().connectedAnchor = child1.transform.position;
+		//					child.GetComponent<FixedJoint>().breakForce = 1.0f;
+							child.transform.root.tag = "cube_close";
+							material_change(col.transform.root.gameObject);
+
+							Singleton<SoundPlayer>.instance.playSE( "hit008" ,2);
+
+							Animator ani = child1.GetComponent<Animator>();
+							ani.Play("fall01");
+							int mod = (int)cubersFile.now_play_stage % emitter.chainExplosion_userLeve;
+							monster_color color;
+							if (mod != 0) {
+								color = monster_color.noColor_monster;
+							} else {
+								color = monster.monster_instance.getMonster_color(child1.tag);
+							}
+							change_MonsterMaterial(child1, monster_situation.smile_monster, color);
+
+							// ポイント加算
+							int p = gamePointADD();
+							point_count = point_count + p;
+							hitPointDSP(child1.transform.position, 0);//cube position set
+
+							//ガイドフロアーハイライトクリア
+							reset_Guid_Floor();
+
+							if (gravitySpheres_count <= 0) {
+								now_gravity = false;
+								emitter.emptyCubePosition = true;
+							}
+							// game clear check
+							if (sphere_totalCount - now_sphere_count <= 0 && now_gravitySpheres_count <= 0) {
+								timer_Stop = true;
+								if ((cubersFile.user_stage < emitter.user_stage_max) && (cubersFile.now_play_stage == cubersFile.user_stage)) cubersFile.user_stage++;
+								sw_sphere = false;
+								game_complete_proc();
+								complete = true;
+								emitter.sw_floorUpDown = false;
+								gameStatus_text = emitter.gameclear_msg;
+
+								// point dsp off
+								pointDSPOff();
+								obj_3dtext = null;
+
+							}
+						}
+						else {
+						}
+
+
 					}
-					change_MonsterMaterial(child1, monster_situation.smile_monster, color);
+					else if(col.gameObject.transform.root.tag == "cube_close") {
 
-					// ポイント加算
-					int p = gamePointADD();
-					point_count = point_count + p;
-					hitPointDSP(child1.transform.position, 0);//cube position set
+						GameObject child1 = this.gameObject;
 
-					//ガイドフロアーハイライトクリア
-					reset_Guid_Floor();
-					
-					if (gravitySpheres_count <= 0) {
-						now_gravity = false;
-						emitter.emptyCubePosition = true;
+						// in object collider?
+						if (monster.monster_instance.getMonster_IOstatus(child1.tag)) {
+		//					Debug.Log("--------------HIT!!!!--------------");
+							return;
+						}
+
+						complete = false;
+
+						// パーティクルエフェクト処理
+						emitter.effect_explosion = true;
+						emitter.monster_bomb(child1);
+
+						monster_reset(child1);
+
+						lost_Spheres--;
+						if (lost_Spheres<= 0) {
+
+							// point dsp off
+							pointDSPOff();
+							obj_3dtext = null;
+
+							timer_Stop = true;
+
+							point_count = 0;
+							// ゲームオーバー処理
+							sw_sphere = false;
+							game_over_proc();
+							gameover = true;
+
+							// セーブデータ
+							cubersFile.lost_count = 0;
+
+		//					emitter.swCubersfile = 2; // save cubersfile
+		//					GetComponent<cubersFile>().save_gameEncryptionData();
+		//					emitter.save_gameEncryptionData();
+
+							emitter.sw_floorUpDown = false;
+		//					GetComponent<emitter>().stop_BGM();
+							gameStatus_text = emitter.gameover_msg;
+		//					timer = 10;
+		//					counter.timer = 13;
+							return;
+						}
+
+						if (now_sphere_count > 0) now_sphere_count--;
+
+						if (gravitySpheres_count <= 0) {
+		//					sw_sphere = false;
+							now_gravity = false;
+						}
+
+						reset_Guid_Floor();
+
 					}
-					// game clear check
-					if (sphere_totalCount - now_sphere_count <= 0 && now_gravitySpheres_count <= 0) {
-						timer_Stop = true;
-						if ((cubersFile.user_stage < emitter.user_stage_max) && (cubersFile.now_play_stage == cubersFile.user_stage)) cubersFile.user_stage++;
-						sw_sphere = false;
-						game_complete_proc();
-						complete = true;
-						emitter.sw_floorUpDown = false;
-						gameStatus_text = emitter.gameclear_msg;
+					else if(col.gameObject.transform.root.tag == "floor") {
 
-						// point dsp off
-						pointDSPOff();
-						obj_3dtext = null;
-
+						col.gameObject.transform.gameObject.GetComponent<Renderer>().material.EnableKeyword("_EMISSION");
+						col.gameObject.transform.gameObject.GetComponent<Renderer>().material.SetColor("_EmissionColor", new Color(0.85f,0.03f,0.26f));
 					}
 				}
-				else {
-				}
-
-
-			}
-			else if(col.gameObject.transform.root.tag == "cube_close") {
-
-				GameObject child1 = this.gameObject;
-
-				// in object collider?
-				if (monster.monster_instance.getMonster_IOstatus(child1.tag)) {
-//					Debug.Log("--------------HIT!!!!--------------");
-					return;
-				}
-
-				complete = false;
-
-				// パーティクルエフェクト処理
-				emitter.effect_explosion = true;
-				emitter.monster_bomb(child1);
-
-				monster_reset(child1);
-
-				lost_Spheres--;
-				if (lost_Spheres<= 0) {
-
-					// point dsp off
-					pointDSPOff();
-					obj_3dtext = null;
-
-					timer_Stop = true;
-
-					point_count = 0;
-					// ゲームオーバー処理
-					sw_sphere = false;
-					game_over_proc();
-					gameover = true;
-
-					// セーブデータ
-					cubersFile.lost_count = 0;
-
-//					emitter.swCubersfile = 2; // save cubersfile
-//					GetComponent<cubersFile>().save_gameEncryptionData();
-//					emitter.save_gameEncryptionData();
-
-					emitter.sw_floorUpDown = false;
-//					GetComponent<emitter>().stop_BGM();
-					gameStatus_text = emitter.gameover_msg;
-//					timer = 10;
-//					counter.timer = 13;
-					return;
-				}
-				
-				if (now_sphere_count > 0) now_sphere_count--;
-
-				if (gravitySpheres_count <= 0) {
-//					sw_sphere = false;
-					now_gravity = false;
-				}
-
-				reset_Guid_Floor();
-
-			}
-			else if(col.gameObject.transform.root.tag == "floor") {
-
-				col.gameObject.transform.gameObject.GetComponent<Renderer>().material.EnableKeyword("_EMISSION");
-				col.gameObject.transform.gameObject.GetComponent<Renderer>().material.SetColor("_EmissionColor", new Color(0.85f,0.03f,0.26f));
-			}
-		}
-*/
+		*/
 		// monster reset
 		public static void monster_reset(GameObject obj) {
 
@@ -1219,19 +1231,19 @@ namespace  nm_sphere {
 			obj.GetComponent<Collider>().isTrigger = false;
 			obj.GetComponent<SphereCollider>().enabled = false;
 
-//			Destroy(obj.GetComponent<FixedJoint>().enableCollision);
+			//			Destroy(obj.GetComponent<FixedJoint>().enableCollision);
 
-//			Vector3 obj_start_position = obj.transform.position;
-//			obj_start_position = obj.GetComponent<paku>().getStartPosition();
-		
-//			Vector3 obj_start_position = emit_obj
+			//			Vector3 obj_start_position = obj.transform.position;
+			//			obj_start_position = obj.GetComponent<paku>().getStartPosition();
+
+			//			Vector3 obj_start_position = emit_obj
 
 			obj.transform.position = get_s_round_position(monster.monster_instance.getMonster_position(obj.tag));
-//			Vector3 obj_start_position =  monster.monster_instance.getMonster_position(obj.tag);
-//			obj.transform.position = obj_start_position;
-//			Debug.Log("obj_start_position: " + obj_start_position);
+			//			Vector3 obj_start_position =  monster.monster_instance.getMonster_position(obj.tag);
+			//			obj.transform.position = obj_start_position;
+			//			Debug.Log("obj_start_position: " + obj_start_position);
 
-//			now_sphere_count--;
+			//			now_sphere_count--;
 
 		}
 		// point dsp off
@@ -1239,7 +1251,7 @@ namespace  nm_sphere {
 			// point dsp off
 			if (sphere.obj_pointText != null) {
 				int tt = sphere.obj_pointText.Length;
-				for (int t = 0; t < tt;t++) {
+				for (int t = 0; t < tt; t++) {
 					if (obj_pointText[t] != null) {
 						Destroy(obj_pointText[t]);
 						obj_pointText[t] = null;
@@ -1249,11 +1261,11 @@ namespace  nm_sphere {
 			if (sphere.anim_pointText != null) {
 				int tt = anim_pointText.GetLength(0);
 				int ttt = anim_pointText.GetLength(1);
-				for (int t = 0; t < tt ; t++) {
-					for (int i = 0; i < ttt ; i++) {
-						if (anim_pointText[t,i] != null) {
-							Destroy(anim_pointText[t,i]);
-							anim_pointText[t,i] = null;
+				for (int t = 0; t < tt; t++) {
+					for (int i = 0; i < ttt; i++) {
+						if (anim_pointText[t, i] != null) {
+							Destroy(anim_pointText[t, i]);
+							anim_pointText[t, i] = null;
 						}
 					}
 				}
@@ -1270,12 +1282,12 @@ namespace  nm_sphere {
 
 		// TODO:: 連鎖数及び連鎖取得アイテム数の表示処理
 		// ChainExplosionCount dsp　
-		public static void chainExplosionLineCountDSP(Vector3 pos)
+		public static void chainExplosionLineCountDSP(Vector3 pos, monster_color color)
 		{
 
 			if (anim_pointText == null) anim_pointText = new GameObject[emitter.cubeCount * emitter.cubeCount * emitter.cubeCount, emitter.cubeCount * emitter.cubeCount * emitter.cubeCount];
 
-            Double wy = Math.Round(pos.y * 10, 1, MidpointRounding.AwayFromZero);
+			Double wy = Math.Round(pos.y * 10, 1, MidpointRounding.AwayFromZero);
 			string str_y = wy.ToString();
 			float obj_Y_Position = float.Parse(str_y) / 10;
 			Double wx = Math.Round(pos.x * 10, 1, MidpointRounding.AwayFromZero);
@@ -1316,34 +1328,34 @@ namespace  nm_sphere {
 			str = emitter.chainExplosionLineCount.ToString() + " Chain Line";
 
 			// TODO:キューブ上でのヒットポイント表示処理
-			setChainExplosionInfoAnimation(setHitPointPosition(text_pos), str);
+			setChainExplosionInfoAnimation(setHitPointPosition(text_pos), str, color);
 		}
 
 		// TODO:Hit point dsp　連鎖エッグ表示処理は下記スイッチ１から３の処理を修正 ※未使用により要コメントアウト
 		public static void hitPointDSP(Vector3 pos, int sw) {
 
 			if (obj_pointText == null) obj_pointText = new GameObject[emitter.cubeCount * emitter.cubeCount * emitter.cubeCount];
-			if (anim_pointText == null) anim_pointText = new GameObject[emitter.cubeCount * emitter.cubeCount * emitter.cubeCount,emitter.cubeCount * emitter.cubeCount * emitter.cubeCount];
+			if (anim_pointText == null) anim_pointText = new GameObject[emitter.cubeCount * emitter.cubeCount * emitter.cubeCount, emitter.cubeCount * emitter.cubeCount * emitter.cubeCount];
 
 			int tt = hitpointcount;
 
 			Double wy = Math.Round(pos.y * 10, 1, MidpointRounding.AwayFromZero);
 			string str_y = wy.ToString();
-			float obj_Y_Position = float.Parse(str_y)/10;
+			float obj_Y_Position = float.Parse(str_y) / 10;
 			Double wx = Math.Round(pos.x * 10, 1, MidpointRounding.AwayFromZero);
 			string str_x = wx.ToString();
-			float obj_X_Position = float.Parse(str_x)/10;
+			float obj_X_Position = float.Parse(str_x) / 10;
 			Double wz = Math.Round(pos.z * 10, 1, MidpointRounding.AwayFromZero);
 			string str_z = wz.ToString();
-			float obj_Z_Position = float.Parse(str_z)/10;
+			float obj_Z_Position = float.Parse(str_z) / 10;
 
 			// HitPoint dsp position set
 			int cubeCount = emitter.cubeCount;
 			float cube_scale = emitter.cube_scale;
-			int half_cubeCount = cubeCount/2;
-			float offset = cubeCount%2;
+			int half_cubeCount = cubeCount / 2;
+			float offset = cubeCount % 2;
 			if (offset != 0) offset = 0;
-			else offset = cubeCount/2;
+			else offset = cubeCount / 2;
 
 			if (sw != 0) {
 				if (obj_Y_Position == (-half_cubeCount + cubeCount - 1) * cube_scale + offset) {
@@ -1364,24 +1376,24 @@ namespace  nm_sphere {
 				if (obj_Z_Position == -((-half_cubeCount + cubeCount - 1) * cube_scale + offset)) {
 					pos.z -= 1.2f;
 				}
-//				if (obj_Y_Position == (-half_cubeCount + cubeCount - 1) * cube_scale + offset) {
-//					pos.y += 0.1f;
-//				}
-//				if (obj_Y_Position == -((-half_cubeCount + cubeCount - 1) * cube_scale + offset)) {
-//					pos.y += 0.1f;
-//				}
-//				if (obj_X_Position == (-half_cubeCount + cubeCount - 1) * cube_scale + offset) {
-//					pos.x += 0.2f;
-//				}
-//				if (obj_X_Position == -((-half_cubeCount + cubeCount - 1) * cube_scale + offset)) {
-//					pos.x -= 0.2f;
-//				}
-//				if (obj_Z_Position == (-half_cubeCount + cubeCount - 1) * cube_scale + offset) {
-//					pos.z += 0.2f;
-//				}
-//				if (obj_Z_Position == -((-half_cubeCount + cubeCount - 1) * cube_scale + offset)) {
-//					pos.z -= 0.2f;
-//				}
+				//				if (obj_Y_Position == (-half_cubeCount + cubeCount - 1) * cube_scale + offset) {
+				//					pos.y += 0.1f;
+				//				}
+				//				if (obj_Y_Position == -((-half_cubeCount + cubeCount - 1) * cube_scale + offset)) {
+				//					pos.y += 0.1f;
+				//				}
+				//				if (obj_X_Position == (-half_cubeCount + cubeCount - 1) * cube_scale + offset) {
+				//					pos.x += 0.2f;
+				//				}
+				//				if (obj_X_Position == -((-half_cubeCount + cubeCount - 1) * cube_scale + offset)) {
+				//					pos.x -= 0.2f;
+				//				}
+				//				if (obj_Z_Position == (-half_cubeCount + cubeCount - 1) * cube_scale + offset) {
+				//					pos.z += 0.2f;
+				//				}
+				//				if (obj_Z_Position == -((-half_cubeCount + cubeCount - 1) * cube_scale + offset)) {
+				//					pos.z -= 0.2f;
+				//				}
 
 			}
 			else {
@@ -1391,16 +1403,16 @@ namespace  nm_sphere {
 			var text_pos = Camera.main.WorldToScreenPoint(pos);
 
 			if (obj_pointText[tt] != null) {
-//				GameObject wobj1 = obj_pointText[tt];
-//				Material mat1 = wobj1.transform.gameObject.GetComponent<Renderer>().material;
-//				DestroyImmediate(mat1);
+				//				GameObject wobj1 = obj_pointText[tt];
+				//				Material mat1 = wobj1.transform.gameObject.GetComponent<Renderer>().material;
+				//				DestroyImmediate(mat1);
 				Destroy(obj_pointText[tt]);
 			}
-//			obj_pointText[tt] = (GameObject)Instantiate(s_pointText, new Vector3(s_pointText.transform.position.x, s_pointText.transform.position.y, s_pointText.transform.position.z), Quaternion.identity);
-//			obj_pointText[tt].transform.SetParent(s_canvas.transform);
-//			obj_pointText[tt].transform.position = setHitPointPosition(text_pos);
+			//			obj_pointText[tt] = (GameObject)Instantiate(s_pointText, new Vector3(s_pointText.transform.position.x, s_pointText.transform.position.y, s_pointText.transform.position.z), Quaternion.identity);
+			//			obj_pointText[tt].transform.SetParent(s_canvas.transform);
+			//			obj_pointText[tt].transform.position = setHitPointPosition(text_pos);
 			String str = "";
-			switch(sw) {
+			switch (sw) {
 				case 0:
 					str = "10pt";
 					break;
@@ -1460,7 +1472,7 @@ namespace  nm_sphere {
 		*/
 		// TODO:連鎖でのキューブ上での文字表示処理
 		// 連鎖数及び取得連鎖アイテム数表示処理
-		public static void setChainExplosionInfoAnimation(Vector3 pos, string text)
+		public static void setChainExplosionInfoAnimation(Vector3 pos, string text, monster_color color)
 		{
 
 			// 表示オフはemmiterの// Update() → if (chain_explosion)で親子関係を解除する // chain Explosion reset cheack コメント
@@ -1468,8 +1480,36 @@ namespace  nm_sphere {
 			var textcount = text.ToString().Length;
 			float window_size = Screen.height;
 			int font_size = 48;
+			string sprite_s;
+			long sprite_no = (cubersFile.now_play_stage / 2 - 1) * 5;
 
-			pointText_w = (GameObject)Instantiate(s_pointText, new Vector3(s_pointText.transform.position.x, s_pointText.transform.position.y, s_pointText.transform.position.z), Quaternion.identity);
+			switch (color)
+            {
+				case monster_color.green_monster:
+					pointText_w = (GameObject)Instantiate(s_chaineCountGreenText, new Vector3(s_chaineCountGreenText.transform.position.x, s_chaineCountGreenText.transform.position.y, s_chaineCountGreenText.transform.position.z), Quaternion.identity);
+					sprite_no += 0;
+					break;
+				case monster_color.yellow_monster:
+					pointText_w = (GameObject)Instantiate(s_chaineCountYellowText, new Vector3(s_chaineCountYellowText.transform.position.x, s_chaineCountYellowText.transform.position.y, s_chaineCountYellowText.transform.position.z), Quaternion.identity);
+					sprite_no += 1;
+					break;
+				case monster_color.red_monster:
+					pointText_w = (GameObject)Instantiate(s_chaineCountRedText, new Vector3(s_chaineCountRedText.transform.position.x, s_chaineCountRedText.transform.position.y, s_chaineCountRedText.transform.position.z), Quaternion.identity);
+					sprite_no += 2;
+					break;
+				case monster_color.purple_monster:
+					pointText_w = (GameObject)Instantiate(s_chaineCountPurpleText, new Vector3(s_chaineCountPurpleText.transform.position.x, s_chaineCountPurpleText.transform.position.y, s_chaineCountPurpleText.transform.position.z), Quaternion.identity);
+					sprite_no += 3;
+					break;
+				case monster_color.blue_monster:
+					pointText_w = (GameObject)Instantiate(s_chaineCountBlueText, new Vector3(s_chaineCountBlueText.transform.position.x, s_chaineCountBlueText.transform.position.y, s_chaineCountBlueText.transform.position.z), Quaternion.identity);
+					sprite_no += 4;
+					break;
+			}
+
+			sprite_s = "<sprite=" + sprite_no.ToString() + ">";
+			text = sprite_s + text;
+
 			pointText_w.transform.SetParent(s_canvas.transform);
 			pointText_w.transform.position = pos;
 			pointText_w.gameObject.GetComponent<TMPro.TextMeshProUGUI>().text = text;

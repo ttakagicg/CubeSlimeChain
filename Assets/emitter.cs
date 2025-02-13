@@ -2047,7 +2047,7 @@ namespace nm_emitter
 							//						if (int.Parse(str) < 0) {
 
 							// TODO:連鎖 追加
-							sphere.chainExplosionLineCountDSP(chainExplosion_Touch_Position);
+							sphere.chainExplosionLineCountDSP(chainExplosion_Touch_Position, chainExplosioncolor);
 							canvasPanel canvasp = GetComponentInChildren<canvasPanel>();
 							canvasp.chainInfoEffectDSP();
 							//canvasPanel.canvasPanel_instance.chainInfoEffectDSP();Anima2D
