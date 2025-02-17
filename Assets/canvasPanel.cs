@@ -496,11 +496,13 @@ namespace nm_canvasPanel
 		public Button b_Lostadd;
 		public Button b_Share;
 		public Button b_new_game;
-		public Button b_retry;
+        public Button b_new_game2;
+        public Button b_retry;
 		public Button b_item;
 		//public Button b_charge;
 		public static Button bs_new_game;
-		public static Button bs_retry;
+        public static Button bs_new_game2;
+        public static Button bs_retry;
 		public static Button bs_item;
 		public static Button bs_setting;
         //public static Button bs_charge;
@@ -1351,14 +1353,20 @@ namespace nm_canvasPanel
 			obj_n.onClick.AddListener(() => ButtonNewGameClick());
 			b_new_game.gameObject.SetActive(false);
 
-			// game retry button
-			//bs_retry = b_retry;
-			//Button obj_r = b_retry.transform.GetComponent<Button>();
-			//obj_r.onClick.AddListener(() => ButtonRetryClick());
-			//b_retry.gameObject.SetActive(false);
+            // new game select 2 button
+            bs_new_game2 = b_new_game2;
+            Button obj_n2 = b_new_game2.transform.GetComponent<Button>();
+            obj_n2.onClick.AddListener(() => ButtonNewGame2Click());
+            b_new_game2.gameObject.SetActive(false);
 
-			// game item button
-			bs_item = b_item;
+            // game retry button
+            //bs_retry = b_retry;
+            //Button obj_r = b_retry.transform.GetComponent<Button>();
+            //obj_r.onClick.AddListener(() => ButtonRetryClick());
+            //b_retry.gameObject.SetActive(false);
+
+            // game item button
+            bs_item = b_item;
 			Button obj_o = b_item.transform.GetComponent<Button>();
 			obj_o.onClick.AddListener(() => ButtonItemClick());
 			b_item.gameObject.SetActive(false);
@@ -2370,7 +2378,7 @@ namespace nm_canvasPanel
 
             var seq2 = DOTween.Sequence();
             seq2.Append(itemGetView.transform.DOScale(new Vector3(1.0f, 1.0f), 1.0f));
-            seq2.Append(itemGetView.transform.DOScale(new Vector3(1.0f, 1.0f), 1.0f));　// 表示時間の為２度設定 1.0f→2.0fよりスムーズ
+            seq2.Append(itemGetView.transform.DOScale(new Vector3(1.0f, 1.0f), 2.0f));　// 表示時間の為２度設定 1.0f→2.0fよりスムーズ
             seq2.OnComplete(() =>
             {
                 // アニメーションが終了時によばれる
@@ -2914,8 +2922,9 @@ namespace nm_canvasPanel
 			case 0:
 				bs_new_game.gameObject.SetActive(false);
                 // TODO:1-1-7削除　メインメニュー処理修正
+                bs_new_game2.gameObject.SetActive(false);
                 //bs_retry.gameObject.SetActive(false);
-				bs_item.gameObject.SetActive(false);
+                bs_item.gameObject.SetActive(false);
                 bs_setting.gameObject.SetActive(false);
 
 //				s_center_waku.gameObject.SetActive(false);
@@ -2938,6 +2947,7 @@ namespace nm_canvasPanel
 
 				bs_new_game.gameObject.SetActive(true);
                 // TODO:1-1-7削除　メインメニュー処理修正
+                bs_new_game2.gameObject.SetActive(true);
                 //bs_retry.gameObject.SetActive(true);
                 bs_item.gameObject.SetActive(true);
                 bs_setting.gameObject.SetActive(true);
@@ -3024,119 +3034,6 @@ namespace nm_canvasPanel
         // ステージメニューの作成　gameselectView
         private void Create_GameSelectView() {
 
-            selectViewClose_BT.transform.tag = "99";
-            selectViewClose_BT.GetComponent<Button>().onClick.RemoveAllListeners();
-            selectViewClose_BT.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell(selectViewClose_BT));
-            // TODO:newステージセレクト関連
-            stage1_1_bt.transform.tag = "1";
-            stage1_1_bt.GetComponent<Button>().onClick.RemoveAllListeners();
-            stage1_1_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell(stage1_1_bt));
-            setGameBadge(stage1_1_bt, 1);
-            //setStageLevelSelectBTTotalClearInfo(1,1);
-
-            stage1_2_bt.transform.tag = "2";
-            stage1_2_bt.GetComponent<Button>().onClick.RemoveAllListeners();
-            stage1_2_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell(stage1_2_bt));
-            setGameBadge(stage1_2_bt, 1);
-            //setStageLevelSelectBTTotalClearInfo(1, 2);
-
-            stage1_3_bt.transform.tag = "3";
-            stage1_3_bt.GetComponent<Button>().onClick.RemoveAllListeners();
-            stage1_3_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell(stage1_3_bt));
-            setGameBadge(stage1_3_bt, 1);
-            //setStageLevelSelectBTTotalClearInfo(1, 3);
-
-            stage2_1_bt.transform.tag = "4";
-            stage2_1_bt.GetComponent<Button>().onClick.RemoveAllListeners();
-            stage2_1_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell(stage2_1_bt));
-            setGameBadge(stage2_1_bt, 1);
-            //setStageLevelSelectBTTotalClearInfo(2, 1);
-
-            stage2_2_bt.transform.tag = "5";
-            stage2_2_bt.GetComponent<Button>().onClick.RemoveAllListeners();
-            stage2_2_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell(stage2_2_bt));
-            setGameBadge(stage2_2_bt, 1);
-            //setStageLevelSelectBTTotalClearInfo(2, 2);
-
-            stage2_3_bt.transform.tag = "6";
-            stage2_3_bt.GetComponent<Button>().onClick.RemoveAllListeners();
-            stage2_3_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell(stage2_3_bt));
-            setGameBadge(stage2_3_bt, 1);
-            //setStageLevelSelectBTTotalClearInfo(2, 3);
-
-            stage3_1_bt.transform.tag = "7";
-            stage3_1_bt.GetComponent<Button>().onClick.RemoveAllListeners();
-            stage3_1_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell(stage3_1_bt));
-            setGameBadge(stage3_1_bt, 1);
-            //setStageLevelSelectBTTotalClearInfo(3, 1);
-
-            stage3_2_bt.transform.tag = "8";
-            stage3_2_bt.GetComponent<Button>().onClick.RemoveAllListeners();
-            stage3_2_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell(stage3_2_bt));
-            setGameBadge(stage3_2_bt, 1);
-            //setStageLevelSelectBTTotalClearInfo(3, 2);
-
-            stage3_3_bt.transform.tag = "9";
-            stage3_3_bt.GetComponent<Button>().onClick.RemoveAllListeners();
-            stage3_3_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell(stage3_3_bt));
-            setGameBadge(stage3_3_bt, 1);
-            //setStageLevelSelectBTTotalClearInfo(3, 3);
-
-            stage4_1_bt.transform.tag = "10";
-            stage4_1_bt.GetComponent<Button>().onClick.RemoveAllListeners();
-            stage4_1_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell(stage4_1_bt));
-            setGameBadge(stage4_1_bt, 1);
-            //setStageLevelSelectBTTotalClearInfo(4, 1);
-
-            stage4_2_bt.transform.tag = "11";
-            stage4_2_bt.GetComponent<Button>().onClick.RemoveAllListeners();
-            stage4_2_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell(stage4_2_bt));
-            setGameBadge(stage4_2_bt, 1);
-            //setStageLevelSelectBTTotalClearInfo(4, 2);
-
-            stage4_3_bt.transform.tag = "12";
-            stage4_3_bt.GetComponent<Button>().onClick.RemoveAllListeners();
-            stage4_3_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell(stage4_3_bt));
-            setGameBadge(stage4_3_bt, 1);
-            //setStageLevelSelectBTTotalClearInfo(4, 3);
-
-            stage5_1_bt.transform.tag = "13";
-            stage5_1_bt.GetComponent<Button>().onClick.RemoveAllListeners();
-            stage5_1_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell(stage5_1_bt));
-            setGameBadge(stage5_1_bt, 1);
-            //setStageLevelSelectBTTotalClearInfo(5, 1);
-
-            stage5_2_bt.transform.tag = "14";
-            stage5_2_bt.GetComponent<Button>().onClick.RemoveAllListeners();
-            stage5_2_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell(stage5_2_bt));
-            setGameBadge(stage5_2_bt, 1);
-            //setStageLevelSelectBTTotalClearInfo(5, 2);
-
-            stage5_3_bt.transform.tag = "15";
-            stage5_3_bt.GetComponent<Button>().onClick.RemoveAllListeners();
-            stage5_3_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell(stage5_3_bt));
-            setGameBadge(stage5_3_bt, 1);
-            //setStageLevelSelectBTTotalClearInfo(5, 3);
-
-            stage6_1_bt.transform.tag = "16";
-            stage6_1_bt.GetComponent<Button>().onClick.RemoveAllListeners();
-            stage6_1_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell(stage6_1_bt));
-            setGameBadge(stage6_1_bt, 1);
-            //setStageLevelSelectBTTotalClearInfo(6, 1);
-
-            stage6_2_bt.transform.tag = "17";
-            stage6_2_bt.GetComponent<Button>().onClick.RemoveAllListeners();
-            stage6_2_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell(stage6_2_bt));
-            setGameBadge(stage6_2_bt, 1);
-            //setStageLevelSelectBTTotalClearInfo(6, 2);
-
-            stage6_3_bt.transform.tag = "18";
-            stage6_3_bt.GetComponent<Button>().onClick.RemoveAllListeners();
-            stage6_3_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell(stage6_3_bt));
-            setGameBadge(stage6_3_bt, 1);
-            //setStageLevelSelectBTTotalClearInfo(6, 3);
-
-
             // TODO:旧ステージセレクト関連
             selectView1_1.transform.tag = "1";
 			selectView1_1.GetComponent<Button>().onClick.RemoveAllListeners();
@@ -3181,51 +3078,148 @@ namespace nm_canvasPanel
             setStageSelectBTTotalClearInfo(6);
 
         }
-        // TODO:new ゲームステージ選択メニュー画面修正
-/*        void setStageLevelSelectBTTotalClearInfo(int stageno, int level)
+        private void Create_GameStageSelectView()
         {
-            // トータルプレイ時間
-            long totalPlayTime = 0;
-            long totalLostCount = 0;
+            selectViewClose_BT.transform.tag = "99";
+            selectViewClose_BT.GetComponent<Button>().onClick.RemoveAllListeners();
+            selectViewClose_BT.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell(selectViewClose_BT));
+            // TODO:newステージセレクト関連
+            stage1_1_bt.transform.tag = "1";
+            stage1_1_bt.GetComponent<Button>().onClick.RemoveAllListeners();
+            stage1_1_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell(stage1_1_bt));
+            setGameBadge(stage1_1_bt, 1);
 
-            IDictionary dt = (IDictionary)cubersFile.stage[stageno - 1].leveldata[level - 1];
-            // プレイ時間（秒）
-            totalPlayTime += (long)dt["playtime"];
-            // トータルロストカウント
-            totalLostCount += (long)dt["lostcount"];
-            var span = new TimeSpan(0, 0, (int)totalPlayTime);
-            var hhmmss = span.ToString(@"hh\:mm\:ss");
-            switch (stageno)
-            {
-                case 1:
-                    cleartime1_1.gameObject.GetComponent<Text>().text = hhmmss;
-                    totallost1_1_count.gameObject.GetComponent<Text>().text = totalLostCount.ToString();
-                    break;
-                case 2:
-                    cleartime1_2.gameObject.GetComponent<Text>().text = hhmmss;
-                    totallost1_2_count.gameObject.GetComponent<Text>().text = totalLostCount.ToString();
-                    break;
-                case 3:
-                    cleartime2_1.gameObject.GetComponent<Text>().text = hhmmss;
-                    totallost2_1_count.gameObject.GetComponent<Text>().text = totalLostCount.ToString();
-                    break;
-                case 4:
-                    cleartime2_2.gameObject.GetComponent<Text>().text = hhmmss;
-                    totallost2_2_count.gameObject.GetComponent<Text>().text = totalLostCount.ToString();
-                    break;
-                case 5:
-                    cleartime3_1.gameObject.GetComponent<Text>().text = hhmmss;
-                    totallost3_1_count.gameObject.GetComponent<Text>().text = totalLostCount.ToString();
-                    break;
-                case 6:
-                    cleartime3_2.gameObject.GetComponent<Text>().text = hhmmss;
-                    totallost3_2_count.gameObject.GetComponent<Text>().text = totalLostCount.ToString();
-                    break;
-            }
+            stage1_2_bt.transform.tag = "2";
+            stage1_2_bt.GetComponent<Button>().onClick.RemoveAllListeners();
+            stage1_2_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell(stage1_2_bt));
+            setGameBadge(stage1_2_bt, 1);
+
+            stage1_3_bt.transform.tag = "3";
+            stage1_3_bt.GetComponent<Button>().onClick.RemoveAllListeners();
+            stage1_3_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell(stage1_3_bt));
+            setGameBadge(stage1_3_bt, 1);
+
+            stage2_1_bt.transform.tag = "4";
+            stage2_1_bt.GetComponent<Button>().onClick.RemoveAllListeners();
+            stage2_1_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell(stage2_1_bt));
+            setGameBadge(stage2_1_bt, 1);
+
+            stage2_2_bt.transform.tag = "5";
+            stage2_2_bt.GetComponent<Button>().onClick.RemoveAllListeners();
+            stage2_2_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell(stage2_2_bt));
+            setGameBadge(stage2_2_bt, 1);
+
+            stage2_3_bt.transform.tag = "6";
+            stage2_3_bt.GetComponent<Button>().onClick.RemoveAllListeners();
+            stage2_3_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell(stage2_3_bt));
+            setGameBadge(stage2_3_bt, 1);
+
+            stage3_1_bt.transform.tag = "7";
+            stage3_1_bt.GetComponent<Button>().onClick.RemoveAllListeners();
+            stage3_1_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell(stage3_1_bt));
+            setGameBadge(stage3_1_bt, 1);
+
+            stage3_2_bt.transform.tag = "8";
+            stage3_2_bt.GetComponent<Button>().onClick.RemoveAllListeners();
+            stage3_2_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell(stage3_2_bt));
+            setGameBadge(stage3_2_bt, 1);
+
+            stage3_3_bt.transform.tag = "9";
+            stage3_3_bt.GetComponent<Button>().onClick.RemoveAllListeners();
+            stage3_3_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell(stage3_3_bt));
+            setGameBadge(stage3_3_bt, 1);
+
+            stage4_1_bt.transform.tag = "10";
+            stage4_1_bt.GetComponent<Button>().onClick.RemoveAllListeners();
+            stage4_1_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell(stage4_1_bt));
+            setGameBadge(stage4_1_bt, 1);
+
+            stage4_2_bt.transform.tag = "11";
+            stage4_2_bt.GetComponent<Button>().onClick.RemoveAllListeners();
+            stage4_2_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell(stage4_2_bt));
+            setGameBadge(stage4_2_bt, 1);
+
+            stage4_3_bt.transform.tag = "12";
+            stage4_3_bt.GetComponent<Button>().onClick.RemoveAllListeners();
+            stage4_3_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell(stage4_3_bt));
+            setGameBadge(stage4_3_bt, 1);
+
+            stage5_1_bt.transform.tag = "13";
+            stage5_1_bt.GetComponent<Button>().onClick.RemoveAllListeners();
+            stage5_1_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell(stage5_1_bt));
+            setGameBadge(stage5_1_bt, 1);
+
+            stage5_2_bt.transform.tag = "14";
+            stage5_2_bt.GetComponent<Button>().onClick.RemoveAllListeners();
+            stage5_2_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell(stage5_2_bt));
+            setGameBadge(stage5_2_bt, 1);
+
+            stage5_3_bt.transform.tag = "15";
+            stage5_3_bt.GetComponent<Button>().onClick.RemoveAllListeners();
+            stage5_3_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell(stage5_3_bt));
+            setGameBadge(stage5_3_bt, 1);
+
+            stage6_1_bt.transform.tag = "16";
+            stage6_1_bt.GetComponent<Button>().onClick.RemoveAllListeners();
+            stage6_1_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell(stage6_1_bt));
+            setGameBadge(stage6_1_bt, 1);
+
+            stage6_2_bt.transform.tag = "17";
+            stage6_2_bt.GetComponent<Button>().onClick.RemoveAllListeners();
+            stage6_2_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell(stage6_2_bt));
+            setGameBadge(stage6_2_bt, 1);
+
+            stage6_3_bt.transform.tag = "18";
+            stage6_3_bt.GetComponent<Button>().onClick.RemoveAllListeners();
+            stage6_3_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell(stage6_3_bt));
+            setGameBadge(stage6_3_bt, 1);
+
         }
-*/
-        // TODO:1-1-6 ゲームステージ選択メニュー画面修正
-        void setStageSelectBTTotalClearInfo(int stageno)
+            // TODO:new ゲームステージ選択メニュー画面修正
+            /*        void setStageLevelSelectBTTotalClearInfo(int stageno, int level)
+                    {
+                        // トータルプレイ時間
+                        long totalPlayTime = 0;
+                        long totalLostCount = 0;
+
+                        IDictionary dt = (IDictionary)cubersFile.stage[stageno - 1].leveldata[level - 1];
+                        // プレイ時間（秒）
+                        totalPlayTime += (long)dt["playtime"];
+                        // トータルロストカウント
+                        totalLostCount += (long)dt["lostcount"];
+                        var span = new TimeSpan(0, 0, (int)totalPlayTime);
+                        var hhmmss = span.ToString(@"hh\:mm\:ss");
+                        switch (stageno)
+                        {
+                            case 1:
+                                cleartime1_1.gameObject.GetComponent<Text>().text = hhmmss;
+                                totallost1_1_count.gameObject.GetComponent<Text>().text = totalLostCount.ToString();
+                                break;
+                            case 2:
+                                cleartime1_2.gameObject.GetComponent<Text>().text = hhmmss;
+                                totallost1_2_count.gameObject.GetComponent<Text>().text = totalLostCount.ToString();
+                                break;
+                            case 3:
+                                cleartime2_1.gameObject.GetComponent<Text>().text = hhmmss;
+                                totallost2_1_count.gameObject.GetComponent<Text>().text = totalLostCount.ToString();
+                                break;
+                            case 4:
+                                cleartime2_2.gameObject.GetComponent<Text>().text = hhmmss;
+                                totallost2_2_count.gameObject.GetComponent<Text>().text = totalLostCount.ToString();
+                                break;
+                            case 5:
+                                cleartime3_1.gameObject.GetComponent<Text>().text = hhmmss;
+                                totallost3_1_count.gameObject.GetComponent<Text>().text = totalLostCount.ToString();
+                                break;
+                            case 6:
+                                cleartime3_2.gameObject.GetComponent<Text>().text = hhmmss;
+                                totallost3_2_count.gameObject.GetComponent<Text>().text = totalLostCount.ToString();
+                                break;
+                        }
+                    }
+            */
+            // TODO:1-1-6 ゲームステージ選択メニュー画面修正
+            void setStageSelectBTTotalClearInfo(int stageno)
         {
             // トータルプレイ時間
             long totalPlayTime = 0;
@@ -5743,7 +5737,6 @@ namespace nm_canvasPanel
             // --------------------------------------------------------------------------------------------------------------------------------
             // TODO:追加　1-1-2 2:アイテム購入画面遷移ボタン処理を追加する
             // itemViewスライド
-
             // --------------------------------------------------------------------------------------------------------------------------------
 
             // game select field
@@ -6644,6 +6637,38 @@ namespace nm_canvasPanel
                 //footer_BG.gameObject.SetActive(true);
                 right_header.gameObject.SetActive(true);
 				b_Pause.gameObject.SetActive(true);
+            }
+        }
+        // new stage select view
+        public void ButtonNewGame2Click()
+        {
+
+            if (gsf_Move) return;
+            else gsf_Move = true;
+
+            s_center_View.gameObject.SetActive(false);
+            // ステージ選択画面ビュー作成処理
+            Create_GameStageSelectView();
+
+            if (!gsf_Up)
+            {
+                game_stage_select_view.gameObject.SetActive(true);
+                gsf_Up = true;
+            }
+            else
+            {
+                gsf_Up = false;
+
+                safeareaout_header_BG.gameObject.SetActive(true);
+                safeareaout_footer_BG.gameObject.SetActive(true);
+                playItemView_button_BG.gameObject.SetActive(true);
+                playSettingView_button_BG.gameObject.SetActive(true);
+                down_button_L_BG.gameObject.SetActive(true);
+                down_button_R_BG.gameObject.SetActive(true);
+                //header_BG.gameObject.SetActive(true);
+                //footer_BG.gameObject.SetActive(true);
+                right_header.gameObject.SetActive(true);
+                b_Pause.gameObject.SetActive(true);
             }
         }
 
