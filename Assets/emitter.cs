@@ -369,13 +369,13 @@ namespace nm_emitter
 			}
 		}
 
-        public static void levelCheck(long level) {
+        public static void levelCheck(long stage) {
 
 //			float screen_width_per = Screen.width / 320.0f;
 
 			before_cubeCount = cubeCount;
 
-			switch(level) {
+			switch(stage) {
 			case 1:
 			case 2:
 				cubeCount = 3;

@@ -230,6 +230,24 @@ namespace nm_canvasPanel
         // ゲームクリア・失敗画面
         public Image complete_view;
         public Image complete_level_image;
+        public GameObject complete_level_badge1_1;
+        public GameObject complete_level_badge1_2;
+        public GameObject complete_level_badge1_3;
+        public GameObject complete_level_badge2_1;
+        public GameObject complete_level_badge2_2;
+        public GameObject complete_level_badge2_3;
+        public GameObject complete_level_badge3_1;
+        public GameObject complete_level_badge3_2;
+        public GameObject complete_level_badge3_3;
+        public GameObject complete_level_badge4_1;
+        public GameObject complete_level_badge4_2;
+        public GameObject complete_level_badge4_3;
+        public GameObject complete_level_badge5_1;
+        public GameObject complete_level_badge5_2;
+        public GameObject complete_level_badge5_3;
+        public GameObject complete_level_badge6_1;
+        public GameObject complete_level_badge6_2;
+        public GameObject complete_level_badge6_3;
         public Text complete_level_text;
         // TODO:修正・追加 1-1-3
         public Button cmp_OK_BT;
@@ -1470,8 +1488,8 @@ namespace nm_canvasPanel
 			// complete view
 			complete_view.gameObject.SetActive(false);
 
-			// Failed view
-			failed_view.gameObject.SetActive(false);
+            // Failed view
+            failed_view.gameObject.SetActive(false);
 
 			// high Score dsp
             s_LifeLostCount_text = LifeLostCount_text;
@@ -2397,19 +2415,14 @@ namespace nm_canvasPanel
             //*/
             //s_silver_item_get_text.text = "✖︎　" + emitter.chainExplosionLinePlayCount.ToString();
 
-            //if (s_max_chain_count_text.text == "") {
-            //    s_max_chain_count_text.text = "0";
-            //}
-            //if (int.Parse(s_max_chain_count_text.text) < emitter.chainExplosionLinePlayMAX) { 
-            //    /*
-            //    Vector3 scal_max = s_max_chain_count_BG.transform.localScale;
-            //    scal_max.x = m_hit_zoom;
-            //    scal_max.y = m_hit_zoom;
-            //    scal_max.z = m_hit_zoom;
-            //    s_max_chain_count_BG.transform.localScale = scal_max;
-            //    */
-            //    s_max_chain_count_text.text = emitter.chainExplosionLinePlayMAX.ToString();
-            //}
+            if (s_max_chain_count_text.text == "")
+            {
+                s_max_chain_count_text.text = "0";
+            }
+            if (int.Parse(s_max_chain_count_text.text) < emitter.chainExplosionLinePlayMAX)
+            {
+                s_max_chain_count_text.text = emitter.chainExplosionLinePlayMAX.ToString();
+            }
 
         }
 
@@ -3082,97 +3095,97 @@ namespace nm_canvasPanel
         {
             selectViewClose_BT.transform.tag = "99";
             selectViewClose_BT.GetComponent<Button>().onClick.RemoveAllListeners();
-            selectViewClose_BT.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell(selectViewClose_BT));
+            selectViewClose_BT.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell2(1, 99));
             // TODO:newステージセレクト関連
             stage1_1_bt.transform.tag = "1";
             stage1_1_bt.GetComponent<Button>().onClick.RemoveAllListeners();
-            stage1_1_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell(stage1_1_bt));
-            setGameBadge(stage1_1_bt, 1);
+            stage1_1_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell2(1, 1));
+            setGameBadge(stage1_1_bt, 1, 1);
 
             stage1_2_bt.transform.tag = "2";
             stage1_2_bt.GetComponent<Button>().onClick.RemoveAllListeners();
-            stage1_2_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell(stage1_2_bt));
-            setGameBadge(stage1_2_bt, 1);
+            stage1_2_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell2(1, 2));
+            setGameBadge(stage1_2_bt, 1, 2);
 
             stage1_3_bt.transform.tag = "3";
             stage1_3_bt.GetComponent<Button>().onClick.RemoveAllListeners();
-            stage1_3_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell(stage1_3_bt));
-            setGameBadge(stage1_3_bt, 1);
+            stage1_3_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell2(1, 3));
+            setGameBadge(stage1_3_bt, 1, 3);
 
             stage2_1_bt.transform.tag = "4";
             stage2_1_bt.GetComponent<Button>().onClick.RemoveAllListeners();
-            stage2_1_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell(stage2_1_bt));
-            setGameBadge(stage2_1_bt, 1);
+            stage2_1_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell2(2, 1));
+            setGameBadge(stage2_1_bt, 1, 1);
 
             stage2_2_bt.transform.tag = "5";
             stage2_2_bt.GetComponent<Button>().onClick.RemoveAllListeners();
-            stage2_2_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell(stage2_2_bt));
-            setGameBadge(stage2_2_bt, 1);
+            stage2_2_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell2(2, 2));
+            setGameBadge(stage2_2_bt, 1, 2);
 
             stage2_3_bt.transform.tag = "6";
             stage2_3_bt.GetComponent<Button>().onClick.RemoveAllListeners();
-            stage2_3_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell(stage2_3_bt));
-            setGameBadge(stage2_3_bt, 1);
+            stage2_3_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell2(2, 3));
+            setGameBadge(stage2_3_bt, 1, 3);
 
             stage3_1_bt.transform.tag = "7";
             stage3_1_bt.GetComponent<Button>().onClick.RemoveAllListeners();
-            stage3_1_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell(stage3_1_bt));
-            setGameBadge(stage3_1_bt, 1);
+            stage3_1_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell2(3, 1));
+            setGameBadge(stage3_1_bt, 1, 1);
 
             stage3_2_bt.transform.tag = "8";
             stage3_2_bt.GetComponent<Button>().onClick.RemoveAllListeners();
-            stage3_2_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell(stage3_2_bt));
-            setGameBadge(stage3_2_bt, 1);
+            stage3_2_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell2(3, 2));
+            setGameBadge(stage3_2_bt, 1, 2);
 
             stage3_3_bt.transform.tag = "9";
             stage3_3_bt.GetComponent<Button>().onClick.RemoveAllListeners();
-            stage3_3_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell(stage3_3_bt));
-            setGameBadge(stage3_3_bt, 1);
+            stage3_3_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell2(3, 3));
+            setGameBadge(stage3_3_bt, 1, 3);
 
             stage4_1_bt.transform.tag = "10";
             stage4_1_bt.GetComponent<Button>().onClick.RemoveAllListeners();
-            stage4_1_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell(stage4_1_bt));
-            setGameBadge(stage4_1_bt, 1);
+            stage4_1_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell2(4, 1));
+            setGameBadge(stage4_1_bt, 1, 1);
 
             stage4_2_bt.transform.tag = "11";
             stage4_2_bt.GetComponent<Button>().onClick.RemoveAllListeners();
-            stage4_2_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell(stage4_2_bt));
-            setGameBadge(stage4_2_bt, 1);
+            stage4_2_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell2(4, 2));
+            setGameBadge(stage4_2_bt, 1, 2);
 
             stage4_3_bt.transform.tag = "12";
             stage4_3_bt.GetComponent<Button>().onClick.RemoveAllListeners();
-            stage4_3_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell(stage4_3_bt));
-            setGameBadge(stage4_3_bt, 1);
+            stage4_3_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell2(4, 3));
+            setGameBadge(stage4_3_bt, 1, 3);
 
             stage5_1_bt.transform.tag = "13";
             stage5_1_bt.GetComponent<Button>().onClick.RemoveAllListeners();
-            stage5_1_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell(stage5_1_bt));
-            setGameBadge(stage5_1_bt, 1);
+            stage5_1_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell2(5, 1));
+            setGameBadge(stage5_1_bt, 1, 1);
 
             stage5_2_bt.transform.tag = "14";
             stage5_2_bt.GetComponent<Button>().onClick.RemoveAllListeners();
-            stage5_2_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell(stage5_2_bt));
-            setGameBadge(stage5_2_bt, 1);
+            stage5_2_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell2(5, 2));
+            setGameBadge(stage5_2_bt, 1, 2);
 
             stage5_3_bt.transform.tag = "15";
             stage5_3_bt.GetComponent<Button>().onClick.RemoveAllListeners();
-            stage5_3_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell(stage5_3_bt));
-            setGameBadge(stage5_3_bt, 1);
+            stage5_3_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell2(5, 3));
+            setGameBadge(stage5_3_bt, 1, 3);
 
             stage6_1_bt.transform.tag = "16";
             stage6_1_bt.GetComponent<Button>().onClick.RemoveAllListeners();
-            stage6_1_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell(stage6_1_bt));
-            setGameBadge(stage6_1_bt, 1);
+            stage6_1_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell2(6, 1));
+            setGameBadge(stage6_1_bt, 1, 1);
 
             stage6_2_bt.transform.tag = "17";
             stage6_2_bt.GetComponent<Button>().onClick.RemoveAllListeners();
-            stage6_2_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell(stage6_2_bt));
-            setGameBadge(stage6_2_bt, 1);
+            stage6_2_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell2(6, 2));
+            setGameBadge(stage6_2_bt, 1, 2);
 
             stage6_3_bt.transform.tag = "18";
             stage6_3_bt.GetComponent<Button>().onClick.RemoveAllListeners();
-            stage6_3_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell(stage6_3_bt));
-            setGameBadge(stage6_3_bt, 1);
+            stage6_3_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell2(6, 3));
+            setGameBadge(stage6_3_bt, 1, 3);
 
         }
             // TODO:new ゲームステージ選択メニュー画面修正
@@ -3328,44 +3341,278 @@ namespace nm_canvasPanel
                 }
         */
         // ステージ選択ボタンマスクチェック＆バッジセット
-        void setGameBadge(Button bt, int i)
+        void setGameBadge(Button bt, int i, int level)
         {
-            stage1_1_bt.gameObject.SetActive(true);
-            stage1_2_bt.gameObject.SetActive(false);
-            stage1_3_bt.gameObject.SetActive(false);
-            stage2_1_bt.gameObject.SetActive(false);
-            stage2_2_bt.gameObject.SetActive(false);
-            stage2_3_bt.gameObject.SetActive(false);
-            stage3_1_bt.gameObject.SetActive(false);
-            stage3_2_bt.gameObject.SetActive(false);
-            stage3_3_bt.gameObject.SetActive(false);
-            stage4_1_bt.gameObject.SetActive(false);
-            stage4_2_bt.gameObject.SetActive(false);
-            stage4_3_bt.gameObject.SetActive(false);
-            stage5_1_bt.gameObject.SetActive(false);
-            stage5_2_bt.gameObject.SetActive(false);
-            stage5_3_bt.gameObject.SetActive(false);
-            stage6_1_bt.gameObject.SetActive(false);
-            stage6_2_bt.gameObject.SetActive(false);
-            stage6_3_bt.gameObject.SetActive(false);
-            stage1_1_Mask.gameObject.SetActive(false);
-            stage1_2_Mask.gameObject.SetActive(true);
-            stage1_3_Mask.gameObject.SetActive(true);
-            stage2_1_Mask.gameObject.SetActive(true);
-            stage2_2_Mask.gameObject.SetActive(true);
-            stage2_3_Mask.gameObject.SetActive(true);
-            stage3_1_Mask.gameObject.SetActive(true);
-            stage3_2_Mask.gameObject.SetActive(true);
-            stage3_3_Mask.gameObject.SetActive(true);
-            stage4_1_Mask.gameObject.SetActive(true);
-            stage4_2_Mask.gameObject.SetActive(true);
-            stage4_3_Mask.gameObject.SetActive(true);
-            stage5_1_Mask.gameObject.SetActive(true);
-            stage5_2_Mask.gameObject.SetActive(true);
-            stage5_3_Mask.gameObject.SetActive(true);
-            stage6_1_Mask.gameObject.SetActive(true);
-            stage6_2_Mask.gameObject.SetActive(true);
-            stage6_3_Mask.gameObject.SetActive(true);
+            img = null;
+            int laststage;
+            for (int m = 0; m < cubersFile.game_stage_max; m++)
+            {
+                if (cubersFile.stage[m].stage_no == i)
+                {
+                    int sts = (int)cubersFile.stage[m].status;
+                    laststage = (int)cubersFile.stage[m].last_level;
+                    IDictionary dt = (IDictionary)cubersFile.stage[i - 1].leveldata[level - 1];
+                    var levelstatus = (long)dt["status"];
+                    switch (i)
+                    {
+                        // stage 1
+                        case 1:
+                            switch (level)
+                            {
+                                case 1:
+                                    if (levelstatus == 0)
+                                    {
+                                        stage1_1_bt.gameObject.SetActive(false);
+                                        stage1_1_Mask.gameObject.SetActive(true);
+                                    }
+                                    else
+                                    {
+                                        stage1_1_bt.gameObject.SetActive(true);
+                                        stage1_1_Mask.gameObject.SetActive(false);
+                                    }
+                                    break;
+                                case 2:
+                                    if (levelstatus == 0)
+                                    {
+                                        stage1_2_bt.gameObject.SetActive(false);
+                                        stage1_2_Mask.gameObject.SetActive(true);
+                                    }
+                                    else
+                                    {
+                                        stage1_2_bt.gameObject.SetActive(true);
+                                        stage1_2_Mask.gameObject.SetActive(false);
+                                    }
+                                    break;
+                                case 3:
+                                    if (levelstatus == 0)
+                                    {
+                                        stage1_3_bt.gameObject.SetActive(false);
+                                        stage1_3_Mask.gameObject.SetActive(true);
+                                    }
+                                    else
+                                    {
+                                        stage1_3_bt.gameObject.SetActive(true);
+                                        stage1_3_Mask.gameObject.SetActive(false);
+                                    }
+                                    break;
+                            }
+                            break;
+                        // stage 2
+                        case 2:
+                            switch (level)
+                            {
+                                case 1:
+                                    if (levelstatus == 0)
+                                    {
+                                        stage2_1_bt.gameObject.SetActive(false);
+                                        stage2_1_Mask.gameObject.SetActive(true);
+                                    }
+                                    else
+                                    {
+                                        stage2_1_bt.gameObject.SetActive(true);
+                                        stage2_1_Mask.gameObject.SetActive(false);
+                                    }
+                                    break;
+                                case 2:
+                                    if (levelstatus == 0)
+                                    {
+                                        stage2_2_bt.gameObject.SetActive(false);
+                                        stage2_2_Mask.gameObject.SetActive(true);
+                                    }
+                                    else
+                                    {
+                                        stage2_2_bt.gameObject.SetActive(true);
+                                        stage2_2_Mask.gameObject.SetActive(false);
+                                    }
+                                    break;
+                                case 3:
+                                    if (levelstatus == 0)
+                                    {
+                                        stage2_3_bt.gameObject.SetActive(false);
+                                        stage2_3_Mask.gameObject.SetActive(true);
+                                    }
+                                    else
+                                    {
+                                        stage2_3_bt.gameObject.SetActive(true);
+                                        stage2_3_Mask.gameObject.SetActive(false);
+                                    }
+                                    break;
+                            }
+                            break;
+                        // stage 3
+                        case 3:
+                            switch (level)
+                            {
+                                case 1:
+                                    if (levelstatus == 0)
+                                    {
+                                        stage3_1_bt.gameObject.SetActive(false);
+                                        stage3_1_Mask.gameObject.SetActive(true);
+                                    }
+                                    else
+                                    {
+                                        stage3_1_bt.gameObject.SetActive(true);
+                                        stage3_1_Mask.gameObject.SetActive(false);
+                                    }
+                                    break;
+                                case 2:
+                                    if (levelstatus == 0)
+                                    {
+                                        stage3_2_bt.gameObject.SetActive(false);
+                                        stage3_2_Mask.gameObject.SetActive(true);
+                                    }
+                                    else
+                                    {
+                                        stage3_2_bt.gameObject.SetActive(true);
+                                        stage3_2_Mask.gameObject.SetActive(false);
+                                    }
+                                    break;
+                                case 3:
+                                    if (levelstatus == 0)
+                                    {
+                                        stage3_3_bt.gameObject.SetActive(false);
+                                        stage3_3_Mask.gameObject.SetActive(true);
+                                    }
+                                    else
+                                    {
+                                        stage3_3_bt.gameObject.SetActive(true);
+                                        stage3_3_Mask.gameObject.SetActive(false);
+                                    }
+                                    break;
+                            }
+                            break;
+                        // stage 4
+                        case 4:
+                            switch (level)
+                            {
+                                case 1:
+                                    if (levelstatus == 0)
+                                    {
+                                        stage4_1_bt.gameObject.SetActive(false);
+                                        stage4_1_Mask.gameObject.SetActive(true);
+                                    }
+                                    else
+                                    {
+                                        stage4_1_bt.gameObject.SetActive(true);
+                                        stage4_1_Mask.gameObject.SetActive(false);
+                                    }
+                                    break;
+                                case 2:
+                                    if (levelstatus == 0)
+                                    {
+                                        stage4_2_bt.gameObject.SetActive(false);
+                                        stage4_2_Mask.gameObject.SetActive(true);
+                                    }
+                                    else
+                                    {
+                                        stage4_2_bt.gameObject.SetActive(true);
+                                        stage4_2_Mask.gameObject.SetActive(false);
+                                    }
+                                    break;
+                                case 3:
+                                    if (levelstatus == 0)
+                                    {
+                                        stage4_3_bt.gameObject.SetActive(false);
+                                        stage4_3_Mask.gameObject.SetActive(true);
+                                    }
+                                    else
+                                    {
+                                        stage4_3_bt.gameObject.SetActive(true);
+                                        stage4_3_Mask.gameObject.SetActive(false);
+                                    }
+                                    break;
+                            }
+                            break;
+                        // stage 5
+                        case 5:
+                            switch (level)
+                            {
+                                case 1:
+                                    if (levelstatus == 0)
+                                    {
+                                        stage5_1_bt.gameObject.SetActive(false);
+                                        stage5_1_Mask.gameObject.SetActive(true);
+                                    }
+                                    else
+                                    {
+                                        stage5_1_bt.gameObject.SetActive(true);
+                                        stage5_1_Mask.gameObject.SetActive(false);
+                                    }
+                                    break;
+                                case 2:
+                                    if (levelstatus == 0)
+                                    {
+                                        stage5_2_bt.gameObject.SetActive(false);
+                                        stage5_2_Mask.gameObject.SetActive(true);
+                                    }
+                                    else
+                                    {
+                                        stage5_2_bt.gameObject.SetActive(true);
+                                        stage5_2_Mask.gameObject.SetActive(false);
+                                    }
+                                    break;
+                                case 3:
+                                    if (levelstatus == 0)
+                                    {
+                                        stage5_3_bt.gameObject.SetActive(false);
+                                        stage5_3_Mask.gameObject.SetActive(true);
+                                    }
+                                    else
+                                    {
+                                        stage5_3_bt.gameObject.SetActive(true);
+                                        stage5_3_Mask.gameObject.SetActive(false);
+                                    }
+                                    break;
+                            }
+                            break;
+                        // stage 6
+                        case 6:
+                            switch (level)
+                            {
+                                case 1:
+                                    if (levelstatus == 0)
+                                    {
+                                        stage6_1_bt.gameObject.SetActive(false);
+                                        stage6_1_Mask.gameObject.SetActive(true);
+                                    }
+                                    else
+                                    {
+                                        stage6_1_bt.gameObject.SetActive(true);
+                                        stage6_1_Mask.gameObject.SetActive(false);
+                                    }
+                                    break;
+                                case 2:
+                                    if (levelstatus == 0)
+                                    {
+                                        stage6_2_bt.gameObject.SetActive(false);
+                                        stage6_2_Mask.gameObject.SetActive(true);
+                                    }
+                                    else
+                                    {
+                                        stage6_2_bt.gameObject.SetActive(true);
+                                        stage6_2_Mask.gameObject.SetActive(false);
+                                    }
+                                    break;
+                                case 3:
+                                    if (levelstatus == 0)
+                                    {
+                                        stage6_3_bt.gameObject.SetActive(false);
+                                        stage6_3_Mask.gameObject.SetActive(true);
+                                    }
+                                    else
+                                    {
+                                        stage6_3_bt.gameObject.SetActive(true);
+                                        stage6_3_Mask.gameObject.SetActive(false);
+                                    }
+                                    break;
+                            }
+                            break;
+                    }
+                    // リソースステージバッジイメージデータのセット
+                    //getResourceLevelImageData(i, laststage, img);
+                    break;
+                }
+            }
 
         }
         private Sprite spt;
@@ -3532,30 +3779,48 @@ namespace nm_canvasPanel
         // ステージクリア条件情報
         // モンスター落下個数 最低 配列
         public static int[,] gravity_number_min_array = {
-            { 1, 2, 2, 2, 2},     // 3cube タイムチャレンジ
-            { 1, 2, 2, 2, 2},     // 3cube 連鎖モード
-            { 2, 2, 2, 2, 2},     // 4cube タイムチャレンジ
-            { 2, 2, 2, 2, 2},     // 4cube 連鎖モード
-            { 3, 3, 3, 3, 3},     // 5cube タイムチャレンジ
-            { 3, 3, 3, 3, 3}      // 5cube 連鎖モード
+            { 1, 2, 2},     // 3cube タイムチャレンジ
+            { 1, 2, 2},     // 3cube 連鎖モード
+            { 2, 2, 2},     // 4cube タイムチャレンジ
+            { 2, 2, 2},     // 4cube 連鎖モード
+            { 3, 3, 3},     // 5cube タイムチャレンジ
+            { 3, 3, 3}      // 5cube 連鎖モード
+            //{ 1, 2, 2, 2, 2},     // 3cube タイムチャレンジ
+            //{ 1, 2, 2, 2, 2},     // 3cube 連鎖モード
+            //{ 2, 2, 2, 2, 2},     // 4cube タイムチャレンジ
+            //{ 2, 2, 2, 2, 2},     // 4cube 連鎖モード
+            //{ 3, 3, 3, 3, 3},     // 5cube タイムチャレンジ
+            //{ 3, 3, 3, 3, 3}      // 5cube 連鎖モード
             };
         // モンスター落下個数 最高 配列
         public static int[,] gravity_number_max_array = {
-            { 2, 3, 4, 4, 4},     // 3cube タイムチャレンジ
-            { 2, 3, 4, 4, 4},     // 3cube 連鎖モード
-            { 3, 4, 5, 5, 5},     // 4cube タイムチャレンジ
-            { 3, 4, 5, 5, 5},     // 4cube 連鎖モード
-            { 4, 5, 6, 6, 6},     // 5cube タイムチャレンジ
-            { 4, 5, 6, 6, 6}      // 5cube 連鎖モード
+            { 2, 3, 4},     // 3cube タイムチャレンジ
+            { 2, 3, 4},     // 3cube 連鎖モード
+            { 3, 4, 5},     // 4cube タイムチャレンジ
+            { 3, 4, 5},     // 4cube 連鎖モード
+            { 4, 5, 6},     // 5cube タイムチャレンジ
+            { 4, 5, 6}      // 5cube 連鎖モード
+            //{ 2, 3, 4, 4, 4},     // 3cube タイムチャレンジ
+            //{ 2, 3, 4, 4, 4},     // 3cube 連鎖モード
+            //{ 3, 4, 5, 5, 5},     // 4cube タイムチャレンジ
+            //{ 3, 4, 5, 5, 5},     // 4cube 連鎖モード
+            //{ 4, 5, 6, 6, 6},     // 5cube タイムチャレンジ
+            //{ 4, 5, 6, 6, 6}      // 5cube 連鎖モード
             };
         // 落下待機時間 (秒)　配列　０の場合、10s から　５s可変
         public static int[,] gravity_time_array = {
-            { 10, 10, 10, 7, 4},     // 3cube タイムチャレンジ
-            { 10, 10, 10, 7, 4},     // 3cube 連鎖モード
-            { 10, 10, 10, 7, 4},     // 4cube タイムチャレンジ
-            { 10, 10, 10, 7, 4},     // 4cube 連鎖モード
-            { 10, 10, 10, 7, 4},     // 5cube タイムチャレンジ
-            { 10, 10, 10, 7, 4}      // 5cube 連鎖モード
+            { 10, 7, 4},     // 3cube タイムチャレンジ
+            { 10, 7, 4},     // 3cube 連鎖モード
+            { 10, 7, 4},     // 4cube タイムチャレンジ
+            { 10, 7, 4},     // 4cube 連鎖モード
+            { 10, 7, 4},     // 5cube タイムチャレンジ
+            { 10, 7, 4}      // 5cube 連鎖モード
+            //{ 10, 10, 10, 7, 4},     // 3cube タイムチャレンジ
+            //{ 10, 10, 10, 7, 4},     // 3cube 連鎖モード
+            //{ 10, 10, 10, 7, 4},     // 4cube タイムチャレンジ
+            //{ 10, 10, 10, 7, 4},     // 4cube 連鎖モード
+            //{ 10, 10, 10, 7, 4},     // 5cube タイムチャレンジ
+            //{ 10, 10, 10, 7, 4}      // 5cube 連鎖モード
             };
         // ３連鎖必要回数 配列 ０の場合は、非表示
         public static int[,] chaine_count_array = {
@@ -3866,7 +4131,63 @@ namespace nm_canvasPanel
 
                 }
         */
-        // ステージバッジ　イメージリソースセット
+        // 新ステージバッジ　イメージリソースセット
+        void setLevelImageBadge(int levelNo, int stageNo)
+        {
+            complete_level_badge1_1.gameObject.SetActive(false);
+            complete_level_badge1_2.gameObject.SetActive(false);
+            complete_level_badge1_3.gameObject.SetActive(false);
+            complete_level_badge2_1.gameObject.SetActive(false);
+            complete_level_badge2_2.gameObject.SetActive(false);
+            complete_level_badge2_3.gameObject.SetActive(false);
+            complete_level_badge3_1.gameObject.SetActive(false);
+            complete_level_badge3_2.gameObject.SetActive(false);
+            complete_level_badge3_3.gameObject.SetActive(false);
+            complete_level_badge4_1.gameObject.SetActive(false);
+            complete_level_badge4_2.gameObject.SetActive(false);
+            complete_level_badge4_3.gameObject.SetActive(false);
+            complete_level_badge5_1.gameObject.SetActive(false);
+            complete_level_badge5_2.gameObject.SetActive(false);
+            complete_level_badge5_3.gameObject.SetActive(false);
+            complete_level_badge6_1.gameObject.SetActive(false);
+            complete_level_badge6_2.gameObject.SetActive(false);
+            complete_level_badge6_3.gameObject.SetActive(false);
+
+            switch (stageNo)
+            {
+                case 1:
+                    if (levelNo == 1) complete_level_badge1_1.gameObject.SetActive(true);
+                    if (levelNo == 2) complete_level_badge1_2.gameObject.SetActive(true);
+                    if (levelNo == 3) complete_level_badge1_3.gameObject.SetActive(true);
+                    break;
+                case 2:
+                    if (levelNo == 1) complete_level_badge2_1.gameObject.SetActive(true);
+                    if (levelNo == 2) complete_level_badge2_2.gameObject.SetActive(true);
+                    if (levelNo == 3) complete_level_badge2_3.gameObject.SetActive(true);
+                    break;
+                case 3:
+                    if (levelNo == 1) complete_level_badge3_1.gameObject.SetActive(true);
+                    if (levelNo == 2) complete_level_badge3_2.gameObject.SetActive(true);
+                    if (levelNo == 3) complete_level_badge3_3.gameObject.SetActive(true);
+                    break;
+                case 4:
+                    if (levelNo == 1) complete_level_badge4_1.gameObject.SetActive(true);
+                    if (levelNo == 2) complete_level_badge4_2.gameObject.SetActive(true);
+                    if (levelNo == 3) complete_level_badge4_3.gameObject.SetActive(true);
+                    break;
+                case 5:
+                    if (levelNo == 1) complete_level_badge5_1.gameObject.SetActive(true);
+                    if (levelNo == 2) complete_level_badge5_2.gameObject.SetActive(true);
+                    if (levelNo == 3) complete_level_badge5_3.gameObject.SetActive(true);
+                    break;
+                case 6:
+                    if (levelNo == 1) complete_level_badge6_1.gameObject.SetActive(true);
+                    if (levelNo == 2) complete_level_badge6_2.gameObject.SetActive(true);
+                    if (levelNo == 3) complete_level_badge6_3.gameObject.SetActive(true);
+                    break;
+            }
+        }
+        // 旧ステージバッジ　イメージリソースセット
         void getResourceLevelImageData(int levelNo, int stageNo, Image image)
         {
             switch (stageNo)
@@ -5582,7 +5903,7 @@ namespace nm_canvasPanel
                             var stage = (int)cubersFile.now_play_stage;
                             var level = (int)cubersFile.now_play_stagelevel;
                             // リソースステージバッジイメージデータのセット
-                            getResourceLevelImageData(stage, level, img);
+                            setLevelImageBadge(stage, level);
                             complete_level_image.gameObject.SetActive(true);
 
                             // TODO:1-1-3 修正　
@@ -5748,9 +6069,10 @@ namespace nm_canvasPanel
                     seq.OnComplete(() =>
                     {
                         // アニメーションが終了時によばれる
-                        gf_Move = false;
                     });
-				} else {
+                    gf_Move = false;
+                }
+                else {
                     int mod = (int)cubersFile.now_play_stage % emitter.chainExplosion_userLeve;
                     if (mod == 0)
                     {
@@ -5775,39 +6097,48 @@ namespace nm_canvasPanel
                     seq.OnComplete(() =>
                     {
                         // アニメーションが終了時によばれる
-                        gf_Move = false;
 
                     });
-				}
-			}
+                    gf_Move = false;
+                }
+            }
             // game stage_select field
             if (gsf_Move)
             {
                 if (gsf_Up)
                 {
-
-                    game_stage_select_view.GetComponent<RectTransform>().Translate(new Vector3(0, 100, 0) * f_Speed * Time.deltaTime);
-                    if (game_stage_select_view.transform.position.y >= pos_gs.y)
+                    var seq = DOTween.Sequence();
+                    seq.Append(game_stage_select_view.rectTransform.DOMove(new Vector3(0, pos_gs.y, 0), 1));
+                    seq.OnComplete(() =>
                     {
-                        Vector3 pos = game_stage_select_view.GetComponent<RectTransform>().position;
-                        pos.y = pos_gs.y;
-                        game_stage_select_view.rectTransform.position = pos;
-                        gsf_Move = false;
-                    }
+                        // アニメーションが終了時によばれる
+                    });
+                    gsf_Move = false;
+
+                    //game_stage_select_view.GetComponent<RectTransform>().Translate(new Vector3(0, 100, 0) * f_Speed * Time.deltaTime);
+                    //if (game_stage_select_view.transform.position.y >= pos_gs.y)
+                    //{
+                    //    Vector3 pos = game_stage_select_view.GetComponent<RectTransform>().position;
+                    //    pos.y = pos_gs.y;
+                    //    game_stage_select_view.rectTransform.position = pos;
+                    //    gsf_Move = false;
+                    //}
 
                 }
                 else
                 {
 
-                    game_stage_select_view.GetComponent<RectTransform>().Translate(new Vector3(0, -100, 0) * f_Speed * Time.deltaTime);
-                    if (game_stage_select_view.transform.position.y <= -game_stage_select_view.rectTransform.sizeDelta.y)
+                    // 連鎖無しステージ選択時、ここで連鎖パネルビューを強制的にオフにする
+                    s_monsterSlimeColorCountView.gameObject.SetActive(false);
+
+                    var seq = DOTween.Sequence();
+                    seq.Append(game_stage_select_view.rectTransform.DOMove(new Vector3(0, -Screen.height, 0), 1));
+                    seq.OnComplete(() =>
                     {
-                        Vector3 pos = game_stage_select_view.GetComponent<RectTransform>().position;
-                        pos.y = -game_stage_select_view.rectTransform.sizeDelta.y;
-                        game_stage_select_view.GetComponent<RectTransform>().position = pos;
-                        gsf_Move = false;
-                        game_stage_select_view.gameObject.SetActive(false);
-                    }
+                        // アニメーションが終了時によばれる
+
+                    });
+                    gsf_Move = false;
 
                 }
             }
@@ -6208,6 +6539,30 @@ namespace nm_canvasPanel
 
         }
 
+        //   ステージ選択ボタン押下処理
+        public void buttonSelectCell2(int stage, int level)
+        {
+            if (level == 99)
+            {
+                //s_center_field.gameObject.SetActive(true);
+                //s_mainMenu_field.gameObject.SetActive(true);
+                setCenterView(1);
+
+                gsf_Move = true;
+                gsf_Up = false;
+                return;
+            }
+
+            cubersFile.now_play_stage = stage;    // ステージ選択 番号
+
+            setStageSelectLevel(level);     // セーブサービス利用無し　レベル１データを設定
+            // TODO:追加　1-1-1 2:レベル選択で行われていたデータ設定処理をステージ選択で行なうように変更  ↑
+
+            gsf_Move = true;
+            gsf_Up = false;
+
+        }
+
         // TODO:追加　1-1-1 2:レベル選択で行われていたデータ設定処理をステージ選択で行なうように変更
         // StageLevel Dataを設定する
         public void setStageSelectLevel(int selectLevel)
@@ -6241,9 +6596,9 @@ namespace nm_canvasPanel
             center_header.gameObject.SetActive(true);
             b_Pause.gameObject.SetActive(true);
 
-            emitter.BGMstate = emitter.BGM_State.start;
+            //emitter.BGMstate = emitter.BGM_State.start;
 
-            emitter.playState = emitter.gamePlayState.Play;
+            //emitter.playState = emitter.gamePlayState.Play;
 
             // ステージバッジ表示
             // TODO:バッジ変更に伴う修正
