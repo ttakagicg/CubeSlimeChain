@@ -64,6 +64,8 @@ public class swipe : MonoBehaviour {
 	
 		// ゲームエンド処理中？
 		if (sphere.gameStatus_text != "") return;
+        if (sphere.gameover) return;
+        if (sphere.complete) return;
         // モンスタ落下開始フラグオン？
         // モンスター落下中はキューブの回転を止める
         // 落下モンスタの本来落ちるべき位置がズレる問題を回避するため落下開始でキューブの回転を止める、もしくは90度移動を完了させる
@@ -89,11 +91,10 @@ public class swipe : MonoBehaviour {
                 if (floor_touch || (emitter.turn_end && emitter.turn_move))
                 {
                     //Debug.Log("!!!!!!!!!floor begin");
-                    flgSwip = false;
+                    flgSwip = false; 
                     emitter.touchcube_guid_OFF();
                     return;
                 }
-
                 startPos = touch.position;
 				Ray ray = Camera.main.ScreenPointToRay(startPos);
 				RaycastHit hit = new RaycastHit();

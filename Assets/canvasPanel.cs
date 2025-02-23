@@ -49,7 +49,8 @@ namespace nm_canvasPanel
 		public Image center_header;
 		public Image right_header;
 		public Image center_View;
-		public static Image s_center_View;
+        public Vector3 center_View_orgSize;
+        public static Image s_center_View;
 		public Image gamecount;
 		public Image item_View;
         public Image setting_View;
@@ -248,7 +249,9 @@ namespace nm_canvasPanel
         public GameObject complete_level_badge6_1;
         public GameObject complete_level_badge6_2;
         public GameObject complete_level_badge6_3;
-        public Text complete_level_text;
+        public TextMeshProUGUI complete_level_text;
+        public TextMeshProUGUI playtime_text;
+        public TextMeshProUGUI getItem_Count_text;
         // TODO:修正・追加 1-1-3
         public Button cmp_OK_BT;
         public Image saveConfirm_View;
@@ -256,6 +259,7 @@ namespace nm_canvasPanel
         public Button saveLevelCancel_BT;
         public Button saveLevelClose_BT;
         public Button cmp_NEXT_BT;
+        public Button cmp_shop_BT;
         public bool stageCompleteInfoON = false;
         public Image stage_Clear_Info_view;
         public static Image s_stage_Clear_Info_view;
@@ -280,9 +284,25 @@ namespace nm_canvasPanel
         public Image besttime_text_star;
         public static Image s_besttime_text_star;
         // TODO:削除 ゲーム仕様変更の為
-        //public Image faild_condition_line_bg_image;
-        //public Text faild_condition_line_text;
         public Image failed_view;
+        public GameObject faild_level_badge1_1;
+        public GameObject faild_level_badge1_2;
+        public GameObject faild_level_badge1_3;
+        public GameObject faild_level_badge2_1;
+        public GameObject faild_level_badge2_2;
+        public GameObject faild_level_badge2_3;
+        public GameObject faild_level_badge3_1;
+        public GameObject faild_level_badge3_2;
+        public GameObject faild_level_badge3_3;
+        public GameObject faild_level_badge4_1;
+        public GameObject faild_level_badge4_2;
+        public GameObject faild_level_badge4_3;
+        public GameObject faild_level_badge5_1;
+        public GameObject faild_level_badge5_2;
+        public GameObject faild_level_badge5_3;
+        public GameObject faild_level_badge6_1;
+        public GameObject faild_level_badge6_2;
+        public GameObject faild_level_badge6_3;
         public Button fld_OK_BT;
 		public Button fld_RT_BT;
         public Button itemView_BT;
@@ -292,8 +312,6 @@ namespace nm_canvasPanel
         public static Text s_total_playtime_text;
         public Text total_lostlife_count_text;
         public static Text s_total_lostlife_count_text;
-        //public Text ranking_text;
-        //public static Text s_ranking_text;
 
         // 連鎖MAX数及び連鎖取得予定アイテム数表示
         public Image max_chain_count_BG;
@@ -824,7 +842,7 @@ namespace nm_canvasPanel
 		public GameObject purpleMonsterLineSliderCount;
 		public GameObject redMonsterLineSliderCount;
 		public GameObject blueMonsterLineSliderCount;
-
+        public static Image s_safeareaout_header_BG;
 
         // Use this for initialization
         void Start () {
@@ -836,6 +854,7 @@ namespace nm_canvasPanel
             float safeAreaHight = 0;
             float safeAreaHightUnder = 0;
             //#if UNITY_EDITOR_OSX
+            s_safeareaout_header_BG = safeareaout_header_BG;
             if (Screen.width >= 1125 && Screen.height >= 2436)
             {
                 safeAreaHight = safeareaout_header_BG.rectTransform.sizeDelta.y * screen_width_per;
@@ -1398,7 +1417,8 @@ namespace nm_canvasPanel
 			// game end next & game select button
 			Button cmp_OK_BT_o = cmp_OK_BT.transform.GetComponent<Button>();
 			cmp_OK_BT_o.onClick.AddListener(() => ButtonGameEndNewGameClick());
-			Button cmp_NEXT_BT_o = cmp_NEXT_BT.transform.GetComponent<Button>();
+            //cmp_OK_BT_o.onClick.AddListener(() => ButtonGameEndNewGameClick());
+            Button cmp_NEXT_BT_o = cmp_NEXT_BT.transform.GetComponent<Button>();
             cmp_NEXT_BT_o.onClick.AddListener(() => ButtonGameEndNextClick());
 			Button fld_OK_BT_o = fld_OK_BT.transform.GetComponent<Button>();
 			fld_OK_BT_o.onClick.AddListener(() => ButtonGameEndNewGameClick());
@@ -1426,6 +1446,10 @@ namespace nm_canvasPanel
             // TODO:追加　1-1-2  アイテム購入画面表示ボタン
             Button itemView_BT_o = itemView_BT.transform.GetComponent<Button>();
             itemView_BT_o.onClick.AddListener(() => ButtonItemClick());
+
+            // TODO:追加　1-1-2  アイテム購入画面表示ボタン
+            Button cmp_shop_BT_o = cmp_shop_BT.transform.GetComponent<Button>();
+            cmp_shop_BT_o.onClick.AddListener(() => ButtonItemClick());
 
             // TODO:追加　1-1-6 ゲームステージ選択メニュー画面修正
             // ステージ選択ボタン押下時の確認画面にて、新規スタートレベル選択
@@ -2949,14 +2973,14 @@ namespace nm_canvasPanel
 
 			 // main menu dsp
 			case 1:
-				s_gameStatus_text.text = "";
+/*                var safeAreaHight = s_safeareaout_header_BG.rectTransform.sizeDelta.y * screen_width_per;
 
-				//Vector2 size = s_center_field.rectTransform.sizeDelta;
-				//size.y = bs_new_game.GetComponent<RectTransform>().sizeDelta.y * 4 + 120;
-				//s_center_field.rectTransform.sizeDelta = size;
-				Vector3 pos = s_center_View.transform.position;
-				pos.y = Screen.height/2 - (s_center_View.rectTransform.sizeDelta.y * screen_width_per /2);
-                    s_center_View.transform.position = pos;
+                Vector3 scal_c = s_center_View.transform.localScale;
+                Vector3 pos_c = s_center_View.transform.position;
+                pos_c.y = (Screen.height - safeAreaHight) / 2 - s_center_View.rectTransform.sizeDelta.y * scal_c.y / 2;
+                s_center_View.transform.position = pos_c;
+*/
+                s_gameStatus_text.text = "";
 
 				bs_new_game.gameObject.SetActive(true);
                 // TODO:1-1-7削除　メインメニュー処理修正
@@ -2964,8 +2988,6 @@ namespace nm_canvasPanel
                 //bs_retry.gameObject.SetActive(true);
                 bs_item.gameObject.SetActive(true);
                 bs_setting.gameObject.SetActive(true);
-
-//				s_center_waku.gameObject.SetActive(true);
 
 				s_center_View.gameObject.SetActive(true);
 
@@ -4132,58 +4154,99 @@ namespace nm_canvasPanel
                 }
         */
         // 新ステージバッジ　イメージリソースセット
-        void setLevelImageBadge(int levelNo, int stageNo)
+        void setLevelImageBadge(int stageNo, int levelNo, int gamestatus)
         {
-            complete_level_badge1_1.gameObject.SetActive(false);
-            complete_level_badge1_2.gameObject.SetActive(false);
-            complete_level_badge1_3.gameObject.SetActive(false);
-            complete_level_badge2_1.gameObject.SetActive(false);
-            complete_level_badge2_2.gameObject.SetActive(false);
-            complete_level_badge2_3.gameObject.SetActive(false);
-            complete_level_badge3_1.gameObject.SetActive(false);
-            complete_level_badge3_2.gameObject.SetActive(false);
-            complete_level_badge3_3.gameObject.SetActive(false);
-            complete_level_badge4_1.gameObject.SetActive(false);
-            complete_level_badge4_2.gameObject.SetActive(false);
-            complete_level_badge4_3.gameObject.SetActive(false);
-            complete_level_badge5_1.gameObject.SetActive(false);
-            complete_level_badge5_2.gameObject.SetActive(false);
-            complete_level_badge5_3.gameObject.SetActive(false);
-            complete_level_badge6_1.gameObject.SetActive(false);
-            complete_level_badge6_2.gameObject.SetActive(false);
-            complete_level_badge6_3.gameObject.SetActive(false);
+            if (gamestatus == 1)
+            {
+                complete_level_badge1_1.gameObject.SetActive(false);
+                complete_level_badge1_2.gameObject.SetActive(false);
+                complete_level_badge1_3.gameObject.SetActive(false);
+                complete_level_badge2_1.gameObject.SetActive(false);
+                complete_level_badge2_2.gameObject.SetActive(false);
+                complete_level_badge2_3.gameObject.SetActive(false);
+                complete_level_badge3_1.gameObject.SetActive(false);
+                complete_level_badge3_2.gameObject.SetActive(false);
+                complete_level_badge3_3.gameObject.SetActive(false);
+                complete_level_badge4_1.gameObject.SetActive(false);
+                complete_level_badge4_2.gameObject.SetActive(false);
+                complete_level_badge4_3.gameObject.SetActive(false);
+                complete_level_badge5_1.gameObject.SetActive(false);
+                complete_level_badge5_2.gameObject.SetActive(false);
+                complete_level_badge5_3.gameObject.SetActive(false);
+                complete_level_badge6_1.gameObject.SetActive(false);
+                complete_level_badge6_2.gameObject.SetActive(false);
+                complete_level_badge6_3.gameObject.SetActive(false);
+            } else
+            {
+                faild_level_badge1_1.gameObject.SetActive(false);
+                faild_level_badge1_2.gameObject.SetActive(false);
+                faild_level_badge1_3.gameObject.SetActive(false);
+                faild_level_badge2_1.gameObject.SetActive(false);
+                faild_level_badge2_2.gameObject.SetActive(false);
+                faild_level_badge2_3.gameObject.SetActive(false);
+                faild_level_badge3_1.gameObject.SetActive(false);
+                faild_level_badge3_2.gameObject.SetActive(false);
+                faild_level_badge3_3.gameObject.SetActive(false);
+                faild_level_badge4_1.gameObject.SetActive(false);
+                faild_level_badge4_2.gameObject.SetActive(false);
+                faild_level_badge4_3.gameObject.SetActive(false);
+                faild_level_badge5_1.gameObject.SetActive(false);
+                faild_level_badge5_2.gameObject.SetActive(false);
+                faild_level_badge5_3.gameObject.SetActive(false);
+                faild_level_badge6_1.gameObject.SetActive(false);
+                faild_level_badge6_2.gameObject.SetActive(false);
+                faild_level_badge6_3.gameObject.SetActive(false);
 
+            }
             switch (stageNo)
             {
                 case 1:
-                    if (levelNo == 1) complete_level_badge1_1.gameObject.SetActive(true);
-                    if (levelNo == 2) complete_level_badge1_2.gameObject.SetActive(true);
-                    if (levelNo == 3) complete_level_badge1_3.gameObject.SetActive(true);
+                    if (gamestatus == 1 && levelNo == 1) complete_level_badge1_1.gameObject.SetActive(true);
+                    if (gamestatus == 1 && levelNo == 2) complete_level_badge1_2.gameObject.SetActive(true);
+                    if (gamestatus == 1 && levelNo == 3) complete_level_badge1_3.gameObject.SetActive(true);
+                    if (gamestatus == 2 && levelNo == 1) faild_level_badge1_1.gameObject.SetActive(true);
+                    if (gamestatus == 2 && levelNo == 2) faild_level_badge1_2.gameObject.SetActive(true);
+                    if (gamestatus == 2 && levelNo == 3) faild_level_badge1_3.gameObject.SetActive(true);
                     break;
                 case 2:
-                    if (levelNo == 1) complete_level_badge2_1.gameObject.SetActive(true);
-                    if (levelNo == 2) complete_level_badge2_2.gameObject.SetActive(true);
-                    if (levelNo == 3) complete_level_badge2_3.gameObject.SetActive(true);
+                    if (gamestatus == 1 && levelNo == 1) complete_level_badge2_1.gameObject.SetActive(true);
+                    if (gamestatus == 1 && levelNo == 2) complete_level_badge2_2.gameObject.SetActive(true);
+                    if (gamestatus == 1 && levelNo == 3) complete_level_badge2_3.gameObject.SetActive(true);
+                    if (gamestatus == 2 && levelNo == 1) faild_level_badge2_1.gameObject.SetActive(true);
+                    if (gamestatus == 2 && levelNo == 2) faild_level_badge2_2.gameObject.SetActive(true);
+                    if (gamestatus == 2 && levelNo == 3) faild_level_badge2_3.gameObject.SetActive(true);
                     break;
                 case 3:
-                    if (levelNo == 1) complete_level_badge3_1.gameObject.SetActive(true);
-                    if (levelNo == 2) complete_level_badge3_2.gameObject.SetActive(true);
-                    if (levelNo == 3) complete_level_badge3_3.gameObject.SetActive(true);
+                    if (gamestatus == 1 && levelNo == 1) complete_level_badge3_1.gameObject.SetActive(true);
+                    if (gamestatus == 1 && levelNo == 2) complete_level_badge3_2.gameObject.SetActive(true);
+                    if (gamestatus == 1 && levelNo == 3) complete_level_badge3_3.gameObject.SetActive(true);
+                    if (gamestatus == 2 && levelNo == 1) faild_level_badge3_1.gameObject.SetActive(true);
+                    if (gamestatus == 2 && levelNo == 2) faild_level_badge3_2.gameObject.SetActive(true);
+                    if (gamestatus == 2 && levelNo == 3) faild_level_badge3_3.gameObject.SetActive(true);
                     break;
                 case 4:
-                    if (levelNo == 1) complete_level_badge4_1.gameObject.SetActive(true);
-                    if (levelNo == 2) complete_level_badge4_2.gameObject.SetActive(true);
-                    if (levelNo == 3) complete_level_badge4_3.gameObject.SetActive(true);
+                    if (gamestatus == 1 && levelNo == 1) complete_level_badge4_1.gameObject.SetActive(true);
+                    if (gamestatus == 1 && levelNo == 2) complete_level_badge4_2.gameObject.SetActive(true);
+                    if (gamestatus == 1 && levelNo == 3) complete_level_badge4_3.gameObject.SetActive(true);
+                    if (gamestatus == 2 && levelNo == 1) faild_level_badge4_1.gameObject.SetActive(true);
+                    if (gamestatus == 2 && levelNo == 2) faild_level_badge4_2.gameObject.SetActive(true);
+                    if (gamestatus == 2 && levelNo == 3) faild_level_badge4_3.gameObject.SetActive(true);
                     break;
                 case 5:
-                    if (levelNo == 1) complete_level_badge5_1.gameObject.SetActive(true);
-                    if (levelNo == 2) complete_level_badge5_2.gameObject.SetActive(true);
-                    if (levelNo == 3) complete_level_badge5_3.gameObject.SetActive(true);
+                    if (gamestatus == 1 && levelNo == 1) complete_level_badge5_1.gameObject.SetActive(true);
+                    if (gamestatus == 1 && levelNo == 2) complete_level_badge5_2.gameObject.SetActive(true);
+                    if (gamestatus == 1 && levelNo == 3) complete_level_badge5_3.gameObject.SetActive(true);
+                    if (gamestatus == 2 && levelNo == 1) faild_level_badge5_1.gameObject.SetActive(true);
+                    if (gamestatus == 2 && levelNo == 2) faild_level_badge5_2.gameObject.SetActive(true);
+                    if (gamestatus == 2 && levelNo == 3) faild_level_badge5_3.gameObject.SetActive(true);
                     break;
                 case 6:
-                    if (levelNo == 1) complete_level_badge6_1.gameObject.SetActive(true);
-                    if (levelNo == 2) complete_level_badge6_2.gameObject.SetActive(true);
-                    if (levelNo == 3) complete_level_badge6_3.gameObject.SetActive(true);
+                    if (gamestatus == 1 && levelNo == 1) complete_level_badge6_1.gameObject.SetActive(true);
+                    if (gamestatus == 1 && levelNo == 2) complete_level_badge6_2.gameObject.SetActive(true);
+                    if (gamestatus == 1 && levelNo == 3) complete_level_badge6_3.gameObject.SetActive(true);
+                    if (gamestatus == 2 && levelNo == 1) faild_level_badge6_1.gameObject.SetActive(true);
+                    if (gamestatus == 2 && levelNo == 2) faild_level_badge6_2.gameObject.SetActive(true);
+                    if (gamestatus == 2 && levelNo == 3) faild_level_badge6_3.gameObject.SetActive(true);
                     break;
             }
         }
@@ -5832,28 +5895,28 @@ namespace nm_canvasPanel
             // ゲームステータス表示有か？　ゲームステータスの表示の有無で判定
             if (sphere.gameStatus_text != "") {
 				// センターフィールド表示中？
-				if (!s_center_View.gameObject.activeSelf) {
-					// 表示前なら　センターフィールドの表示ポジション計算及び表示、センターフィールドへの内容表示までの待機時間設定
-					Vector2 size = s_center_View.rectTransform.sizeDelta;
-					size.y = gameStatus_text.rectTransform.sizeDelta.y+ 20;
-                    s_center_View.rectTransform.sizeDelta = size;
-					Vector3 pos = s_center_View.transform.position;
-					pos.y = Screen.height/2 - s_center_View.rectTransform.sizeDelta.y/2;
-                    s_center_View.transform.position = pos;
+				//if (!s_center_View.gameObject.activeSelf) {
+    //                // 表示前なら　センターフィールドの表示ポジション計算及び表示、センターフィールドへの内容表示までの待機時間設定
+    //                Vector2 size = s_center_View.rectTransform.sizeDelta;
+    //                center_View_orgSize = size;
+    //                size.y = gameStatus_text.rectTransform.sizeDelta.y+ 20;
+    //                s_center_View.rectTransform.sizeDelta = size;
+				//	Vector3 pos = s_center_View.transform.position;
+				//	pos.y = Screen.height/2 - s_center_View.rectTransform.sizeDelta.y/2;
+    //                s_center_View.transform.position = pos;
 
-					Vector3 pos_s = gameStatus_text.transform.position;
-					pos_s.y = s_center_View.transform.position.y + s_center_View.rectTransform.sizeDelta.y/2 - gameStatus_text.rectTransform.sizeDelta.y/2;
-					gameStatus_text.transform.position = pos_s;
+				//	Vector3 pos_s = gameStatus_text.transform.position;
+				//	pos_s.y = s_center_View.transform.position.y + s_center_View.rectTransform.sizeDelta.y/2 - gameStatus_text.rectTransform.sizeDelta.y/2;
+				//	gameStatus_text.transform.position = pos_s;
 
-                    s_center_View.gameObject.SetActive(true);
-					s_gameStatus_text.gameObject.SetActive(true);
-//					s_center_waku.gameObject.SetActive(false);
+    //                s_center_View.gameObject.SetActive(true);
+				//	//s_gameStatus_text.gameObject.SetActive(true);
 
-					gameStatus_text.text = sphere.gameStatus_text;
-					statusTime = 5;
+				//	gameStatus_text.text = sphere.gameStatus_text;
+				//	statusTime = 2;
 
-				}
-				else {
+				//}
+				//else {
 					// センターフィールド内容表示までのカウントダウン
 					statusTime -= Time.deltaTime;
 					
@@ -5890,20 +5953,20 @@ namespace nm_canvasPanel
 
                             // ゲームクリアビューオン
                             complete_view.gameObject.SetActive(true);
-							sphere.gameover = false;
-							sphere.complete = false;
+							//sphere.gameover = false;
+							//sphere.complete = false;
                             // 念の為ゲーム失敗表示ビューオフ
                             failed_view.gameObject.SetActive(false);
 
                             // レベルタイトル
                             // TODO:削除　レベルバッジをレベル数に差し替える場合、下記レベルタイトルセットは削除
-                            complete_level_text.gameObject.GetComponent<Text>().text = "- LEVEL " + cubersFile.now_play_stagelevel.ToString() + " -";
+                            complete_level_text.gameObject.GetComponent<Text>().text = "Stage: " + cubersFile.now_play_stage.ToString() + " Level: " + cubersFile.now_play_stagelevel.ToString() + " -";
                             // レベルバッジ表示
                             img = complete_level_image.GetComponent<Image>();
                             var stage = (int)cubersFile.now_play_stage;
                             var level = (int)cubersFile.now_play_stagelevel;
                             // リソースステージバッジイメージデータのセット
-                            setLevelImageBadge(stage, level);
+                            setLevelImageBadge(stage, level, 1);
                             complete_level_image.gameObject.SetActive(true);
 
                             // TODO:1-1-3 修正　
@@ -5923,15 +5986,6 @@ namespace nm_canvasPanel
 
                             // TODO:1-1-5 追加　各データ更新時のスター表示演出処理
                             setScoreUpdateStarEffect();
-
-                            /*
-                                // サンシャイン演出
-                                s_sunshine1.gameObject.SetActive(true);
-                                s_sunshine2.gameObject.SetActive(true);
-                                sunshinerotate = 1;
-								sunshinerotateTime = 10;
-								sphere.timer = 8.5f;
-                            */
 
                             // TODO:1-1-4追加 レベルMAX時チェック
                             // レベルMAX攻略か？
@@ -5977,12 +6031,17 @@ namespace nm_canvasPanel
                             // --------------------------------------------------------------------------------------------------------------------------------
                             // ゲームオーバー時の処理
                             //// ゲームクリアメッセージオフ
-                            //s_center_field.gameObject.SetActive(false);
                             failed_view.gameObject.SetActive(true);
-							sphere.gameover = false;
-							sphere.complete = false;
+                            sphere.gameStatus_text = "";
+                            //sphere.gameover = false;
+							//sphere.complete = false;
 
-                            // TODO:追加 リトライアイテム個数表示
+                            var stage = (int)cubersFile.now_play_stage;
+                            var level = (int)cubersFile.now_play_stagelevel;
+                            // リソースステージバッジイメージデータのセット
+                            setLevelImageBadge(stage, level, 2);
+
+/*                            // TODO:追加 リトライアイテム個数表示
                             if (cubersFile.item_retry > 999)
                             {
                                 retryItemCount_text.fontSize = 42;
@@ -5993,20 +6052,6 @@ namespace nm_canvasPanel
                                 retryItemCount_text.fontSize =  58;
                                 retryItemCount_text.text = cubersFile.item_retry.ToString();
                             }
-                            // TODO:削除 ゲーム仕様変更の為、下記処理を削除
-                            // 連鎖時の条件表示
-                            //switch (cubersFile.now_play_stage)
-                            //{
-                            //    case 2:
-                            //    case 4:
-                            //    case 6:
-                            //        faild_condition_line_bg_image.gameObject.SetActive(true);
-                            //        faild_condition_line_text.gameObject.GetComponent<Text>().text = "Line " + chaine_count_array[cubersFile.now_play_stage - 1, cubersFile.now_play_stagelevel - 1] + " / " + chain_3_count;
-                            //        break;
-                            //    default:
-                            //        faild_condition_line_bg_image.gameObject.SetActive(false);
-                            //        break;
-                            //}
 
                             Vector2 size = s_center_View.rectTransform.sizeDelta;
 							Vector3 pos = s_center_View.transform.position;
@@ -6014,13 +6059,17 @@ namespace nm_canvasPanel
 							Vector3 pos_failed = failed_view.transform.position;
 							pos_failed.y = pos.y;
 							failed_view.transform.position = pos_failed;
+ */                          // ボタン入力待ち
+                            gameStatus_text.text = "";
+                            //s_center_View.gameObject.SetActive(false);
+                            //s_center_View.rectTransform.sizeDelta = center_View_orgSize;
 
-							//Debug.Log("pos_failed:" + pos_failed);
+                            //Debug.Log("pos_failed:" + pos_failed);
 
-						}
+                        }
 
-					}
-				}
+                    }
+				//}
 			}
 
             // --------------------------------------------------------------------------------------------------------------------------------
@@ -6481,6 +6530,7 @@ namespace nm_canvasPanel
             {
                 //s_center_field.gameObject.SetActive(true);
                 //s_mainMenu_field.gameObject.SetActive(true);
+                //s_center_View.rectTransform.sizeDelta = center_View_orgSize;
                 setCenterView(1);
 
                 gf_Move = true;
@@ -6546,6 +6596,7 @@ namespace nm_canvasPanel
             {
                 //s_center_field.gameObject.SetActive(true);
                 //s_mainMenu_field.gameObject.SetActive(true);
+                //s_center_View.rectTransform.sizeDelta = center_View_orgSize;
                 setCenterView(1);
 
                 gsf_Move = true;
@@ -6671,7 +6722,9 @@ namespace nm_canvasPanel
                 emitter.gravity_Time += 0.99f;
             }
             setGravityWaitTimeDSP((int)emitter.gravity_Time);
-
+            // sound Play setting
+            emitter.player.playBGM();
+            emitter.BGMstate = emitter.BGM_State.play;
 
         }
 
@@ -6925,21 +6978,25 @@ namespace nm_canvasPanel
             complete_view.gameObject.SetActive(true);
 
         }
+        public emitter Emitter;
+        public sphere Sphere;
+
         public void ButtonGameEndNewGameClick() {
 
             // インタースティシャル広告表示制御
             // TODO:広告表示関連処理
-/*            gameEndButton_clickCount--;
-            if (gameEndButton_clickCount <= 0)
-            {
-                gameEndButton_clickCount = emitter.INTERSTITIAL_AD;
-                sw_gameEndButton = 1;   // ButtonClick New Game
-                // TODO:AD インタースティシャル広告表示
-                //RequestInterstitial();
-                return;
-            }
-*/
+            /*            gameEndButton_clickCount--;
+                        if (gameEndButton_clickCount <= 0)
+                        {
+                            gameEndButton_clickCount = emitter.INTERSTITIAL_AD;
+                            sw_gameEndButton = 1;   // ButtonClick New Game
+                            // TODO:AD インタースティシャル広告表示
+                            //RequestInterstitial();
+                            return;
+                        }
+            */
             // TODO:修正・追加 1-1-3 月極サービス利用者用攻略レベルセーブ処理
+            /*
             bool monthlyservice = cubersFile.cubersFile_instance.checkMonthlyService();
             if (monthlyservice)
             {
@@ -6948,14 +7005,35 @@ namespace nm_canvasPanel
                 complete_view.gameObject.SetActive(false);
                 return;
             }
-
+            */
+            //safeareaout_header_BG.gameObject.SetActive(false);
+            //safeareaout_footer_BG.gameObject.SetActive(false);
+            //header_BG.gameObject.SetActive(true);
+            //footer_BG.gameObject.SetActive(true);
+            playItemView_button_BG.gameObject.SetActive(false);
+            playSettingView_button_BG.gameObject.SetActive(false);
+            down_button_L_BG.gameObject.SetActive(false);
+            down_button_R_BG.gameObject.SetActive(false);
+            right_header.gameObject.SetActive(false);
+            left_header.gameObject.SetActive(false);
+            center_header.gameObject.SetActive(false);
+            b_Pause.gameObject.SetActive(false);
+            noChainPlayTimeDSP_Sceen2BGImage.gameObject.SetActive(false);
+            monsterColorCountSceen2View.gameObject.SetActive(false);
+            waitingTimerGauge_BG.gameObject.SetActive(false);
             complete_view.gameObject.SetActive(false);
 			failed_view.gameObject.SetActive(false);
-            //faild_condition_line_bg_image.gameObject.SetActive(false);
 
-            sphere.gameStatus_text = "";
+            Sphere.sphere_nowclear();
+            Emitter.cube_nowclear();
+            sphere.gameover = false;
+            sphere.complete = false;
 
-			ButtonNewGameClick();
+            //sphere.gameStatus_text = "";
+
+            //s_center_View.rectTransform.sizeDelta = center_View_orgSize;
+            setCenterView(1);
+
 		}
 
         // ゲームスタートボタン押下時処理
@@ -7024,6 +7102,8 @@ namespace nm_canvasPanel
                 //footer_BG.gameObject.SetActive(true);
                 right_header.gameObject.SetActive(true);
                 b_Pause.gameObject.SetActive(true);
+                sphere.gameover = false;
+                sphere.complete = false;
             }
         }
 
@@ -7052,6 +7132,10 @@ namespace nm_canvasPanel
 
             complete_view.gameObject.SetActive(false);
             failed_view.gameObject.SetActive(false);
+
+            // TODO:New StageSElectView Open
+            ButtonNewGame2Click();
+            /*
             int nextLevel = (int)cubersFile.now_play_stagelevel;
             if (nextLevel == emitter.stageLevel_max)
             {
@@ -7064,19 +7148,21 @@ namespace nm_canvasPanel
                 nextLevel++;
                 setStageSelectLevel(nextLevel);
             }
+            */
         }
         // TODO:連鎖 リトライ処理
         public void ButtonGameEndRetryClick() {
+            /*
             // TODO:追加　1-1-2  リトライアイテム制御
             if(cubersFile.item_retry == 0)
             {
                 //  リトライアイテム無し アイテムビュー表示
                 ButtonItemClick();
                 return;
-            }
+            }            
             // リトライアイテム１使用
             cubersFile.item_retry--;
-
+            */
             // インタースティシャル広告表示制御
             // TODO:広告表示関連処理
             //gameEndButton_clickCount--;
@@ -7119,9 +7205,11 @@ namespace nm_canvasPanel
             right_header.gameObject.SetActive(true);
 			left_header.gameObject.SetActive(true);
             center_header.gameObject.SetActive(true);
+            sphere.gameover = false;
+            sphere.complete = false;
 
             //gamePoint.gameObject.SetActive(true);
-			b_Pause.gameObject.SetActive(true);
+            b_Pause.gameObject.SetActive(true);
             //b_share.gameObject.SetActive(true);
             //b_change.gameObject.SetActive(true);
 
@@ -7154,8 +7242,11 @@ namespace nm_canvasPanel
 
 			if (if_Move) return;
 			else if_Move = true;
-			
-			if (!if_Up) {
+
+            //sphere.gameover = false;
+            //sphere.complete = false;
+
+            if (!if_Up) {
                 item_View.gameObject.SetActive(true);
 				setItemViewData();
 				if_Up = true;

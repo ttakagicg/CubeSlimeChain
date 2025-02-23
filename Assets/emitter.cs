@@ -442,9 +442,9 @@ namespace nm_emitter
 
 			Camera.main.transform.position = pos;
 
-			if (sphere.sphere_Count != 0) sphere.before_sphere_Count = sphere.sphere_Count;
-			else sphere.before_sphere_Count = cubeCount;
-			sphere.sphere_Count = cubeCount;
+            if (sphere.sphere_Count != 0) sphere.before_sphere_Count = sphere.sphere_Count;
+            else sphere.before_sphere_Count = cubeCount;
+            sphere.sphere_Count = cubeCount;
 
 		}
 
@@ -1799,7 +1799,6 @@ namespace nm_emitter
 			}
 		}
 		
-
 		const int time_keta = 2;
 
 		public static Vector3 offset;
@@ -2278,18 +2277,41 @@ namespace nm_emitter
 		}
 
 		//  cube clear
-		void cube_clear() {
+		public void cube_clear() {
 
 			if (cubes == null) return;
 			int ii = 0;
 			for (int j=0; j<before_cubeCount; j++) {
 				for (int k=0; k<before_cubeCount; k++) {
 					for (int i=0; i<before_cubeCount; i++) {
-						ii++;
+						ii++;      
 						if (cubes [j,k,i] != null) {
 							destroyCubeMaterial(cubes [j,k,i]);
 							Destroy(cubes [j,k,i]);
 							cubes [j,k,i] = null;
+						}
+					}
+				}
+			}
+
+		}
+		public void cube_nowclear()
+		{
+
+			if (cubes == null) return;
+			int ii = 0;
+			for (int j = 0; j < cubeCount; j++)
+			{
+				for (int k = 0; k < cubeCount; k++)
+				{
+					for (int i = 0; i < cubeCount; i++)
+					{
+						ii++;
+						if (cubes[j, k, i] != null)
+						{
+							destroyCubeMaterial(cubes[j, k, i]);
+							Destroy(cubes[j, k, i]);
+							cubes[j, k, i] = null;
 						}
 					}
 				}

@@ -34,7 +34,7 @@
     "chainGetItem_3":0,
     "itemwaitexchange":100,
     "itemretryexchange":100,
-    "setting_BGM":0,
+    "setting_BGM":1,
     "setting_SoundEffect":1,
     "setting_BG_Animation":1,
     "stage":[

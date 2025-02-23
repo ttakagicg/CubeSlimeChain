@@ -110,6 +110,7 @@ namespace  nm_monsterTrigger {
                                 nm_sphere.sphere.complete = true;
                                 emitter.sw_floorUpDown = false;
                                 nm_sphere.sphere.gameStatus_text = emitter.gameclear_msg;
+                                canvasPanel.statusTime = 2;
 
                                 // point dsp off
                                 nm_sphere.sphere.pointDSPOff();
@@ -138,8 +139,8 @@ namespace  nm_monsterTrigger {
                                     // 条件チェック
                                     int confition_chain_count = canvasPanel.chaine_count_array[cubersFile.now_play_stage - 1, cubersFile.now_play_stagelevel - 1];
                                     // ３連鎖回数チェック
-                                    if (confition_chain_count <= canvasPanel.chain_3_count)
-                                    {
+                                    //if (confition_chain_count <= canvasPanel.chain_3_count)
+                                    //{
                                         // 条件連鎖クリア
                                         nm_sphere.sphere.timer_Stop = true;
                                         // レベル・ランク更新
@@ -150,6 +151,7 @@ namespace  nm_monsterTrigger {
                                         nm_sphere.sphere.complete = true;
                                         emitter.sw_floorUpDown = false;
                                         nm_sphere.sphere.gameStatus_text = emitter.gameclear_msg;
+                                        canvasPanel.statusTime = 2;
 
                                         // point dsp off
                                         nm_sphere.sphere.pointDSPOff();
@@ -163,14 +165,14 @@ namespace  nm_monsterTrigger {
                                         // Game Data Save
                                         cubersFile.cubersFile_instance.save_gameEncryptionData();
 
-                                    }
-                                    else
-                                    {
-                                        // 条件連鎖未満
-                                        // TODO:連鎖　仕様変更による見直し箇所
-                                        gameOverProc();
-                                        return;
-                                    }
+                                    //}
+                                    //else
+                                    //{
+                                    //    // 条件連鎖未満
+                                    //    // TODO:連鎖　仕様変更による見直し箇所
+                                    //    gameOverProc();
+                                    //    return;
+                                    //}
                                 }
                                 else {
                                     // ライン残あり　キューブが全て埋まった状態
@@ -248,6 +250,7 @@ namespace  nm_monsterTrigger {
 
             emitter.sw_floorUpDown = false;
             nm_sphere.sphere.gameStatus_text = emitter.gameover_msg;
+            canvasPanel.statusTime = 2;
 
             // BGM Stop
             emitter.BGMstate = emitter.BGM_State.Stop;

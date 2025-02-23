@@ -792,6 +792,54 @@ namespace  nm_sphere {
 
 			//			reset_Guid_Floor();
 		}
+		public void sphere_nowclear()
+		{
+
+			if (spheres == null) return;
+
+			sw_sphere = false;
+			screen_width = Screen.width;
+			screen_height = Screen.height;
+			for (int j = 0; j < sphere_Count; j++)
+			{
+				for (int k = 0; k < sphere_Count; k++)
+				{
+					for (int i = 0; i < sphere_Count; ++i)
+					{
+
+						if (spheres[j, k, i] != null)
+						{
+							if (cubersFile.game_Sceen == 0)
+							{
+								GameObject obj = spheres[j, k, i].transform.Find("dpt_ball").gameObject;
+								GameObject obj2 = obj.transform.Find("sk").gameObject;
+								GameObject obj3 = obj2.transform.Find("body_mdl").gameObject;
+								Material mat1 = obj3.transform.gameObject.GetComponent<Renderer>().material;
+								DestroyImmediate(mat1);
+							}
+							Destroy(spheres[j, k, i]);
+							spheres[j, k, i] = null;
+						}
+					}
+				}
+			}
+			for (int ii = 0; ii < sphere_Count; ii++)
+			{
+				if (useGravitySpheres[ii] != null)
+				{
+					if (cubersFile.game_Sceen == 0)
+					{
+						GameObject wobj1 = useGravitySpheres[ii];
+						Material mat1 = wobj1.transform.gameObject.GetComponent<Renderer>().material;
+						DestroyImmediate(mat1);
+					}
+					Destroy(useGravitySpheres[ii]);
+					useGravitySpheres[ii] = null;
+				}
+			}
+			spheres = null;
+			now_sphere_count = 0;
+		}
 
 		const int cube_corner_count = 8;
 		const int cube_center_count = 6;
