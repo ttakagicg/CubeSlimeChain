@@ -136,6 +136,10 @@ namespace nm_monster
 		public Mesh monster2_blackMesh3;
 		public Mesh monster2_orangeMesh3;
 
+		public Mesh itemCardSlimMesh_1;
+		public Mesh itemCardSlimMesh_2;
+		public Mesh itemCardSlimMesh_3;
+
 		const int monster_totalCount_3 = 26;
 		const int monster_totalCount_4 = 56;
 		const int monster_totalCount_5 = 98;
@@ -510,7 +514,23 @@ namespace nm_monster
 		color_count.Add(monster_color.orange_monster, level_count);
 #endif
 		}
-
+		private Mesh itemSlimMesh;
+		public Mesh GetItemCardSlimMesh(int itemmesh)
+        {
+			switch (itemmesh)
+            {
+				case 0:
+					itemSlimMesh = itemCardSlimMesh_1;
+					break;
+				case 1:
+					itemSlimMesh = itemCardSlimMesh_2;
+					break;
+				case 2:
+					itemSlimMesh = itemCardSlimMesh_3;
+					break;
+			}
+			return itemSlimMesh;
+		}
 		// モンスターカラー変更の為、頂点カラーを利用したキャラオブジェクトのMESHオブジェクトを変更する処理の為
 		// fbx内のMESHオブジェクトをカラー指定のあるオブジェクトを返す
 		public Mesh GetMonsterColorMesh(monster_situation situation, monster_color color)
@@ -1092,7 +1112,7 @@ namespace nm_monster
 					}
 					if (gamesceen == 2)
 					{
-						animationName = "Anim_Slime_Walking_04";
+						animationName = "Anim_Slime_Dying_03";
 					}
 					break;
 				default:

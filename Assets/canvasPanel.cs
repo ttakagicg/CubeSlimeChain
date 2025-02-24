@@ -35,6 +35,9 @@ namespace nm_canvasPanel
 
 		public Canvas canvas;
 
+        public emitter Emitter;
+        public sphere Sphere;
+
         public static bool isFloorTouch = false;
 
 		private static float screen_width_per;
@@ -5851,12 +5854,13 @@ namespace nm_canvasPanel
             // ポーズ中か？
             if (emitter.sw_pause && !emitter.sw_stop)
             {
-                pauseTimer_text.gameObject.SetActive(true);
+                //pauseTimer_text.gameObject.SetActive(true);
                 int kk = 1;
                 string st = @"D" + kk.ToString();
                 int val = (int)emitter.pause_timer;
                 string str = val.ToString(st);
                 pauseTimer_text.text = str;
+                Sphere.waitTimerCountDown_DSP(str);
             }
             else if (emitter.sw_pause && emitter.sw_stop)
             {
@@ -6978,8 +6982,6 @@ namespace nm_canvasPanel
             complete_view.gameObject.SetActive(true);
 
         }
-        public emitter Emitter;
-        public sphere Sphere;
 
         public void ButtonGameEndNewGameClick() {
 
@@ -7790,7 +7792,9 @@ namespace nm_canvasPanel
 
 			if (sphere.gravitySpheres_count == 0) return;
 
-			emitter.sw_floorUpDown = true;
+            Sphere.sphere_CardSlime_Clear(emitter.item_Slim_No.waitTime_slim);
+
+            emitter.sw_floorUpDown = true;
 			emitter.sw_Gravity = true;
 			if (pauseON) {
 				pauseON = false;
@@ -7851,24 +7855,25 @@ namespace nm_canvasPanel
 
 			//if (emitter.sw_Gravity) {
 
-                cubersFile.pause_count--;
-				emitter.playState = emitter.gamePlayState.Pause;
-				timeChange = true;
-				emitter.sw_Gravity = false;
-				//emitter.BGMstate = emitter.BGM_State.Stop;
-				emitter.sw_pause = true;
+            cubersFile.pause_count--;
+			emitter.playState = emitter.gamePlayState.Pause;
+			timeChange = true;
+			emitter.sw_Gravity = false;
+			//emitter.BGMstate = emitter.BGM_State.Stop;
+			emitter.sw_pause = true;
 
-				emitter.pause_timer += emitter.PAUSETIME;
-				counter.timer = 0; // pause_timer値を0になったらtimer=0として待機時間０でモンスターを落下させる
+			emitter.pause_timer += emitter.PAUSETIME;
+			counter.timer = 0; // pause_timer値を0になったらtimer=0として待機時間０でモンスターを落下させる
 
-				//pause_text.gameObject.SetActive(true);
-                pause_banner_BG.gameObject.SetActive(true);
-                gamecount.gameObject.SetActive(false);
-				pauseON = true;
-                // AdMob init.
-                // TODO:AD バナー広告の初期化
-                //this.RequestBanner();
-            //}
+            //pause_text.gameObject.SetActive(true);
+            //pause_banner_BG.gameObject.SetActive(true);
+            Sphere.set_Sphere_CardSlime(emitter.item_Slim_No.waitTime_slim);
+            gamecount.gameObject.SetActive(false);
+			pauseON = true;
+            // AdMob init.
+            // TODO:AD バナー広告の初期化
+            //this.RequestBanner();
+        //}
         }
 
         // シェアボタンクリック処理

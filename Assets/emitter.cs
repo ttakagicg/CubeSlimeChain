@@ -28,7 +28,15 @@ namespace nm_emitter
 			Stop,
 			pit
 		}
+		public enum item_Slim_No
+        {
+			waitTime_slim = 0,
+			gurdlife_slim,
+			resetTime_slim
+        }
 		public static gamePlayState playState = gamePlayState.Zero;
+
+		public sphere Sphere;
 
 		const float button_height = 50;
 		const float button_width = 100;
@@ -213,6 +221,7 @@ namespace nm_emitter
 			MobileAds.Initialize(initStatus => { });
 
 			pause_timer = 0;
+			sw_pause = false;
 			//pause_timer = PAUSETIME;
 
 			updown_timer = nextDownWaitTimer;  // 落下後、次のモンスター落下待機表示までの待ち時間
@@ -464,54 +473,30 @@ namespace nm_emitter
 			int setCubeCount = 0;
             var intensity = -3;
             var factor = Mathf.Pow(1.5f, intensity);
-            //wBaseColor = new Color((255.0f / 255.0f) * factor, (255.0f / 255.0f) * factor, (255.0f / 255.0f) * factor, 80.0f / 255.0f); // 白
             wBaseColor = new Color(255.0f / 255.0f, 255.0f / 255.0f, 255.0f / 255.0f, 80.0f / 255.0f); // 白
 			int mod = (int)cubersFile.now_play_stage;
-			//			int mod = (int)cubersFile.now_play_stage % emitter.chainExplosion_userLeve;
 			switch (mod) {
 			case 1:
 			case 2:
-//				texture1 = (Texture)Resources.Load ("0 star/juwelly");
 				texture1 = (Texture)Resources.Load ("0 star/star_1");
 
-                //wcolor = new Color((28.0f/255.0f) * factor, (220.0f / 255.0f) * factor, (28.0f /255.0f) * factor, 80.0f / 255.0f); // green
-				//wcolor = new Color(229.0f/255.0f,156.0f/255.0f,91.0f/255.0f,136.0f/255.0f); //オレンジ
 				wcolor = new Color((17.0f/255.0f) * factor, (47.0f/255.0f) * factor, (151.0f/255.0f) * factor, 80.0f/255.0f); // blue
 				break;
 			case 3:
 			case 4:
 				texture1 = (Texture)Resources.Load ("0 star/Heart_3");
 				wcolor = new Color((28.0f / 255.0f) * factor, (220.0f / 255.0f) * factor, (28.0f / 255.0f) * factor, 80.0f / 255.0f); // green
-				//wcolor = new Color((220.0f/255.0f) * factor,(220.0f /255.0f) * factor, (20.0f/255.0f) * factor, 80.0f / 255.0f); //yellow
-				//wcolor = new Color(220.0f/255.0f,220.0f/255.0f,20.0f/255.0f, 80.0f / 255.0f); //オレンジ
-				//wcolor = new Color(156.0f/255.0f,0.0f/255.0f,87.0f/255.0f);
-//				wcolor = new Color(0,0.683f,0);
 				break;
 			case 5:
 			case 6:
 				texture1 = (Texture)Resources.Load ("0 star/dai_1");
 				wcolor = new Color((220.0f/255.0f) * factor, (28.0f/255.0f) * factor, (28.0f/255.0f) * factor, 80.0f / 255.0f);
-				//wcolor = new Color(220.0f/255.0f, 28.0f/255.0f, 28.0f/255.0f, 80.0f / 255.0f);
-//				wcolor = new Color(91.0f/255.0f,229.0f/255.0f,109.0f/255.0f,136.0f/255.0f); // グリーン
-				//wcolor = new Color(121.0f/255.0f,128.0f/255.0f,0.0f/255.0f);
-//				wcolor = new Color(0.683f,0.683f,0);
 				break;
 			}
 
 
-            //cube_m.SetTexture("_MainTex", texture1);
             cube_m.SetColor("_EmissionColor", wcolor);
-            //cube_m.SetColor("_SpecColor", wcolor);
             cube_m.SetColor("_Color", wBaseColor);
-            //cube_m.SetColor("_Color", wcolor);
-
-
-            //cube_m.SetColor("_Albedo", wcolor);
-            //cube_m.SetColor("_EmissionColor", wcolor);
-            //cube_m.SetColor("_Color", wcolor);
-            //cube_m_h.SetColor("_Color", wcolor);
-
-
 
             for (int j=0; j<cubeCount; j++) {
 				for (int k=0; k<cubeCount; k++) {
@@ -554,6 +539,7 @@ namespace nm_emitter
 				}
 			}
 		}
+
 		void floor_clear() {
 
 			if (guid_floor == null) return;
@@ -569,6 +555,7 @@ namespace nm_emitter
 				}
 			}
 		}
+
 		public void reset_Cube(){
 			
 			screen_width = Screen.width;
@@ -1485,8 +1472,9 @@ namespace nm_emitter
 			if (effect_obj[effect_obj_count] != null) {
 				Destroy(effect_obj[effect_obj_count]);
 			}
-			effect_obj[effect_obj_count] = (GameObject)Instantiate(s_explosion2, new Vector3(s_explosion2.transform.position.x, s_explosion2.transform.position.y, s_explosion2.transform.position.z), Quaternion.identity);
-			effect_obj[effect_obj_count].transform.position = effect_position;
+
+			//effect_obj[effect_obj_count] = (GameObject)Instantiate(s_explosion2, new Vector3(s_explosion2.transform.position.x, s_explosion2.transform.position.y, s_explosion2.transform.position.z), Quaternion.identity);
+			//effect_obj[effect_obj_count].transform.position = effect_position;
 
 			int mod = (int)cubersFile.now_play_stage % emitter.chainExplosion_userLeve;
 			monster_color color;
@@ -1496,6 +1484,7 @@ namespace nm_emitter
 			} else {
 				color = monster.monster_instance.getMonster_color(obj.tag);
 			}
+
 			switch (color) {
 			case monster_color.blue_monster:
 				chainExplosion_color = new Color(0.09f, 0.27f, 1.0f, 1.0f);
@@ -1519,8 +1508,9 @@ namespace nm_emitter
 				chainExplosion_color = new Color(0.61f, 0.58f, 0.67f, 1.0f);
 				break;
 			}
+
 			var delayTime = 0.2f;
-			GameObject obj1 = effect_obj[effect_obj_count].transform.Find("ring1").gameObject;
+			GameObject obj1 = s_explosion2.transform.Find("ring1").gameObject;
 			var main = obj1.GetComponent<ParticleSystem>().main;
 			main.startDelay = delayTime;
 			GameObject obj2 = obj1.transform.Find("par1").gameObject;
@@ -1543,59 +1533,38 @@ namespace nm_emitter
 			var main5 = obj6.GetComponent<ParticleSystem>().main;
 			main5.startColor = chainExplosion_color;
 			main5.startDelay = delayTime;
-			// 追加エフェクト
-/*			GameObject obj7 = obj1.transform.Find("MagicEffect6").gameObject;
-			GameObject objsub1 = obj7.transform.Find("Magic-Ring").gameObject;
-			var mainsub1 = objsub1.GetComponent<ParticleSystem>().main;
-			Color cl1 = mainsub1.startColor.colorMax;
-			cl1.r = chainExplosion_color.r;
-			cl1.g = chainExplosion_color.g;
-			cl1.b = chainExplosion_color.b;
-			mainsub1.startColor = cl1;
-			mainsub1.startDelay = delayTime;
-			GameObject objsub2 = obj7.transform.Find("Magic-Ring_2").gameObject;
-			var mainsub2 = objsub2.GetComponent<ParticleSystem>().main;
-			Color cl2 = mainsub2.startColor.colorMax;
-			cl2.r = chainExplosion_color.r;
-			cl2.g = chainExplosion_color.g;
-			cl2.b = chainExplosion_color.b;
-			mainsub2.startColor = cl2;
-			mainsub2.startDelay = delayTime;
-            GameObject objsub3 = obj7.transform.Find("Magic-Smoke").gameObject;
-            var mainsub3 = objsub3.GetComponent<ParticleSystem>().main;
-            Color cl3 = mainsub3.startColor.colorMax;
-            cl3.r = chainExplosion_color.r;
-            cl3.g = chainExplosion_color.g;
-            cl3.b = chainExplosion_color.b;
-            mainsub3.startColor = cl3;
-            mainsub3.startDelay = delayTime;
-            GameObject objsub31 = obj7.transform.Find("Magic-Smoke1").gameObject;
-            var mainsub31 = objsub31.GetComponent<ParticleSystem>().main;
-            Color cl31 = mainsub31.startColor.colorMax;
-            cl31.r = chainExplosion_color.r;
-            cl31.g = chainExplosion_color.g;
-            cl31.b = chainExplosion_color.b;
-            mainsub31.startColor = cl31;
-            mainsub31.startDelay = delayTime;
-            GameObject objsub4 = obj7.transform.Find("Magic-Flash").gameObject;
-			var mainsub4 = objsub4.GetComponent<ParticleSystem>().main;
-			Color cl4 = mainsub4.startColor.colorMax;
-			cl4.r = chainExplosion_color.r;
-			cl4.g = chainExplosion_color.g;
-			cl4.b = chainExplosion_color.b;
-			mainsub4.startColor = cl4;
-			mainsub4.startDelay = delayTime;
-			GameObject objsub5 = obj7.transform.Find("Magic-Spark").gameObject;
-			var mainsub5 = objsub5.GetComponent<ParticleSystem>().main;
-			Color cl5 = mainsub5.startColor.colorMax;
-			cl5.r = chainExplosion_color.r;
-			cl5.g = chainExplosion_color.g;
-			cl5.b = chainExplosion_color.b;
-			mainsub5.startColor = cl5;
-			mainsub5.startDelay = delayTime;
-*/
 
-			//Singleton<SoundPlayer>.instance.playSE_2( "bomb004" ,0);
+			//var delayTime = 0.2f;
+			//GameObject obj1 = effect_obj[effect_obj_count].transform.Find("ring1").gameObject;
+			//var main = obj1.GetComponent<ParticleSystem>().main;
+			//main.startDelay = delayTime;
+			//GameObject obj2 = obj1.transform.Find("par1").gameObject;
+			//var main1 = obj2.GetComponent<ParticleSystem>().main;
+			//main1.startColor = chainExplosion_color;
+			//main1.startDelay = delayTime;
+			//GameObject obj3 = obj1.transform.Find("glitter1").gameObject;
+			//var main2 = obj3.GetComponent<ParticleSystem>().main;
+			//main2.startColor = chainExplosion_color;
+			//main2.startDelay = delayTime;
+			//GameObject obj4 = obj1.transform.Find("glitter2").gameObject;
+			//var main3 = obj4.GetComponent<ParticleSystem>().main;
+			//main3.startColor = chainExplosion_color;
+			//main3.startDelay = delayTime;
+			//GameObject obj5 = obj1.transform.Find("par3").gameObject;
+			//var main4 = obj5.GetComponent<ParticleSystem>().main;
+			//main4.startColor = chainExplosion_color;
+			//main4.startDelay = delayTime;
+			//GameObject obj6 = obj1.transform.Find("ring2").gameObject;
+			//var main5 = obj6.GetComponent<ParticleSystem>().main;
+			//main5.startColor = chainExplosion_color;
+			//main5.startDelay = delayTime;
+
+			effect_obj[effect_obj_count] = (GameObject)Instantiate(s_explosion2, new Vector3(s_explosion2.transform.position.x, s_explosion2.transform.position.y, s_explosion2.transform.position.z), Quaternion.identity);
+			effect_obj[effect_obj_count].transform.position = effect_position;
+
+			Animator ani = obj.gameObject.GetComponent<Animator>();
+			string str = monster.monster_instance.PlayMonsterAnimation(monster_situation.wakeup_monster, cubersFile.game_Sceen);
+			ani.Play(str);
 
 			effect_obj_count++;
 
@@ -1942,6 +1911,8 @@ namespace nm_emitter
 					canvasPanel.pauseON = false;
 					BGMstate = emitter.BGM_State.play;
 					sw_pause = false;
+					Sphere.sphere_CardSlime_Clear(emitter.item_Slim_No.waitTime_slim);
+
     				}
         		}
 

@@ -46,8 +46,13 @@ namespace  nm_sphere {
 		public static long point_count;
 
 		public GameObject Sphere_Main;
+		public GameObject Sphere_CardItemSlim_1;
+		public GameObject Sphere_CardItemSlim_2;
+		public GameObject Sphere_CardItemSlim_3;
 		public static GameObject[,,] spheres;
 		public static GameObject[] spheres_A;
+		public static GameObject[] spheres_cardSlim;
+		public int item_slime_count;
 		public static char_obj_animation[,,] char_obj_anim;
 		public Material Spher_r;
 
@@ -147,6 +152,9 @@ namespace  nm_sphere {
 			s_num_7 = num_7;
 			s_num_8 = num_8;
 			s_num_9 = num_9;
+
+			int enumlength = Enum.GetValues(typeof(emitter.item_Slim_No)).Length;
+			spheres_cardSlim = new GameObject[enumlength];
 
 		}
 
@@ -455,6 +463,119 @@ namespace  nm_sphere {
 				}
 			}
 		}
+		// アイテム、スライムカードの出現スライムオブジェクト作成
+		GameObject itemslimobj;
+		bool cardslim_ON = false;
+		Vector3 before_pos_1;
+		Vector3 before_pos_2;
+		Vector3 before_pos_3;
+		public void waitTimerCountDown_DSP(string time)
+        {
+			GameObject obj1 = itemslimobj.transform.GetChild(1).gameObject;
+			obj1.gameObject.GetComponent<TMPro.TextMeshPro>().text = time;
+
+		}
+		public void set_Sphere_CardSlime(emitter.item_Slim_No slim_No)
+        {
+			if (cardslim_ON) return;
+			cardslim_ON = true;
+			float offset = emitter.cubeCount % 3;
+			offset *= 1.5f;
+
+			switch (slim_No)
+            {
+				case emitter.item_Slim_No.waitTime_slim:
+					itemslimobj = Sphere_CardItemSlim_1;
+					before_pos_1 = itemslimobj.transform.position;
+					break;
+				case emitter.item_Slim_No.resetTime_slim:
+					itemslimobj = Sphere_CardItemSlim_2;
+					before_pos_2 = itemslimobj.transform.position;
+					break;
+				case emitter.item_Slim_No.gurdlife_slim:
+					itemslimobj = Sphere_CardItemSlim_3;
+					before_pos_3 = itemslimobj.transform.position;
+					break;
+			}
+			Vector3 pos = itemslimobj.transform.position;
+			pos.x += emitter.cube_scale * offset;
+			pos.y += emitter.cube_scale * offset;
+            pos.z += emitter.cube_scale * offset;
+			itemslimobj.transform.position = pos;
+
+
+			GameObject obj1 = itemslimobj.transform.GetChild(0).gameObject;
+			Animator ani = obj1.gameObject.GetComponent<Animator>();
+			GameObject obj_mesh = obj1.transform.GetChild(1).gameObject;
+			obj_mesh.GetComponent<SkinnedMeshRenderer>().sharedMesh = monster.monster_instance.GetItemCardSlimMesh((int)slim_No);
+
+			string str = monster.monster_instance.PlayMonsterAnimation(monster_situation.noraml_monster, cubersFile.game_Sceen);
+			ani.Play(str);
+
+			itemslimobj.gameObject.SetActive(true);
+
+			//int half_cubeCount = emitter.cubeCount / 2;
+			//float offset = emitter.cubeCount % 2;
+
+			//if (spheres_cardSlim[(int)slim_No] != null) {
+			//	Destroy(spheres_cardSlim[(int)slim_No]);
+			//	spheres_cardSlim[(int)slim_No] = null;
+			//}
+			//spheres_cardSlim[(int)slim_No] = (GameObject)Instantiate(Sphere_CardItemSlim, new Vector3((-half_cubeCount + offset + 2) * emitter.cube_scale, (half_cubeCount + offset + 2) * emitter.cube_scale, (half_cubeCount + offset + 2) * emitter.cube_scale), Quaternion.identity);
+			//GameObject obj = spheres_cardSlim[(int)slim_No].transform.GetChild(1).gameObject;
+			//obj.GetComponent<SkinnedMeshRenderer>().sharedMesh = monster.monster_instance.GetItemCardSlimMesh((int)slim_No);
+
+			//Animator ani = spheres_cardSlim[(int)slim_No].GetComponent<Animator>();
+			//string str = monster.monster_instance.PlayMonsterAnimation(monster_situation.wakeup_monster, cubersFile.game_Sceen);
+			//ani.Play(str);
+
+		}
+		public void sphere_CardSlime_Clear(emitter.item_Slim_No slim_No)
+        {
+			switch (slim_No)
+			{
+				case emitter.item_Slim_No.waitTime_slim:
+					itemslimobj = Sphere_CardItemSlim_1;
+					itemslimobj.transform.position = before_pos_1;
+					break;
+				case emitter.item_Slim_No.gurdlife_slim:
+					itemslimobj = Sphere_CardItemSlim_2;
+					itemslimobj.transform.position = before_pos_2;
+					break;
+				case emitter.item_Slim_No.resetTime_slim:
+					itemslimobj = Sphere_CardItemSlim_3;
+					itemslimobj.transform.position = before_pos_3;
+					break;
+			}
+			cardslim_ON = false;
+			itemslimobj.gameObject.SetActive(false);
+
+			//if (spheres_cardSlim[(int)slim_No] != null)
+			//{
+			//	Destroy(spheres_cardSlim[(int)slim_No]);
+			//	spheres_cardSlim[(int)slim_No] = null;
+			//}
+		}
+		public void sphere_CardSlime_allClear()
+		{
+			cardslim_ON = false;
+			Sphere_CardItemSlim_1.transform.position = before_pos_1;
+			Sphere_CardItemSlim_1.gameObject.SetActive(false);
+			Sphere_CardItemSlim_2.transform.position = before_pos_2;
+			Sphere_CardItemSlim_2.gameObject.SetActive(false);
+			Sphere_CardItemSlim_3.transform.position = before_pos_3;
+			Sphere_CardItemSlim_3.gameObject.SetActive(false);
+
+			//int itemslimlength = Enum.GetValues(typeof(emitter.item_Slim_No)).Length;
+			//if (spheres_cardSlim != null)
+			//{
+			//	for (int i = 0; i < itemslimlength; i++)
+			//	{
+			//		Destroy(spheres_cardSlim[i]);
+			//		spheres_cardSlim[i] = null;
+			//	}
+			//}
+		}
 		// 洗濯ステージに該当するモンスターオブジェクト群を初期化（準備）
 		public void sphere_on() {
 
@@ -476,11 +597,6 @@ namespace  nm_sphere {
 				float offset = sphere_Count % 2;
 				if (offset != 0) offset = 0;
 				else offset = scale / 2;
-
-				//				int half_sphereount = sphere_Count/2;
-				//				float offset = sphere_Count%2;
-				//				if (offset != 0) offset = 0;
-				//				else offset = scale/2;
 
 				char_obj_anim = new char_obj_animation[sphere_Count, sphere_Count, sphere_Count];
 
