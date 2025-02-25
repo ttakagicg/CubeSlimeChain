@@ -1422,7 +1422,7 @@ namespace nm_canvasPanel
 			cmp_OK_BT_o.onClick.AddListener(() => ButtonGameEndNewGameClick());
             //cmp_OK_BT_o.onClick.AddListener(() => ButtonGameEndNewGameClick());
             Button cmp_NEXT_BT_o = cmp_NEXT_BT.transform.GetComponent<Button>();
-            cmp_NEXT_BT_o.onClick.AddListener(() => ButtonGameEndNextClick());
+            cmp_NEXT_BT_o.onClick.AddListener(() => ButtonGameEndRetryClick());
 			Button fld_OK_BT_o = fld_OK_BT.transform.GetComponent<Button>();
 			fld_OK_BT_o.onClick.AddListener(() => ButtonGameEndNewGameClick());
 			Button fld_RT_BT_o = fld_RT_BT.transform.GetComponent<Button>();
@@ -4375,11 +4375,11 @@ namespace nm_canvasPanel
             if (sphere.lost_Spheres == emitter.lost_count_MAX)
             {
                 //  ロスト０
-                lifeLostCount_Zero.gameObject.SetActive(true);
+                //lifeLostCount_Zero.gameObject.SetActive(true);
             }
             else
             {
-                lifeLostCount_Zero.gameObject.SetActive(false);
+                //lifeLostCount_Zero.gameObject.SetActive(false);
             }
 
 		}
@@ -4402,6 +4402,7 @@ namespace nm_canvasPanel
             }
             else
             {
+                // New Complete View Used
                 besttime_text.gameObject.SetActive(false);
             }
 
@@ -4428,7 +4429,7 @@ namespace nm_canvasPanel
             }
             else
             {
-                max_chain_Mes_BG.gameObject.SetActive(false);
+                //max_chain_Mes_BG.gameObject.SetActive(false);
             }
         }
 
@@ -4455,7 +4456,7 @@ namespace nm_canvasPanel
 
             if (emitter.playGetSilverItemCount != 0)
             {
-                get_Item_Mes_BG.gameObject.SetActive(true);
+                //get_Item_Mes_BG.gameObject.SetActive(true);
             }
         }
 
@@ -5931,7 +5932,7 @@ namespace nm_canvasPanel
 					
 					if (int.Parse(str) <= 0) {
 
-						if (gameStatus_text.text == emitter.gameclear_msg) {
+						if (sphere.gameStatus_text == emitter.gameclear_msg) {
 
                             // --------------------------------------------------------------------------------------------------------------------------------
                             //  ゲームコンプリート処理
@@ -5964,7 +5965,7 @@ namespace nm_canvasPanel
 
                             // レベルタイトル
                             // TODO:削除　レベルバッジをレベル数に差し替える場合、下記レベルタイトルセットは削除
-                            complete_level_text.gameObject.GetComponent<Text>().text = "Stage: " + cubersFile.now_play_stage.ToString() + " Level: " + cubersFile.now_play_stagelevel.ToString() + " -";
+                            complete_level_text.gameObject.GetComponent<TMPro.TextMeshProUGUI>().text = "Stage: " + cubersFile.now_play_stage.ToString() + " Level: " + cubersFile.now_play_stagelevel.ToString() + " -";
                             // レベルバッジ表示
                             img = complete_level_image.GetComponent<Image>();
                             var stage = (int)cubersFile.now_play_stage;
@@ -5995,7 +5996,7 @@ namespace nm_canvasPanel
                             // レベルMAX攻略か？
                             if ((int)cubersFile.now_play_stagelevel ==  cubersFile.game_stagelevel_max)
                             {
-                                // レベルMAX時、ステージクリア情報を表示する
+/*                                // レベルMAX時、ステージクリア情報を表示する
                                 setStageTotalClearInfo();
                                 // レベルMAX時、ステージクリア情報をセットする
                                 stage_Data stg1 = cubersFile.stage[(int)cubersFile.now_play_stage - 1];
@@ -6012,12 +6013,12 @@ namespace nm_canvasPanel
                                     cubersFile.stage[(int)cubersFile.now_play_stage] = stg2;
                                 }
                                 cubersFile.cubersFile_instance.save_gameEncryptionData();
-
+*/
                             }
                             else
                             {
                                 // レベル攻略中ステージクリア情報をセットする
-                                stage_Data stg1 = cubersFile.stage[(int)cubersFile.now_play_stage - 1];
+/*                                stage_Data stg1 = cubersFile.stage[(int)cubersFile.now_play_stage - 1];
                                 // ステージ攻略済み
                                 stg1.status = 2;
                                 // 最後に攻略したレベルを保存　セーブレベルデータ有りの場合からの再開は、そのレベルを起点として最後に攻略したレベルとなる
@@ -6026,7 +6027,7 @@ namespace nm_canvasPanel
                                 cubersFile.stage[(int)cubersFile.now_play_stage - 1] = stg1;
 
                                 cubersFile.cubersFile_instance.save_gameEncryptionData();
-                            }
+ */                           }
                             // ボタン入力待ち
                             gameStatus_text.text = "";
 
@@ -7012,6 +7013,9 @@ namespace nm_canvasPanel
             //safeareaout_footer_BG.gameObject.SetActive(false);
             //header_BG.gameObject.SetActive(true);
             //footer_BG.gameObject.SetActive(true);
+
+            cubersFile.cubersFile_instance.load_gameEncryptionData();
+
             playItemView_button_BG.gameObject.SetActive(false);
             playSettingView_button_BG.gameObject.SetActive(false);
             down_button_L_BG.gameObject.SetActive(false);
@@ -7126,6 +7130,8 @@ namespace nm_canvasPanel
             //    return;
             //}
 
+            cubersFile.cubersFile_instance.load_gameEncryptionData();
+
             emitter.BGMstate = emitter.BGM_State.start;
 
             s_center_View.gameObject.SetActive(false);
@@ -7176,6 +7182,8 @@ namespace nm_canvasPanel
             //    //RequestInterstitial();
             //    return;
             //}
+
+            cubersFile.cubersFile_instance.load_gameEncryptionData();
 
             emitter.BGMstate = emitter.BGM_State.start;
 

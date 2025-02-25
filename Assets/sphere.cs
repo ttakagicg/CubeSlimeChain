@@ -532,19 +532,20 @@ namespace  nm_sphere {
 		}
 		public void sphere_CardSlime_Clear(emitter.item_Slim_No slim_No)
         {
+			if (before_pos_1 != Vector3.zero)
 			switch (slim_No)
 			{
 				case emitter.item_Slim_No.waitTime_slim:
 					itemslimobj = Sphere_CardItemSlim_1;
-					itemslimobj.transform.position = before_pos_1;
-					break;
-				case emitter.item_Slim_No.gurdlife_slim:
-					itemslimobj = Sphere_CardItemSlim_2;
-					itemslimobj.transform.position = before_pos_2;
+					if (before_pos_1 != Vector3.zero) itemslimobj.transform.position = before_pos_1;
 					break;
 				case emitter.item_Slim_No.resetTime_slim:
+					itemslimobj = Sphere_CardItemSlim_2;
+					if (before_pos_2 != Vector3.zero) itemslimobj.transform.position = before_pos_2;
+					break;
+				case emitter.item_Slim_No.gurdlife_slim:
 					itemslimobj = Sphere_CardItemSlim_3;
-					itemslimobj.transform.position = before_pos_3;
+					if (before_pos_3 != Vector3.zero) itemslimobj.transform.position = before_pos_3;
 					break;
 			}
 			cardslim_ON = false;

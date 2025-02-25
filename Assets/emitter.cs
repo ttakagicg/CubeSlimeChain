@@ -31,9 +31,9 @@ namespace nm_emitter
 		public enum item_Slim_No
         {
 			waitTime_slim = 0,
-			gurdlife_slim,
-			resetTime_slim
-        }
+			resetTime_slim,
+			gurdlife_slim
+		}
 		public static gamePlayState playState = gamePlayState.Zero;
 
 		public sphere Sphere;
