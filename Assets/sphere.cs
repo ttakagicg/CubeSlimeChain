@@ -532,7 +532,6 @@ namespace  nm_sphere {
 		}
 		public void sphere_CardSlime_Clear(emitter.item_Slim_No slim_No)
         {
-			if (before_pos_1 != Vector3.zero)
 			switch (slim_No)
 			{
 				case emitter.item_Slim_No.waitTime_slim:

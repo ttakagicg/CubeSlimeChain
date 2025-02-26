@@ -183,7 +183,7 @@ namespace  nm_monsterTrigger {
                                     return;
                                 }
                             }
-                                break;
+                            break;
                         // 連鎖モード
 
                     }

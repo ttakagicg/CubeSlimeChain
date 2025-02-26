@@ -4392,6 +4392,8 @@ namespace nm_canvasPanel
             long playtime = (long)playEndTimeSpan.TotalMilliseconds;
             var time = (long)dt["playtime"];
 
+            playtime_text.text = gameTimeEnd_text.text;
+
             // プレイ時間更新　プレイ時間が少ない程Good
             if (time > playtime || time == 0) {
                 besttime_text.gameObject.SetActive(true);
@@ -5950,10 +5952,10 @@ namespace nm_canvasPanel
                             // TODO:1-1-3修正　レベル攻略情報デザイン変更に伴い下記修正
                             // ロストライフ＆プレータイムデータセット
                             s_LifeLostCount_text.GetComponent<Text>().text = (emitter.lost_count_MAX - sphere.lost_Spheres).ToString();
-                            s_gameTimeEnd_text.text = s_gameTime_text.text;
+                            //s_gameTimeEnd_text.text = s_gameTime_text.text;
 
-                            // ゲームクリアステータスメッセージオフ
-                            s_center_View.gameObject.SetActive(false);
+                        // ゲームクリアステータスメッセージオフ
+                        s_center_View.gameObject.SetActive(false);
                             s_gameStatus_text.gameObject.SetActive(false);
 
                             // ゲームクリアビューオン
