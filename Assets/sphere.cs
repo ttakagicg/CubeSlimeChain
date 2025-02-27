@@ -236,24 +236,24 @@ namespace  nm_sphere {
 									// animation wait time set
 									char_obj_anim[j, k, i].wait_time = UnityEngine.Random.Range(1, 3);
 
-									/*									// スライムモンスター待機アニメーション切り替え処理
-																		if (cubersFile.game_Sceen == 2)
-																		{
-																			Animator ani = spheres[j, k, i].GetComponent<Animator>();
-																			AnimatorClipInfo[] clipInfo = ani.GetCurrentAnimatorClipInfo(0);
-																			string clipName = clipInfo[0].clip.name;
-																			// TODO: 待機中アニメーション複数設定
-																			if (ani.GetCurrentAnimatorStateInfo(0).IsName("Anim_Slime_Walking_04"))
-																			{
-																				string str1 = monster.monster_instance.PlayMonsterAnimation(monster_situation.noraml_monster, cubersFile.game_Sceen);
-																				ani.Play(str1);
-																			}
-																			else
-																			{
-																				string str1 = monster.monster_instance.PlayMonsterAnimation(monster_situation.wakeup_monster, cubersFile.game_Sceen);
-																				ani.Play(str1);
-																			}
-																		} */
+									/*// スライムモンスター待機アニメーション切り替え処理
+									if (cubersFile.game_Sceen == 2)
+									{
+										Animator ani = spheres[j, k, i].GetComponent<Animator>();
+										AnimatorClipInfo[] clipInfo = ani.GetCurrentAnimatorClipInfo(0);
+										string clipName = clipInfo[0].clip.name;
+										// TODO: 待機中アニメーション複数設定
+										if (ani.GetCurrentAnimatorStateInfo(0).IsName("Anim_Slime_Walking_04"))
+										{
+											string str1 = monster.monster_instance.PlayMonsterAnimation(monster_situation.noraml_monster, cubersFile.game_Sceen);
+											ani.Play(str1);
+										}
+										else
+										{
+											string str1 = monster.monster_instance.PlayMonsterAnimation(monster_situation.wakeup_monster, cubersFile.game_Sceen);
+											ani.Play(str1);
+										}
+									} */
 								}
 							}
 

@@ -577,12 +577,12 @@ namespace nm_emitter
 			canvasPanel.creditCountImageInit(cubeCount);
 			canvasPanel.s_gameTime_text.text = "00:00:00:00";
 			canvasPanel.s_noChainGameTime_text.text = "00:00:00:00";
-			canvasPanel.s_topGameTime_text.text = "TopTime 00:00:00:00";
+			//canvasPanel.s_topGameTime_text.text = "TopTime 00:00:00:00";
 			canvasPanel.gametempoCount = 0;
 			canvasPanel canvaspanel = GetComponentInChildren<canvasPanel>();
 			canvaspanel.gameTempoReset();
 			canvaspanel.showItemDSP();
-			
+			canvaspanel.showTopTimeDSP();
 
 			initGameTempo();
 				

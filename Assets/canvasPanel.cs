@@ -4396,6 +4396,7 @@ namespace nm_canvasPanel
 
             // プレイ時間更新　プレイ時間が少ない程Good
             if (time > playtime || time == 0) {
+                besttime_text.text = playtime.ToString();
                 besttime_text.gameObject.SetActive(true);
                  // プレイタイム更新保存
                 dt["playtime"] = playtime;
@@ -5455,6 +5456,24 @@ namespace nm_canvasPanel
                     goldItemArray[i].gameObject.SetActive(false);
                 }
             }
+        }
+        public void showTopTimeDSP()
+        {
+            IDictionary dt = (IDictionary)cubersFile.stage[cubersFile.now_play_stage - 1].leveldata[(int)cubersFile.now_play_stagelevel - 1];
+
+            var time = (long)dt["playtime"];
+
+            // プレイ時間更新
+            if (time == 0)
+            {
+                s_topGameTime_text.text = "TopTime 00:00:00:00";
+            }
+            else
+            {
+                TimeSpan interval = TimeSpan.FromMilliseconds(time);
+                s_topGameTime_text.text = "TopTime " + ConvertTimeSpanToString(interval);
+            }
+
         }
         public void showItemDSP()
         {
@@ -6745,8 +6764,6 @@ namespace nm_canvasPanel
             //        play_condition2.GetComponent<Image>().color = new Color(1.0f, 0.0f, 0.0f);
             //        break;
             //}
-
-
 
             // 落下待機時間表示初期設定
             int wait_timer = gravity_time_array[cubersFile.now_play_stage - 1, cubersFile.now_play_stagelevel - 1];
