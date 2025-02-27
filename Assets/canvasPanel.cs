@@ -4451,7 +4451,7 @@ namespace nm_canvasPanel
             cubersFile.silveritem_count = +(long)emitter.playGetSilverItemCount;
 
             IDictionary dt = (IDictionary)cubersFile.stage[cubersFile.now_play_stage - 1].leveldata[(int)cubersFile.now_play_stagelevel - 1];
-            dt["itemcount"] = (long)emitter.playGetSilverItemCount;
+            dt["itemcount"] = (long)emitter.playGetSilverItemCount; // <- Level play infoの情報としてセーブ　必要ないと思うので削除
             cubersFile.stage[cubersFile.now_play_stage - 1].leveldata[(int)cubersFile.now_play_stagelevel - 1] = dt;
 
             cubersFile.cubersFile_instance.save_gameEncryptionData();
@@ -6201,18 +6201,33 @@ namespace nm_canvasPanel
 			// item View
 			if (if_Move) {
 				if (if_Up) {
-                    item_View.GetComponent<RectTransform>().Translate(new Vector3 (0,100,0) * f_Speed * Time.deltaTime);
-//					item_field.GetComponent<RectTransform>().Translate(new Vector3 (0,50,0) * f_Speed * Time.deltaTime);
+                    var seq = DOTween.Sequence();
+                    seq.Append(item_View.rectTransform.DOMove(new Vector3(0, pos_gs.y, 0), 1));
+                    seq.OnComplete(() =>
+                    {
+                        // アニメーションが終了時によばれる
+                    });
+                    if_Move = false;
+
+/*                    item_View.GetComponent<RectTransform>().Translate(new Vector3 (0,100,0) * f_Speed * Time.deltaTime);
 					if (item_View.transform.position.y >= 0) {
 						Vector3 pos = item_View.GetComponent<RectTransform>().position;
 						pos.y = 0.0f;
                         item_View.rectTransform.position = pos;
 						if_Move = false;
 					}
-				}
+*/				}
 				else {
-                    item_View.GetComponent<RectTransform>().Translate(new Vector3 (0,-100,0) * f_Speed * Time.deltaTime);
-//					item_field.GetComponent<RectTransform>().Translate(new Vector3 (0,-50,0) * f_Speed * Time.deltaTime);
+                    var seq = DOTween.Sequence();
+                    seq.Append(item_View.rectTransform.DOMove(new Vector3(0, -Screen.height, 0), 1));
+                    seq.OnComplete(() =>
+                    {
+                        // アニメーションが終了時によばれる
+
+                    });
+                    if_Move = false;
+
+/*                    item_View.GetComponent<RectTransform>().Translate(new Vector3 (0,-100,0) * f_Speed * Time.deltaTime);
 					if (item_View.transform.position.y <= -item_View.rectTransform.sizeDelta.y) {
 						Vector3 pos = item_View.GetComponent<RectTransform>().position;
 						pos.y = -item_View.rectTransform.sizeDelta.y;
@@ -6220,7 +6235,7 @@ namespace nm_canvasPanel
 						if_Move = false;
                         item_View.gameObject.SetActive(false);
 					}
-				}
+*/				}
 			}
             // TODO:1-1-11 追加 新規設定画面処理の作成
             // setting view
@@ -6228,6 +6243,14 @@ namespace nm_canvasPanel
             {
                 if (is_Up)
                 {
+                    var seq = DOTween.Sequence();
+                    seq.Append(setting_View.rectTransform.DOMove(new Vector3(0, pos_gs.y, 0), 1));
+                    seq.OnComplete(() =>
+                    {
+                        // アニメーションが終了時によばれる
+                    });
+                    is_Move = false;
+/*
                     setting_View.GetComponent<RectTransform>().Translate(new Vector3(0, 100, 0) * f_Speed * Time.deltaTime);
                     if (setting_View.transform.position.y >= 0)
                     {
@@ -6236,9 +6259,18 @@ namespace nm_canvasPanel
                         setting_View.rectTransform.position = pos;
                         is_Move = false;
                     }
-                }
+*/                }
                 else
                 {
+                    var seq = DOTween.Sequence();
+                    seq.Append(setting_View.rectTransform.DOMove(new Vector3(0, -Screen.height, 0), 1));
+                    seq.OnComplete(() =>
+                    {
+                        // アニメーションが終了時によばれる
+
+                    });
+                    is_Move = false;
+/*
                     setting_View.GetComponent<RectTransform>().Translate(new Vector3(0, -100, 0) * f_Speed * Time.deltaTime);
                     if (setting_View.transform.position.y <= -setting_View.rectTransform.sizeDelta.y)
                     {
@@ -6248,7 +6280,7 @@ namespace nm_canvasPanel
                         is_Move = false;
                         setting_View.gameObject.SetActive(false);
                     }
-                }
+*/                }
             }
             // TODO:1-1-１4 追加 ユーザー設定画面処理
             // user name view
