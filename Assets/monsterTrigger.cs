@@ -3,16 +3,21 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using DG.Tweening;
 
 using nm_counter;
 using nm_emitter;
 using nm_canvasPanel;
 using nm_monster;
 using nm_cubersFile;
+using nm_sphere;
 
 namespace  nm_monsterTrigger {
 
     public class monsterTrigger : MonoBehaviour {
+
+        public sphere Sphere;
+        public emitter Emitter;
 
         // Use this for initialization
         void Start () {
@@ -192,7 +197,38 @@ namespace  nm_monsterTrigger {
 			}
 			else if(col.gameObject.transform.root.tag == "cube_close") {
 
-				GameObject child1 = this.gameObject;
+                GameObject child1 = this.gameObject;
+
+                // ライフ消滅無効アイテムON？
+                sphere spherescript;
+                GameObject obj = GameObject.Find("emitter");
+                spherescript = obj.GetComponent<sphere>();
+                var seq = DOTween.Sequence();
+                if (spherescript.get_CardSlimDSP_Status(emitter.item_Slim_No.gurdlife_slim))
+                {
+                    // パーティクルエフェクト処理
+                    emitter.effect_explosion = true;
+                    emitter.monster_Explosion(child1, 2);
+
+                    nm_sphere.sphere.monster_reset(child1);
+
+                    if (nm_sphere.sphere.now_sphere_count > 0) nm_sphere.sphere.now_sphere_count--;
+                    nm_sphere.sphere.complete = false;
+                    nm_sphere.sphere.reset_Guid_Floor();
+                    if (nm_sphere.sphere.gravitySpheres_count <= 0)
+                    {
+                        nm_sphere.sphere.now_gravity = false;
+                        seq.Append(spherescript.Sphere_CardItemSlim_3.transform.DORotate(Vector3.up * 360f, 2f));
+                        seq.OnComplete(() =>
+                        {
+                            // アニメーションが終了時によばれる
+                            spherescript.sphere_CardSlime_Clear(emitter.item_Slim_No.gurdlife_slim);
+                        });
+                    }
+
+                    //spherescript.sphere_CardSlim_Particle_Start(emitter.item_Slim_No.gurdlife_slim);
+                    return;
+                }
 
 				// in object collider?
 				if (monster.monster_instance.getMonster_IOstatus(child1.tag)) {
@@ -204,7 +240,7 @@ namespace  nm_monsterTrigger {
 
 				// パーティクルエフェクト処理
 				emitter.effect_explosion = true;
-				emitter.monster_Explosion(child1);
+				emitter.monster_Explosion(child1, 1);
 
 				nm_sphere.sphere.monster_reset(child1);
 

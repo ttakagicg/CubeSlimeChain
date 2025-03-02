@@ -77,9 +77,12 @@ namespace nm_cubersFile
         public static long golditem_count;
         public static long silveritem_count;
 
+        public static long pauseitem_count;
+        public static long timeresetitem_count;
+        public static long lifelostinvaliditem_count;
+
         public static long game_count;
         public static long lost_count;
-        public static long pause_count;
         public static long delay_count;
         public static long lostadd_count;
         public static IList stagelist;
@@ -215,7 +218,9 @@ namespace nm_cubersFile
             silveritem_count = (long)response["silveritem"];
             game_count = (long)response["gamecount"];
             lost_count = (long)response["lost"];
-            pause_count = (long)response["pause"];
+            pauseitem_count = (long)response["pause"];
+            timeresetitem_count = (long)response["timereset"];
+            lifelostinvaliditem_count = (long)response["lifelostinvalid"];
             delay_count = (long)response["delay"];
             lostadd_count = (long)response["lostadd"];
 
@@ -324,8 +329,10 @@ namespace nm_cubersFile
             response["itemretry"] = item_retry;
             response["gamecount"] = game_count;
 			response["lost"] = lost_count;
-			response["pause"] = pause_count;
-			response["delay"] = delay_count;
+			response["pause"] = pauseitem_count;
+            response["timereset"] = timeresetitem_count;
+            response["lifelostinvalid"] = lifelostinvaliditem_count;
+            response["delay"] = delay_count;
 			response["lostadd"] = lostadd_count;
             // TODO:追加　1-1-1 3:セーブサービス利用データの作成
             response["monthlyService"] = monthlyService;

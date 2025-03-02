@@ -17,6 +17,8 @@
     "gamecount":3,
     "lost":3,
     "pause":99,
+    "timereset":99,
+    "lifelostinvalid":99,
     "delay":12,
     "lostadd":15,
     "item_gamecount":3,

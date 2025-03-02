@@ -30,6 +30,17 @@ namespace  nm_sphere {
 		public float screen_width;
 		public float screen_height;
 
+		GameObject itemslimobj;
+		public bool cardslim1_ON = false;
+		public bool cardslim2_ON = false;
+		public bool cardslim3_ON = false;
+		Vector3 before_pos_1;
+		Vector3 before_pos_2;
+		Vector3 before_pos_3;
+		Quaternion before_rot_1;
+		Quaternion before_rot_2;
+		Quaternion before_rot_3;
+
 		// sw_sphere(モンスター初期化終了まで２、3秒掛かる為カウントダウンがない場合、モンスター表示までタイムラグあり)
 		public const int startTimer = 1; // 1秒設定しても上記理由で２、3秒掛かる
 		const int sphere_totalCount_3 = 26;
@@ -113,6 +124,7 @@ namespace  nm_sphere {
 		public static double monster_floor_position_correction;
 
 		public static object emit_obj;
+		public emitter Emitter;
 
 		// Use this for initialization
 		void Start() {
@@ -463,12 +475,8 @@ namespace  nm_sphere {
 				}
 			}
 		}
+
 		// アイテム、スライムカードの出現スライムオブジェクト作成
-		GameObject itemslimobj;
-		bool cardslim_ON = false;
-		Vector3 before_pos_1;
-		Vector3 before_pos_2;
-		Vector3 before_pos_3;
 		public void waitTimerCountDown_DSP(string time)
         {
 			GameObject obj1 = itemslimobj.transform.GetChild(1).gameObject;
@@ -477,24 +485,35 @@ namespace  nm_sphere {
 		}
 		public void set_Sphere_CardSlime(emitter.item_Slim_No slim_No)
         {
-			if (cardslim_ON) return;
-			cardslim_ON = true;
 			float offset = emitter.cubeCount % 3;
 			offset *= 1.5f;
 
 			switch (slim_No)
             {
 				case emitter.item_Slim_No.waitTime_slim:
+					if (cardslim1_ON) return;
+					cardslim1_ON = true;
 					itemslimobj = Sphere_CardItemSlim_1;
 					before_pos_1 = itemslimobj.transform.position;
+					Quaternion rotation1 = itemslimobj.transform.rotation;
+					before_rot_1 = rotation1;
+					cardslim1_ON = true;
 					break;
 				case emitter.item_Slim_No.resetTime_slim:
 					itemslimobj = Sphere_CardItemSlim_2;
 					before_pos_2 = itemslimobj.transform.position;
+                    Quaternion rotation2 = itemslimobj.transform.rotation;
+                    before_rot_2 = rotation2;
+					cardslim2_ON = true;
 					break;
 				case emitter.item_Slim_No.gurdlife_slim:
+					if (cardslim3_ON) return;
+					cardslim3_ON = true;
 					itemslimobj = Sphere_CardItemSlim_3;
 					before_pos_3 = itemslimobj.transform.position;
+					Quaternion rotation3 = itemslimobj.transform.rotation;
+					before_rot_3 = rotation3;
+					//Emitter.lifelostinvalid_ON = true;
 					break;
 			}
 			Vector3 pos = itemslimobj.transform.position;
@@ -514,6 +533,18 @@ namespace  nm_sphere {
 
 			itemslimobj.gameObject.SetActive(true);
 
+			if (slim_No == emitter.item_Slim_No.resetTime_slim)
+            {
+				var seq = DOTween.Sequence();
+				seq.Append(itemslimobj.transform.DORotate(Vector3.up *  360f, 2f));
+				seq.OnComplete(() =>
+				{
+					// アニメーションが終了時によばれる
+					sphere_CardSlime_Clear(slim_No);
+				});
+			}
+
+
 			//int half_cubeCount = emitter.cubeCount / 2;
 			//float offset = emitter.cubeCount % 2;
 
@@ -530,24 +561,92 @@ namespace  nm_sphere {
 			//ani.Play(str);
 
 		}
+		public bool get_CardSlimDSP_Status(emitter.item_Slim_No slim_No)
+        {
+			bool status = false;
+			switch (slim_No)
+			{
+				case emitter.item_Slim_No.waitTime_slim:
+					status = cardslim1_ON;
+					break;
+				case emitter.item_Slim_No.resetTime_slim:
+					status = cardslim2_ON;
+					break;
+				case emitter.item_Slim_No.gurdlife_slim:
+					status = cardslim3_ON;
+					break;
+			}
+			return status;
+
+		}
+		public void sphere_CardSlim_Particle_Start(emitter.item_Slim_No slim_No)
+        {
+			switch (slim_No)
+			{
+				case emitter.item_Slim_No.waitTime_slim:
+					itemslimobj = Sphere_CardItemSlim_1;
+					GameObject child11 = itemslimobj.transform.Find("CFXR4 Bouncing Glows Bubble (Blue Purple)").gameObject;
+					child11.transform.gameObject.GetComponent<ParticleSystem>().Play();
+					GameObject child12 = itemslimobj.transform.Find("CFXR3 Magic Aura A (Runic)").gameObject;
+					child12.transform.gameObject.GetComponent<ParticleSystem>().Play();
+					break;
+				case emitter.item_Slim_No.resetTime_slim:
+					itemslimobj = Sphere_CardItemSlim_2;
+					GameObject child21 = itemslimobj.transform.Find("CFXR4 Bouncing Glows Bubble (Blue Purple)").gameObject;
+					child21.transform.gameObject.GetComponent<ParticleSystem>().Play();
+					break;
+				case emitter.item_Slim_No.gurdlife_slim:
+					itemslimobj = Sphere_CardItemSlim_3;
+					itemslimobj.gameObject.SetActive(true);
+                    GameObject child31 = itemslimobj.transform.GetChild(2).gameObject;
+                    ParticleSystem pal1 = child31.transform.gameObject.GetComponent<ParticleSystem>();
+                    pal1.Play();
+                    child31.transform.gameObject.GetComponent<ParticleSystem>().Play();
+                    var seq = DOTween.Sequence();
+					seq.Append(itemslimobj.transform.DORotate(Vector3.up * 360f, 2f));
+					seq.OnComplete(() =>
+					{
+						// アニメーションが終了時によばれる
+						sphere_CardSlime_Clear(slim_No);
+						//Emitter.lifelostinvalid_ON = false;
+					});
+
+					break;
+			}
+
+		}
 		public void sphere_CardSlime_Clear(emitter.item_Slim_No slim_No)
         {
 			switch (slim_No)
 			{
 				case emitter.item_Slim_No.waitTime_slim:
 					itemslimobj = Sphere_CardItemSlim_1;
-					if (before_pos_1 != Vector3.zero) itemslimobj.transform.position = before_pos_1;
+					if (before_pos_1 != Vector3.zero)
+					{
+						itemslimobj.transform.position = before_pos_1;
+						itemslimobj.transform.rotation = before_rot_1;
+					}
+					cardslim1_ON = false;
 					break;
 				case emitter.item_Slim_No.resetTime_slim:
 					itemslimobj = Sphere_CardItemSlim_2;
-					if (before_pos_2 != Vector3.zero) itemslimobj.transform.position = before_pos_2;
+					if (before_pos_2 != Vector3.zero)
+					{
+						itemslimobj.transform.position = before_pos_2;
+						itemslimobj.transform.rotation = before_rot_2;
+					}
+					cardslim2_ON = false;
 					break;
 				case emitter.item_Slim_No.gurdlife_slim:
 					itemslimobj = Sphere_CardItemSlim_3;
-					if (before_pos_3 != Vector3.zero) itemslimobj.transform.position = before_pos_3;
+					if (before_pos_3 != Vector3.zero)
+					{
+						itemslimobj.transform.position = before_pos_3;
+						itemslimobj.transform.rotation = before_rot_3;
+					}
+					cardslim3_ON = false;
 					break;
 			}
-			cardslim_ON = false;
 			itemslimobj.gameObject.SetActive(false);
 
 			//if (spheres_cardSlim[(int)slim_No] != null)
@@ -558,13 +657,18 @@ namespace  nm_sphere {
 		}
 		public void sphere_CardSlime_allClear()
 		{
-			cardslim_ON = false;
 			Sphere_CardItemSlim_1.transform.position = before_pos_1;
+			Sphere_CardItemSlim_1.transform.rotation = before_rot_1;
 			Sphere_CardItemSlim_1.gameObject.SetActive(false);
 			Sphere_CardItemSlim_2.transform.position = before_pos_2;
+			Sphere_CardItemSlim_2.transform.rotation = before_rot_2;
 			Sphere_CardItemSlim_2.gameObject.SetActive(false);
 			Sphere_CardItemSlim_3.transform.position = before_pos_3;
+			Sphere_CardItemSlim_3.transform.rotation = before_rot_3;
 			Sphere_CardItemSlim_3.gameObject.SetActive(false);
+			cardslim1_ON = false;
+			cardslim2_ON = false;
+			cardslim3_ON = false;
 
 			//int itemslimlength = Enum.GetValues(typeof(emitter.item_Slim_No)).Length;
 			//if (spheres_cardSlim != null)

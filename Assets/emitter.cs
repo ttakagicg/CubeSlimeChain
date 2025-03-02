@@ -128,7 +128,9 @@ namespace nm_emitter
 
 		public sphere sp;
 
-		public static bool sw_Gravity;
+		//public bool lifelostinvalid_ON = false;
+
+        public static bool sw_Gravity;
 
 		public AudioClip sphere_garavity_sound;
 		private AudioSource audioSource;
@@ -136,10 +138,12 @@ namespace nm_emitter
 		public GameObject explosion1;
 		public GameObject explosion2;
 		public GameObject explosion_monster_bomb;
-        public GameObject explosion_cube_bomb;
+		public GameObject explosion_monster_heartbomb;
+		public GameObject explosion_cube_bomb;
         public static GameObject s_explosion2;
 		public static GameObject s_explosion_monster_bomb;
-        public static GameObject s_explosion_cube_bomb;
+		public static GameObject s_explosion_monster_heartbomb;
+		public static GameObject s_explosion_cube_bomb;
         // BGM
         public static BGMPlayer player;
 		BGMPlayer player1;
@@ -207,7 +211,8 @@ namespace nm_emitter
 
 			s_explosion2 = explosion2;
 			s_explosion_monster_bomb = explosion_monster_bomb;
-            s_explosion_cube_bomb = explosion_cube_bomb;
+			s_explosion_monster_heartbomb = explosion_monster_heartbomb;
+			s_explosion_cube_bomb = explosion_cube_bomb;
             s_touchChainExplosionEffect = touchChainExplosionEffect;
 			s_shootChainExplosionEffect = shootChainExplosionEffect;
 
@@ -231,6 +236,14 @@ namespace nm_emitter
             MainMenuDsp();
 
 		}
+		//public bool get_lifelostinvalid_ON()
+  //      {
+		//	return lifelostinvalid_ON;
+  //      }
+		//public void set_lifelostinvalid_ON(bool status)
+		//{
+		//	lifelostinvalid_ON = status;
+		//}
 		public void setSceenDsp(int stageNumber)
         {
 			switch (cubersFile.now_play_stage)
@@ -795,7 +808,7 @@ namespace nm_emitter
 		public static bool effect_explosion;
 		public static float effect_Explosion_timer;
 		// monster explosion
-		public static void monster_Explosion(GameObject obj) {
+		public static void monster_Explosion(GameObject obj, int select) {
 
 			int mod = (int)cubersFile.now_play_stage % emitter.chainExplosion_userLeve;
 			monster_color color;
@@ -831,21 +844,37 @@ namespace nm_emitter
 			if (effect_explosion_obj[effect_explosion_obj_count] != null) {
 				Destroy(effect_explosion_obj[effect_explosion_obj_count]);
 			}
-			effect_explosion_obj[effect_explosion_obj_count] = (GameObject)Instantiate(s_explosion_monster_bomb, 
-				new Vector3(s_explosion_monster_bomb.transform.position.x, s_explosion_monster_bomb.transform.position.y, s_explosion_monster_bomb.transform.position.z),
-				Quaternion.identity);
-			Vector3 effect_position = obj.transform.position;
-			effect_position.y -= 1.0f;
-			effect_explosion_obj[effect_explosion_obj_count].transform.position = effect_position;
+			if (select == 1)
+            {
+				effect_explosion_obj[effect_explosion_obj_count] = (GameObject)Instantiate(s_explosion_monster_bomb,
+					new Vector3(s_explosion_monster_bomb.transform.position.x, s_explosion_monster_bomb.transform.position.y, s_explosion_monster_bomb.transform.position.z),
+					Quaternion.identity);
+				Vector3 effect_position = obj.transform.position;
+				effect_position.y -= 1.0f;
+				effect_explosion_obj[effect_explosion_obj_count].transform.position = effect_position;
 
-			GameObject obj1 = effect_explosion_obj[effect_explosion_obj_count].transform.Find("Stamp_pfireball01").gameObject;
-			var main1 = obj1.GetComponent<ParticleSystem>().main;
-			main1.startColor = explosion_color;
-			effect_explosion_obj_count++;
+				GameObject obj1 = effect_explosion_obj[effect_explosion_obj_count].transform.Find("Stamp_pfireball01").gameObject;
+				var main1 = obj1.GetComponent<ParticleSystem>().main;
+				main1.startColor = explosion_color;
+				effect_explosion_obj_count++;
 
-			Singleton<SoundPlayer>.instance.playSE_2( "bomb005" ,2);
+				Singleton<SoundPlayer>.instance.playSE_2("bomb005", 2);
+				effect_Explosion_timer = 2;
 
-			effect_Explosion_timer = 2;
+			}
+			else
+            {
+				effect_explosion_obj[effect_explosion_obj_count] = (GameObject)Instantiate(s_explosion_monster_heartbomb,
+					new Vector3(s_explosion_monster_heartbomb.transform.position.x, s_explosion_monster_heartbomb.transform.position.y + cube_obj_scale * 2f, s_explosion_monster_heartbomb.transform.position.z),
+					Quaternion.identity);
+				Vector3 effect_position = obj.transform.position;
+				effect_position.y += 1.0f;
+				effect_explosion_obj[effect_explosion_obj_count].transform.position = effect_position;
+				Singleton<SoundPlayer>.instance.playSE_2("bomb002", 3);
+				effect_Explosion_timer = 1;
+				effect_explosion_obj_count++;
+			}
+
 		}
         // Cube boemb
         public static void cube_explosion(GameObject obj)

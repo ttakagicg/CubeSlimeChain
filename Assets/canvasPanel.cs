@@ -516,6 +516,8 @@ namespace nm_canvasPanel
 		public Text lostadd_Count_text;
 		public Text slowCount_text;
 		public Text pauseCount_text;
+        public Text timereset_count;
+        public Text lifelostinvalid_count;
         public Image pause_banner_BG;
         public Text pause_banner_text;
 
@@ -529,6 +531,8 @@ namespace nm_canvasPanel
 		public Button b_Delay;
 
 		public Button b_Pause;
+        public Button b_TimeReset;
+        public Button b_LifeLostInvalid;
         public Button b_share;
         public Button b_change;
 
@@ -552,6 +556,10 @@ namespace nm_canvasPanel
         private bool item_BGM_Status;
         // item view
         public Button itemViewClose_BT;
+        public TextMeshProUGUI itemview_jewelry_count;
+        public TextMeshProUGUI itemview_pauseitem_count;
+        public TextMeshProUGUI itemview_timerestitem_count;
+        public TextMeshProUGUI itemview_lifelostitem_count;
         public Text goldCoin_TotalCount;
         public Button itemSet1_BT;
         public Button itemSet2_BT;
@@ -1613,6 +1621,24 @@ namespace nm_canvasPanel
 
             Button obj1 = b_Pause.transform.GetComponent<Button>();
             obj1.onClick.AddListener(() => ButtonPauseClick());
+
+            // time reset button
+            Vector3 b_scal_tr = b_TimeReset.transform.localScale;
+            b_scal_tr.x = b_scal_tr.x * screen_width_per;
+            b_scal_tr.y = b_scal_tr.y * screen_width_per;
+            b_TimeReset.transform.localScale = b_scal_tr;
+
+            Button obj12 = b_TimeReset.transform.GetComponent<Button>();
+            obj12.onClick.AddListener(() => ButtonTimeResetClick());
+
+            // life lost invalid button
+            Vector3 b_scal_lf = b_LifeLostInvalid.transform.localScale;
+            b_scal_lf.x = b_scal_lf.x * screen_width_per;
+            b_scal_lf.y = b_scal_lf.y * screen_width_per;
+            b_LifeLostInvalid.transform.localScale = b_scal_lf;
+
+            Button obj13 = b_LifeLostInvalid.transform.GetComponent<Button>();
+            obj13.onClick.AddListener(() => ButtonLifeLostInvalidClick());
 
             // share button
             Vector3 b_scal_s = b_share.transform.localScale;
@@ -5699,16 +5725,32 @@ namespace nm_canvasPanel
 			gamePointDSP(w_point);
 
 
-			// pause count
+			// pauseitem count
 			string st5 = @"D" + k.ToString();
-			int val5 = (int)cubersFile.pause_count;
+			int val5 = (int)cubersFile.pauseitem_count;
 			if (val5 > 999) val5 = 999; // limit dsp 999
 			string str5 = val5.ToString(st5);
 			
 			pauseCount_text.text = str5.ToString();
-			
-			// lostadd count
-			string st6 = @"D" + k.ToString();
+
+            // timeresetitem count
+            string st51 = @"D" + k.ToString();
+            int val51 = (int)cubersFile.timeresetitem_count;
+            if (val51 > 999) val51 = 999; // limit dsp 999
+            string str51 = val51.ToString(st51);
+
+            timereset_count.text = str51.ToString();
+
+            // lifelostinvaliditem count
+            string st52 = @"D" + k.ToString();
+            int val52 = (int)cubersFile.lifelostinvaliditem_count;
+            if (val52 > 999) val52 = 999; // limit dsp 999
+            string str52 = val52.ToString(st52);
+
+            lifelostinvalid_count.text = str52.ToString();
+
+            // lostadd count
+            string st6 = @"D" + k.ToString();
 			int val6 = (int)cubersFile.lostadd_count;
 			if (val6 > 999) val6 = 999; // limit dsp 999
 			string str6 = val6.ToString(st6);
@@ -6779,8 +6821,8 @@ namespace nm_canvasPanel
             }
             setGravityWaitTimeDSP((int)emitter.gravity_Time);
             // sound Play setting
-            emitter.player.playBGM();
-            emitter.BGMstate = emitter.BGM_State.play;
+            //emitter.player.playBGM();
+            //emitter.BGMstate = emitter.BGM_State.play;
 
         }
 
@@ -7324,7 +7366,12 @@ namespace nm_canvasPanel
         // TODO:1-1-１０修正 新規アイテム変換購入画面処理の作成
         void setItemViewData()
         {
-            // 所持ゴールドコイン数表示
+            itemview_jewelry_count.text = cubersFile.jewelry_Count.ToString();
+            itemview_pauseitem_count.text = cubersFile.pauseitem_count.ToString();
+            itemview_timerestitem_count.text = cubersFile.timeresetitem_count.ToString();
+            itemview_lifelostitem_count.text = cubersFile.lifelostinvaliditem_count.ToString();
+
+            /*// 所持ゴールドコイン数表示
             goldCoin_TotalCount.text = cubersFile.goldCoin_Count.ToString();
 
             // アイテムセットボタン表示
@@ -7364,11 +7411,12 @@ namespace nm_canvasPanel
                         break;
                 }
             }
+            
             //  交換アイテムゴールドコイン数
             itemWait_count.text = "×" + cubersFile.item_wait.ToString();
             itemRetry_count.text = "×" + cubersFile.item_retry.ToString();
 
-            /*
+            
                         item_gold_count_text.text = cubersFile.goldcoin_count.ToString();
                         item_gold_count = cubersFile.goldcoin_count;
                         item_now_gameCount_text.text = cubersFile.game_count.ToString();
@@ -7909,13 +7957,14 @@ namespace nm_canvasPanel
 
 		public void ButtonPauseClick() {
 
-			if (cubersFile.pause_count <= 0) return;
+			if (cubersFile.pauseitem_count <= 0) return;
 			if (sphere.gravitySpheres_count == 0) return;
 
 			//if (emitter.sw_Gravity) {
 
-            cubersFile.pause_count--;
-			emitter.playState = emitter.gamePlayState.Pause;
+            cubersFile.pauseitem_count--;
+            cubersFile.cubersFile_instance.save_gameEncryptionData();
+            emitter.playState = emitter.gamePlayState.Pause;
 			timeChange = true;
 			emitter.sw_Gravity = false;
 			//emitter.BGMstate = emitter.BGM_State.Stop;
@@ -7934,9 +7983,33 @@ namespace nm_canvasPanel
             //this.RequestBanner();
         //}
         }
+        // アップテンポタイマーリセット　7or4を10へ
+        public void ButtonTimeResetClick()
+        {
+
+            if (cubersFile.timeresetitem_count <= 0) return;
+            if (sphere.gravitySpheres_count == 0) return;
+
+            cubersFile.timeresetitem_count--;
+            cubersFile.cubersFile_instance.save_gameEncryptionData();
+            counter.timer = 10; // pause_timer値を0になったらtimer=0として待機時間０でモンスターを落下させる
+
+            Sphere.set_Sphere_CardSlime(emitter.item_Slim_No.resetTime_slim);
+        }
+
+        // ライフ消滅無効
+        public void ButtonLifeLostInvalidClick()
+        {
+            if (cubersFile.lifelostinvaliditem_count <= 0) return;
+            if (sphere.gravitySpheres_count == 0) return;
+
+            cubersFile.lifelostinvaliditem_count--;
+            cubersFile.cubersFile_instance.save_gameEncryptionData();
+            Sphere.set_Sphere_CardSlime(emitter.item_Slim_No.gurdlife_slim);
+        }
 
         // シェアボタンクリック処理
-		public IEnumerator ButtonShareClick() {
+        public IEnumerator ButtonShareClick() {
 
 			if (emitter.sw_Gravity) emitter.sw_Gravity = false;
 			else emitter.sw_Gravity = true;
