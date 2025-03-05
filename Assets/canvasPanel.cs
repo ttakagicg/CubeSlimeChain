@@ -3836,12 +3836,6 @@ namespace nm_canvasPanel
             { 2, 2, 2},     // 4cube 連鎖モード
             { 3, 3, 3},     // 5cube タイムチャレンジ
             { 3, 3, 3}      // 5cube 連鎖モード
-            //{ 1, 2, 2, 2, 2},     // 3cube タイムチャレンジ
-            //{ 1, 2, 2, 2, 2},     // 3cube 連鎖モード
-            //{ 2, 2, 2, 2, 2},     // 4cube タイムチャレンジ
-            //{ 2, 2, 2, 2, 2},     // 4cube 連鎖モード
-            //{ 3, 3, 3, 3, 3},     // 5cube タイムチャレンジ
-            //{ 3, 3, 3, 3, 3}      // 5cube 連鎖モード
             };
         // モンスター落下個数 最高 配列
         public static int[,] gravity_number_max_array = {
@@ -3851,12 +3845,6 @@ namespace nm_canvasPanel
             { 3, 4, 5},     // 4cube 連鎖モード
             { 4, 5, 6},     // 5cube タイムチャレンジ
             { 4, 5, 6}      // 5cube 連鎖モード
-            //{ 2, 3, 4, 4, 4},     // 3cube タイムチャレンジ
-            //{ 2, 3, 4, 4, 4},     // 3cube 連鎖モード
-            //{ 3, 4, 5, 5, 5},     // 4cube タイムチャレンジ
-            //{ 3, 4, 5, 5, 5},     // 4cube 連鎖モード
-            //{ 4, 5, 6, 6, 6},     // 5cube タイムチャレンジ
-            //{ 4, 5, 6, 6, 6}      // 5cube 連鎖モード
             };
         // 落下待機時間 (秒)　配列　０の場合、10s から　５s可変
         public static int[,] gravity_time_array = {
@@ -3866,13 +3854,16 @@ namespace nm_canvasPanel
             { 10, 7, 4},     // 4cube 連鎖モード
             { 10, 7, 4},     // 5cube タイムチャレンジ
             { 10, 7, 4}      // 5cube 連鎖モード
-            //{ 10, 10, 10, 7, 4},     // 3cube タイムチャレンジ
-            //{ 10, 10, 10, 7, 4},     // 3cube 連鎖モード
-            //{ 10, 10, 10, 7, 4},     // 4cube タイムチャレンジ
-            //{ 10, 10, 10, 7, 4},     // 4cube 連鎖モード
-            //{ 10, 10, 10, 7, 4},     // 5cube タイムチャレンジ
-            //{ 10, 10, 10, 7, 4}      // 5cube 連鎖モード
             };
+        /*// 落下待機時間 (秒)　可変間隔時間　配列　０の場合、可変無し
+        public static int[,,] gravity_time_changeinterval_array = {
+            {{ 0, 0, 0},{ 0, 2, 0}, { 0, 2, 12}},     // 3cube タイムチャレンジ
+            {{ 0, 0, 0},{ 0, 12, 0}, { 0, 12, 12}},     // 3cube 連鎖モード
+            {{ 0, 0, 0},{ 0, 12, 0}, { 0, 12, 12}},     // 4cube タイムチャレンジ
+            {{ 0, 0, 0},{ 0, 12, 0}, { 0, 12, 12}},     // 4cube 連鎖モード　レベル１
+            {{ 0, 0, 0},{ 0, 12, 0}, { 0, 12, 12}},     // 5cube タイムチャレンジ　レベル１
+            {{ 0, 0, 0},{ 0, 12, 0}, { 0, 12, 12}}      // 5cube 連鎖モード　レベル１
+            };*/
         // ３連鎖必要回数 配列 ０の場合は、非表示
         public static int[,] chaine_count_array = {
             { 0, 0, 0, 0, 0, 0 ,0},     // 3cube タイムチャレンジ
@@ -4713,13 +4704,58 @@ namespace nm_canvasPanel
         // 落下待機時間の範囲に応じて　BG関連表示、カラー、BGMに変化をつける
         public void gravityWaitTemp(int w_time)
         {
+            int temp = 0;
+            emitter.wait_variable_timerCount--;
+/*            Debug.Log(" gravityWaitTemp w_time = " + w_time);
+            Debug.Log(" gravityWaitTemp wait_variable_timerCount = " + emitter.wait_variable_timerCount);
+            Debug.Log(" gravityWaitTemp gravity_Timespan = " + emitter.gravity_Timespan); */
+            // 可変待機時間更新かチェック
+            if (emitter.wait_variable_timerCount <= 0) {
+                if(emitter.gravity_Timespan < 2) emitter.gravity_Timespan++;
+                emitter.wait_variable_timerCount = emitter.wait_timer_variable;
+            }
+
+            if (w_time == 0)
+            {
+                switch(cubersFile.now_play_stagelevel)
+                {
+                    case 1:
+                        temp = emitter.slowTempoTime;
+                        break;
+                    case 2:
+                        if (emitter.gravity_Timespan == 0)
+                        {
+                            temp = emitter.slowTempoTime;
+                        }
+                        else if (emitter.gravity_Timespan >= 1)
+                        {
+                            temp = emitter.midlleTempoTime;
+                        }
+                        break;
+                    case 3:
+                        if (emitter.gravity_Timespan == 0)
+                        {
+                            temp = emitter.slowTempoTime;
+                        }
+                        else if (emitter.gravity_Timespan == 1)
+                        {
+                            temp = emitter.midlleTempoTime;
+                        } else
+                        {
+                            temp = emitter.highTempoTime;
+                        }
+                        break;
+                }
+            }
+            //Debug.Log(" gravityWaitTemp temp = " + temp);
+
             waitingTimerGauge_BG.gameObject.SetActive(true);
             Level_top.gameObject.SetActive(true);
 
             //float brk = Mathf.PingPong(Time.time * 2.0f, 1.0f);
             Color cl;
 
-            if (w_time == 0)
+            /*if (w_time == 0)
             {
                 gametempoCount = gametempoCount + temp_distance;
                 if (gametempoCount > temp_distance * 10)
@@ -4727,13 +4763,14 @@ namespace nm_canvasPanel
                     gametempoCount = temp_distance * 10;
                 }
             }
-
             int temp = gametempoCount / temp_distance;
+            */
             switch (temp)
             {
                 case 0:
-                case 1:
-                case 2:
+                case 10:
+                case 9:
+                case 8:
                     // １０秒から8秒落下
                     // 連鎖あり？
                     if (swChangeTempo != 0)
@@ -4754,8 +4791,8 @@ namespace nm_canvasPanel
                     // BGM pitch設定
                     emitter.player.playBGM(0);
                     break;
-                case 3:
-                case 4:
+                case 7:
+                case 6:
                 case 5:
                     //7秒から5秒落下
                     // 連鎖あり？
@@ -4776,10 +4813,10 @@ namespace nm_canvasPanel
                     // BGM pitch設定
                     emitter.player.playBGM(1);
                     break;
-                case 6:
-                case 7:
-                case 8:
-                case 9:
+                case 4:
+                case 3:
+                case 2:
+                case 1:
                     //4秒落下
                     // 連鎖あり？
                     if (swChangeTempo != 0)
@@ -4807,6 +4844,7 @@ namespace nm_canvasPanel
                     emitter.player.playBGM(2);
                     break;
             }
+            //Debug.Log(" gravityWaitTemp gravity_Time = " + emitter.gravity_Time);
 
         }
 
@@ -5818,8 +5856,11 @@ namespace nm_canvasPanel
 
                     startCountDown = false;
 					countDownTime = emitter.startCountDownTimer;
-                    int wait_timer = gravity_time_array[cubersFile.now_play_stage - 1, cubersFile.now_play_stagelevel - 1];
-                    if (wait_timer == 0)
+
+                    int wait_timer = gravity_time_array[cubersFile.now_play_stage - 1, emitter.gravity_Timespan];
+                    //int wait_timer = gravity_time_array[cubersFile.now_play_stage - 1, cubersFile.now_play_stagelevel - 1];
+                    emitter.player.playBGM(0);
+                    /*if (wait_timer == 0)
                     {
                         emitter.gravity_Time = emitter.slowTempoTime;
                         emitter.gravity_Time += 0.99f;
@@ -5829,7 +5870,7 @@ namespace nm_canvasPanel
                     {
                         emitter.gravity_Time = gravity_time_array[cubersFile.now_play_stage - 1, cubersFile.now_play_stagelevel - 1];
                         emitter.gravity_Time += 0.99f;
-                        switch((int)emitter.gravity_Time)
+                        switch ((int)emitter.gravity_Time)
                         {
                             case 1:
                             case 2:
@@ -5849,6 +5890,7 @@ namespace nm_canvasPanel
                                 break;
                         }
                     }
+                    */
                     counter.timer = 0;
 					timeChange = true; //true時、タイマースタート以外にモンスターの動きにも関係するプレーステータスの設定も行われる
 				}
@@ -6244,9 +6286,24 @@ namespace nm_canvasPanel
                 }
                 else
                 {
-
-                    // 連鎖無しステージ選択時、ここで連鎖パネルビューを強制的にオフにする
-                    s_monsterSlimeColorCountView.gameObject.SetActive(false);
+                    int mod = (int)cubersFile.now_play_stage % emitter.chainExplosion_userLeve;
+                    if (mod == 0)
+                    {
+                        // 連鎖パネル表示リセット　パネルマスクオン時のリセットが無いのでここで非表示とする　連鎖カウント等は別個所でセット
+                        greenMonsterSlimeCountMaskImage_s.gameObject.SetActive(false);
+                        yellowMonsterSlimeCountMaskImage_s.gameObject.SetActive(false);
+                        redMonsterSlimeCountMaskImage_s.gameObject.SetActive(false);
+                        purpleMonsterSlimeCountMaskImage_s.gameObject.SetActive(false);
+                        blueMonsterSlimeCountMaskImage_s.gameObject.SetActive(false);
+                        whiteMonsterSlimeCountMaskImage_s.gameObject.SetActive(false);
+                        // 連鎖無しステージ選択時、ここで連鎖パネルビューを強制的にオンにする
+                        s_monsterSlimeColorCountView.gameObject.SetActive(true);
+                    }
+                    else
+                    {
+                        // 連鎖無しステージ選択時、ここで連鎖パネルビューを強制的にオフにする
+                        s_monsterSlimeColorCountView.gameObject.SetActive(false);
+                    }
 
                     var seq = DOTween.Sequence();
                     seq.Append(game_stage_select_view.rectTransform.DOMove(new Vector3(0, -Screen.height, 0), 1));
@@ -6706,6 +6763,9 @@ namespace nm_canvasPanel
 
             cubersFile.now_play_stage = stage;    // ステージ選択 番号
 
+            // TODO:連鎖ありカウントパネルイメージ設定
+            setChainBombPanelImage((int)cubersFile.now_play_stage);
+
             setStageSelectLevel(level);     // セーブサービス利用無し　レベル１データを設定
             // TODO:追加　1-1-1 2:レベル選択で行われていたデータ設定処理をステージ選択で行なうように変更  ↑
 
@@ -6807,11 +6867,18 @@ namespace nm_canvasPanel
             //        break;
             //}
 
-            // 落下待機時間表示初期設定
-            int wait_timer = gravity_time_array[cubersFile.now_play_stage - 1, cubersFile.now_play_stagelevel - 1];
+            // 落下待機時間表示初期設定 ステージレベル選択時
+            emitter.gravity_Timespan = 0;     // 可変落下時間配列のポジション開始10秒から
+            emitter.gravity_Time = emitter.slowTempoTime;
+            // wait_variable_timerCount　１カウント＝10秒刻み
+            emitter.wait_variable_timerCount = emitter.wait_timer_variable;
+            //emitter.wait_variable_timerCount = gravity_time_changeinterval_array[cubersFile.now_play_stage - 1, cubersFile.now_play_stagelevel - 1, emitter.gravity_Timespan_array];
+            emitter.gravity_Time += 0.99f;
+
+            /* int wait_timer = gravity_time_array[cubersFile.now_play_stage - 1, cubersFile.now_play_stagelevel - 1];
             if (wait_timer == 0)
             {
-                emitter.gravity_Time = emitter.slowTempoTime;
+                emitter.gravity_Time = emitter.slowTempoTime; 
                 emitter.gravity_Time += 0.99f;
             }
             else
@@ -6819,6 +6886,7 @@ namespace nm_canvasPanel
                 emitter.gravity_Time = gravity_time_array[cubersFile.now_play_stage - 1, cubersFile.now_play_stagelevel - 1];
                 emitter.gravity_Time += 0.99f;
             }
+            */
             setGravityWaitTimeDSP((int)emitter.gravity_Time);
             // sound Play setting
             //emitter.player.playBGM();
@@ -6976,14 +7044,16 @@ namespace nm_canvasPanel
             if (w_time == beforeTime) return;
             beforeTime = w_time;
 
-            int w_temp = gravity_time_array[cubersFile.now_play_stage - 1, cubersFile.now_play_stagelevel - 1];
+            //int w_temp = gravity_time_array[cubersFile.now_play_stage - 1, emitter.gravity_Timespan_array];
+            //int w_temp = gravity_time_array[cubersFile.now_play_stage - 1, cubersFile.now_play_stagelevel - 1];
             // ラスト落下モンスタ時の待機時間　４s　gravityLastMonsterがオンの時ラストモンスタ落下モード
-            if (w_temp != 0 || emitter.gravityLastMonster)
+            if (w_time != 0) 
+            //if (w_temp != 0 || emitter.gravityLastMonster)
             {
                 waitingTimerGauge_BG.gameObject.SetActive(true);
                 Level_top.gameObject.SetActive(true);
 
-                switch (w_temp)
+                switch (w_time)
                 {
                     // 4秒以下　赤
                     case 1:
@@ -7009,10 +7079,10 @@ namespace nm_canvasPanel
             else
             {
                 // 可変テンポ処理
-                if (sphere.gravitySpheres_count != 0)
-                {
+                //if (sphere.gravitySpheres_count != 0)
+                //{
                     gravityWaitTemp(w_time);
-                }
+                //}
             }
             // 秒単位ゲージ表示
             for (int i = 0; i < 10; i++)
@@ -7297,6 +7367,9 @@ namespace nm_canvasPanel
 			sphere.start_game = true;
 			sunshinerotate = 0;
 
+            emitter.wait_variable_timerCount = emitter.wait_timer_variable;
+            emitter.gravity_Timespan = 0;
+
             safeareaout_header_BG.gameObject.SetActive(true);
             safeareaout_footer_BG.gameObject.SetActive(true);
             playItemView_button_BG.gameObject.SetActive(true);
@@ -7316,12 +7389,31 @@ namespace nm_canvasPanel
             //b_share.gameObject.SetActive(true);
             //b_change.gameObject.SetActive(true);
 
+            int mod = (int)cubersFile.now_play_stage % emitter.chainExplosion_userLeve;
+            if (mod == 0)
+            {
+                // 連鎖パネル表示リセット　パネルマスクオン時のリセットが無いのでここで非表示とする　連鎖カウント等は別個所でセット
+                greenMonsterSlimeCountMaskImage_s.gameObject.SetActive(false);
+                yellowMonsterSlimeCountMaskImage_s.gameObject.SetActive(false);
+                redMonsterSlimeCountMaskImage_s.gameObject.SetActive(false);
+                purpleMonsterSlimeCountMaskImage_s.gameObject.SetActive(false);
+                blueMonsterSlimeCountMaskImage_s.gameObject.SetActive(false);
+                whiteMonsterSlimeCountMaskImage_s.gameObject.SetActive(false);
+                // 連鎖無しステージ選択時、ここで連鎖パネルビューを強制的にオンにする
+                s_monsterSlimeColorCountView.gameObject.SetActive(true);
+            }
+            else
+            {
+                // 連鎖無しステージ選択時、ここで連鎖パネルビューを強制的にオフにする
+                s_monsterSlimeColorCountView.gameObject.SetActive(false);
+            }
+
             /* TODO: 連鎖関連修正 連鎖１プレーでカウントリセットを継続保持に変更の為、コメントアウト
             chain_1_count = 0;
             chain_2_count = 0;
             chain_3_count = 0;
             */
-            
+
         }
         // TODO:1-1-１０追加 新規アイテム変換購入画面処理の作成
         private float itemViewWaitStopTime;
@@ -7953,6 +8045,8 @@ namespace nm_canvasPanel
 			// 落下ゲージボタンオフ
 			//sphereDownGaugeOff();
 			counter.timer = emitter.nextDownWaitTimer;  // 落下後、次のモンスター落下待機表示までの待ち時間
+
+            gravityWaitTemp(0);
         }
 
 		public void ButtonPauseClick() {

@@ -535,8 +535,12 @@ namespace  nm_sphere {
 
 			if (slim_No == emitter.item_Slim_No.resetTime_slim)
             {
+				// 可変タイマー設定リセット
+				emitter.gravity_Timespan = 0;
+				emitter.wait_variable_timerCount = emitter.wait_timer_variable;
+
 				var seq = DOTween.Sequence();
-				seq.Append(itemslimobj.transform.DORotate(Vector3.up *  360f, 2f));
+				seq.Append(itemslimobj.transform.DORotate(new Vector3(0, 0, 360), 2, RotateMode.LocalAxisAdd));
 				seq.OnComplete(() =>
 				{
 					// アニメーションが終了時によばれる
@@ -1339,7 +1343,7 @@ namespace  nm_sphere {
 
 			int jj = UnityEngine.Random.Range(0, extract_obj_count);
 			if (extract_obj[jj] == null) {
-				Debug.Log("extract_obj:" + extract_obj_count);
+				//Debug.Log("extract_obj:" + extract_obj_count);
 			}
 			return extract_obj[jj];
 		}

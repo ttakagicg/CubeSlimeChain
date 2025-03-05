@@ -63,7 +63,8 @@ namespace nm_emitter
 		private bool initEmitter = false;
 
 		// 可変待機時間は、ゲージ表示を行うCanvasPanelの表示処理内で設定される
-		public static float gravity_Time = 10;	//スタートタイマー　10秒 -> ５秒 -> ３秒
+		public static float gravity_Time = 10;  //スタートタイマー　10秒 -> 7秒 -> 4秒
+		public static int gravity_Timespan;
 
 		public static int cubeCount;
 		public static int before_cubeCount;
@@ -176,6 +177,8 @@ namespace nm_emitter
 		public const int slowTempoTime = 10;
 		public const int midlleTempoTime = 7;
 		public const int highTempoTime = 4;
+		public static int wait_variable_timerCount;
+		public const int wait_timer_variable = 2;	// 1:10秒
 
 		public GameObject sceen_light1;
 		public GameObject sceen_light2;
@@ -2409,7 +2412,7 @@ namespace nm_emitter
             int befor_turn_angle = turn_angle;
             turn_angle += wangle;
             if (befor_turn_angle != turn_angle)
-                Debug.Log("turn_angle = " + turn_angle);
+                //Debug.Log("turn_angle = " + turn_angle);
             if (turn_angle >= 90 || turn_angle <= -90) {
 				
 				reset_cubeAngle();
@@ -2518,7 +2521,7 @@ namespace nm_emitter
 								(CubeViewportPoint.y * CanvasRect.sizeDelta.y));
 							if (touchPosition.y >= CubeViewPortToCanvasPoint.y && touchPosition.y <= CubeViewPortToCanvasPoint.y + scale.y)
 							{
-								Debug.Log("HIT!!");
+								//Debug.Log("HIT!!");
 							}
 						}
 					}
