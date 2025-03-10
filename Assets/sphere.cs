@@ -1223,7 +1223,8 @@ namespace  nm_sphere {
 
 				//				counter.timer = emitter.gravity_Time + 1;
 				now_gravitySpheres_count = gravitySpheres_count;
-
+				//// スライム設置から落下開始までに行われた連鎖情報修正フラグON
+				//emitter.start_OneFallChainCountCollection = true;
 			}
 		}
 
@@ -1601,6 +1602,32 @@ namespace  nm_sphere {
 
 			// TODO:キューブ上でのヒットポイント表示処理
 			setChainExplosionInfoAnimation(setHitPointPosition(text_pos), str, color);
+
+			//// スライム別の連鎖数セット
+			//setSlimChainExplosionCount(emitter.chainExplosionLineCount, color);
+		}
+		// スライム別の連鎖数セット
+		public static void setSlimChainExplosionCount(int linecount, monster_color color)
+        {
+			switch (color)
+			{
+				case monster_color.green_monster:
+					emitter.green_OneFallChainCount += linecount;
+					break;
+				case monster_color.yellow_monster:
+					emitter.yellow_OneFallChainCount += linecount;
+					break;
+				case monster_color.red_monster:
+					emitter.red_OneFallChainCount += linecount;
+					break;
+				case monster_color.purple_monster:
+					emitter.purple_OneFallChainCount += linecount;
+					break;
+				case monster_color.blue_monster:
+					emitter.blue_OneFallChainCount += linecount;
+					break;
+			}
+
 		}
 
 		// TODO:Hit point dsp　連鎖エッグ表示処理は下記スイッチ１から３の処理を修正 ※未使用により要コメントアウト
@@ -1751,7 +1778,7 @@ namespace  nm_sphere {
 			screen_width_per = Screen.width / 1125.0f;
 			var textcount = text.ToString().Length;
 			float window_size = Screen.height;
-			int font_size = 48;
+			//int font_size = 48;
 			string sprite_s;
 			long sprite_no = (cubersFile.now_play_stage / 2 - 1) * 5;
 
@@ -1792,13 +1819,14 @@ namespace  nm_sphere {
 			pointText_w.gameObject.transform.localScale = scal;
 
 			var seq = DOTween.Sequence();
-			seq.Append(pointText_w.transform.DOScale(new Vector3(1.0f, 1.0f), 1.0f));
-			seq.Append(pointText_w.transform.DOScale(new Vector3(1.0f, 1.0f), 1.0f));　// 表示時間の為２度設定 1.0f→2.0fよりスムーズ
+			seq.Append(pointText_w.transform.DOScale(new Vector3(1.0f, 1.0f), 2.0f));
             seq.OnComplete(() =>
 			{
 				// アニメーションが終了時によばれる
 				pointText_w.gameObject.transform.parent = null;
-            });
+				Destroy(pointText_w);
+
+			});
 		}
 
 

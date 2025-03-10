@@ -286,6 +286,8 @@ namespace nm_canvasPanel
         public static Text s_besttime_text;
         public Image besttime_text_star;
         public static Image s_besttime_text_star;
+        public Image jewelry_star;
+        public Image jewelry_get_star;
         // TODO:削除 ゲーム仕様変更の為
         public Image failed_view;
         public GameObject faild_level_badge1_1;
@@ -443,6 +445,10 @@ namespace nm_canvasPanel
         public Text topGameTime_text;
         public static Text s_topGameTime_text;
         public TextMeshProUGUI noChainGameTime_text;
+        public Image topGameTimeChainView_BG;
+        public static Image s_topGameTimeChainView_BG;
+        public Text topGameTimeChainView_text;
+        public static Text s_topGameTimeChainView_text;
         public static TextMeshProUGUI s_noChainGameTime_text;
         public TimeSpan currentTs;
 		public static TimeSpan playEndTimeSpan;
@@ -454,11 +460,19 @@ namespace nm_canvasPanel
         public TextMeshProUGUI startCountDown_text5;
         // itemGet Message disp.
         public Image itemGetView;
+        public Image itemGetView_BG;
+        public TextMeshProUGUI itemGetIcon;
         public TextMeshProUGUI itemGetTitle;
         public TextMeshProUGUI itemGetCount;
         public TextMeshProUGUI itemGetMessage;
         public Text gamePoint;
         public Text gamePointLabel;
+        // Set SlimCard View
+        public Image slimcardView;
+        public Image slimcard1;
+        public Image slimcard2;
+        public Image slimcard3;
+        public static Image s_slimcardView;
 
         // 取得アイテム表示
         public Text coin_text;
@@ -881,7 +895,9 @@ namespace nm_canvasPanel
             s_noChainGameTime_text = noChainGameTime_text;
             s_topGameTime_BG = topGameTime_BG;
             s_topGameTime_text = topGameTime_text;
-			countDownTime = emitter.startCountDownTimer;
+            s_topGameTimeChainView_BG = topGameTimeChainView_BG;
+            s_topGameTimeChainView_text = topGameTimeChainView_text;
+            countDownTime = emitter.startCountDownTimer;
 
             emitter.playState = emitter.gamePlayState.Pause;
 
@@ -1496,11 +1512,24 @@ namespace nm_canvasPanel
             itemGetView.transform.localScale = scal_igt;
             Vector3 pos_igt = itemGetView.transform.position;
             pos_igt.x = pos_igt.x * screen_width_per;
-            pos_st.y = (Screen.height - safeAreaHight) - (center_header.rectTransform.sizeDelta.y + monsterColorCountView.rectTransform.sizeDelta.y + waitingTimerGauge_BG.rectTransform.sizeDelta.y + itemGetView.rectTransform.sizeDelta.y + 20) * scal2.y;
+            pos_igt.y = (Screen.height - safeAreaHight) - (center_header.rectTransform.sizeDelta.y + monsterColorCountView.rectTransform.sizeDelta.y + waitingTimerGauge_BG.rectTransform.sizeDelta.y + itemGetView.rectTransform.sizeDelta.y + 40) * scal2.y;
             itemGetView.transform.position = pos_igt;
             itemGetView.gameObject.SetActive(false);
 
             jewelryCountStarIcon.gameObject.SetActive(false);
+
+            // set slim card表示
+            Vector3 scal_sc = slimcardView.transform.localScale;
+            scal_sc.x = scal_sc.x * screen_width_per;
+            scal_sc.y = scal_sc.y * screen_width_per;
+            slimcardView.transform.localScale = scal_sc;
+            Vector3 pos_sc = slimcardView.transform.position;
+            pos_sc.x = scal_sc.x * screen_width_per;
+            pos_sc.y = (Screen.height - safeAreaHight) - (center_header.rectTransform.sizeDelta.y + monsterColorCountView.rectTransform.sizeDelta.y + waitingTimerGauge_BG.rectTransform.sizeDelta.y + topGameTimeChainView_BG.rectTransform.sizeDelta.y + slimcardView.rectTransform.sizeDelta.y + 40.0f) * scal2.y;
+            slimcardView.transform.position = pos_sc;
+
+            s_slimcardView = slimcardView;
+            s_slimcardView.gameObject.SetActive(false);
 
             s_monsterColorCountView = monsterColorCountView;
             s_monsterColorCountView.gameObject.SetActive(false);
@@ -2414,7 +2443,126 @@ namespace nm_canvasPanel
         // TODO:連鎖　MAX chain count情報及び取得予定アイテム数表示の拡大表示処理
         public void chainInfoEffectDSP()
         {
-            // ジュエリーカウントアップエフェクト表示
+            // 連鎖総数チェック
+            String sprite_s = "";
+            int slim_count = 0;
+            int max_chain_count = 0;
+            int jewelry_count = 0;
+            if (emitter.green_OneFallChainCount > 0)
+            {
+                sprite_s = "<sprite=0>";
+                slim_count = 1;
+                max_chain_count = emitter.green_OneFallChainCount;
+            }
+            if (emitter.yellow_OneFallChainCount > 0)
+            {
+                String st = "<sprite=1>";
+                sprite_s += st;
+                slim_count++;
+                if (max_chain_count < emitter.yellow_OneFallChainCount)
+                {
+                    max_chain_count = emitter.yellow_OneFallChainCount;
+                }
+            }
+            if (emitter.red_OneFallChainCount > 0)
+            {
+                String st = "<sprite=2>";
+                sprite_s += st;
+                slim_count++;
+                if (max_chain_count < emitter.red_OneFallChainCount)
+                {
+                    max_chain_count = emitter.red_OneFallChainCount;
+                }
+            }
+            if (emitter.purple_OneFallChainCount > 0)
+            {
+                String st = "<sprite=3>";
+                sprite_s += st;
+                slim_count++;
+                if (max_chain_count < emitter.purple_OneFallChainCount)
+                {
+                    max_chain_count = emitter.purple_OneFallChainCount;
+                }
+            }
+            if (emitter.blue_OneFallChainCount > 0)
+            {
+                String st = "<sprite=4>";
+                sprite_s += st;
+                slim_count++;
+                if (max_chain_count < emitter.blue_OneFallChainCount)
+                {
+                    max_chain_count = emitter.blue_OneFallChainCount;
+                }
+            }
+
+            // slim 3種以上で同時連鎖　slim種数分魔法数ゲット！
+            if (slim_count >= 3)
+            {
+                jewelry_count = slim_count;
+            }
+            //  MAX連鎖数6以上 スライム複数でその総数のmax_chain_countが６以上もあり - 5の魔法石Get!
+            if (max_chain_count >= 6)
+            //if (max_chain_count >= 1)
+            {
+                // slim 3種以上の場合もあるので加算
+                //jewelry_count += max_chain_count;
+                jewelry_count += max_chain_count - 5;
+            }
+            // 取得jewelry無しの場合は、表示しない
+            if (jewelry_count <= 0)
+            {
+                jewelry_count = 0;
+                return;
+            }
+            // 各スライム連鎖カウントリセット
+            emitter.green_OneFallChainCount = 0;
+            emitter.yellow_OneFallChainCount = 0;
+            emitter.red_OneFallChainCount = 0;
+            emitter.purple_OneFallChainCount = 0;
+            emitter.blue_OneFallChainCount = 0;
+
+            // 取得jewelryありの場合
+            itemGetIcon.gameObject.GetComponent<TMPro.TextMeshProUGUI>().text = sprite_s;
+            itemGetTitle.gameObject.GetComponent<TMPro.TextMeshProUGUI>().text = slim_count.ToString() + " Slim " + max_chain_count.ToString() + " Chain";
+            itemGetMessage.gameObject.GetComponent<TMPro.TextMeshProUGUI>().text = " x   " + jewelry_count.ToString();
+
+            // play get total jewelry Count -> game complete時に　jewelry_Count_totalがcubeFile.jewelry_Count に加算される
+            emitter.jewelry_Count_total += jewelry_count;
+
+            //  SunShain disp.
+            Vector2 scale1 = itemGetView_BG.rectTransform.localScale;
+            scale1.x = 0.1f;
+            scale1.y = 0.1f;
+            itemGetView_BG.rectTransform.localScale = scale1;
+            itemGetView_BG.rectTransform.rotation = Quaternion.Euler(0, 0, 0);
+
+            var seq1 = DOTween.Sequence();
+            seq1.Append(itemGetView_BG.rectTransform.DOScale(new Vector3(1.0f, 1.0f), 2.0f));
+            seq1.Join(itemGetView_BG.rectTransform.DORotate(new Vector3(0f, 0f, 180f),   // 終了時点のRotation
+                2.0f                    // アニメーション時間
+            ));
+            seq1.OnComplete(() => {
+                // アニメーションが終了時によばれる
+            });
+
+            // Star Dsp.
+            Vector2 scale2 = jewelry_get_star.rectTransform.localScale;
+            scale2.x = 0.1f;
+            scale2.y = 0.1f;
+            jewelry_get_star.rectTransform.localScale = scale2;
+            jewelry_get_star.rectTransform.rotation = Quaternion.Euler(0, 0, 0);
+            var seq2 = DOTween.Sequence();
+            seq2.Append(jewelry_get_star.rectTransform.DOScale(new Vector3(1.0f, 1.0f), 1.0f));
+            seq2.Join(jewelry_get_star.rectTransform.DORotate(new Vector3(0f, 0f, 180f),   // 終了時点のRotation
+                2.0f                    // アニメーション時間
+            ));
+            jewelry_get_star.gameObject.SetActive(true);
+            seq2.OnComplete(() => {
+                // アニメーションが終了時によばれる
+                jewelry_get_star.gameObject.SetActive(false);
+            });
+
+            /*// ジュエリーカウントアップエフェクト表示
             var seq = DOTween.Sequence();
             seq.Append(jewelryCountIcon.transform.DOScale(new Vector3(1.5f, 1.5f), 0.5f));
             seq.Append(jewelryCountIcon.transform.DOScale(new Vector3(1.5f, 1.5f), 2.0f));
@@ -2443,14 +2591,14 @@ namespace nm_canvasPanel
                 // アニメーションが終了時によばれる
                 jewelryCountStarIcon.gameObject.SetActive(false);
             });
-
+            */
             // ジュエリーアイテムゲットメッセージ表示
             itemGetView.gameObject.SetActive(true);
 
-            var seq2 = DOTween.Sequence();
-            seq2.Append(itemGetView.transform.DOScale(new Vector3(1.0f, 1.0f), 1.0f));
-            seq2.Append(itemGetView.transform.DOScale(new Vector3(1.0f, 1.0f), 2.0f));　// 表示時間の為２度設定 1.0f→2.0fよりスムーズ
-            seq2.OnComplete(() =>
+            Vector3 scal_igt = itemGetView.transform.localScale;
+            var seq3 = DOTween.Sequence();
+            seq3.Append(itemGetView.transform.DOScale(new Vector3(scal_igt.x, scal_igt.y), 2.0f));
+            seq3.OnComplete(() =>
             {
                 // アニメーションが終了時によばれる
                 itemGetView.gameObject.SetActive(false);
@@ -5531,11 +5679,13 @@ namespace nm_canvasPanel
             if (time == 0)
             {
                 s_topGameTime_text.text = "TopTime 00:00:00:00";
+                s_topGameTimeChainView_text.text = "TopTime 00:00:00:00";
             }
             else
             {
                 TimeSpan interval = TimeSpan.FromMilliseconds(time);
                 s_topGameTime_text.text = "TopTime " + ConvertTimeSpanToString(interval);
+                s_topGameTimeChainView_text.text = "TopTime " + ConvertTimeSpanToString(interval);
             }
 
         }
@@ -6057,8 +6207,8 @@ namespace nm_canvasPanel
                             s_LifeLostCount_text.GetComponent<Text>().text = (emitter.lost_count_MAX - sphere.lost_Spheres).ToString();
                             //s_gameTimeEnd_text.text = s_gameTime_text.text;
 
-                        // ゲームクリアステータスメッセージオフ
-                        s_center_View.gameObject.SetActive(false);
+                            // ゲームクリアステータスメッセージオフ
+                            s_center_View.gameObject.SetActive(false);
                             s_gameStatus_text.gameObject.SetActive(false);
 
                             // ゲームクリアビューオン
@@ -6096,6 +6246,10 @@ namespace nm_canvasPanel
 
                             // TODO:1-1-5 追加　各データ更新時のスター表示演出処理
                             setScoreUpdateStarEffect();
+
+                            // New 25-03 Get jewelry Count add & Star DSP.
+                            setGetJewelryCount();
+
 
                             // TODO:1-1-4追加 レベルMAX時チェック
                             // レベルMAX攻略か？
@@ -6433,7 +6587,7 @@ namespace nm_canvasPanel
         // set ScoreUpdate Star Effect disp.
         public void  setScoreUpdateStarEffect()
         {
-            if (max_chain_Mes_BG.gameObject.activeSelf == true)
+            /*if (max_chain_Mes_BG.gameObject.activeSelf == true)
             {
                 // 連鎖最高数更新あり
                 Vector2 scale1 = s_maxChain_star.rectTransform.localScale;
@@ -6493,7 +6647,7 @@ namespace nm_canvasPanel
                     s_lifeLostCount_Zero_star.gameObject.SetActive(false);
                 });
 
-            }
+            }*/
             if (besttime_text.gameObject.activeSelf == true)
             {
                 // プレイ時間更新？
@@ -6515,6 +6669,46 @@ namespace nm_canvasPanel
                 });
 
             }
+        }
+
+        // New 25-03 Get jewelry Count add & Star DSP.
+        public void setGetJewelryCount()
+        {
+            // 所持魔法石に連鎖でゲットした魔法石を加算して表示と獲得魔法石を加算した数値をcubersFileにセーブ
+            jewelry_text.text = ((long)emitter.jewelry_Count_total + cubersFile.jewelry_Count).ToString();
+            cubersFile.jewelry_Count += (long)emitter.jewelry_Count_total;
+            cubersFile.cubersFile_instance.save_gameEncryptionData();
+
+            // ジュエリーカウントアップエフェクト表示
+            var seq = DOTween.Sequence();
+            seq.Append(jewelryCountIcon.transform.DOScale(new Vector3(1.5f, 1.5f), 0.5f));
+            seq.Append(jewelryCountIcon.transform.DOScale(new Vector3(1.5f, 1.5f), 2.0f));
+            seq.OnComplete(() =>
+            {
+                // アニメーションが終了時によばれる
+                Vector3 scal = jewelryCountIcon.gameObject.transform.localScale;
+                scal.x = 1.0f;
+                scal.y = 1.0f;
+                jewelryCountIcon.gameObject.transform.localScale = scal;
+            });
+
+            // Star Dsp.
+            Vector2 scale2 = jewelry_star.rectTransform.localScale;
+            scale2.x = 0.1f;
+            scale2.y = 0.1f;
+            jewelry_star.rectTransform.localScale = scale2;
+            jewelry_star.rectTransform.rotation = Quaternion.Euler(0, 0, 0);
+
+            var seq2 = DOTween.Sequence();
+            seq2.Append(jewelry_star.rectTransform.DOScale(new Vector3(1.0f, 1.0f), 1.0f));
+            seq2.Join(jewelry_star.rectTransform.DORotate(new Vector3(0f, 0f, 180f),   // 終了時点のRotation
+                2.0f                    // アニメーション時間
+            ));
+            jewelry_star.gameObject.SetActive(true);
+            seq2.OnComplete(() => {
+                // アニメーションが終了時によばれる
+                jewelry_star.gameObject.SetActive(false);
+            });
         }
 
         //動画視聴完了時
@@ -8047,9 +8241,27 @@ namespace nm_canvasPanel
 			counter.timer = emitter.nextDownWaitTimer;  // 落下後、次のモンスター落下待機表示までの待ち時間
 
             gravityWaitTemp(0);
+
+            Debug.Log("落下Button!!! " + emitter.start_OneFallChainCountCollection + " !!!");
+            // スライム設置から落下開始までに連鎖ありかチェック
+            if (emitter.start_OneFallChainCountCollection)
+            {
+                // スライム設置から落下開始までに行われた連鎖情報修正フラグOFF
+                emitter.start_OneFallChainCountCollection = false;
+                // １落下サイクル時の連鎖情報表示及び魔法石（ジュエリー）獲得チェック
+                GameObject w_obj1 = GameObject.Find("Canvas");
+                w_obj1.GetComponent<canvasPanel>().chainInfoEffectDSP();
+                emitter.green_OneFallChainCount = 0;
+                emitter.yellow_OneFallChainCount = 0;
+                emitter.red_OneFallChainCount = 0;
+                emitter.purple_OneFallChainCount = 0;
+                emitter.blue_OneFallChainCount = 0;
+                Debug.Log("chainInfoEffectDSP!!");
+            }
+
         }
 
-		public void ButtonPauseClick() {
+        public void ButtonPauseClick() {
 
 			if (cubersFile.pauseitem_count <= 0) return;
 			if (sphere.gravitySpheres_count == 0) return;

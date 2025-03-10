@@ -169,6 +169,16 @@ namespace nm_emitter
 		public static int goldItemCount;            //　ゴールドアイテム獲得数		ゲームベース情報として保存される
 		public static int silverItemCount;          //　シルバーアイテム獲得数		ゲームベース情報として保存される
 		public static int playGetSilverItemCount;          //　プレイ中シルバーアイテム獲得数		ゲームコンプリート時に累計加算され現在のアイテム表示に反映される
+		// お宝（ジュエリー）獲得時の条件判定に利用
+		public static int green_OneFallChainCount;  // １落下待機中に行われた連鎖の最大数　同じカラーの2つの連鎖で数の大きい連鎖数を保存
+		public static int yellow_OneFallChainCount;  // １落下待機中に行われた連鎖の最大数　同じカラーの2つの連鎖で数の大きい連鎖数を保存
+		public static int red_OneFallChainCount;  // １落下待機中に行われた連鎖の最大数　同じカラーの2つの連鎖で数の大きい連鎖数を保存
+		public static int purple_OneFallChainCount;  // １落下待機中に行われた連鎖の最大数　同じカラーの2つの連鎖で数の大きい連鎖数を保存
+		public static int blue_OneFallChainCount;  // １落下待機中に行われた連鎖の最大数　同じカラーの2つの連鎖で数の大きい連鎖数を保存
+		// スライム設置から落下開始までに行われた連鎖情報修正フラグ
+		public static bool start_OneFallChainCountCollection;
+
+		public static int jewelry_Count_total;  // One Play Get jewelry Count
 
 		public static int tempoLength;
 		public const int threeCube = 10; // 1 tempゲージあたりの秒数
@@ -178,7 +188,8 @@ namespace nm_emitter
 		public const int midlleTempoTime = 7;
 		public const int highTempoTime = 4;
 		public static int wait_variable_timerCount;
-		public const int wait_timer_variable = 2;	// 1:10秒
+		public const int wait_timer_variable = 12;  // 1:10秒
+		public const int chain_slim_count_MAX = 5;
 
 		public GameObject sceen_light1;
 		public GameObject sceen_light2;
@@ -599,6 +610,8 @@ namespace nm_emitter
 			canvaspanel.gameTempoReset();
 			canvaspanel.showItemDSP();
 			canvaspanel.showTopTimeDSP();
+			// One Play Get Total jewelry Count
+			jewelry_Count_total = 0;
 
 			initGameTempo();
 				
@@ -621,31 +634,39 @@ namespace nm_emitter
 				}
 				// TODO：テンポゲージトップバー表示OFF＆MAX連鎖カウント表示BGON
 				canvasPanel.s_max_chain_count_BG.gameObject.SetActive(true);
-				canvasPanel.waitingTimerTop_BG_s.gameObject.SetActive(false);
+				canvasPanel.waitingTimerTop_BG_s.gameObject.SetActive(true);
+				canvasPanel.s_slimcardView.gameObject.SetActive(true);
 
 				canvasPanel.s_noChainPlayTimeDSP_Sceen2BGImage.gameObject.SetActive(false);
 				canvasPanel.s_topGameTime_text.gameObject.SetActive(false);
+				canvasPanel.s_topGameTimeChainView_text.gameObject.SetActive(true);
 
 				canvasPanel.s_gameTime_text.gameObject.SetActive(true);
 				canvasPanel.s_noChainGameTime_text.gameObject.SetActive(false);
 
 				canvasPanel.s_gameTime_BG.gameObject.SetActive(true);
 				canvasPanel.s_topGameTime_BG.gameObject.SetActive(false);
+				canvasPanel.s_topGameTimeChainView_BG.gameObject.SetActive(true);
+
 			}
 			else {
 				canvasPanel.s_monsterColorCountView.gameObject.SetActive(false);
 				// TODO：テンポゲージトップバー表示OFF＆MAX連鎖カウント表示BG ON
 				canvasPanel.s_max_chain_count_BG.gameObject.SetActive(false);
 				canvasPanel.waitingTimerTop_BG_s.gameObject.SetActive(true);
+				canvasPanel.s_slimcardView.gameObject.SetActive(false);
 
 				canvasPanel.s_noChainPlayTimeDSP_Sceen2BGImage.gameObject.SetActive(true);
 				canvasPanel.s_topGameTime_text.gameObject.SetActive(true);
+				canvasPanel.s_topGameTimeChainView_text.gameObject.SetActive(false);
 
 				canvasPanel.s_gameTime_BG.gameObject.SetActive(false);
 				canvasPanel.s_topGameTime_BG.gameObject.SetActive(true);
 
 				canvasPanel.s_gameTime_text.gameObject.SetActive(false);
 				canvasPanel.s_noChainGameTime_text.gameObject.SetActive(true);
+				canvasPanel.s_topGameTimeChainView_BG.gameObject.SetActive(false);
+
 			}
 
 		}
@@ -1273,6 +1294,7 @@ namespace nm_emitter
                                     chainExplosionLineCount = w_linecount;
                                     int p = sphere.gamePointADD(w_linecount);
                                     chainExplosionPoint += p;
+
 									// 連鎖時の落下テンポゲージ減ボーナススイッチセット　swChangeTempo＝０の時は、何もされない
 									canvasPanel.swChangeTempo = w_linecount;
                                     canvasPanel.chain_1_count++;
@@ -1323,6 +1345,17 @@ namespace nm_emitter
 									setChainExplosionTouchEffect(sphere.spheres[j,k,i], m_color);
 									setChainExplosionCounterPanelEffect(m_color);
 									chainExplosioncolor = m_color;
+
+									// スライム別の連鎖数セット
+									// スライム設置から落下開始までに行われた連鎖チェックフラグON
+									Debug.Log("Chain !! " + emitter.start_OneFallChainCountCollection + " !!!");
+									emitter.start_OneFallChainCountCollection = true;
+									sphere.setSlimChainExplosionCount(chainExplosionLineCount, m_color);
+
+									// タッチ直後で、魔法石（ジュエリー）獲得条件をクリアしているかチェック　１スライムで6連鎖以上を達成している場合直ぐにGet表示
+									GameObject w_obj1 = GameObject.Find("Canvas");
+									w_obj1.GetComponent<canvasPanel>().chainInfoEffectDSP();
+									Debug.Log("chainInfoEffectDSP touchNow!! Check!!");
 
 									Singleton<SoundPlayer>.instance.playSE_2("bomb004", 0);
 
@@ -2051,7 +2084,10 @@ namespace nm_emitter
 							// TODO:連鎖 追加
 							sphere.chainExplosionLineCountDSP(chainExplosion_Touch_Position, chainExplosioncolor);
 							canvasPanel canvasp = GetComponentInChildren<canvasPanel>();
-							canvasp.chainInfoEffectDSP();
+							//  １落下サイクル時の連鎖情報表示及びお宝（ジュエリー）獲得チェック
+							//canvasp.chainInfoEffectDSP();
+
+
 							//canvasPanel.canvasPanel_instance.chainInfoEffectDSP();Anima2D
 							/*
 							switch (chainExplosionLineCount) {

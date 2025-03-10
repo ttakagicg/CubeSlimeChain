@@ -259,7 +259,22 @@ namespace  nm_counter {
                     canvasPanel.beforeTime = (int)timer + 1;
                     //canvasPanel canvasp = GetComponentInChildren<canvasPanel>();
                     //canvasp.setGravityWaitTimeDSP((int)timer);
-
+                    Debug.Log("落下11 !! " + emitter.start_OneFallChainCountCollection + " !!!");
+                    // スライム設置から落下開始までに連鎖ありかチェック
+                    if (emitter.start_OneFallChainCountCollection)
+                    {
+                        // スライム設置から落下開始までに行われた連鎖情報修正フラグOFF
+                        emitter.start_OneFallChainCountCollection = false;
+                        // １落下サイクル時の連鎖情報表示及び魔法石（ジュエリー）獲得チェック
+                        GameObject w_obj1 = GameObject.Find("Canvas");
+                        w_obj1.GetComponent<canvasPanel>().chainInfoEffectDSP();
+                        emitter.green_OneFallChainCount = 0;
+                        emitter.yellow_OneFallChainCount = 0;
+                        emitter.red_OneFallChainCount = 0;
+                        emitter.purple_OneFallChainCount = 0;
+                        emitter.blue_OneFallChainCount = 0;
+                        Debug.Log("chainInfoEffectDSP!!");
+                    }
                 }
                 else if (sphere.gravitySpheres_count == 0) {
 					// タイマーカウント０　プレー開始処理　落下モンスター設定
@@ -283,6 +298,18 @@ namespace  nm_counter {
                         canvasPanel.beforeTime = (int)timer + 1;
                         canvasPanel canvasp = GetComponentInChildren<canvasPanel>();
                         canvasp.setGravityWaitTimeDSP((int)timer);
+                        //Debug.Log("落下22!! " + emitter.start_OneFallChainCountCollection + " !!!");
+                        //// スライム設置から落下開始までに連鎖ありかチェック
+                        //if (emitter.start_OneFallChainCountCollection)
+                        //{
+                        //    // スライム設置から落下開始までに行われた連鎖情報修正フラグOFF
+                        //    emitter.start_OneFallChainCountCollection = false;
+                        //    // １落下サイクル時の連鎖情報表示及び魔法石（ジュエリー）獲得チェック
+                        //    GameObject w_obj1 = GameObject.Find("Canvas");
+                        //    w_obj1.GetComponent<canvasPanel>().chainInfoEffectDSP();
+                        //    Debug.Log("chainInfoEffectDSP!!");
+                        //}
+
                     }
 
                     //canvasPanel.startDwonGaugeBrink = true;
