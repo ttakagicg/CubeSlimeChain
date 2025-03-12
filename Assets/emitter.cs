@@ -651,6 +651,7 @@ namespace nm_emitter
 			}
 			else {
 				canvasPanel.s_monsterColorCountView.gameObject.SetActive(false);
+				canvasPanel.s_monsterSlimeColorCountView.gameObject.SetActive(false);
 				// TODO：テンポゲージトップバー表示OFF＆MAX連鎖カウント表示BG ON
 				canvasPanel.s_max_chain_count_BG.gameObject.SetActive(false);
 				canvasPanel.waitingTimerTop_BG_s.gameObject.SetActive(true);

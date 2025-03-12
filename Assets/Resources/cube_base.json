@@ -40,7 +40,7 @@
     "setting_SoundEffect":1,
     "setting_BG_Animation":1,
     "stage":[
-      {"status":2,"stage":1,"lastlevel":0,"monthlyServiceSaveLevel":1,"levellist":[
+      {"stage":1,"status":2,"lastlevel":0,"monthlyServiceSaveLevel":1,"levellist":[
         {
           "status":2,"stage_no":1,"stagelevel_no":1,"playtime":0,"lostcount":0,"itemcount":0,"maxchain":0},
         {

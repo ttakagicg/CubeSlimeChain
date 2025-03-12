@@ -552,12 +552,12 @@ namespace nm_canvasPanel
 
 		public Button b_Lostadd;
 		public Button b_Share;
-		public Button b_new_game;
+		public Button b_slimCard;
         public Button b_new_game2;
         public Button b_retry;
 		public Button b_item;
 		//public Button b_charge;
-		public static Button bs_new_game;
+		public static Button bs_slimCard;
         public static Button bs_new_game2;
         public static Button bs_retry;
 		public static Button bs_item;
@@ -1132,7 +1132,7 @@ namespace nm_canvasPanel
             // シェアボタン
             b_share.gameObject.SetActive(false);
             // テクスチャチェンジボタン
-            b_change.gameObject.SetActive(false);
+            b_change.gameObject.SetActive(true);
 
             // モンスターカラーカウント表示ビュー
             monsterCounter2DEffect_s = monsterCounter2DEffect;
@@ -1412,10 +1412,10 @@ namespace nm_canvasPanel
 
 
             // new game select button
-            bs_new_game = b_new_game;
-			Button obj_n = b_new_game.transform.GetComponent<Button>();
-			obj_n.onClick.AddListener(() => ButtonNewGameClick());
-			b_new_game.gameObject.SetActive(false);
+            bs_slimCard = b_slimCard;
+			Button obj_n = b_slimCard.transform.GetComponent<Button>();
+			obj_n.onClick.AddListener(() => ButtonSlimCardClick());
+            b_slimCard.gameObject.SetActive(false);
 
             // new game select 2 button
             bs_new_game2 = b_new_game2;
@@ -1524,8 +1524,9 @@ namespace nm_canvasPanel
             scal_sc.y = scal_sc.y * screen_width_per;
             slimcardView.transform.localScale = scal_sc;
             Vector3 pos_sc = slimcardView.transform.position;
-            pos_sc.x = scal_sc.x * screen_width_per;
-            pos_sc.y = (Screen.height - safeAreaHight) - (center_header.rectTransform.sizeDelta.y + monsterColorCountView.rectTransform.sizeDelta.y + waitingTimerGauge_BG.rectTransform.sizeDelta.y + topGameTimeChainView_BG.rectTransform.sizeDelta.y + slimcardView.rectTransform.sizeDelta.y + 40.0f) * scal2.y;
+            pos_sc.x = pos_sc.x * screen_width_per;
+            pos_sc.y = 5 * screen_width_per + safeAreaHightUnder + (b_Pause.gameObject.GetComponent<Image>().rectTransform.sizeDelta.y) * scal2.y;
+            //pos_sc.y = (Screen.height - safeAreaHight) - (center_header.rectTransform.sizeDelta.y + monsterColorCountView.rectTransform.sizeDelta.y + waitingTimerGauge_BG.rectTransform.sizeDelta.y + topGameTimeChainView_BG.rectTransform.sizeDelta.y + slimcardView.rectTransform.sizeDelta.y + 40.0f) * scal2.y;
             slimcardView.transform.position = pos_sc;
 
             s_slimcardView = slimcardView;
@@ -1619,7 +1620,7 @@ namespace nm_canvasPanel
 			b_Delay.transform.localScale = b_scal;
 			Vector3 b_pos = b_Delay.transform.position;
 			b_pos.x = b_pos.x * screen_width_per;
-			b_pos.y = b_pos.y * screen_height_per;
+            b_pos.y = 5 * screen_width_per + safeAreaHightUnder;
 			b_Delay.transform.position = b_pos;
 
 			Button obj = b_Delay.transform.GetComponent<Button>();
@@ -3134,7 +3135,7 @@ namespace nm_canvasPanel
 			switch(sw) {
 			// center view off
 			case 0:
-				bs_new_game.gameObject.SetActive(false);
+				bs_slimCard.gameObject.SetActive(false);
                 // TODO:1-1-7削除　メインメニュー処理修正
                 bs_new_game2.gameObject.SetActive(false);
                 //bs_retry.gameObject.SetActive(false);
@@ -3159,7 +3160,7 @@ namespace nm_canvasPanel
 */
                 s_gameStatus_text.text = "";
 
-				bs_new_game.gameObject.SetActive(true);
+                bs_slimCard.gameObject.SetActive(true);
                 // TODO:1-1-7削除　メインメニュー処理修正
                 bs_new_game2.gameObject.SetActive(true);
                 //bs_retry.gameObject.SetActive(true);
@@ -3314,77 +3315,77 @@ namespace nm_canvasPanel
             stage2_1_bt.transform.tag = "4";
             stage2_1_bt.GetComponent<Button>().onClick.RemoveAllListeners();
             stage2_1_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell2(2, 1));
-            setGameBadge(stage2_1_bt, 1, 1);
+            setGameBadge(stage2_1_bt, 2, 1);
 
             stage2_2_bt.transform.tag = "5";
             stage2_2_bt.GetComponent<Button>().onClick.RemoveAllListeners();
             stage2_2_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell2(2, 2));
-            setGameBadge(stage2_2_bt, 1, 2);
+            setGameBadge(stage2_2_bt, 2, 2);
 
             stage2_3_bt.transform.tag = "6";
             stage2_3_bt.GetComponent<Button>().onClick.RemoveAllListeners();
             stage2_3_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell2(2, 3));
-            setGameBadge(stage2_3_bt, 1, 3);
+            setGameBadge(stage2_3_bt, 2, 3);
 
             stage3_1_bt.transform.tag = "7";
             stage3_1_bt.GetComponent<Button>().onClick.RemoveAllListeners();
             stage3_1_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell2(3, 1));
-            setGameBadge(stage3_1_bt, 1, 1);
+            setGameBadge(stage3_1_bt, 3, 1);
 
             stage3_2_bt.transform.tag = "8";
             stage3_2_bt.GetComponent<Button>().onClick.RemoveAllListeners();
             stage3_2_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell2(3, 2));
-            setGameBadge(stage3_2_bt, 1, 2);
+            setGameBadge(stage3_2_bt, 3, 2);
 
             stage3_3_bt.transform.tag = "9";
             stage3_3_bt.GetComponent<Button>().onClick.RemoveAllListeners();
             stage3_3_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell2(3, 3));
-            setGameBadge(stage3_3_bt, 1, 3);
+            setGameBadge(stage3_3_bt, 3, 3);
 
             stage4_1_bt.transform.tag = "10";
             stage4_1_bt.GetComponent<Button>().onClick.RemoveAllListeners();
             stage4_1_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell2(4, 1));
-            setGameBadge(stage4_1_bt, 1, 1);
+            setGameBadge(stage4_1_bt, 4, 1);
 
             stage4_2_bt.transform.tag = "11";
             stage4_2_bt.GetComponent<Button>().onClick.RemoveAllListeners();
             stage4_2_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell2(4, 2));
-            setGameBadge(stage4_2_bt, 1, 2);
+            setGameBadge(stage4_2_bt, 4, 2);
 
             stage4_3_bt.transform.tag = "12";
             stage4_3_bt.GetComponent<Button>().onClick.RemoveAllListeners();
             stage4_3_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell2(4, 3));
-            setGameBadge(stage4_3_bt, 1, 3);
+            setGameBadge(stage4_3_bt, 4, 3);
 
             stage5_1_bt.transform.tag = "13";
             stage5_1_bt.GetComponent<Button>().onClick.RemoveAllListeners();
             stage5_1_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell2(5, 1));
-            setGameBadge(stage5_1_bt, 1, 1);
+            setGameBadge(stage5_1_bt, 5, 1);
 
             stage5_2_bt.transform.tag = "14";
             stage5_2_bt.GetComponent<Button>().onClick.RemoveAllListeners();
             stage5_2_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell2(5, 2));
-            setGameBadge(stage5_2_bt, 1, 2);
+            setGameBadge(stage5_2_bt, 5, 2);
 
             stage5_3_bt.transform.tag = "15";
             stage5_3_bt.GetComponent<Button>().onClick.RemoveAllListeners();
             stage5_3_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell2(5, 3));
-            setGameBadge(stage5_3_bt, 1, 3);
+            setGameBadge(stage5_3_bt, 5, 3);
 
             stage6_1_bt.transform.tag = "16";
             stage6_1_bt.GetComponent<Button>().onClick.RemoveAllListeners();
             stage6_1_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell2(6, 1));
-            setGameBadge(stage6_1_bt, 1, 1);
+            setGameBadge(stage6_1_bt, 6, 1);
 
             stage6_2_bt.transform.tag = "17";
             stage6_2_bt.GetComponent<Button>().onClick.RemoveAllListeners();
             stage6_2_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell2(6, 2));
-            setGameBadge(stage6_2_bt, 1, 2);
+            setGameBadge(stage6_2_bt, 6, 2);
 
             stage6_3_bt.transform.tag = "18";
             stage6_3_bt.GetComponent<Button>().onClick.RemoveAllListeners();
             stage6_3_bt.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell2(6, 3));
-            setGameBadge(stage6_3_bt, 1, 3);
+            setGameBadge(stage6_3_bt, 6, 3);
 
         }
             // TODO:new ゲームステージ選択メニュー画面修正
@@ -3551,7 +3552,7 @@ namespace nm_canvasPanel
                     int sts = (int)cubersFile.stage[m].status;
                     laststage = (int)cubersFile.stage[m].last_level;
                     IDictionary dt = (IDictionary)cubersFile.stage[i - 1].leveldata[level - 1];
-                    var levelstatus = (long)dt["status"];
+                    long levelstatus = (long)dt["status"];
                     switch (i)
                     {
                         // stage 1
@@ -6451,7 +6452,7 @@ namespace nm_canvasPanel
                         blueMonsterSlimeCountMaskImage_s.gameObject.SetActive(false);
                         whiteMonsterSlimeCountMaskImage_s.gameObject.SetActive(false);
                         // 連鎖無しステージ選択時、ここで連鎖パネルビューを強制的にオンにする
-                        s_monsterSlimeColorCountView.gameObject.SetActive(true);
+                        s_monsterSlimeColorCountView.gameObject.SetActive(false);
                     }
                     else
                     {
@@ -6801,7 +6802,7 @@ namespace nm_canvasPanel
             // レベル確認画面
             startSaveLevelConfirm_View.gameObject.SetActive(false);
             // ステージ選択メニュー表示
-            ButtonNewGameClick();
+            ButtonSlimCardClick();
 
         }
         // ステージ選択ボタン押下時の確認画面にて、スタートセーブレベル選択
@@ -7317,7 +7318,7 @@ namespace nm_canvasPanel
             // メインメニュー表示
             sphere.gameStatus_text = "";
 
-            ButtonNewGameClick();
+            ButtonSlimCardClick();
 
             // 攻略レベルセーブ確認画面オフ
             saveConfirm_View.gameObject.SetActive(false);
@@ -7329,7 +7330,7 @@ namespace nm_canvasPanel
             // メインメニュー表示
             sphere.gameStatus_text = "";
 
-            ButtonNewGameClick();
+            ButtonSlimCardClick();
 
         }
         public void ButtonSaveLevelCloseClick()
@@ -7398,13 +7399,10 @@ namespace nm_canvasPanel
             setCenterView(1);
 
 		}
-
-        // ゲームスタートボタン押下時処理
-        // これまではUpdate()で時間経過でスライド処理を行っていたが、DOTweenを使用して別スレッドでスライド処理を実行させる
-        // よって、
-        public void ButtonNewGameClick() {
-
-			if (gf_Move) return;
+        // Slim Card 管理画面
+        public void ButtonSlimCardClick() {
+            return;
+			/*if (gf_Move) return;
 			else gf_Move = true;
 
             s_center_View.gameObject.SetActive(false);
@@ -7433,7 +7431,7 @@ namespace nm_canvasPanel
                 //footer_BG.gameObject.SetActive(true);
                 right_header.gameObject.SetActive(true);
 				b_Pause.gameObject.SetActive(true);
-            }
+            }*/
         }
         // new stage select view
         public void ButtonNewGame2Click()
@@ -8335,19 +8333,71 @@ namespace nm_canvasPanel
             }
         }
 
-        // テクスチャチェンジボタンクリック処理
+        // テクスチャチェンジボタンクリック処理 ->  TODO:テスト用としてCubeFilesの初期化を行う
         public void ButtonChangeClick()
         {
-
-            if (emitter.sw_Gravity) emitter.sw_Gravity = false;
+            // CubeFiles Init.
+            cubersFile.cubersFile_instance.init_gameEncryptionData();
+            cubersFile.cubersFile_instance.load_gameEncryptionData();
+            /*if (emitter.sw_Gravity) emitter.sw_Gravity = false;
             else emitter.sw_Gravity = true;
             Debug.Log("stop");
-
+            */
         }
-
+        // TODO:ステージ及びレベルリセット　ステージ１　レベル１へCubeFilesのデータをリセット
+        static bool sw_cubefiles_stageStatus = false;
         public void ButtonDelayClick() {
 
-			if (emitter.sw_delay) return;
+            if (sw_cubefiles_stageStatus) {
+                sw_cubefiles_stageStatus = false;
+            } else
+            {
+                sw_cubefiles_stageStatus = true;
+            }
+
+            for (int m = 0; m < cubersFile.game_stage_max; m++)
+            {
+                if (m == 0)
+                {
+                    cubersFile.stage[m].status = 2;
+                } else
+                {
+                    if (sw_cubefiles_stageStatus)
+                    {
+                        cubersFile.stage[m].status = 0;
+                    } else
+                    {
+                        cubersFile.stage[m].status = 2;
+                    }
+                }
+                IList levelData = cubersFile.stage[m].leveldata;
+                for (int i = 0; i < cubersFile.game_stagelevel_max; i++)
+                {
+                    IDictionary dt = (IDictionary)levelData[i];
+                    //IDictionary dt = (IDictionary)cubersFile.stage[m].leveldata[i];
+                    if (m == 0 && i == 0)
+                    {
+                        dt["status"] = 2;
+                    } else
+                    {
+                        if (sw_cubefiles_stageStatus)
+                        {
+                            dt["status"] = 0;
+                        }
+                        else
+                        {
+                            dt["status"] = 2;
+                        }
+                    }
+                    levelData[i] = dt;
+                    //cubersFile.stage[m].leveldata[i] = dt;
+                }
+                cubersFile.stage[m].leveldata = levelData;
+            }
+            cubersFile.cubersFile_instance.save_gameEncryptionData();
+            cubersFile.cubersFile_instance.load_gameEncryptionData();
+
+            /*if (emitter.sw_delay) return;
 			if (cubersFile.delay_count <= 0) return;
 			if (!emitter.sw_Gravity) return;
 
@@ -8359,10 +8409,11 @@ namespace nm_canvasPanel
 			GameObject obj = this.transform.root.gameObject;
 			obj.GetComponent<emitter>().circle_Delay();
 			emitter.BGMstate = emitter.BGM_State.pit;
-		}
+            */
+        }
 
-		// lost count add
-		public void ButtonLostaddClick() {
+        // lost count add
+        public void ButtonLostaddClick() {
 
 			if (cubersFile.lostadd_count <= 0) return;
 
