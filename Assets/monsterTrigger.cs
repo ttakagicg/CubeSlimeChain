@@ -41,8 +41,18 @@ namespace  nm_monsterTrigger {
 
 		void OnTriggerEnter(Collider col){
 
-			if(col.gameObject.transform.root.tag == "cube_empty") {
-				
+            bool rotate_on = false;
+            if (emitter.turn_move)
+            {
+                GameObject obj = GameObject.Find("emitter").gameObject;
+                if (obj.GetComponent<emitter>().cube_rotate_check(col.gameObject))
+                {
+                    rotate_on = true;
+                }
+            }
+
+            if (col.gameObject.transform.root.tag == "cube_empty" && !rotate_on) {
+
 				GameObject child1 = this.gameObject;
                 if (!monster.monster_instance.getMonster_IOstatus(child1.tag))
                 {
@@ -195,7 +205,7 @@ namespace  nm_monsterTrigger {
                 }
 
 			}
-			else if(col.gameObject.transform.root.tag == "cube_close") {
+			else if(col.gameObject.transform.root.tag == "cube_close" || rotate_on) {
 
                 GameObject child1 = this.gameObject;
 

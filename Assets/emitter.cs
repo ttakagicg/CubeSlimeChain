@@ -2446,9 +2446,9 @@ namespace nm_emitter
 					}
 				}
 			}
-            int befor_turn_angle = turn_angle;
+            //int befor_turn_angle = turn_angle;
             turn_angle += wangle;
-            if (befor_turn_angle != turn_angle)
+            //if (befor_turn_angle != turn_angle)
                 //Debug.Log("turn_angle = " + turn_angle);
             if (turn_angle >= 90 || turn_angle <= -90) {
 				
@@ -2456,6 +2456,59 @@ namespace nm_emitter
 			}
 
 		}
+
+		// 衝突キューブ現在回転中かチェック
+		public bool cube_rotate_check(GameObject cube)
+        {
+			bool rotate = false;
+			int half_cubeCount = cubeCount / 2;
+
+			Double wy = Math.Round(cube.transform.position.y * 10, 1, MidpointRounding.AwayFromZero);
+			string str_y = wy.ToString();
+			float p_y = float.Parse(str_y) / 10;
+
+			if (p_y > half_cubeCount * cube_scale + cube_scale) return rotate;
+
+			Double wx = Math.Round(cube.transform.position.x * 10, 1, MidpointRounding.AwayFromZero);
+			string str_x = wx.ToString();
+			float p_x = float.Parse(str_x) / 10;
+			Double wz = Math.Round(cube.transform.position.z * 10, 1, MidpointRounding.AwayFromZero);
+			string str_z = wz.ToString();
+			float p_z = float.Parse(str_z) / 10;
+
+			// left 90 turn
+			if (left_rotate || (p_y == left_turn))
+			{
+				rotate = true;
+			}
+			// right 90 turn
+			if (right_rotate || (p_y == right_turn))
+			{
+				rotate = true;
+			}
+			// right up 90 rotate
+			if (right_up_rotate || (p_x == right_up_turn))
+			{
+				rotate = true;
+			}
+			// right down 90 rotate
+			if (right_down_rotate || (p_x == right_down_turn))
+			{
+				rotate = true;
+			}
+			// left up 90 rotate
+			if (left_up_rotate || (p_z == left_up_turn))
+			{
+				rotate = true;
+			}
+			// left down 90 rotate
+			if (left_down_rotate || (p_z == left_down_turn))
+			{
+				rotate = true;
+			}
+
+			return rotate;
+        }
 
 		private void obj_rotate(GameObject obj,int sw) {
 
