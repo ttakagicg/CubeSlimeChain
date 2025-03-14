@@ -2451,64 +2451,10 @@ namespace nm_emitter
             //if (befor_turn_angle != turn_angle)
                 //Debug.Log("turn_angle = " + turn_angle);
             if (turn_angle >= 90 || turn_angle <= -90) {
-				
+				cube_rotate_Endcheck();
 				reset_cubeAngle();
 			}
-
 		}
-
-		// 衝突キューブ現在回転中かチェック
-		public bool cube_rotate_check(GameObject cube)
-        {
-			bool rotate = false;
-			int half_cubeCount = cubeCount / 2;
-
-			Double wy = Math.Round(cube.transform.position.y * 10, 1, MidpointRounding.AwayFromZero);
-			string str_y = wy.ToString();
-			float p_y = float.Parse(str_y) / 10;
-
-			if (p_y > half_cubeCount * cube_scale + cube_scale) return rotate;
-
-			Double wx = Math.Round(cube.transform.position.x * 10, 1, MidpointRounding.AwayFromZero);
-			string str_x = wx.ToString();
-			float p_x = float.Parse(str_x) / 10;
-			Double wz = Math.Round(cube.transform.position.z * 10, 1, MidpointRounding.AwayFromZero);
-			string str_z = wz.ToString();
-			float p_z = float.Parse(str_z) / 10;
-
-			// left 90 turn
-			if (left_rotate || (p_y == left_turn))
-			{
-				rotate = true;
-			}
-			// right 90 turn
-			if (right_rotate || (p_y == right_turn))
-			{
-				rotate = true;
-			}
-			// right up 90 rotate
-			if (right_up_rotate || (p_x == right_up_turn))
-			{
-				rotate = true;
-			}
-			// right down 90 rotate
-			if (right_down_rotate || (p_x == right_down_turn))
-			{
-				rotate = true;
-			}
-			// left up 90 rotate
-			if (left_up_rotate || (p_z == left_up_turn))
-			{
-				rotate = true;
-			}
-			// left down 90 rotate
-			if (left_down_rotate || (p_z == left_down_turn))
-			{
-				rotate = true;
-			}
-
-			return rotate;
-        }
 
 		private void obj_rotate(GameObject obj,int sw) {
 
@@ -2566,6 +2512,331 @@ namespace nm_emitter
             }
 
         }
+		// キューブ回転終了時、90°の倍数で正確に停止しているかチェック
+		// TODO:回転不足でCubeがズレる現象が発生している為の処理
+		public void cube_rotate_Endcheck()
+		{
+			for (int j = 0; j < cubeCount; j++)
+			{
+				for (int k = 0; k < cubeCount; k++)
+				{
+					for (int i = 0; i < cubeCount; i++)
+					{
+						// cube
+						if ((j > 0 && j < cubeCount - 1) && (k > 0 && k < cubeCount - 1) && (i > 0 && i < cubeCount - 1))
+						{
+						}
+						else if (cubes[j, k, i] != null)
+						{
+							set_cube_rotate_End(cubes[j, k, i]);
+						}
+						// sphere
+						if (sphere.spheres[j, k, i] != null)
+						{
+							set_cube_rotate_End(sphere.spheres[j, k, i]);
+						}
+					}
+				}
+			}
+		}
+		// キューブ回転終了時、90°の倍数で正確に停止していない場合の補正処理
+		public void set_cube_rotate_End(GameObject obj) {
+
+			int half_cubeCount = cubeCount / 2;
+
+			Double wy = Math.Round(obj.transform.position.y * 10, 1, MidpointRounding.AwayFromZero);
+			string str_y = wy.ToString();
+			float p_y = float.Parse(str_y) / 10;
+
+			if (p_y > half_cubeCount * cube_scale + cube_scale) return;
+
+			Double wx = Math.Round(obj.transform.position.x * 10, 1, MidpointRounding.AwayFromZero);
+			string str_x = wx.ToString();
+			float p_x = float.Parse(str_x) / 10;
+			Double wz = Math.Round(obj.transform.position.z * 10, 1, MidpointRounding.AwayFromZero);
+			string str_z = wz.ToString();
+			float p_z = float.Parse(str_z) / 10;
+
+
+			float rot_x = obj.transform.localEulerAngles.x;
+			float rot_y = obj.transform.localEulerAngles.y;
+			float rot_z = obj.transform.localEulerAngles.z;
+			// left 90 turn
+			if (left_rotate || (p_y == left_turn))
+			{
+				// wangle = 5 : -5 < rot_y < 5
+				if (rot_y > -wangle && rot_y < wangle || rot_y > 360 - wangle)
+                {
+					Vector3 qr = obj.transform.localEulerAngles;
+					qr.y = 0;
+					obj.transform.localEulerAngles = qr;
+
+				}
+				// wangle = 5 : 85 < rot_y < 95
+				if (rot_y > 90 - wangle && rot_y < 90 + wangle)
+				{
+					Vector3 qr = obj.transform.localEulerAngles;
+					qr.y = 90;
+					obj.transform.localEulerAngles = qr;
+
+				}
+				// wangle = 5 : 175 < rot_y < 185
+				if (rot_y > 180 - wangle && rot_y < 180 + wangle)
+				{
+					Vector3 qr = obj.transform.localEulerAngles;
+					qr.y = 180;
+					obj.transform.localEulerAngles = qr;
+
+				}
+				// wangle = 5 : 165 < rot_y < 275
+				if (rot_y > 270 - wangle && rot_y < 270 + wangle)
+				{
+					Vector3 qr = obj.transform.localEulerAngles;
+					qr.y = 270;
+					obj.transform.localEulerAngles = qr;
+
+				}
+				//Debug.Log("1 left_rotate = x:" + rot_x + " y:" + rot_y + " z:" + rot_z);
+			}
+			// right 90 turn
+			if (right_rotate || (p_y == right_turn))
+			{
+				// wangle = 5 : -5 < rot_y < 5
+				if (rot_y > -wangle && rot_y < wangle || rot_y > -360 + wangle)
+				{
+					Vector3 qr = obj.transform.localEulerAngles;
+					qr.y = 0;
+					obj.transform.localEulerAngles = qr;
+
+				}
+				// wangle = 5 : -85 < rot_y < -95
+				if (rot_y < -90 + wangle && rot_y > -90 - wangle)
+				{
+					Vector3 qr = obj.transform.localEulerAngles;
+					qr.y = -90;
+					obj.transform.localEulerAngles = qr;
+
+				}
+				// wangle = 5 : -175 < rot_y < -185
+				if (rot_y < -180 + wangle && rot_y > -180 - wangle)
+				{
+					Vector3 qr = obj.transform.localEulerAngles;
+					qr.y = -180;
+					obj.transform.localEulerAngles = qr;
+
+				}
+				// wangle = 5 : -265 < rot_y < -275
+				if (rot_y < -270 + wangle && rot_y > -270 - wangle)
+				{
+					Vector3 qr = obj.transform.localEulerAngles;
+					qr.y = -270;
+					obj.transform.localEulerAngles = qr;
+
+				}
+				//Debug.Log("2 right_rotate = x:" + rot_x + " y:" + rot_y + " z:" + rot_z);
+			}
+			// right up 90 rotate
+			if (right_up_rotate || (p_x == right_up_turn))
+			{
+				// wangle = 5 : -5 < rot_x < 5
+				if (rot_x > -wangle && rot_x < wangle || rot_x > 360 - wangle)
+				{
+					Vector3 qr = obj.transform.localEulerAngles;
+					qr.x = 0;
+					obj.transform.localEulerAngles = qr;
+
+				}
+				// wangle = 5 : 85 < rot_x < 95
+				if (rot_x > 90 - wangle && rot_x < 90 + wangle)
+				{
+					Vector3 qr = obj.transform.localEulerAngles;
+					qr.x = 90;
+					obj.transform.localEulerAngles = qr;
+
+				}
+				// wangle = 5 : 175 < rot_x < 185
+				if (rot_x > 180 - wangle && rot_x < 180 + wangle)
+				{
+					Vector3 qr = obj.transform.localEulerAngles;
+					qr.x = 180;
+					obj.transform.localEulerAngles = qr;
+
+				}
+				// wangle = 5 : 165 < rot_x < 275
+				if (rot_x > 270 - wangle && rot_x < 270 + wangle)
+				{
+					Vector3 qr = obj.transform.localEulerAngles;
+					qr.x = 270;
+					obj.transform.localEulerAngles = qr;
+
+				}
+				//Debug.Log("3 right_up_rotate = x:" + rot_x + " y:" + rot_y + " z:" + rot_z);
+			}
+			// right down 90 rotate
+			if (right_down_rotate || (p_x == right_down_turn))
+			{
+				// wangle = 5 : -5 < rot_x < 5
+				if (rot_x > -wangle && rot_x < wangle || rot_x > -360 + wangle)
+				{
+					Vector3 qr = obj.transform.localEulerAngles;
+					qr.x = 0;
+					obj.transform.localEulerAngles = qr;
+
+				}
+				// wangle = 5 : -85 < rot_x < -95
+				if (rot_x < -90 + wangle && rot_x > -90 - wangle)
+				{
+					Vector3 qr = obj.transform.localEulerAngles;
+					qr.x = -90;
+					obj.transform.localEulerAngles = qr;
+
+				}
+				// wangle = 5 : -175 < rot_x < -185
+				if (rot_x < -180 + wangle && rot_x > -180 - wangle)
+				{
+					Vector3 qr = obj.transform.localEulerAngles;
+					qr.x = -180;
+					obj.transform.localEulerAngles = qr;
+
+				}
+				// wangle = 5 : -265 < rot_x < -275
+				if (rot_x < -270 + wangle && rot_x > -270 - wangle)
+				{
+					Vector3 qr = obj.transform.localEulerAngles;
+					qr.x = -270;
+					obj.transform.localEulerAngles = qr;
+
+				}
+				//Debug.Log("4 right_down_rotate = x:" + rot_x + " y:" + rot_y + " z:" + rot_z);
+			}
+			// left up 90 rotate
+			if (left_up_rotate || (p_z == left_up_turn))
+			{
+				// wangle = 5 : -5 < rot_z < 5
+				if (rot_z > -wangle && rot_z < wangle || rot_z > 360 - wangle)
+				{
+					Vector3 qr = obj.transform.localEulerAngles;
+					qr.z = 0;
+					obj.transform.localEulerAngles = qr;
+
+				}
+				// wangle = 5 : 85 < rot_z < 95
+				if (rot_z > 90 - wangle && rot_z < 90 + wangle)
+				{
+					Vector3 qr = obj.transform.localEulerAngles;
+					qr.z = 90;
+					obj.transform.localEulerAngles = qr;
+
+				}
+				// wangle = 5 : 175 < rot_z < 185
+				if (rot_z > 180 - wangle && rot_z < 180 + wangle)
+				{
+					Vector3 qr = obj.transform.localEulerAngles;
+					qr.z = 180;
+					obj.transform.localEulerAngles = qr;
+
+				}
+				// wangle = 5 : 165 < rot_z < 275
+				if (rot_z > 270 - wangle && rot_z < 270 + wangle)
+				{
+					Vector3 qr = obj.transform.localEulerAngles;
+					qr.z= 270;
+					obj.transform.localEulerAngles = qr;
+
+				}
+				//Debug.Log("5 left_up_rotate = x:" + rot_x + " y:" + rot_y + " z:" + rot_z);
+			}
+			// left down 90 rotate
+			if (left_down_rotate || (p_z == left_down_turn))
+			{
+				// wangle = 5 : -5 < rot_z < 5
+				if (rot_z > -wangle && rot_z < wangle || rot_z > -360 + wangle)
+				{
+					Vector3 qr = obj.transform.localEulerAngles;
+					qr.z = 0;
+					obj.transform.localEulerAngles = qr;
+
+				}
+				// wangle = 5 : -85 < rot_x < -95
+				if (rot_z < -90 + wangle && rot_z > -90 - wangle)
+				{
+					Vector3 qr = obj.transform.localEulerAngles;
+					qr.z = -90;
+					obj.transform.localEulerAngles = qr;
+
+				}
+				// wangle = 5 : -175 < rot_x < -185
+				if (rot_z < -180 + wangle && rot_z > -180 - wangle)
+				{
+					Vector3 qr = obj.transform.localEulerAngles;
+					qr.z = -180;
+					obj.transform.localEulerAngles = qr;
+
+				}
+				// wangle = 5 : -265 < rot_x < -275
+				if (rot_z < -270 + wangle && rot_z > -270 - wangle)
+				{
+					Vector3 qr = obj.transform.localEulerAngles;
+					qr.z = -270;
+					obj.transform.localEulerAngles = qr;
+
+				}
+				//Debug.Log("6 left_down_rotate = x:" + rot_x + " y:" + rot_y + " z:" + rot_z);
+			}
+		}
+
+		// 衝突キューブ現在回転中かチェック
+		public bool cube_rotate_check(GameObject cube)
+		{
+			bool rotate = false;
+			int half_cubeCount = cubeCount / 2;
+
+			Double wy = Math.Round(cube.transform.position.y * 10, 1, MidpointRounding.AwayFromZero);
+			string str_y = wy.ToString();
+			float p_y = float.Parse(str_y) / 10;
+
+			if (p_y > half_cubeCount * cube_scale + cube_scale) return rotate;
+
+			Double wx = Math.Round(cube.transform.position.x * 10, 1, MidpointRounding.AwayFromZero);
+			string str_x = wx.ToString();
+			float p_x = float.Parse(str_x) / 10;
+			Double wz = Math.Round(cube.transform.position.z * 10, 1, MidpointRounding.AwayFromZero);
+			string str_z = wz.ToString();
+			float p_z = float.Parse(str_z) / 10;
+
+			// left 90 turn
+			if (left_rotate || (p_y == left_turn))
+			{
+				rotate = true;
+			}
+			// right 90 turn
+			if (right_rotate || (p_y == right_turn))
+			{
+				rotate = true;
+			}
+			// right up 90 rotate
+			if (right_up_rotate || (p_x == right_up_turn))
+			{
+				rotate = true;
+			}
+			// right down 90 rotate
+			if (right_down_rotate || (p_x == right_down_turn))
+			{
+				rotate = true;
+			}
+			// left up 90 rotate
+			if (left_up_rotate || (p_z == left_up_turn))
+			{
+				rotate = true;
+			}
+			// left down 90 rotate
+			if (left_down_rotate || (p_z == left_down_turn))
+			{
+				rotate = true;
+			}
+
+			return rotate;
+		}
 
 		public Texture button_base_2;
 		void OnGUI() {
