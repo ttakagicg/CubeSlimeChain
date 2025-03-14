@@ -181,14 +181,6 @@ namespace  nm_monsterTrigger {
                                         // Game Data Save
                                         cubersFile.cubersFile_instance.save_gameEncryptionData();
 
-                                    //}
-                                    //else
-                                    //{
-                                    //    // 条件連鎖未満
-                                    //    // TODO:連鎖　仕様変更による見直し箇所
-                                    //    gameOverProc();
-                                    //    return;
-                                    //}
                                 }
                                 else
                                 {

@@ -2120,24 +2120,30 @@ namespace nm_emitter
 			}
 
 			// BGMコントロール
-			if ( player != null )
-			switch (BGMstate) {
-				case BGM_State.play:
-					player.playBGM();
-					player1.pauseBGM();
-				break;
+			if (player != null)
+			{
+				switch (BGMstate)
+				{
+					case BGM_State.play:
+						player.playBGM();
+						player1.pauseBGM();
+						BGMstate = BGM_State.start;
+						break;
 
-				case BGM_State.Stop:
-					player.pauseBGM();
-				break;
+					case BGM_State.Stop:
+						player.pauseBGM();
+						BGMstate = BGM_State.start;
+						break;
 
-				case BGM_State.pit:
-					player.pauseBGM();
-					player1.playBGM((int)0);
-					break;
-				default:
-					player.update();
-				break;
+					case BGM_State.pit:
+						player.pauseBGM();
+						player1.playBGM((int)0);
+						BGMstate = BGM_State.start;
+						break;
+					default:
+						player.update();
+						break;
+				}
 			}
 
 			// TODO:1-1-11 追加 新規設定画面処理の作成

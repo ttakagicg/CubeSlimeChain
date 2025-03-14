@@ -6962,7 +6962,7 @@ namespace nm_canvasPanel
             setChainBombPanelImage((int)cubersFile.now_play_stage);
 
             setStageSelectLevel(level);     // セーブサービス利用無し　レベル１データを設定
-            // TODO:追加　1-1-1 2:レベル選択で行われていたデータ設定処理をステージ選択で行なうように変更  ↑
+                                            // TODO:追加　1-1-1 2:レベル選択で行われていたデータ設定処理をステージ選択で行なうように変更  ↑
 
             gsf_Move = true;
             gsf_Up = false;
@@ -7003,7 +7003,6 @@ namespace nm_canvasPanel
             b_Pause.gameObject.SetActive(true);
 
             //emitter.BGMstate = emitter.BGM_State.start;
-
             //emitter.playState = emitter.gamePlayState.Play;
 
             // ステージバッジ表示
@@ -7488,6 +7487,7 @@ namespace nm_canvasPanel
             cubersFile.cubersFile_instance.load_gameEncryptionData();
 
             emitter.BGMstate = emitter.BGM_State.start;
+            emitter.BGMstate = emitter.BGM_State.play;
 
             s_center_View.gameObject.SetActive(false);
 
@@ -7541,6 +7541,7 @@ namespace nm_canvasPanel
             cubersFile.cubersFile_instance.load_gameEncryptionData();
 
             emitter.BGMstate = emitter.BGM_State.start;
+            emitter.BGMstate = emitter.BGM_State.play;
 
             s_center_View.gameObject.SetActive(false);
 			//s_mainMenu_field.gameObject.SetActive(false);
@@ -8269,7 +8270,8 @@ namespace nm_canvasPanel
             cubersFile.pauseitem_count--;
             cubersFile.cubersFile_instance.save_gameEncryptionData();
             emitter.playState = emitter.gamePlayState.Pause;
-			timeChange = true;
+            emitter.BGMstate = emitter.BGM_State.Stop;
+            timeChange = true;
 			emitter.sw_Gravity = false;
 			//emitter.BGMstate = emitter.BGM_State.Stop;
 			emitter.sw_pause = true;
