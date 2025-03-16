@@ -6680,6 +6680,8 @@ namespace nm_canvasPanel
             cubersFile.jewelry_Count += (long)emitter.jewelry_Count_total;
             cubersFile.cubersFile_instance.save_gameEncryptionData();
 
+            getItem_Count_text.text = emitter.jewelry_Count_total.ToString();
+
             // ジュエリーカウントアップエフェクト表示
             var seq = DOTween.Sequence();
             seq.Append(jewelryCountIcon.transform.DOScale(new Vector3(1.5f, 1.5f), 0.5f));
