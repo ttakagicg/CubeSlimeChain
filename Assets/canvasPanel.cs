@@ -38,6 +38,8 @@ namespace nm_canvasPanel
         public emitter Emitter;
         public sphere Sphere;
 
+        public Image screen_Mask;
+        private float do_duration = 0.5f;
         public static bool isFloorTouch = false;
 
 		private static float screen_width_per;
@@ -908,6 +910,13 @@ namespace nm_canvasPanel
             // 落下ボタンオフ
             //sphereDownGaugeOff();
 
+            // View切り替えブラックマスク
+            Vector3 scal_sm = screen_Mask.transform.localScale;
+            scal_sm.x = scal_sm.x * screen_width_per;
+            scal_sm.y = scal_sm.y * screen_width_per;
+            screen_Mask.transform.localScale = scal_sm;
+            screen_Mask.gameObject.SetActive(false);
+
             // セーフエリア外ヘッダー
             Vector3 scal_shb = safeareaout_header_BG.transform.localScale;
             scal_shb.x = scal_shb.x * screen_width_per;
@@ -1357,9 +1366,9 @@ namespace nm_canvasPanel
             scal_unvView.x = scal_unvView.x * screen_width_per;
             scal_unvView.y = scal_unvView.y * screen_width_per;
             userName_view.transform.localScale = scal_unvView;
-            Vector3 pos_unvView = userName_view.transform.position;
-            pos_unvView.y = -(Screen.height - safeAreaHight);
-            userName_view.transform.position = pos_unvView;
+            //Vector3 pos_unvView = userName_view.transform.position;
+            //pos_unvView.y = -(Screen.height - safeAreaHight);
+            //userName_view.transform.position = pos_unvView;
             userName_view.gameObject.SetActive(false);
             userNameViewClose_BT.gameObject.SetActive(false);
             userName_BG.gameObject.SetActive(false);
@@ -1599,9 +1608,9 @@ namespace nm_canvasPanel
             gsselect_scal.x = gsselect_scal.x * screen_width_per;
             gsselect_scal.y = gsselect_scal.y * screen_width_per;
             game_stage_select_view.transform.localScale = gselect_scal;
-            Vector3 gsf_pos = game_stage_select_view.transform.position;
-            gsf_pos.y = -(Screen.height - safeAreaHight);
-            game_stage_select_view.transform.position = gsf_pos;
+            //Vector3 gsf_pos = game_stage_select_view.transform.position;
+            //gsf_pos.y = -(Screen.height - safeAreaHight);
+            //game_stage_select_view.transform.position = gsf_pos;
 
             // item Bonus
             Vector3 bn_scal = item_bonus.transform.localScale;
@@ -1712,9 +1721,9 @@ namespace nm_canvasPanel
 			pf_scal_m.x = pf_scal_m.x * screen_width_per;
 			pf_scal_m.y = pf_scal_m.y * screen_height_per;
             item_View.transform.localScale = pf_scal_m;
-			Vector3 pf_pos = item_View.transform.position;
-			pf_pos.y = -(Screen.height - safeAreaHight);
-            item_View.transform.position = pf_pos;
+			//Vector3 pf_pos = item_View.transform.position;
+			//pf_pos.y = -(Screen.height - safeAreaHight);
+   //         item_View.transform.position = pf_pos;
             item_View.gameObject.SetActive(false);
 
             // setting view
@@ -1722,9 +1731,9 @@ namespace nm_canvasPanel
             ps_scal_m.x = ps_scal_m.x * screen_width_per;
             ps_scal_m.y = ps_scal_m.y * screen_height_per;
             setting_View.transform.localScale = ps_scal_m;
-            Vector3 ps_pos = setting_View.transform.position;
-            ps_pos.y = -(Screen.height - safeAreaHight);
-            setting_View.transform.position = ps_pos;
+            //Vector3 ps_pos = setting_View.transform.position;
+            //ps_pos.y = -(Screen.height - safeAreaHight);
+            //setting_View.transform.position = ps_pos;
             setting_View.gameObject.SetActive(false);
 
             // TODO:1-1-１０修正 新規アイテム変換購入画面処理の作成
@@ -2444,6 +2453,17 @@ namespace nm_canvasPanel
         // TODO:連鎖　MAX chain count情報及び取得予定アイテム数表示の拡大表示処理
         public void chainInfoEffectDSP()
         {
+
+            // MAX連鎖総数check&DSP
+            if (s_max_chain_count_text.text == "")
+            {
+                s_max_chain_count_text.text = "0";
+            }
+            if (int.Parse(s_max_chain_count_text.text) < emitter.chainExplosionLinePlayMAX)
+            {
+                s_max_chain_count_text.text = emitter.chainExplosionLinePlayMAX.ToString();
+            }
+
             // 連鎖総数チェック
             String sprite_s = "";
             int slim_count = 0;
@@ -2616,16 +2636,6 @@ namespace nm_canvasPanel
             //s_silver_item_GET_BG.transform.localScale = scal;
             //*/
             //s_silver_item_get_text.text = "✖︎　" + emitter.chainExplosionLinePlayCount.ToString();
-
-            if (s_max_chain_count_text.text == "")
-            {
-                s_max_chain_count_text.text = "0";
-            }
-            if (int.Parse(s_max_chain_count_text.text) < emitter.chainExplosionLinePlayMAX)
-            {
-                s_max_chain_count_text.text = emitter.chainExplosionLinePlayMAX.ToString();
-            }
-
         }
 
 
@@ -6421,12 +6431,26 @@ namespace nm_canvasPanel
             {
                 if (gsf_Up)
                 {
+                    screen_Mask.gameObject.SetActive(true);
                     var seq = DOTween.Sequence();
+                    seq.Append(screen_Mask.DOFade(1, do_duration));
+                    seq.OnComplete(() =>
+                    {
+                        game_stage_select_view.gameObject.SetActive(true);
+                        var seq = DOTween.Sequence();
+                        seq.Append(screen_Mask.DOFade(0, do_duration));
+                        seq.OnComplete(() =>
+                        {
+                            screen_Mask.gameObject.SetActive(false);
+                        });
+                    });
+                    /*var seq = DOTween.Sequence();
                     seq.Append(game_stage_select_view.rectTransform.DOMove(new Vector3(0, pos_gs.y, 0), 1));
                     seq.OnComplete(() =>
                     {
                         // アニメーションが終了時によばれる
                     });
+                    */
                     gsf_Move = false;
 
                     //game_stage_select_view.GetComponent<RectTransform>().Translate(new Vector3(0, 100, 0) * f_Speed * Time.deltaTime);
@@ -6460,13 +6484,27 @@ namespace nm_canvasPanel
                         s_monsterSlimeColorCountView.gameObject.SetActive(false);
                     }
 
+                    screen_Mask.gameObject.SetActive(true);
                     var seq = DOTween.Sequence();
+                    seq.Append(screen_Mask.DOFade(1, do_duration));
+                    seq.OnComplete(() =>
+                    {
+                        game_stage_select_view.gameObject.SetActive(false);
+                        var seq = DOTween.Sequence();
+                        seq.Append(screen_Mask.DOFade(0, do_duration));
+                        seq.OnComplete(() =>
+                        {
+                            screen_Mask.gameObject.SetActive(false);
+                        });
+                    });
+
+                    /*var seq = DOTween.Sequence();
                     seq.Append(game_stage_select_view.rectTransform.DOMove(new Vector3(0, -Screen.height, 0), 1));
                     seq.OnComplete(() =>
                     {
                         // アニメーションが終了時によばれる
 
-                    });
+                    });*/
                     gsf_Move = false;
 
                 }
@@ -6474,13 +6512,28 @@ namespace nm_canvasPanel
 			// item View
 			if (if_Move) {
 				if (if_Up) {
+                    screen_Mask.gameObject.SetActive(true);
                     var seq = DOTween.Sequence();
-                    seq.Append(item_View.rectTransform.DOMove(new Vector3(0, pos_gs.y, 0), 1));
+                    seq.Append(screen_Mask.DOFade(1, do_duration));
+                    seq.OnComplete(() =>
+                    {
+                        item_View.gameObject.SetActive(true);
+                        var seq = DOTween.Sequence();
+                        seq.Append(screen_Mask.DOFade(0, do_duration));
+                        seq.OnComplete(() =>
+                        {
+                            screen_Mask.gameObject.SetActive(false);
+                        });
+                    });
+                    if_Move = false;
+
+/*                    seq.Append(item_View.rectTransform.DOMove(new Vector3(0, pos_gs.y, 0), 1));
                     seq.OnComplete(() =>
                     {
                         // アニメーションが終了時によばれる
                     });
                     if_Move = false;
+*/
 
 /*                    item_View.GetComponent<RectTransform>().Translate(new Vector3 (0,100,0) * f_Speed * Time.deltaTime);
 					if (item_View.transform.position.y >= 0) {
@@ -6491,7 +6544,22 @@ namespace nm_canvasPanel
 					}
 */				}
 				else {
+                    screen_Mask.gameObject.SetActive(true);
                     var seq = DOTween.Sequence();
+                    seq.Append(screen_Mask.DOFade(1, do_duration));
+                    seq.OnComplete(() =>
+                    {
+                        item_View.gameObject.SetActive(false);
+                        var seq = DOTween.Sequence();
+                        seq.Append(screen_Mask.DOFade(0, do_duration));
+                        seq.OnComplete(() =>
+                        {
+                            screen_Mask.gameObject.SetActive(false);
+                        });
+                    });
+                    if_Move = false;
+
+/*                    var seq = DOTween.Sequence();
                     seq.Append(item_View.rectTransform.DOMove(new Vector3(0, -Screen.height, 0), 1));
                     seq.OnComplete(() =>
                     {
@@ -6499,7 +6567,7 @@ namespace nm_canvasPanel
 
                     });
                     if_Move = false;
-
+*/
 /*                    item_View.GetComponent<RectTransform>().Translate(new Vector3 (0,-100,0) * f_Speed * Time.deltaTime);
 					if (item_View.transform.position.y <= -item_View.rectTransform.sizeDelta.y) {
 						Vector3 pos = item_View.GetComponent<RectTransform>().position;
@@ -6516,12 +6584,25 @@ namespace nm_canvasPanel
             {
                 if (is_Up)
                 {
+                    screen_Mask.gameObject.SetActive(true);
                     var seq = DOTween.Sequence();
+                    seq.Append(screen_Mask.DOFade(1, do_duration));
+                    seq.OnComplete(() =>
+                    {
+                        setting_View.gameObject.SetActive(true);
+                        var seq = DOTween.Sequence();
+                        seq.Append(screen_Mask.DOFade(0, do_duration));
+                        seq.OnComplete(() =>
+                        {
+                            screen_Mask.gameObject.SetActive(false);
+                        });
+                    });
+                    /*var seq = DOTween.Sequence();
                     seq.Append(setting_View.rectTransform.DOMove(new Vector3(0, pos_gs.y, 0), 1));
                     seq.OnComplete(() =>
                     {
                         // アニメーションが終了時によばれる
-                    });
+                    });*/
                     is_Move = false;
 /*
                     setting_View.GetComponent<RectTransform>().Translate(new Vector3(0, 100, 0) * f_Speed * Time.deltaTime);
@@ -6535,13 +6616,26 @@ namespace nm_canvasPanel
 */                }
                 else
                 {
+                    screen_Mask.gameObject.SetActive(true);
                     var seq = DOTween.Sequence();
+                    seq.Append(screen_Mask.DOFade(1, do_duration));
+                    seq.OnComplete(() =>
+                    {
+                        setting_View.gameObject.SetActive(false);
+                        var seq = DOTween.Sequence();
+                        seq.Append(screen_Mask.DOFade(0, do_duration));
+                        seq.OnComplete(() =>
+                        {
+                            screen_Mask.gameObject.SetActive(false);
+                        });
+                    });
+                    /*var seq = DOTween.Sequence();
                     seq.Append(setting_View.rectTransform.DOMove(new Vector3(0, -Screen.height, 0), 1));
                     seq.OnComplete(() =>
                     {
                         // アニメーションが終了時によばれる
 
-                    });
+                    });*/
                     is_Move = false;
 /*
                     setting_View.GetComponent<RectTransform>().Translate(new Vector3(0, -100, 0) * f_Speed * Time.deltaTime);
@@ -6561,18 +6655,46 @@ namespace nm_canvasPanel
             {
                 if (nv_Up)
                 {
-                    userName_view.GetComponent<RectTransform>().Translate(new Vector3(0, 100, 0) * f_Speed * Time.deltaTime);
+                    screen_Mask.gameObject.SetActive(true);
+                    var seq = DOTween.Sequence();
+                    seq.Append(screen_Mask.DOFade(1, do_duration));
+                    seq.OnComplete(() =>
+                    {
+                        userName_view.gameObject.SetActive(true);
+                        var seq = DOTween.Sequence();
+                        seq.Append(screen_Mask.DOFade(0, do_duration));
+                        seq.OnComplete(() =>
+                        {
+                            screen_Mask.gameObject.SetActive(false);
+                        });
+                    });
+                    nv_Move = false;
+                    /*userName_view.GetComponent<RectTransform>().Translate(new Vector3(0, 100, 0) * f_Speed * Time.deltaTime);
                     if (userName_view.transform.position.y >= 0)
                     {
                         Vector3 pos = userName_view.GetComponent<RectTransform>().position;
                         pos.y = 0.0f;
                         userName_view.rectTransform.position = pos;
                         nv_Move = false;
-                    }
+                    }*/
                 }
                 else
                 {
-                    userName_view.GetComponent<RectTransform>().Translate(new Vector3(0, -100, 0) * f_Speed * Time.deltaTime);
+                    screen_Mask.gameObject.SetActive(true);
+                    var seq = DOTween.Sequence();
+                    seq.Append(screen_Mask.DOFade(1, do_duration));
+                    seq.OnComplete(() =>
+                    {
+                        userName_view.gameObject.SetActive(false);
+                        var seq = DOTween.Sequence();
+                        seq.Append(screen_Mask.DOFade(0, do_duration));
+                        seq.OnComplete(() =>
+                        {
+                            screen_Mask.gameObject.SetActive(false);
+                        });
+                    });
+                    nv_Move = false;
+                    /*userName_view.GetComponent<RectTransform>().Translate(new Vector3(0, -100, 0) * f_Speed * Time.deltaTime);
                     if (userName_view.transform.position.y <= -userName_view.rectTransform.sizeDelta.y)
                     {
                         Vector3 pos = userName_view.GetComponent<RectTransform>().position;
@@ -6580,7 +6702,7 @@ namespace nm_canvasPanel
                         userName_view.GetComponent<RectTransform>().position = pos;
                         nv_Move = false;
                         userName_view.gameObject.SetActive(false);
-                    }
+                    }*/
                 }
             }
         }
@@ -6649,7 +6771,7 @@ namespace nm_canvasPanel
                 });
 
             }*/
-            if (besttime_text.gameObject.activeSelf == true)
+                    if (besttime_text.gameObject.activeSelf == true)
             {
                 // プレイ時間更新？
                 Vector2 scale2 = s_besttime_text_star.rectTransform.localScale;
@@ -7397,8 +7519,19 @@ namespace nm_canvasPanel
             //sphere.gameStatus_text = "";
 
             //s_center_View.rectTransform.sizeDelta = center_View_orgSize;
-            setCenterView(1);
-
+            screen_Mask.gameObject.SetActive(true);
+            var seq = DOTween.Sequence();
+            seq.Append(screen_Mask.DOFade(1, do_duration));
+            seq.OnComplete(() =>
+            {
+                setCenterView(1);
+                var seq = DOTween.Sequence();
+                seq.Append(screen_Mask.DOFade(0, do_duration));
+                seq.OnComplete(() =>
+                {
+                    screen_Mask.gameObject.SetActive(false);
+                });
+            });
 		}
         // Slim Card 管理画面
         public void ButtonSlimCardClick() {
@@ -7447,7 +7580,7 @@ namespace nm_canvasPanel
 
             if (!gsf_Up)
             {
-                game_stage_select_view.gameObject.SetActive(true);
+                //game_stage_select_view.gameObject.SetActive(true);
                 gsf_Up = true;
             }
             else
@@ -7552,10 +7685,11 @@ namespace nm_canvasPanel
 
 			complete_view.gameObject.SetActive(false);
 			failed_view.gameObject.SetActive(false);
-			ButtonRetryClick();
-		}
+
+            ButtonRetryClick();
+        }
         // TODO:連鎖　リトライ処理
-		public void ButtonRetryClick() {
+        public void ButtonRetryClick() {
 
 			// start処理は、sphereのstart_gameフラグによる呼び出しのgame_start()でcube処理もリセットされる
 			emitter.levelCheck(cubersFile.now_play_stage);
@@ -7637,7 +7771,7 @@ namespace nm_canvasPanel
             //sphere.complete = false;
 
             if (!if_Up) {
-                item_View.gameObject.SetActive(true);
+                //item_View.gameObject.SetActive(true);
 				setItemViewData();
 				if_Up = true;
                 // TODO:1-1-１０追加 新規アイテム変換購入画面処理の作成
@@ -7875,7 +8009,7 @@ namespace nm_canvasPanel
             if (!is_Up)
             {
                 initToggle();
-                setting_View.gameObject.SetActive(true);
+                //setting_View.gameObject.SetActive(true);
                 setSettingViewData();
                 is_Up = true;
 
@@ -8069,7 +8203,7 @@ namespace nm_canvasPanel
                 else nv_Move = true;
                 if (!nv_Up)
                 {
-                    userName_view.gameObject.SetActive(true);
+                    //userName_view.gameObject.SetActive(true);
                     userNameViewClose_BT.gameObject.SetActive(true);
                     userName_BG.gameObject.SetActive(true);
                     newUserName_Title.text = "NEW NAME : ";

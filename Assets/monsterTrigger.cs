@@ -146,11 +146,11 @@ namespace  nm_monsterTrigger {
                             nm_sphere.sphere.point_count = nm_sphere.sphere.point_count + p;
                             nm_sphere.sphere.hitPointDSP(child1.transform.position, 0);//cube position set
 
-                            // TODO:連鎖　仕様変更による見直し箇所 現状は、レベル毎にゲーム攻略条件をチェックして攻略か失敗かを判定させているが、ここの部分は廃止となる為、下記削除対象
-                            if (nm_sphere.sphere.sphere_totalCount - nm_sphere.sphere.now_sphere_count <= 0 && nm_sphere.sphere.now_gravitySpheres_count <= 0)
-                            {
-                                if (monster.monster_instance.Get_monsterColorLastcheck())
-                                {
+                            //// TODO:連鎖　仕様変更による見直し箇所 現状は、レベル毎にゲーム攻略条件をチェックして攻略か失敗かを判定させているが、ここの部分は廃止となる為、下記削除対象
+                            //if (nm_sphere.sphere.sphere_totalCount - nm_sphere.sphere.now_sphere_count <= 0 && nm_sphere.sphere.now_gravitySpheres_count <= 0)
+                            //{
+                            //    if (monster.monster_instance.Get_monsterColorLastcheck())
+                            //    {
                                     // 全ライン０　オールクリア
                                     // 条件チェック
                                     int confition_chain_count = canvasPanel.chaine_count_array[cubersFile.now_play_stage - 1, cubersFile.now_play_stagelevel - 1];
@@ -181,15 +181,15 @@ namespace  nm_monsterTrigger {
                                         // Game Data Save
                                         cubersFile.cubersFile_instance.save_gameEncryptionData();
 
-                                }
-                                else
-                                {
-                                    // ライン残あり　キューブが全て埋まった状態
-                                    // TODO:連鎖　仕様変更による見直し箇所
-                                    gameOverProc();
-                                    return;
-                                }
-                            }
+                            //    }
+                            //    else
+                            //    {
+                            //        // ライン残あり　キューブが全て埋まった状態
+                            //        // TODO:連鎖　仕様変更による見直し箇所
+                            //        gameOverProc();
+                            //        return;
+                            //    }
+                            //}
                             break;
                         // 連鎖モード
 
