@@ -1534,7 +1534,7 @@ namespace nm_canvasPanel
             slimcardView.transform.localScale = scal_sc;
             Vector3 pos_sc = slimcardView.transform.position;
             pos_sc.x = pos_sc.x * screen_width_per;
-            pos_sc.y = 5 * screen_width_per + safeAreaHightUnder + (b_Pause.gameObject.GetComponent<Image>().rectTransform.sizeDelta.y) * scal2.y;
+            pos_sc.y = 5 * screen_width_per + safeAreaHightUnder + (b_Pause.gameObject.GetComponent<Image>().rectTransform.sizeDelta.y + 20.0f) * scal2.y;
             //pos_sc.y = (Screen.height - safeAreaHight) - (center_header.rectTransform.sizeDelta.y + monsterColorCountView.rectTransform.sizeDelta.y + waitingTimerGauge_BG.rectTransform.sizeDelta.y + topGameTimeChainView_BG.rectTransform.sizeDelta.y + slimcardView.rectTransform.sizeDelta.y + 40.0f) * scal2.y;
             slimcardView.transform.position = pos_sc;
 

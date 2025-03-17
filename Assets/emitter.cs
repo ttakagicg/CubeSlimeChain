@@ -471,9 +471,9 @@ namespace nm_emitter
 				pos.z = camera_basePosition + cubeCount + 1.5f + iPhoneX_offset;
 			}
 			else {
-				pos.x = camera_basePosition + cubeCount + 2.15f + iPhoneX_offset;
-				pos.y = camera_basePosition + cubeCount + 1.3f + iPhoneX_offset;
-				pos.z = camera_basePosition + cubeCount + 2.1f + iPhoneX_offset;
+				pos.x = camera_basePosition + cubeCount + 2.65f + iPhoneX_offset;
+				pos.y = camera_basePosition + cubeCount + 1.8f + iPhoneX_offset;
+				pos.z = camera_basePosition + cubeCount + 2.6f + iPhoneX_offset;
 			}
 
 			Camera.main.transform.position = pos;
@@ -635,9 +635,9 @@ namespace nm_emitter
 				// TODO：テンポゲージトップバー表示OFF＆MAX連鎖カウント表示BGON
 				canvasPanel.s_max_chain_count_BG.gameObject.SetActive(true);
 				canvasPanel.waitingTimerTop_BG_s.gameObject.SetActive(true);
-				//canvasPanel.s_slimcardView.gameObject.SetActive(true);
+				canvasPanel.s_slimcardView.gameObject.SetActive(true);
 
-				canvasPanel.s_noChainPlayTimeDSP_Sceen2BGImage.gameObject.SetActive(false);
+                canvasPanel.s_noChainPlayTimeDSP_Sceen2BGImage.gameObject.SetActive(false);
 				canvasPanel.s_topGameTime_text.gameObject.SetActive(false);
 				canvasPanel.s_topGameTimeChainView_text.gameObject.SetActive(true);
 

@@ -60,6 +60,7 @@ namespace  nm_sphere {
 		public GameObject Sphere_CardItemSlim_1;
 		public GameObject Sphere_CardItemSlim_2;
 		public GameObject Sphere_CardItemSlim_3;
+		public ParticleSystem heart_P;
 		public static GameObject[,,] spheres;
 		public static GameObject[] spheres_A;
 		public static GameObject[] spheres_cardSlim;
@@ -533,7 +534,15 @@ namespace  nm_sphere {
 
 			itemslimobj.gameObject.SetActive(true);
 
-			if (slim_No == emitter.item_Slim_No.resetTime_slim)
+			if (slim_No == emitter.item_Slim_No.gurdlife_slim)
+            {
+                ParticleSystem prt = Instantiate(heart_P);
+                prt.transform.position = itemslimobj.transform.position;
+                prt.Play();
+                Destroy(prt.gameObject, 2.0f);
+            }
+
+            if (slim_No == emitter.item_Slim_No.resetTime_slim)
             {
 				// 可変タイマー設定リセット
 				emitter.gravity_Timespan = 0;
