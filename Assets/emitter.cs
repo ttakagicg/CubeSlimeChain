@@ -1290,8 +1290,8 @@ namespace nm_emitter
                                         }
                                     }
 									// 連鎖ライン数チェック chainExplosionLineCountが実際の連鎖ライン本数となる
-									// 連鎖ライン数はエフェクトオブジェクト個数を２で割った数　奇数時の余りは切り捨て
-									int w_linecount = effect_obj_count / 2;
+									// 連鎖ライン数はエフェクトオブジェクト個数をcubeCount -1で割った数　奇数時の余りは切り捨て
+									int w_linecount = effect_obj_count / (cubeCount - 1);
                                     chainExplosionLineCount = w_linecount;
                                     int p = sphere.gamePointADD(w_linecount);
                                     chainExplosionPoint += p;
