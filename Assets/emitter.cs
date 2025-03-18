@@ -460,6 +460,7 @@ namespace nm_emitter
 			float iPhoneX_offset = 0;
 			if (Screen.height >= 1624) iPhoneX_offset = 1.5f;
 			Vector3 pos = Camera.main.transform.position;
+			Vector3 rot = Camera.main.transform.localEulerAngles;
 			if (cubeCount == 3) {
 				pos.x = camera_basePosition + cubeCount - 0.5f + iPhoneX_offset;
 				pos.y = camera_basePosition + cubeCount - 1.1f + iPhoneX_offset;
@@ -472,13 +473,18 @@ namespace nm_emitter
 			}
 			else {
 				pos.x = camera_basePosition + cubeCount + 2.65f + iPhoneX_offset;
-				pos.y = camera_basePosition + cubeCount + 1.8f + iPhoneX_offset;
+				pos.y = camera_basePosition + cubeCount + 0.3f + iPhoneX_offset;
 				pos.z = camera_basePosition + cubeCount + 2.6f + iPhoneX_offset;
+				rot.x = 23.0f;
+				//pos.x = camera_basePosition + cubeCount + 2.65f + iPhoneX_offset;
+				//pos.y = camera_basePosition + cubeCount + 1.8f + iPhoneX_offset;
+				//pos.z = camera_basePosition + cubeCount + 2.6f + iPhoneX_offset;
 			}
 
 			Camera.main.transform.position = pos;
+			Camera.main.transform.localEulerAngles = rot;
 
-            if (sphere.sphere_Count != 0) sphere.before_sphere_Count = sphere.sphere_Count;
+			if (sphere.sphere_Count != 0) sphere.before_sphere_Count = sphere.sphere_Count;
             else sphere.before_sphere_Count = cubeCount;
             sphere.sphere_Count = cubeCount;
 
@@ -635,9 +641,12 @@ namespace nm_emitter
 				// TODO：テンポゲージトップバー表示OFF＆MAX連鎖カウント表示BGON
 				canvasPanel.s_max_chain_count_BG.gameObject.SetActive(true);
 				canvasPanel.waitingTimerTop_BG_s.gameObject.SetActive(true);
-				canvasPanel.s_slimcardView.gameObject.SetActive(true);
 
-                canvasPanel.s_noChainPlayTimeDSP_Sceen2BGImage.gameObject.SetActive(false);
+				// TODO:スライムカードプレイ中表示ビューON\OFF
+				canvasPanel.s_slimcardView.gameObject.SetActive(false);// 一旦、オフ25-03-18
+				//canvasPanel.s_slimcardView.gameObject.SetActive(true);
+
+				canvasPanel.s_noChainPlayTimeDSP_Sceen2BGImage.gameObject.SetActive(false);
 				canvasPanel.s_topGameTime_text.gameObject.SetActive(false);
 				canvasPanel.s_topGameTimeChainView_text.gameObject.SetActive(true);
 

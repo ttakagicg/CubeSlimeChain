@@ -59,7 +59,7 @@ namespace nm_canvasPanel
 		public Image gamecount;
 		public Image item_View;
         public Image setting_View;
-		public Image game_select_view;
+		public Image slimCard_View;
         public Image game_stage_select_view;
         public Image sunshine1;
 		public Image sunshine2;
@@ -530,7 +530,6 @@ namespace nm_canvasPanel
 		public Text gameCount_text;
 		public Text lost_Count_text;
 		public Text lostadd_Count_text;
-		public Text slowCount_text;
 		public Text pauseCount_text;
         public Text timereset_count;
         public Text lifelostinvalid_count;
@@ -1595,13 +1594,11 @@ namespace nm_canvasPanel
 
 
             // new game select view
-            Vector3 gselect_scal = game_select_view.transform.localScale;
+            Vector3 gselect_scal = slimCard_View.transform.localScale;
             gselect_scal.x = gselect_scal.x * screen_width_per;
             gselect_scal.y = gselect_scal.y * screen_width_per;
-            game_select_view.transform.localScale = gselect_scal;
-            Vector3 gf_pos = game_select_view.transform.position;
-            gf_pos.y = -(Screen.height - safeAreaHight);
-            game_select_view.transform.position = gf_pos;
+            slimCard_View.transform.localScale = gselect_scal;
+            slimCard_View.gameObject.SetActive(false);
 
             // new game stage select view
             Vector3 gsselect_scal = game_stage_select_view.transform.localScale;
@@ -5910,8 +5907,6 @@ namespace nm_canvasPanel
 			if (val1 > 999) val1 = 999; // limit dsp 999
 			string str1 = val1.ToString(st1);
 			
-			slowCount_text.text = str1.ToString();
-			
 			// game retry count
 			string st2 = @"D" + k.ToString();
 			int val2 = (int)cubersFile.game_count;
@@ -6384,20 +6379,59 @@ namespace nm_canvasPanel
             // itemViewスライド
             // --------------------------------------------------------------------------------------------------------------------------------
 
-            // game select field
+            // slim card control view -> gacha
             if (gf_Move) {
 				if (gf_Up) {
 
+                    screen_Mask.gameObject.SetActive(true);
                     var seq = DOTween.Sequence();
-                    seq.Append(game_select_view.rectTransform.DOMove(new Vector3(0, pos_gs.y, 0),1));
+                    seq.Append(screen_Mask.DOFade(1, do_duration));
                     seq.OnComplete(() =>
                     {
-                        // アニメーションが終了時によばれる
+                        slimCard_View.gameObject.SetActive(true);
+                        var seq = DOTween.Sequence();
+                        seq.Append(screen_Mask.DOFade(0, do_duration));
+                        seq.OnComplete(() =>
+                        {
+                            screen_Mask.gameObject.SetActive(false);
+                        });
                     });
                     gf_Move = false;
                 }
                 else {
                     int mod = (int)cubersFile.now_play_stage % emitter.chainExplosion_userLeve;
+                    if (mod == 0)
+                    {
+                        // 連鎖パネル表示リセット　パネルマスクオン時のリセットが無いのでここで非表示とする　連鎖カウント等は別個所でセット
+                        greenMonsterSlimeCountMaskImage_s.gameObject.SetActive(false);
+                        yellowMonsterSlimeCountMaskImage_s.gameObject.SetActive(false);
+                        redMonsterSlimeCountMaskImage_s.gameObject.SetActive(false);
+                        purpleMonsterSlimeCountMaskImage_s.gameObject.SetActive(false);
+                        blueMonsterSlimeCountMaskImage_s.gameObject.SetActive(false);
+                        whiteMonsterSlimeCountMaskImage_s.gameObject.SetActive(false);
+                        s_monsterSlimeColorCountView.gameObject.SetActive(false);
+                    }
+                    else
+                    {
+                        // 連鎖無しステージ選択時、ここで連鎖パネルビューを強制的にオフにする
+                        s_monsterSlimeColorCountView.gameObject.SetActive(false);
+                    }
+
+                    screen_Mask.gameObject.SetActive(true);
+                    var seq = DOTween.Sequence();
+                    seq.Append(screen_Mask.DOFade(1, do_duration));
+                    seq.OnComplete(() =>
+                    {
+                        slimCard_View.gameObject.SetActive(false);
+                        var seq = DOTween.Sequence();
+                        seq.Append(screen_Mask.DOFade(0, do_duration));
+                        seq.OnComplete(() =>
+                        {
+                            screen_Mask.gameObject.SetActive(false);
+                        });
+                    });
+
+                    /*int mod = (int)cubersFile.now_play_stage % emitter.chainExplosion_userLeve;
                     if (mod == 0)
                     {
                         // 連鎖パネル表示リセット　パネルマスクオン時のリセットが無いのでここで非表示とする　連鎖カウント等は別個所でセット
@@ -6422,7 +6456,7 @@ namespace nm_canvasPanel
                     {
                         // アニメーションが終了時によばれる
 
-                    });
+                    });*/
                     gf_Move = false;
                 }
             }
