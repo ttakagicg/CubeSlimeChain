@@ -56,7 +56,14 @@ namespace nm_canvasPanel
 		public Image center_View;
         public Vector3 center_View_orgSize;
         public static Image s_center_View;
-		public Image gamecount;
+        public Image center_cube3_BG;
+        public Image center_cube4_BG;
+        public Image center_cube5_BG;
+        public static Image s_center_cube3_BG;
+        public static Image s_center_cube4_BG;
+        public static Image s_center_cube5_BG;
+
+        public Image gamecount;
 		public Image item_View;
         public Image setting_View;
 		public Image slimCard_View;
@@ -285,7 +292,7 @@ namespace nm_canvasPanel
         public Image getItem_star;
         public static Image s_getItem_star;
         public Text besttime_text;
-        public static Text s_besttime_text;
+        //public static Text s_besttime_text;
         public Image besttime_text_star;
         public static Image s_besttime_text_star;
         public Image jewelry_star;
@@ -1381,11 +1388,17 @@ namespace nm_canvasPanel
             s_center_View.transform.localScale = scal_c;
 			Vector3 pos_c = s_center_View.transform.position;
 			pos_c.x = pos_c.x * screen_width_per;
-			pos_c.y = (Screen.height - safeAreaHight) / 2 - s_center_View.rectTransform.sizeDelta.y * scal1.y / 2;
+			pos_c.y = (Screen.height - safeAreaHight) / 2 - (s_center_View.rectTransform.sizeDelta.y * scal1.y / 2);
             s_center_View.transform.position = pos_c;
+            s_center_cube3_BG = center_cube3_BG;
+            s_center_cube4_BG = center_cube4_BG;
+            s_center_cube5_BG = center_cube5_BG;
+            center_cube3_BG.gameObject.SetActive(true);
+            center_cube4_BG.gameObject.SetActive(false);
+            center_cube5_BG.gameObject.SetActive(false);
 
-			// Complete View
-			Vector3 scal_cmpView = complete_view.transform.localScale;
+            // Complete View
+            Vector3 scal_cmpView = complete_view.transform.localScale;
 			scal_cmpView.x = scal_cmpView.x * screen_width_per;
 			scal_cmpView.y = scal_cmpView.y * screen_width_per;
 			complete_view.transform.localScale = scal_cmpView;
@@ -1567,7 +1580,7 @@ namespace nm_canvasPanel
 			// high Score dsp
             s_LifeLostCount_text = LifeLostCount_text;
             life_count_point_text.gameObject.SetActive(false);
-            s_besttime_text = besttime_text;
+            //s_besttime_text = besttime_text;
             besttime_text.gameObject.SetActive(false);
             s_besttime_text_star = besttime_text_star;
             besttime_text_star.gameObject.SetActive(false);
@@ -3175,7 +3188,27 @@ namespace nm_canvasPanel
                 bs_setting.gameObject.SetActive(true);
 
 				s_center_View.gameObject.SetActive(true);
-
+                switch(cubersFile.now_play_stage)
+                {
+                    case 1:
+                    case 2:
+                        s_center_cube3_BG.gameObject.SetActive(true);
+                        s_center_cube4_BG.gameObject.SetActive(false);
+                        s_center_cube5_BG.gameObject.SetActive(false);
+                        break;
+                    case 3:
+                    case 4:
+                        s_center_cube3_BG.gameObject.SetActive(false);
+                        s_center_cube4_BG.gameObject.SetActive(true);
+                        s_center_cube5_BG.gameObject.SetActive(false);
+                        break;
+                    case 5:
+                    case 6:
+                        s_center_cube3_BG.gameObject.SetActive(false);
+                        s_center_cube4_BG.gameObject.SetActive(false);
+                        s_center_cube5_BG.gameObject.SetActive(true);
+                        break;
+                }
                 break;
 /*
 			// Complete dsp
@@ -4569,7 +4602,7 @@ namespace nm_canvasPanel
 
             // プレイ時間更新　プレイ時間が少ない程Good
             if (time > playtime || time == 0) {
-                besttime_text.text = playtime.ToString();
+                //besttime_text.text = playtime.ToString();
                 besttime_text.gameObject.SetActive(true);
                  // プレイタイム更新保存
                 dt["playtime"] = playtime;
