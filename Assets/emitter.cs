@@ -304,6 +304,27 @@ namespace nm_emitter
 			//canvasPanel.s_mainMenu_field.gameObject.SetActive(true);
 			canvasPanel.setCenterView(1);
 			canvasPanel.s_center_View.gameObject.SetActive(true);
+			switch (cubersFile.now_play_stage)
+			{
+				case 1:
+				case 2:
+					canvasPanel.s_center_cube3_BG.gameObject.SetActive(true);
+					canvasPanel.s_center_cube4_BG.gameObject.SetActive(false);
+					canvasPanel.s_center_cube5_BG.gameObject.SetActive(false);
+					break;
+				case 3:
+				case 4:
+					canvasPanel.s_center_cube3_BG.gameObject.SetActive(false);
+					canvasPanel.s_center_cube4_BG.gameObject.SetActive(true);
+					canvasPanel.s_center_cube5_BG.gameObject.SetActive(false);
+					break;
+				case 5:
+				case 6:
+					canvasPanel.s_center_cube3_BG.gameObject.SetActive(false);
+					canvasPanel.s_center_cube4_BG.gameObject.SetActive(false);
+					canvasPanel.s_center_cube5_BG.gameObject.SetActive(true);
+					break;
+			}
 			canvasPanel.sunshinerotate = 2;
 			canvasPanel.sunshinerotateTime = 20;
 		}
@@ -465,11 +486,13 @@ namespace nm_emitter
 				pos.x = camera_basePosition + cubeCount - 0.5f + iPhoneX_offset;
 				pos.y = camera_basePosition + cubeCount - 1.1f + iPhoneX_offset;
 				pos.z = camera_basePosition + cubeCount - 0.5f + iPhoneX_offset;
-			} 
+				rot.x = 27.0f;
+			}
 			else if (cubeCount == 4) {
 				pos.x = camera_basePosition + cubeCount + 1.5f + iPhoneX_offset;
 				pos.y = camera_basePosition + cubeCount + 0.2f + iPhoneX_offset;
 				pos.z = camera_basePosition + cubeCount + 1.5f + iPhoneX_offset;
+				rot.x = 27.0f;
 			}
 			else {
 				pos.x = camera_basePosition + cubeCount + 2.65f + iPhoneX_offset;
@@ -480,6 +503,8 @@ namespace nm_emitter
 				//pos.y = camera_basePosition + cubeCount + 1.8f + iPhoneX_offset;
 				//pos.z = camera_basePosition + cubeCount + 2.6f + iPhoneX_offset;
 			}
+
+			Debug.Log("Camera Position : x= " + pos.x + " y= " + pos.y + " z= " + pos.z);
 
 			Camera.main.transform.position = pos;
 			Camera.main.transform.localEulerAngles = rot;
@@ -625,6 +650,7 @@ namespace nm_emitter
 			reset_flag();
 			reset_effect();
 			reset_chainExplosionCounter();
+			this.GetComponent<sphere>().sphere_CardSlime_Clear(emitter.item_Slim_No.gurdlife_slim);
 
 			int mod = (int)cubersFile.now_play_stage % emitter.chainExplosion_userLeve;
 			if (mod == 0) {
