@@ -26,7 +26,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_sRGBTexture
-    value: 1
+    value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_LinearTexture
@@ -73,10 +73,6 @@ Preset:
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: m_FlipGreenChannel
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
     propertyPath: m_IsReadable
     value: 0
     objectReference: {fileID: 0}
@@ -93,7 +89,7 @@ Preset:
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: m_IgnoreMipmapLimit
+    propertyPath: m_IgnoreMasterTextureLimit
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
@@ -218,7 +214,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_TextureType
-    value: 0
+    value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_TextureShape
@@ -255,10 +251,6 @@ Preset:
   - target: {fileID: 0}
     propertyPath: m_ApplyGammaDecoding
     value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_Swizzle
-    value: 50462976
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_CookieLightType
@@ -302,10 +294,6 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_PlatformSettings.Array.data[0].m_Overridden
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_PlatformSettings.Array.data[0].m_IgnorePlatformSupport
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
@@ -353,10 +341,6 @@ Preset:
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: m_PlatformSettings.Array.data[1].m_IgnorePlatformSupport
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
     propertyPath: m_PlatformSettings.Array.data[1].m_AndroidETC2FallbackOverride
     value: 0
     objectReference: {fileID: 0}
@@ -398,10 +382,6 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_PlatformSettings.Array.data[2].m_Overridden
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_PlatformSettings.Array.data[2].m_IgnorePlatformSupport
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
@@ -449,10 +429,6 @@ Preset:
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: m_PlatformSettings.Array.data[3].m_IgnorePlatformSupport
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
     propertyPath: m_PlatformSettings.Array.data[3].m_AndroidETC2FallbackOverride
     value: 0
     objectReference: {fileID: 0}
@@ -462,7 +438,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_PlatformSettings.Array.data[4].m_BuildTarget
-    value: iOS
+    value: iPhone
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_PlatformSettings.Array.data[4].m_MaxTextureSize
@@ -494,10 +470,6 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_PlatformSettings.Array.data[4].m_Overridden
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_PlatformSettings.Array.data[4].m_IgnorePlatformSupport
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
@@ -545,10 +517,6 @@ Preset:
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: m_PlatformSettings.Array.data[5].m_IgnorePlatformSupport
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
     propertyPath: m_PlatformSettings.Array.data[5].m_AndroidETC2FallbackOverride
     value: 0
     objectReference: {fileID: 0}
@@ -558,7 +526,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_PlatformSettings.Array.data[6].m_BuildTarget
-    value: WindowsStoreApps
+    value: Windows Store Apps
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_PlatformSettings.Array.data[6].m_MaxTextureSize
@@ -590,10 +558,6 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_PlatformSettings.Array.data[6].m_Overridden
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_PlatformSettings.Array.data[6].m_IgnorePlatformSupport
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
@@ -641,10 +605,6 @@ Preset:
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: m_PlatformSettings.Array.data[7].m_IgnorePlatformSupport
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
     propertyPath: m_PlatformSettings.Array.data[7].m_AndroidETC2FallbackOverride
     value: 0
     objectReference: {fileID: 0}
@@ -659,10 +619,6 @@ Preset:
   - target: {fileID: 0}
     propertyPath: m_SpriteSheet.m_Outline.Array.size
     value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_CustomData
-    value: 
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_SpriteSheet.m_PhysicsShape.Array.size
@@ -701,19 +657,19 @@ Preset:
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_SpriteCustomMetadata.m_Entries.Array.size
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
     propertyPath: m_SpriteSheet.m_NameFileIdTable.Array.size
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: m_MipmapLimitGroupName
+    propertyPath: m_SpritePackingTag
     value: 
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_PSDRemoveMatte
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_PSDShowRemoveMatteOption
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
@@ -729,8 +685,3 @@ Preset:
     value: 
     objectReference: {fileID: 0}
   m_ExcludedProperties: []
-  m_CoupledType:
-    m_NativeTypeID: 0
-    m_ManagedTypePPtr: {fileID: 0}
-    m_ManagedTypeFallback: 
-  m_CoupledProperties: []
