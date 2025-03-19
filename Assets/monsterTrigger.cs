@@ -126,6 +126,8 @@ namespace  nm_monsterTrigger {
                                 emitter.sw_floorUpDown = false;
                                 nm_sphere.sphere.gameStatus_text = emitter.gameclear_msg;
                                 canvasPanel.statusTime = 2;
+                                GameObject obj = GameObject.Find("emitter").gameObject;
+                                obj.GetComponent<sphere>().sphere_CardSlime_Clear(emitter.item_Slim_No.gurdlife_slim);
 
                                 // point dsp off
                                 nm_sphere.sphere.pointDSPOff();
@@ -168,6 +170,8 @@ namespace  nm_monsterTrigger {
                                         emitter.sw_floorUpDown = false;
                                         nm_sphere.sphere.gameStatus_text = emitter.gameclear_msg;
                                         canvasPanel.statusTime = 2;
+                                        GameObject obj1 = GameObject.Find("emitter").gameObject;
+                                        obj1.GetComponent<sphere>().sphere_CardSlime_Clear(emitter.item_Slim_No.gurdlife_slim);
 
                                         // point dsp off
                                         nm_sphere.sphere.pointDSPOff();
