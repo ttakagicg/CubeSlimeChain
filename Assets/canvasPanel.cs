@@ -6866,6 +6866,12 @@ namespace nm_canvasPanel
         public void setGetJewelryCount()
         {
             // 所持魔法石に連鎖でゲットした魔法石を加算して表示と獲得魔法石を加算した数値をcubersFileにセーブ
+            if (emitter.jewelry_Count_total <= 0)
+            {
+                getItem_Count_text.text = "0";
+                return; //魔法石ゲット無し
+            }
+
             jewelry_text.text = ((long)emitter.jewelry_Count_total + cubersFile.jewelry_Count).ToString();
             cubersFile.jewelry_Count += (long)emitter.jewelry_Count_total;
             cubersFile.cubersFile_instance.save_gameEncryptionData();
