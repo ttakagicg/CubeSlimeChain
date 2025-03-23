@@ -66,7 +66,8 @@ namespace nm_canvasPanel
         public Image gamecount;
 		public Image item_View;
         public Image setting_View;
-		public Image slimCard_View;
+		public Image slimCardControlView;
+        public Button slimCardControlViewClose_BT;
         public Image game_stage_select_view;
         public Image sunshine1;
 		public Image sunshine2;
@@ -320,6 +321,7 @@ namespace nm_canvasPanel
         public Button fld_OK_BT;
 		public Button fld_RT_BT;
         public Button itemView_BT;
+        public TextMeshProUGUI faild_level_text;
         public Text retryItemCount_text;
         // TODO:1-1-4追加 レベルMAX攻略時のトータル成績表示
         public Text total_playtime_text;
@@ -1438,6 +1440,9 @@ namespace nm_canvasPanel
 			obj_n.onClick.AddListener(() => ButtonSlimCardClick());
             b_slimCard.gameObject.SetActive(false);
 
+            Button obj_bs_close_BT = slimCardControlViewClose_BT.transform.GetComponent<Button>();
+            obj_bs_close_BT.onClick.AddListener(() => ButtonSlimCardControlViewCloseClick());
+
             // new game select 2 button
             bs_new_game2 = b_new_game2;
             Button obj_n2 = b_new_game2.transform.GetComponent<Button>();
@@ -1607,11 +1612,11 @@ namespace nm_canvasPanel
 
 
             // new game select view
-            Vector3 gselect_scal = slimCard_View.transform.localScale;
+            Vector3 gselect_scal = slimCardControlView.transform.localScale;
             gselect_scal.x = gselect_scal.x * screen_width_per;
             gselect_scal.y = gselect_scal.y * screen_width_per;
-            slimCard_View.transform.localScale = gselect_scal;
-            slimCard_View.gameObject.SetActive(false);
+            slimCardControlView.transform.localScale = gselect_scal;
+            slimCardControlView.gameObject.SetActive(false);
 
             // new game stage select view
             Vector3 gsselect_scal = game_stage_select_view.transform.localScale;
@@ -3331,6 +3336,13 @@ namespace nm_canvasPanel
             setStageSelectBTTotalClearInfo(6);
 
         }
+        private void Create_slimCardControlView()
+        {
+            //slimCardControlViewClose_BT.transform.tag = "99";
+            //slimCardControlViewClose_BT.GetComponent<Button>().onClick.RemoveAllListeners();
+            //slimCardControlViewClose_BT.GetComponent<Button>().onClick.AddListener(() => buttonSelectCell2(1, 99));
+        }
+
         private void Create_GameStageSelectView()
         {
             selectViewClose_BT.transform.tag = "99";
@@ -6337,7 +6349,9 @@ namespace nm_canvasPanel
                             failed_view.gameObject.SetActive(true);
                             sphere.gameStatus_text = "";
                             //sphere.gameover = false;
-							//sphere.complete = false;
+                            //sphere.complete = false;
+
+                            faild_level_text.gameObject.GetComponent<TMPro.TextMeshProUGUI>().text = "Stage: " + cubersFile.now_play_stage.ToString() + " Level: " + cubersFile.now_play_stagelevel.ToString() + " -";
 
                             var stage = (int)cubersFile.now_play_stage;
                             var level = (int)cubersFile.now_play_stagelevel;
@@ -6422,7 +6436,7 @@ namespace nm_canvasPanel
                     seq.Append(screen_Mask.DOFade(1, do_duration));
                     seq.OnComplete(() =>
                     {
-                        slimCard_View.gameObject.SetActive(true);
+                        slimCardControlView.gameObject.SetActive(true);
                         var seq = DOTween.Sequence();
                         seq.Append(screen_Mask.DOFade(0, do_duration));
                         seq.OnComplete(() =>
@@ -6456,7 +6470,7 @@ namespace nm_canvasPanel
                     seq.Append(screen_Mask.DOFade(1, do_duration));
                     seq.OnComplete(() =>
                     {
-                        slimCard_View.gameObject.SetActive(false);
+                        slimCardControlView.gameObject.SetActive(false);
                         var seq = DOTween.Sequence();
                         seq.Append(screen_Mask.DOFade(0, do_duration));
                         seq.OnComplete(() =>
@@ -7609,13 +7623,12 @@ namespace nm_canvasPanel
 		}
         // Slim Card 管理画面
         public void ButtonSlimCardClick() {
-            return;
-			/*if (gf_Move) return;
+			if (gf_Move) return;
 			else gf_Move = true;
 
             s_center_View.gameObject.SetActive(false);
-            // ステージ選択画面ビュー作成処理
-            Create_GameSelectView();
+            // スライムカード管理画面作成
+            Create_slimCardControlView();
 
             if (!gf_Up) {
 				
@@ -7623,7 +7636,7 @@ namespace nm_canvasPanel
 				//pos_gs = game_select_view.transform.position;
 				//pos_gs.y = (Screen.height / 2) - (game_select_view.rectTransform.sizeDelta.y * gselect_scal.y / 2);
 
-				game_select_view.gameObject.SetActive(true);
+				//slimCardControlView.gameObject.SetActive(true);
 				gf_Up = true;
 			}
 			else {
@@ -7639,7 +7652,7 @@ namespace nm_canvasPanel
                 //footer_BG.gameObject.SetActive(true);
                 right_header.gameObject.SetActive(true);
 				b_Pause.gameObject.SetActive(true);
-            }*/
+            }
         }
         // new stage select view
         public void ButtonNewGame2Click()
@@ -8369,6 +8382,14 @@ namespace nm_canvasPanel
             // 入力確認ビューの名前表示
             newUserNameInput.text = inputText;
             userNameConfirm_Text.text = inputText;
+        }
+        // スライムカード管理画面クローズ
+        public void ButtonSlimCardControlViewCloseClick()
+        {
+            center_View.gameObject.SetActive(true);
+            gf_Move = true;
+            gf_Up = false;
+            return;
         }
 
         public void ButtonMainClick()
