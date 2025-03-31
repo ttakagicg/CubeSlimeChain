@@ -484,6 +484,7 @@ namespace  nm_sphere {
 			obj1.gameObject.GetComponent<TMPro.TextMeshPro>().text = time;
 
 		}
+		private float do_duration = 2.0f;
 		public void set_Sphere_CardSlime(emitter.item_Slim_No slim_No)
         {
 			float offset = emitter.cubeCount % 3;
@@ -544,10 +545,6 @@ namespace  nm_sphere {
 
             if (slim_No == emitter.item_Slim_No.resetTime_slim)
             {
-				// 可変タイマー設定リセット
-				emitter.gravity_Timespan = 0;
-				emitter.wait_variable_timerCount = emitter.wait_timer_variable;
-
 				var seq = DOTween.Sequence();
 				seq.Append(itemslimobj.transform.DORotate(new Vector3(0, 0, 360), 2, RotateMode.LocalAxisAdd));
 				seq.OnComplete(() =>
@@ -555,6 +552,19 @@ namespace  nm_sphere {
 					// アニメーションが終了時によばれる
 					sphere_CardSlime_Clear(slim_No);
 				});
+				canvasPanel.waitingTimerGauge_BG_Image_s.gameObject.SetActive(true);
+				var seq1 = DOTween.Sequence();
+				seq1.Append(canvasPanel.waitingTimerGauge_BG_Image_s.DOFade(1, do_duration));
+				seq1.OnComplete(() =>
+				{
+					var seq = DOTween.Sequence();
+					seq.Append(canvasPanel.waitingTimerGauge_BG_Image_s.DOFade(0, do_duration));
+					seq.OnComplete(() =>
+					{
+						canvasPanel.waitingTimerGauge_BG_Image_s.gameObject.SetActive(false);
+					});
+				});
+
 			}
 
 

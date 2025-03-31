@@ -188,7 +188,7 @@ namespace nm_emitter
 		public const int midlleTempoTime = 7;
 		public const int highTempoTime = 4;
 		public static int wait_variable_timerCount;
-		public const int wait_timer_variable = 12;  // 1:10秒
+        public const int wait_timer_variable = 12;  // 1:10秒
 		public const int chain_slim_count_MAX = 5;
 
 		public GameObject sceen_light1;

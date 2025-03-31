@@ -259,7 +259,7 @@ namespace  nm_counter {
                     canvasPanel.beforeTime = (int)timer + 1;
                     //canvasPanel canvasp = GetComponentInChildren<canvasPanel>();
                     //canvasp.setGravityWaitTimeDSP((int)timer);
-                    Debug.Log("落下11 !! " + emitter.start_OneFallChainCountCollection + " !!!");
+                    //Debug.Log("落下11 !! " + emitter.start_OneFallChainCountCollection + " !!!");
                     // スライム設置から落下開始までに連鎖ありかチェック
                     if (emitter.start_OneFallChainCountCollection)
                     {

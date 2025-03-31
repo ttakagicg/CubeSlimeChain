@@ -402,6 +402,8 @@ namespace nm_canvasPanel
 
         // 落下待機経過時間表示
         public Image waitingTimerGauge_BG;
+        public Image waitingTimerGauge_BG_Image;
+        public static Image waitingTimerGauge_BG_Image_s;
         public Image waitingTimerTop_BG;
         public static Image waitingTimerTop_BG_s;
         public GameObject Level_top;
@@ -1306,7 +1308,9 @@ namespace nm_canvasPanel
             //pos_wtg.y = (Screen.height - safeAreaHight) - ((center_header.rectTransform.sizeDelta.y + 45) * scal2.y);
             waitingTimerGauge_BG.transform.position = pos_wtg;
             waitingTimerGauge_BG.gameObject.SetActive(false);
+            waitingTimerGauge_BG_Image.gameObject.SetActive(false);
 
+            waitingTimerGauge_BG_Image_s = waitingTimerGauge_BG_Image;
             waitingTimerTop_BG_s = waitingTimerTop_BG;
 
             Level_top_Base_Color = Level_top.gameObject.GetComponent<Image>().color;
@@ -7596,6 +7600,7 @@ namespace nm_canvasPanel
             noChainPlayTimeDSP_Sceen2BGImage.gameObject.SetActive(false);
             monsterColorCountSceen2View.gameObject.SetActive(false);
             waitingTimerGauge_BG.gameObject.SetActive(false);
+            waitingTimerGauge_BG_Image.gameObject.SetActive(false);
             complete_view.gameObject.SetActive(false);
 			failed_view.gameObject.SetActive(false);
 
@@ -8529,7 +8534,11 @@ namespace nm_canvasPanel
 
             cubersFile.timeresetitem_count--;
             cubersFile.cubersFile_instance.save_gameEncryptionData();
+            // 可変タイマー設定リセット
+            emitter.gravity_Timespan = 0;
+            emitter.wait_variable_timerCount = emitter.wait_timer_variable;
             counter.timer = 10; // pause_timer値を0になったらtimer=0として待機時間０でモンスターを落下させる
+            gravityWaitTemp(emitter.slowTempoTime);
 
             Sphere.set_Sphere_CardSlime(emitter.item_Slim_No.resetTime_slim);
         }
