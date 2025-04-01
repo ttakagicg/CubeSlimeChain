@@ -2577,7 +2577,7 @@ namespace nm_canvasPanel
             itemGetView_BG.rectTransform.rotation = Quaternion.Euler(0, 0, 0);
 
             var seq1 = DOTween.Sequence();
-            seq1.Append(itemGetView_BG.rectTransform.DOScale(new Vector3(1.0f, 1.0f), 2.0f));
+            seq1.Append(itemGetView_BG.rectTransform.DOScale(new Vector3(1.0f, 1.0f), 4.0f));
             seq1.Join(itemGetView_BG.rectTransform.DORotate(new Vector3(0f, 0f, 180f),   // 終了時点のRotation
                 2.0f                    // アニメーション時間
             ));
