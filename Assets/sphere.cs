@@ -1792,7 +1792,11 @@ namespace  nm_sphere {
 		// 連鎖数及び取得連鎖アイテム数表示処理
 		public static void setChainExplosionInfoAnimation(Vector3 pos, string text, monster_color color)
 		{
-
+			if (pointText_w != null)
+            {
+				pointText_w.gameObject.transform.parent = null;
+				Destroy(pointText_w);
+			}
 			// 表示オフはemmiterの// Update() → if (chain_explosion)で親子関係を解除する // chain Explosion reset cheack コメント
 			screen_width_per = Screen.width / 1125.0f;
 			var textcount = text.ToString().Length;
