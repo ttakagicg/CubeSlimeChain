@@ -1674,7 +1674,8 @@ namespace nm_canvasPanel
 			b_Pause.transform.localScale = b_scal_p;
 			Vector3 b_pos_p = b_Pause.transform.position;
 			b_pos_p.x = b_pos_p.x * screen_width_per;
-            b_pos_p.y = 5 * screen_width_per + safeAreaHightUnder;
+            b_pos_p.y = safeAreaHightUnder - 20.0f;
+            //b_pos_p.y = 5 * screen_width_per + safeAreaHightUnder;
             b_Pause.transform.position = b_pos_p;
 
             Button obj1 = b_Pause.transform.GetComponent<Button>();
