@@ -1,0 +1,39 @@
+fileFormatVersion: 2
+guid: c6e579bdf0ddb4015a11e9ee4744d902
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - Cube_Main: {instanceID: 0}
+  - Floor: {instanceID: 0}
+  - underFloor1: {instanceID: 0}
+  - circle_delay: {instanceID: 0}
+  - touchChainExplosionEffect: {instanceID: 0}
+  - shootChainExplosionEffect: {instanceID: 0}
+  - open_cube_m: {instanceID: 0}
+  - open_cube_m_h: {instanceID: 0}
+  - close_cube_m: {instanceID: 0}
+  - close_cube_m_h: {instanceID: 0}
+  - sp: {instanceID: 0}
+  - sphere_garavity_sound: {instanceID: 0}
+  - explosion1: {instanceID: 0}
+  - explosion2: {instanceID: 0}
+  - explosion_monster_bomb: {instanceID: 0}
+  - explosion_cube_bomb: {instanceID: 0}
+  - underMT: {instanceID: 0}
+  - underMT1: {instanceID: 0}
+  - underMT2: {instanceID: 0}
+  - underMT3: {instanceID: 0}
+  - underMT4: {instanceID: 0}
+  - underMT5: {instanceID: 0}
+  - underMT6: {instanceID: 0}
+  - underMT7: {instanceID: 0}
+  - mat: {instanceID: 0}
+  - texture1: {instanceID: 0}
+  - button_base_2: {instanceID: 0}
+  - canvas: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

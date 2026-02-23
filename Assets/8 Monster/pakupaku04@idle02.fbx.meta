@@ -1,0 +1,847 @@
+fileFormatVersion: 2
+guid: 58ff73481c04c4dda994daf4d3ecad46
+timeCreated: 1456554542
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: Armature
+    100002: body_mdl
+    100004: Bone.002
+    100006: Bone.002_end
+    100008: Bone.head
+    100010: Bone.head_end
+    100012: Bone.joint
+    100014: Bone_P
+    100016: Camera
+    100018: dpt_ball
+    100020: Lamp
+    100022: master
+    100024: mdl
+    100026: //RootNode
+    100028: sk
+    400000: Armature
+    400002: body_mdl
+    400004: Bone.002
+    400006: Bone.002_end
+    400008: Bone.head
+    400010: Bone.head_end
+    400012: Bone.joint
+    400014: Bone_P
+    400016: Camera
+    400018: dpt_ball
+    400020: Lamp
+    400022: master
+    400024: mdl
+    400026: //RootNode
+    400028: sk
+    4300000: body_mdl
+    7400000: idle02
+    7400002: idel01
+    7400004: deth01
+    7400006: fall01
+    7400008: fall02
+    7400010: fall03
+    7400012: idle02
+    7400014: Armature|deth01
+    7400016: Armature|fall01
+    7400018: Armature|fall02
+    7400020: Armature|fall03
+    7400022: Armature|idel01
+    7400024: Armature|idle02
+    7400026: Armature|run.002
+    7400028: idle020
+    9500000: //RootNode
+    13700000: body_mdl
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: idel01
+      takeName: idel01
+      firstFrame: 0
+      lastFrame: 23
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/master
+        weight: 1
+      - path: Armature/master/Bone_P
+        weight: 1
+      - path: Armature/master/Bone_P/Bone.joint
+        weight: 1
+      - path: Armature/master/Bone_P/Bone.joint/Bone.002
+        weight: 1
+      - path: Armature/master/Bone_P/Bone.joint/Bone.002/Bone.002_end
+        weight: 1
+      - path: Armature/master/Bone_P/Bone.joint/Bone.head
+        weight: 1
+      - path: Armature/master/Bone_P/Bone.joint/Bone.head/Bone.head_end
+        weight: 1
+      - path: Camera
+        weight: 1
+      - path: dpt_ball
+        weight: 1
+      - path: dpt_ball/mdl
+        weight: 1
+      - path: dpt_ball/sk
+        weight: 1
+      - path: dpt_ball/sk/body_mdl
+        weight: 1
+      - path: Lamp
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: deth01
+      takeName: deth01
+      firstFrame: 0
+      lastFrame: 23
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/master
+        weight: 1
+      - path: Armature/master/Bone_P
+        weight: 1
+      - path: Armature/master/Bone_P/Bone.joint
+        weight: 1
+      - path: Armature/master/Bone_P/Bone.joint/Bone.002
+        weight: 1
+      - path: Armature/master/Bone_P/Bone.joint/Bone.002/Bone.002_end
+        weight: 1
+      - path: Armature/master/Bone_P/Bone.joint/Bone.head
+        weight: 1
+      - path: Armature/master/Bone_P/Bone.joint/Bone.head/Bone.head_end
+        weight: 1
+      - path: Camera
+        weight: 1
+      - path: dpt_ball
+        weight: 1
+      - path: dpt_ball/mdl
+        weight: 1
+      - path: dpt_ball/sk
+        weight: 1
+      - path: dpt_ball/sk/body_mdl
+        weight: 1
+      - path: Lamp
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: fall01
+      takeName: fall01
+      firstFrame: 0
+      lastFrame: 23
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/master
+        weight: 1
+      - path: Armature/master/Bone_P
+        weight: 1
+      - path: Armature/master/Bone_P/Bone.joint
+        weight: 1
+      - path: Armature/master/Bone_P/Bone.joint/Bone.002
+        weight: 1
+      - path: Armature/master/Bone_P/Bone.joint/Bone.002/Bone.002_end
+        weight: 1
+      - path: Armature/master/Bone_P/Bone.joint/Bone.head
+        weight: 1
+      - path: Armature/master/Bone_P/Bone.joint/Bone.head/Bone.head_end
+        weight: 1
+      - path: Camera
+        weight: 1
+      - path: dpt_ball
+        weight: 1
+      - path: dpt_ball/mdl
+        weight: 1
+      - path: dpt_ball/sk
+        weight: 1
+      - path: dpt_ball/sk/body_mdl
+        weight: 1
+      - path: Lamp
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: fall02
+      takeName: fall02
+      firstFrame: 0
+      lastFrame: 23
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/master
+        weight: 1
+      - path: Armature/master/Bone_P
+        weight: 1
+      - path: Armature/master/Bone_P/Bone.joint
+        weight: 1
+      - path: Armature/master/Bone_P/Bone.joint/Bone.002
+        weight: 1
+      - path: Armature/master/Bone_P/Bone.joint/Bone.002/Bone.002_end
+        weight: 1
+      - path: Armature/master/Bone_P/Bone.joint/Bone.head
+        weight: 1
+      - path: Armature/master/Bone_P/Bone.joint/Bone.head/Bone.head_end
+        weight: 1
+      - path: Camera
+        weight: 1
+      - path: dpt_ball
+        weight: 1
+      - path: dpt_ball/mdl
+        weight: 1
+      - path: dpt_ball/sk
+        weight: 1
+      - path: dpt_ball/sk/body_mdl
+        weight: 1
+      - path: Lamp
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: fall03
+      takeName: fall03
+      firstFrame: 0
+      lastFrame: 23
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/master
+        weight: 1
+      - path: Armature/master/Bone_P
+        weight: 1
+      - path: Armature/master/Bone_P/Bone.joint
+        weight: 1
+      - path: Armature/master/Bone_P/Bone.joint/Bone.002
+        weight: 1
+      - path: Armature/master/Bone_P/Bone.joint/Bone.002/Bone.002_end
+        weight: 1
+      - path: Armature/master/Bone_P/Bone.joint/Bone.head
+        weight: 1
+      - path: Armature/master/Bone_P/Bone.joint/Bone.head/Bone.head_end
+        weight: 1
+      - path: Camera
+        weight: 1
+      - path: dpt_ball
+        weight: 1
+      - path: dpt_ball/mdl
+        weight: 1
+      - path: dpt_ball/sk
+        weight: 1
+      - path: dpt_ball/sk/body_mdl
+        weight: 1
+      - path: Lamp
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: idle020
+      takeName: idle02
+      firstFrame: 0
+      lastFrame: 23
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/master
+        weight: 1
+      - path: Armature/master/Bone_P
+        weight: 1
+      - path: Armature/master/Bone_P/Bone.joint
+        weight: 1
+      - path: Armature/master/Bone_P/Bone.joint/Bone.002
+        weight: 1
+      - path: Armature/master/Bone_P/Bone.joint/Bone.002/Bone.002_end
+        weight: 1
+      - path: Armature/master/Bone_P/Bone.joint/Bone.head
+        weight: 1
+      - path: Armature/master/Bone_P/Bone.joint/Bone.head/Bone.head_end
+        weight: 1
+      - path: Camera
+        weight: 1
+      - path: dpt_ball
+        weight: 1
+      - path: dpt_ball/mdl
+        weight: 1
+      - path: dpt_ball/sk
+        weight: 1
+      - path: dpt_ball/sk/body_mdl
+        weight: 1
+      - path: Lamp
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Armature|deth01
+      takeName: Armature|deth01
+      firstFrame: 0
+      lastFrame: 23
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/master
+        weight: 1
+      - path: Armature/master/Bone_P
+        weight: 1
+      - path: Armature/master/Bone_P/Bone.joint
+        weight: 1
+      - path: Armature/master/Bone_P/Bone.joint/Bone.002
+        weight: 1
+      - path: Armature/master/Bone_P/Bone.joint/Bone.002/Bone.002_end
+        weight: 1
+      - path: Armature/master/Bone_P/Bone.joint/Bone.head
+        weight: 1
+      - path: Armature/master/Bone_P/Bone.joint/Bone.head/Bone.head_end
+        weight: 1
+      - path: Camera
+        weight: 1
+      - path: dpt_ball
+        weight: 1
+      - path: dpt_ball/mdl
+        weight: 1
+      - path: dpt_ball/sk
+        weight: 1
+      - path: dpt_ball/sk/body_mdl
+        weight: 1
+      - path: Lamp
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Armature|fall01
+      takeName: Armature|fall01
+      firstFrame: 0
+      lastFrame: 23
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/master
+        weight: 1
+      - path: Armature/master/Bone_P
+        weight: 1
+      - path: Armature/master/Bone_P/Bone.joint
+        weight: 1
+      - path: Armature/master/Bone_P/Bone.joint/Bone.002
+        weight: 1
+      - path: Armature/master/Bone_P/Bone.joint/Bone.002/Bone.002_end
+        weight: 1
+      - path: Armature/master/Bone_P/Bone.joint/Bone.head
+        weight: 1
+      - path: Armature/master/Bone_P/Bone.joint/Bone.head/Bone.head_end
+        weight: 1
+      - path: Camera
+        weight: 1
+      - path: dpt_ball
+        weight: 1
+      - path: dpt_ball/mdl
+        weight: 1
+      - path: dpt_ball/sk
+        weight: 1
+      - path: dpt_ball/sk/body_mdl
+        weight: 1
+      - path: Lamp
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Armature|fall02
+      takeName: Armature|fall02
+      firstFrame: 0
+      lastFrame: 23
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/master
+        weight: 1
+      - path: Armature/master/Bone_P
+        weight: 1
+      - path: Armature/master/Bone_P/Bone.joint
+        weight: 1
+      - path: Armature/master/Bone_P/Bone.joint/Bone.002
+        weight: 1
+      - path: Armature/master/Bone_P/Bone.joint/Bone.002/Bone.002_end
+        weight: 1
+      - path: Armature/master/Bone_P/Bone.joint/Bone.head
+        weight: 1
+      - path: Armature/master/Bone_P/Bone.joint/Bone.head/Bone.head_end
+        weight: 1
+      - path: Camera
+        weight: 1
+      - path: dpt_ball
+        weight: 1
+      - path: dpt_ball/mdl
+        weight: 1
+      - path: dpt_ball/sk
+        weight: 1
+      - path: dpt_ball/sk/body_mdl
+        weight: 1
+      - path: Lamp
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Armature|fall03
+      takeName: Armature|fall03
+      firstFrame: 0
+      lastFrame: 23
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/master
+        weight: 1
+      - path: Armature/master/Bone_P
+        weight: 1
+      - path: Armature/master/Bone_P/Bone.joint
+        weight: 1
+      - path: Armature/master/Bone_P/Bone.joint/Bone.002
+        weight: 1
+      - path: Armature/master/Bone_P/Bone.joint/Bone.002/Bone.002_end
+        weight: 1
+      - path: Armature/master/Bone_P/Bone.joint/Bone.head
+        weight: 1
+      - path: Armature/master/Bone_P/Bone.joint/Bone.head/Bone.head_end
+        weight: 1
+      - path: Camera
+        weight: 1
+      - path: dpt_ball
+        weight: 1
+      - path: dpt_ball/mdl
+        weight: 1
+      - path: dpt_ball/sk
+        weight: 1
+      - path: dpt_ball/sk/body_mdl
+        weight: 1
+      - path: Lamp
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Armature|idel01
+      takeName: Armature|idel01
+      firstFrame: 0
+      lastFrame: 23
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/master
+        weight: 1
+      - path: Armature/master/Bone_P
+        weight: 1
+      - path: Armature/master/Bone_P/Bone.joint
+        weight: 1
+      - path: Armature/master/Bone_P/Bone.joint/Bone.002
+        weight: 1
+      - path: Armature/master/Bone_P/Bone.joint/Bone.002/Bone.002_end
+        weight: 1
+      - path: Armature/master/Bone_P/Bone.joint/Bone.head
+        weight: 1
+      - path: Armature/master/Bone_P/Bone.joint/Bone.head/Bone.head_end
+        weight: 1
+      - path: Camera
+        weight: 1
+      - path: dpt_ball
+        weight: 1
+      - path: dpt_ball/mdl
+        weight: 1
+      - path: dpt_ball/sk
+        weight: 1
+      - path: dpt_ball/sk/body_mdl
+        weight: 1
+      - path: Lamp
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Armature|idle02
+      takeName: Armature|idle02
+      firstFrame: 0
+      lastFrame: 23
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/master
+        weight: 1
+      - path: Armature/master/Bone_P
+        weight: 1
+      - path: Armature/master/Bone_P/Bone.joint
+        weight: 1
+      - path: Armature/master/Bone_P/Bone.joint/Bone.002
+        weight: 1
+      - path: Armature/master/Bone_P/Bone.joint/Bone.002/Bone.002_end
+        weight: 1
+      - path: Armature/master/Bone_P/Bone.joint/Bone.head
+        weight: 1
+      - path: Armature/master/Bone_P/Bone.joint/Bone.head/Bone.head_end
+        weight: 1
+      - path: Camera
+        weight: 1
+      - path: dpt_ball
+        weight: 1
+      - path: dpt_ball/mdl
+        weight: 1
+      - path: dpt_ball/sk
+        weight: 1
+      - path: dpt_ball/sk/body_mdl
+        weight: 1
+      - path: Lamp
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Armature|run.002
+      takeName: Armature|run.002
+      firstFrame: 0
+      lastFrame: 23
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/master
+        weight: 1
+      - path: Armature/master/Bone_P
+        weight: 1
+      - path: Armature/master/Bone_P/Bone.joint
+        weight: 1
+      - path: Armature/master/Bone_P/Bone.joint/Bone.002
+        weight: 1
+      - path: Armature/master/Bone_P/Bone.joint/Bone.002/Bone.002_end
+        weight: 1
+      - path: Armature/master/Bone_P/Bone.joint/Bone.head
+        weight: 1
+      - path: Armature/master/Bone_P/Bone.joint/Bone.head/Bone.head_end
+        weight: 1
+      - path: Camera
+        weight: 1
+      - path: dpt_ball
+        weight: 1
+      - path: dpt_ball/mdl
+        weight: 1
+      - path: dpt_ball/sk
+        weight: 1
+      - path: dpt_ball/sk/body_mdl
+        weight: 1
+      - path: Lamp
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

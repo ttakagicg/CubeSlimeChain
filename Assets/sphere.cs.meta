@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 3a27c751f941e4ebc8b96f41abfa2f86
+timeCreated: 1457324800
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - Sphere_Main: {instanceID: 0}
+  - explosion: {fileID: 144292, guid: 4ff856d9f627446209321962f2aaa54a, type: 2}
+  - Spher_r: {instanceID: 0}
+  - lost_Count_text: {instanceID: 0}
+  - gameover_text: {instanceID: 0}
+  - angry_mat: {instanceID: 0}
+  - happy_mat: {instanceID: 0}
+  - death_mat: {instanceID: 0}
+  - close_cube_m: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
